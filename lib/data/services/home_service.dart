@@ -44,7 +44,7 @@ class HomeServices extends DioBaseService {
 
   Future<Response<dynamic>?> getSearchApi(String query) async {
     const String meiliSearchUrl = '/multi-search';
-    const String apiKey = "7KFxhLzsW9B4t2egxdVcifEsja9oK6Si";
+    const String apiKey = "kbbqgx7y6zgw7rsqj0t64ym8cgmqq442";
     // 'StratAgile123!';
 
     final List<String> highPriorityIndexes = [
