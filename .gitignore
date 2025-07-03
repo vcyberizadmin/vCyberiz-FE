@@ -30,7 +30,7 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-.env
+#.env
 pubspec.lock
 
 # Symbolication related
@@ -106,6 +106,6 @@ web/.dart_tool/
 web/.packages
 
 # Optional: Environment files (for secrets)
-.env
-.env.*
+#.env
+#.env.*
 
