@@ -1,0 +1,111 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+.env
+pubspec.lock
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+/android/app/.cxx
+/build
+/.dart_tool
+android/local.properties
+ios/Flutter/Debug.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/Generated.xcconfig
+ios/Flutter/Release.xcconfig
+ios/Podfile
+ios/Runner/GeneratedPluginRegistrant.m
+/macos
+/linux
+/android
+/ios
+macos/Flutter/GeneratedPluginRegistrant.swift
+windows/flutter/generated_plugin_registrant.cc
+windows/flutter/generated_plugin_registrant.h
+*.cc
+*.h
+windows/flutter/generated_plugins.cmake
+build/cache.dill.track.dill
+build/flutter_assets/AssetManifest.bin
+*.bin
+pubspec.lock
+/build/flutter_assets
+
+.metadata
+
+# Flutter build files
+build/
+.dart_tool/
+.packages
+.pub-cache/
+.flutter-plugins
+.flutter-plugins-dependencies
+.melos_tool/
+
+# IntelliJ / VS Code
+.idea/
+.vscode/
+*.iml
+
+# macOS system files
+.DS_Store
+
+# Android/iOS native (not used in web)
+android/
+ios/
+windows/
+linux/
+macos/
+
+# Log files
+*.log
+
+# Coverage
+coverage/
+
+# Web-specific
+web/.dart_tool/
+web/.packages
+
+# Optional: Environment files (for secrets)
+.env
+.env.*
+
