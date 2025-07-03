@@ -9,7 +9,7 @@ class HomeServices extends DioBaseService {
   final Dio _dio = DioBaseService.dio;
   final Dio _meiliDio = Dio(
     BaseOptions(
-      baseUrl: "https://strapi-meilisearch.strat-staging.com",
+      baseUrl: "https://getmeilimeilisearchv190-production-9d23.up.railway.app",
       // 'http://46.137.247.186:7700', // Replace with your Strapi backend URL
 
       // baseUrl: 'http://localhost:7700', // Replace with your Strapi backend URL
