@@ -1,6 +1,6 @@
 class Constants {
   //.env file path
-  static const String envPath = "assets/.env";
+  static const String envPath = ".env";
 
   static const String baseURL = "baseURL";
   static const String searchStagingBaseURL = "searchStagingBaseURL";
