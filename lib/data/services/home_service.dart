@@ -9,7 +9,7 @@ class HomeServices extends DioBaseService {
   final Dio _dio = DioBaseService.dio;
   final Dio _meiliDio = Dio(
     BaseOptions(
-      baseUrl: "https://getmeilimeilisearchv190-production-9d23.up.railway.app",
+      baseUrl: "https://getmeilimeilisearchv190-staging.up.railway.app",
       // 'http://46.137.247.186:7700', // Replace with your Strapi backend URL
 
       // baseUrl: 'http://localhost:7700', // Replace with your Strapi backend URL
@@ -44,7 +44,7 @@ class HomeServices extends DioBaseService {
 
   Future<Response<dynamic>?> getSearchApi(String query) async {
     const String meiliSearchUrl = '/multi-search';
-    const String apiKey = "kbbqgx7y6zgw7rsqj0t64ym8cgmqq442";
+    const String apiKey = "5bhcgdv2sisket1qn7acc8kmhdplywys";
     // 'StratAgile123!';
 
     final List<String> highPriorityIndexes = [
