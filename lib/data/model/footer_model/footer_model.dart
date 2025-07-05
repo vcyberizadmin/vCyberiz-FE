@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // To parse this JSON data, do
 //
 //     final footerModel = footerModelFromJson(jsonString);
@@ -162,6 +163,9 @@ class Brand {
             ? []
             : List<dynamic>.from(secLogo!.map((x) => x.toJson())),
       };
+
+  @override
+  String toString() => 'Brand(id: $id, link: $link, secLogo: $secLogo)';
 }
 
 class Cta {
@@ -194,6 +198,11 @@ class Cta {
         "isExternal": isExternal,
         "type": type,
       };
+
+  @override
+  String toString() {
+    return 'Cta(id: $id, label: $label, href: $href, isExternal: $isExternal, type: $type)';
+  }
 }
 
 class SecLogo {
@@ -226,6 +235,11 @@ class SecLogo {
         "mime": mime,
         "label": label,
       };
+
+  @override
+  String toString() {
+    return 'SecLogo(id: $id, url: $url, name: $name, mime: $mime, label: $label)';
+  }
 }
 
 class Company {

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_button_widget.dart';
 import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
@@ -156,27 +157,7 @@ class FooterCompanySection extends StatelessWidget {
                   size: 18,
                 ),
                 Gap(10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ...(state.data?.siteMap?.connect ?? []).map(
-                      (Brand data) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: CircleAvatar(
-                            backgroundColor: AppColors.transparent,
-                            radius: 15,
-                            child: ImageWidget(
-                              imageUrl: data.secLogo?.first.url ?? "",
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                Gap(10),
+                iconsWidget(state), Gap(10),
               ],
             ),
           );
@@ -259,26 +240,7 @@ class FooterCompanySection extends StatelessWidget {
                     size: 18,
                   ),
                   Gap(15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      ...(state.data?.siteMap?.connect ?? []).map(
-                        (Brand data) {
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: CircleAvatar(
-                              backgroundColor: AppColors.transparent,
-                              radius: 15,
-                              child: ImageWidget(
-                                imageUrl: data.secLogo?.first.url ?? "",
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+                  iconsWidget(state),
                 ],
               ),
               Gap(10),
@@ -364,39 +326,52 @@ class FooterCompanySection extends StatelessWidget {
                   ),
                 ),
                 Gap(10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ...(state.data?.siteMap?.connect ?? []).map(
-                      (Brand data) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 20),
-                          child: CircleAvatar(
-                            backgroundColor: AppColors.transparent,
-                            radius: 15,
-                            child: ImageWidget(
-                              imageUrl: data.secLogo?.first.url ?? "",
-                              fit: BoxFit.fill,
-                              //TODO: commented for future use
-                              // width: getValueForScreenType<double>(
-                              //   context: context,
-                              //   mobile: 14,
-                              //   tablet: 16,
-                              //   desktop: 20,
-                              // ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
+                iconsWidget(state),
                 Gap(10),
               ],
             ),
           );
         }
       }),
+    );
+  }
+
+  Widget iconsWidget(FooterState state) {
+    const Map<String, String> socialUrls = {
+      'facebook': 'https://m.facebook.com/vCyberiz/',
+      'x': 'https://x.com/vCyberiz',
+      'LinkedIn': 'https://www.linkedin.com/company/vcyberiz/',
+    };
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        ...(state.data?.siteMap?.connect ?? []).map(
+          (Brand data) {
+            return Padding(
+              padding: const EdgeInsets.only(right: 20),
+              child: InkWell(
+                onTap: () async {
+                  String url = socialUrls[data.link?.label ?? ''] ?? '';
+                  final uri = Uri.parse(url);
+                  if (await canLaunchUrl(uri)) {
+                    await launchUrl(uri, mode: LaunchMode.externalApplication);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                },
+                child: CircleAvatar(
+                  backgroundColor: AppColors.transparent,
+                  radius: 15,
+                  child: ImageWidget(
+                    imageUrl: data.secLogo?.first.url ?? "",
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 
