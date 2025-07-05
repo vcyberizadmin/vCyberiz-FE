@@ -56,7 +56,7 @@ class _CardWidgetState extends State<CardWidget> {
             context: context,
             mobile: 270,
             tablet: 230,
-            desktop: 330,
+            desktop: widget.isHome ? 350 : 330,
           ),
           width: widget.width ??
               getValueForScreenType(
@@ -153,7 +153,7 @@ class _CardWidgetState extends State<CardWidget> {
                   ),
                   color: AppColors.black,
                   overflow: TextOverflow.visible,
-                  maxLines: 4,
+                  maxLines: widget.isHome ? null : 4,
                   textAlign: getValueForScreenType(
                     context: context,
                     mobile: TextAlign.center,

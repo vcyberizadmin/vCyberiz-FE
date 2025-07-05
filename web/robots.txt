@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://vcyberiz.com/sitemap.xml
