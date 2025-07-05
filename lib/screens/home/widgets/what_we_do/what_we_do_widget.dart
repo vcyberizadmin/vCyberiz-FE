@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -49,8 +47,6 @@ class WhatWeDoWidget extends StatelessWidget {
                   sizingInformation,
                 ) {
                   if (sizingInformation.isDesktop) {
-                    log(state.data?.secGif?.first.url ?? '');
-
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,7 +81,6 @@ class WhatWeDoWidget extends StatelessWidget {
                       ],
                     );
                   } else {
-                    log(state.data?.secGif?.first.url ?? '');
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
