@@ -8,6 +8,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/careers_bloc/careers_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_animated_button.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/data/model/careers_model/career_filter_Model.dart';
 
 import '../../../core/utils/styles/app_colors.dart';
@@ -131,8 +132,10 @@ class _FilterPopupState extends State<FilterPopup> {
               ),
               child: ExpansionTile(
                 tilePadding: EdgeInsets.symmetric(horizontal: 16.0),
-                leading: Image.network(data.secLogo?.first.url ?? '',
-                    width: 24, height: 24),
+                leading: ImageWidget(
+                    imageUrl: data.secLogo?.first.url ?? '',
+                    width: 24,
+                    height: 24),
                 title: kStyle.reg(
                   text: text,
                   size: 14,

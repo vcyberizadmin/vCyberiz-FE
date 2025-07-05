@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 
 import '../../../../bloc/about_us_bloc/about_us_bloc.dart';
 import '../../../../core/utils/constants/asset_constants.dart';
@@ -29,7 +29,7 @@ class VideoPlayer extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: CachedNetworkImageProvider(
+              image: decorationImageProviderWidget(
                 state.homeData?.videoUrl?.url ?? '',
               ),
             ),

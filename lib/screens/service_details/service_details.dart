@@ -67,7 +67,9 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                HeaderSection(),
+                HeaderSection(
+                  documentId: widget.documentId,
+                ),
                 ScopeOfServiceSection(
                   documentId: widget.documentId,
                 ),

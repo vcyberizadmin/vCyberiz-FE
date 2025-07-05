@@ -390,8 +390,8 @@ class CareersBloc extends Bloc<CareersEvent, CareersState> {
     filteredList = state.locationText == "All"
         ? filteredList
         : filteredList
-            .where((career) =>
-                career.countries!.any((loc) => loc.text == state.locationText))
+            .where(
+                (career) => career.zipCode?.country?.text == state.locationText)
             .toList();
     // Filter data based on state.locationText
     if (state.filterText != 'All Employment types') {
@@ -400,13 +400,13 @@ class CareersBloc extends Bloc<CareersEvent, CareersState> {
               .any((loc) => loc.secText == state.filterText))
           .toList();
     }
-    if (state.functionText != 'All') {
-      filteredList = filteredList
-          .where(
-            (career) => career.function?.secText == state.functionText,
-          )
-          .toList();
-    }
+    // if (state.functionText != 'All') {
+    //   filteredList = filteredList
+    //       .where(
+    //         (career) => career.function?.secText == state.functionText,
+    //       )
+    //       .toList();
+    // }
 
     // Apply search filter
     if (event.search.isNotEmpty) {
@@ -414,14 +414,14 @@ class CareersBloc extends Bloc<CareersEvent, CareersState> {
         return career.secHeader!
                 .toLowerCase()
                 .contains(event.search.toLowerCase()) ||
-            career.jobcardHeader!
+            career.secHeader!
                 .toLowerCase()
                 .contains(event.search.toLowerCase());
       }).toList();
     } // Apply search filter
     if (event.locationSearch.isNotEmpty) {
       filteredList = filteredList.where((career) {
-        return (career.countries!.first.text ?? '')
+        return (career.zipCode?.country?.text ?? '')
                 .toLowerCase()
                 .contains(event.locationSearch.toLowerCase()) ||
             career.zipCode!.name!

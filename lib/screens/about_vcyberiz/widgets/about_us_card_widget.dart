@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 
 import '../../../../../core/utils/styles/app_colors.dart';
 
@@ -81,8 +82,8 @@ class _AboutUsCardWidgetState extends State<AboutUsCardWidget> {
                       duration: const Duration(milliseconds: 300),
                       height: isHovered ? 100 : 90,
                       width: isHovered ? 100 : 90,
-                      child: Image.network(
-                        widget.imageUrl,
+                      child: ImageWidget(
+                        imageUrl: widget.imageUrl,
                         fit: BoxFit.contain,
                       ),
                     ),

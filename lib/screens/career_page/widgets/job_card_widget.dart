@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/asset_constants.dart';
+import 'package:vcyberiz/core/utils/constants/string_const.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_button_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/data/model/careers_model/career_list_model.dart';
@@ -54,7 +55,7 @@ class CareerCard extends StatelessWidget {
           Wrap(
             children: [
               ...(data?.employmentTypes ?? []).map(
-                (Functions data) => jobTypeText(
+                (EmploymentType data) => jobTypeText(
                   data.secText ?? '',
                   _hexToColor(data.colorIdentifier ?? ''),
                 ),
@@ -76,26 +77,31 @@ class CareerCard extends StatelessWidget {
           ),
           const Gap(8),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    AssetConst.location,
-                    width: 20,
-                    color: AppColors.davysGray,
+              if ((data?.jobLocation ?? '').isNotEmpty)
+                Expanded(
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        AssetConst.location,
+                        width: 20,
+                        color: AppColors.davysGray,
+                      ),
+                      Gap(5),
+                      Expanded(
+                        child: kStyle.reg(
+                          text: data?.jobLocation ?? '',
+                          size: 14,
+                          color: AppColors.davysGray,
+                          overflow: TextOverflow.visible,
+                        ),
+                      )
+                    ],
                   ),
-                  Gap(5),
-                  kStyle.reg(
-                    text: data?.countries?.first.text ?? '',
-                    size: 14,
-                    color: AppColors.davysGray,
-                    overflow: TextOverflow.ellipsis,
-                  )
-                ],
-              ),
+                ),
               CustomButtonWidget(
-                text: 'Apply Now',
+                text: StringConst.applyNow,
                 bgButtonColor: AppColors.darkOrangeColor,
                 onTap: () {
                   context.goNamed(

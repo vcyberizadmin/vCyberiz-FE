@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:vcyberiz/bloc/news_bloc/news_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/data/model/ebook_model/ebook_model.dart';
 
 class EbookWidget extends StatelessWidget {
@@ -94,8 +95,8 @@ class EbookWidget extends StatelessWidget {
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(6),
-                            child: Image.network(
-                              ebook.secImg?.url ?? '',
+                            child: ImageWidget(
+                              imageUrl: ebook.secImg?.url ?? '',
                               width: 50,
                               height: 70,
                               fit: BoxFit.cover,

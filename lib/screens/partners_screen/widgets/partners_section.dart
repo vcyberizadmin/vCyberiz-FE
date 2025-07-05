@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -8,6 +7,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/partners_bloc/partners_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 class PartnersSection extends StatelessWidget {
@@ -74,10 +74,8 @@ class PartnersSection extends StatelessWidget {
                         ),
                         Expanded(
                           flex: 1,
-                          child: CachedNetworkImage(
+                          child: ImageWidget(
                             imageUrl: state.technology?.secImg?.url ?? "",
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -126,10 +124,8 @@ class PartnersSection extends StatelessWidget {
                             tablet: 400,
                           ),
                           width: double.infinity,
-                          child: CachedNetworkImage(
+                          child: ImageWidget(
                             imageUrl: state.technology?.secImg?.url ?? "",
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
                             fit: BoxFit.cover,
                           ),
                         ),

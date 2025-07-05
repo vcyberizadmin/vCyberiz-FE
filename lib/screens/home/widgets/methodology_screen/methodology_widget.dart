@@ -113,9 +113,10 @@ class MethodologyWidget extends StatelessWidget {
     BuildContext context,
     MethodologyState state,
   ) {
+    double centerOfTheVideoPlayer = Constants.desktopBreakPoint / 2;
     return Stack(
       children: [
-        Container(
+        SizedBox(
           height: 550,
           width: Constants.desktopBreakPoint,
           child: VideoPlayerWidget(
@@ -128,9 +129,8 @@ class MethodologyWidget extends StatelessWidget {
 
         Positioned(
           top: 250,
-          left: Constants.desktopBreakPoint * .325,
+          left: centerOfTheVideoPlayer - 165,
           child: Container(
-            width: Constants.width * .15,
             padding: EdgeInsets.symmetric(
               horizontal: 10,
             ),
@@ -151,9 +151,8 @@ class MethodologyWidget extends StatelessWidget {
         //!-------------(text 2(right))
         Positioned(
           top: 250,
-          right: Constants.desktopBreakPoint * .325,
+          right: centerOfTheVideoPlayer - 165,
           child: Container(
-            width: Constants.width * .15,
             padding: EdgeInsets.symmetric(
               horizontal: 10,
             ),
@@ -182,7 +181,7 @@ class MethodologyWidget extends StatelessWidget {
             )),
         //!-------------(center left card)
         Positioned(
-            top: 230,
+            top: 210,
             left: Constants.width < 1200
                 ? 30
                 : Constants.width < 1300
@@ -216,7 +215,7 @@ class MethodologyWidget extends StatelessWidget {
 
         //!-------------(center right card)
         Positioned(
-          top: 220,
+          top: 210,
           right: Constants.width < 1200
               ? 30
               : Constants.width < 1300
@@ -248,6 +247,7 @@ class MethodologyWidget extends StatelessWidget {
     BuildContext context,
     MethodologyState state,
   ) {
+    double centerOfTheVideoPlayer = Constants.desktopBreakPoint / 2;
     return Column(
       children: [
         Stack(
@@ -265,9 +265,8 @@ class MethodologyWidget extends StatelessWidget {
 
             Positioned(
               top: 250,
-              left: Constants.desktopBreakPoint * .25,
+              left: centerOfTheVideoPlayer - 165,
               child: Container(
-                width: Constants.width * .15,
                 padding: EdgeInsets.symmetric(
                   horizontal: 10,
                 ),
@@ -283,9 +282,8 @@ class MethodologyWidget extends StatelessWidget {
             //!-------------(text 2(right))
             Positioned(
               top: 250,
-              right: Constants.desktopBreakPoint * .25,
+              right: centerOfTheVideoPlayer - 165,
               child: Container(
-                width: Constants.width * .15,
                 padding: EdgeInsets.symmetric(
                   horizontal: 10,
                 ),
@@ -361,6 +359,7 @@ class MethodologyWidget extends StatelessWidget {
     BuildContext context,
     MethodologyState state,
   ) {
+    double centerOfTheVideoPlayer = Constants.desktopBreakPoint / 2;
     return Column(
       children: [
         Stack(
@@ -377,14 +376,13 @@ class MethodologyWidget extends StatelessWidget {
             //!-------------(text 1(left))
 
             Positioned(
-              top: 150,
-              left: 10,
-              child: Container(
-                width: Constants.width * .3,
+              top: 160,
+              left: centerOfTheVideoPlayer - 110,
+              child: SizedBox(
                 child: kStyle.bold(
                   text: state.data?.imgOverlayText1 ?? '',
                   color: AppColors.white,
-                  size: 18,
+                  size: 16,
                   overflow: TextOverflow.visible,
                   textAlign: TextAlign.start,
                 ),
@@ -392,10 +390,9 @@ class MethodologyWidget extends StatelessWidget {
             ),
             //!-------------(text 2(right))
             Positioned(
-              top: 150,
-              right: 10,
-              child: Container(
-                width: Constants.width * .3,
+              top: 160,
+              right: centerOfTheVideoPlayer - 110,
+              child: SizedBox(
                 child: kStyle.bold(
                   text: state.data?.imgOverlayText2 ?? '',
                   color: AppColors.white,

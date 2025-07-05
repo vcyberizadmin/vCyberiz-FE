@@ -5,6 +5,8 @@ class StringConst {
   static const String refresh = "Refresh";
   static const String noDataFound = "No Data Found !";
   static const String pageNotFound = "Page Not Found !";
+  static const String weDontHaveAnyOpeningYet =
+      "We don’t have any openings yet";
   static const String pageDoesntExist =
       "We can’t seem to find the page you’re looking for.";
   static const String privacy = 'Privacy';
@@ -93,6 +95,7 @@ class StringConst {
   static const String ourProfile = "Our Profile";
   static const String ourServices = "Our Services";
   static const String dailyData = "Daily data as of ";
+  static const String applyNow = 'Apply Now';
   static const String empowering =
       "Empowering you to defend rapidly and effectively.";
   static const String aboutDescription =

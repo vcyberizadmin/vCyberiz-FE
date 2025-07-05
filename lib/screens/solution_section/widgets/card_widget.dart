@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +5,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_button_widget.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/routes/route_constants.dart';
 
 import '../../../data/model/solutions_model/microsoft_security_model.dart';
@@ -32,7 +32,7 @@ class CardWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Logo
-              CachedNetworkImage(
+              ImageWidget(
                 imageUrl: item?.secImg?.url ?? '',
                 width: Constants.width,
                 height: 250,
@@ -102,7 +102,7 @@ class CardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Logo
-            CachedNetworkImage(
+            ImageWidget(
               imageUrl: item?.secImg?.url ?? '',
               width: getValueForScreenType(
                   context: context, mobile: 0, tablet: 200, desktop: 300),

@@ -1,10 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 import '../../../../bloc/what_we_do_bloc/what_we_do_bloc.dart';
@@ -46,6 +49,8 @@ class WhatWeDoWidget extends StatelessWidget {
                   sizingInformation,
                 ) {
                   if (sizingInformation.isDesktop) {
+                    log(state.data?.secGif?.first.url ?? '');
+
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,14 +70,14 @@ class WhatWeDoWidget extends StatelessWidget {
                         Expanded(
                           flex: 1,
                           child: Center(
-                            child: Image.network(
+                            child: ImageWidget(
                               height: getValueForScreenType(
                                 context: context,
                                 mobile: 400,
                                 tablet: 500,
                                 desktop: 500,
                               ),
-                              state.data?.secGif?.first.url ?? '',
+                              imageUrl: state.data?.secGif?.first.url ?? '',
                               fit: BoxFit.fitHeight,
                             ),
                           ),
@@ -80,14 +85,15 @@ class WhatWeDoWidget extends StatelessWidget {
                       ],
                     );
                   } else {
+                    log(state.data?.secGif?.first.url ?? '');
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         //!-------------------------(Image Section)
                         Center(
-                          child: Image.network(
-                            state.data?.secGif?.first.url ?? '',
+                          child: ImageWidget(
+                            imageUrl: state.data?.secGif?.first.url ?? '',
                             fit: BoxFit.cover,
                           ),
                         ),

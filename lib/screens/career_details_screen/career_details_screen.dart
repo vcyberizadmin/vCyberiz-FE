@@ -11,14 +11,11 @@ import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/screens/base_view/base_view.dart';
 import 'package:vcyberiz/screens/base_view/widget/footer/footer_screen.dart';
-import 'package:vcyberiz/screens/career_details_screen/widgets/additional_info.dart';
 import 'package:vcyberiz/screens/career_details_screen/widgets/job_heading.dart';
 import 'package:vcyberiz/screens/career_details_screen/widgets/job_title%20card.dart';
-import 'package:vcyberiz/screens/career_details_screen/widgets/key_responsibilities.dart';
-import 'package:vcyberiz/screens/career_details_screen/widgets/skills_section.dart';
 import 'package:vcyberiz/screens/career_details_screen/widgets/submit_section.dart';
 
-import 'widgets/security_section.dart';
+import 'widgets/essential_skills.dart';
 
 class CareerDetailsScreen extends StatefulWidget {
   final String documentId;
@@ -164,16 +161,7 @@ class _CareerDetailsScreenState extends State<CareerDetailsScreen> {
           JobTitleCard(
             state: state,
           ),
-          SecuritySection(
-            state: state,
-          ),
-          KeyResponsibilities(
-            state: state,
-          ),
-          SkillsContainer(
-            state: state,
-          ),
-          AdditionalInfoSection(
+          CombinedSkillsSection(
             state: state,
           ),
           ApplicationForm(),
@@ -220,7 +208,7 @@ class _CareerDetailsScreenState extends State<CareerDetailsScreen> {
                           state: state,
                         ),
                         Gap(20),
-                        SecuritySection(
+                        CombinedSkillsSection(
                           state: state,
                         ),
                       ],
@@ -241,18 +229,6 @@ class _CareerDetailsScreenState extends State<CareerDetailsScreen> {
                     ),
                   ),
                 ],
-              ),
-              const Gap(20),
-              KeyResponsibilities(
-                state: state,
-              ),
-              const Gap(20),
-              SkillsContainer(
-                state: state,
-              ),
-              const Gap(20),
-              AdditionalInfoSection(
-                state: state,
               ),
               const Gap(20),
             ],
@@ -299,19 +275,7 @@ class _CareerDetailsScreenState extends State<CareerDetailsScreen> {
                           state: state,
                         ),
                         Gap(20),
-                        SecuritySection(
-                          state: state,
-                        ),
-                        Gap(20),
-                        KeyResponsibilities(
-                          state: state,
-                        ),
-                        Gap(20),
-                        SkillsContainer(
-                          state: state,
-                        ),
-                        Gap(20),
-                        AdditionalInfoSection(
+                        CombinedSkillsSection(
                           state: state,
                         ),
                       ],

@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_const_constructors
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 
 import '../styles/app_colors.dart';
+import 'image_widget.dart';
 
 class CardWidget extends StatefulWidget {
   final String title;
@@ -95,7 +97,7 @@ class _CardWidgetState extends State<CardWidget> {
               //!-----(Svg icon with Jump Effect)
               if (widget.imageUrl.isNotEmpty)
                 Expanded(
-                  flex: 3,
+                  flex: 2,
                   child: Align(
                     alignment: getValueForScreenType(
                       context: context,
@@ -105,14 +107,14 @@ class _CardWidgetState extends State<CardWidget> {
                           : Alignment.center,
                       desktop: Alignment.center,
                     ),
-                    child: Image.network(
-                      widget.imageUrl,
+                    child: ImageWidget(
+                      imageUrl: widget.imageUrl,
                       fit: BoxFit.fill,
                       height: getValueForScreenType(
                         context: context,
                         mobile: 70,
                         tablet: 70,
-                        desktop: 70,
+                        desktop: 65,
                       ),
                     ),
                   ),
@@ -137,7 +139,7 @@ class _CardWidgetState extends State<CardWidget> {
                   maxLines: 2,
                 ),
               ),
-
+              Gap(5),
               //!-----(Description)
               Expanded(
                 flex: 2,

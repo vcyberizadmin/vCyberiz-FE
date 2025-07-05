@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -7,6 +6,7 @@ import 'package:vcyberiz/bloc/events_bloc/events_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_animated_button.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 class EventsSecurityMaturitySection extends StatelessWidget {
@@ -31,7 +31,7 @@ class EventsSecurityMaturitySection extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 image: DecorationImage(
-                  image: CachedNetworkImageProvider(
+                  image: decorationImageProviderWidget(
                     state.relatedEvents?.secCard?.secBg?.url ?? '',
                   ),
                   fit: BoxFit.fill,

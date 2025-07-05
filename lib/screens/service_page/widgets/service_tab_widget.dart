@@ -8,6 +8,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/our_service_bloc/our_service_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/routes/route_constants.dart';
 import '../../../core/utils/styles/app_colors.dart';
 
@@ -363,8 +364,8 @@ class ServiceTabWidget extends StatelessWidget {
   ) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(15),
-      child: Image.network(
-        (state.serviceTabsData?.section ?? [])[state.selectedItem]
+      child: ImageWidget(
+        imageUrl: (state.serviceTabsData?.section ?? [])[state.selectedItem]
                 .tabBody
                 ?.imgUrl
                 ?.url ??

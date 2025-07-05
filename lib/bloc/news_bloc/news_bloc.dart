@@ -345,7 +345,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     emit(state.copyWith(loading: true));
 
     try {
-      NewsArtilceModel response =
+      NewsArticleModel response =
           await _repository.getNewsArticlesApi(event.documentId);
       if (response.data != null) {
         emit(

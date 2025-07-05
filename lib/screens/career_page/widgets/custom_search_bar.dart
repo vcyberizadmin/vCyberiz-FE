@@ -6,6 +6,7 @@ import 'package:vcyberiz/bloc/careers_bloc/careers_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_button_widget.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 class CustomSearchBar extends StatefulWidget {
@@ -101,8 +102,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           ),
           hintText: state.filterData?.form?[0].label,
           border: InputBorder.none,
-          icon: Image.network(
-            state.filterData?.formFieldIcons?[0].fieldIcon?.url ?? '',
+          icon: ImageWidget(
+            imageUrl: state.filterData?.formFieldIcons?[0].fieldIcon?.url ?? '',
             height: 25,
             width: 25,
           ),
@@ -153,8 +154,9 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 ),
                 hintText: state.filterData?.form?[1].label,
                 border: InputBorder.none,
-                icon: Image.network(
-                  state.filterData?.formFieldIcons?[1].fieldIcon?.url ?? '',
+                icon: ImageWidget(
+                  imageUrl:
+                      state.filterData?.formFieldIcons?[1].fieldIcon?.url ?? '',
                   height: 25,
                   width: 25,
                 ),
@@ -223,8 +225,9 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
         ),
         child: Row(
           children: [
-            Image.network(
-              state.filterData?.formFieldIcons?[3].fieldIcon?.url ?? '',
+            ImageWidget(
+              imageUrl:
+                  state.filterData?.formFieldIcons?[3].fieldIcon?.url ?? '',
               height: 25,
               width: 25,
             ),

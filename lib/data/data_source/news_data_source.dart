@@ -112,13 +112,13 @@ class NewsDataSource {
     }
   }
 
-  Future<NewsArtilceModel> getNewsArticlesApi(
+  Future<NewsArticleModel> getNewsArticlesApi(
     String documentId,
   ) async {
     try {
       final Response? response = await service.getNewArticlesApi(documentId);
-      final NewsArtilceModel model =
-          NewsArtilceModel.fromJson(response?.data as Map<String, dynamic>);
+      final NewsArticleModel model =
+          NewsArticleModel.fromJson(response?.data as Map<String, dynamic>);
       return model;
     } on APIException {
       rethrow;

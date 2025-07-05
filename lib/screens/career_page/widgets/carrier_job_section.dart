@@ -27,7 +27,7 @@ class CarrierJobSection extends StatelessWidget {
           color: AppColors.bluishGrey,
           child: (state.eventList ?? []).isEmpty
               ? NoDataWidget(
-                  text: StringConst.noDataFound,
+                  text: StringConst.weDontHaveAnyOpeningYet,
                   color: AppColors.greyText,
                 )
               : GridView.builder(
@@ -43,7 +43,7 @@ class CarrierJobSection extends StatelessWidget {
                       context: context,
                       mobile: 1.2,
                       tablet: 1.5,
-                      desktop: 1.9,
+                      desktop: 1.7,
                     ),
                   ),
                   physics: NeverScrollableScrollPhysics(),

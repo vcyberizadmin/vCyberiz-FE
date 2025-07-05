@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/solutions_bloc/solutions_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 class HeaderSection extends StatelessWidget {
@@ -51,12 +51,10 @@ class HeaderSection extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: CachedNetworkImage(
+                        child: ImageWidget(
                           imageUrl: state.solutionsHeaderData?.secBanner?.secImg
                                   ?.url ??
                               '',
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -80,13 +78,11 @@ class HeaderSection extends StatelessWidget {
                           sizingInformation: sizingInformation,
                         ),
                       ),
-                      CachedNetworkImage(
+                      ImageWidget(
                         key: imageKey,
                         imageUrl:
                             state.solutionsHeaderData?.secBanner?.secImg?.url ??
                                 '',
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
                         fit: BoxFit.cover,
                         // width: sizingInformation.isTablet ? 687 : 833,
                       ),

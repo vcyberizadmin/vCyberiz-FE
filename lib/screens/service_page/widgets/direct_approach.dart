@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -8,6 +7,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/our_service_bloc/our_service_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/hover/hover.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
@@ -22,7 +22,7 @@ class DirectApproachScreen extends StatelessWidget {
           width: Constants.width,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: CachedNetworkImageProvider(
+              image: decorationImageProviderWidget(
                 state.servicedirectApproachdata?.bgImg?.url ?? '',
               ),
               fit: BoxFit.fill,
@@ -129,7 +129,7 @@ class DirectApproachScreen extends StatelessWidget {
                                     context: context,
                                     mobile: 15,
                                     tablet: 20,
-                                    desktop: 25,
+                                    desktop: 10,
                                   )),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -148,8 +148,8 @@ class DirectApproachScreen extends StatelessWidget {
                                             : AppColors.blue),
                                     child: Padding(
                                       padding: const EdgeInsets.all(10),
-                                      child: Image.network(
-                                        item?.logoImg?.url ?? '',
+                                      child: ImageWidget(
+                                        imageUrl: item?.logoImg?.url ?? '',
                                         width: 25,
                                         height: 25,
                                         color: isHovered
@@ -158,7 +158,7 @@ class DirectApproachScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  Gap(10),
+                                  Gap(5),
                                   kStyle.med(
                                     text: item?.secHeader ?? '',
                                     size: 20,
@@ -170,7 +170,7 @@ class DirectApproachScreen extends StatelessWidget {
                                   Gap(5),
                                   kStyle.reg(
                                     text: item?.description ?? '',
-                                    size: 16,
+                                    size: 14,
                                     color: isHovered
                                         ? AppColors.white
                                         : AppColors.blue,

@@ -2,13 +2,12 @@
 
 import 'dart:async';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:vcyberiz/bloc/contact_us_bloc/contact_us_bloc.dart';
 import 'package:vcyberiz/bloc/home-bloc/home_bloc.dart';
 import 'package:vcyberiz/bloc/home-bloc/home_event.dart';
@@ -17,9 +16,11 @@ import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/constants/string_const.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_button_widget.dart';
 import 'package:vcyberiz/core/utils/global_widgets/headingWidget.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/global_widgets/recaptcha_section.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/core/utils/styles/font_constants.dart';
+import 'package:vcyberiz/routes/route_constants.dart';
 import 'package:vcyberiz/screens/base_view/base_view.dart';
 import 'package:vcyberiz/screens/base_view/widget/footer/footer_screen.dart';
 import 'package:vcyberiz/screens/contact_us_screen/widgets/custom_drop_down_field.dart';
@@ -201,7 +202,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                   10,
                 ),
                 image: DecorationImage(
-                  image: CachedNetworkImageProvider(
+                  image: decorationImageProviderWidget(
                       state.headerData?.secBg?.url ?? ''),
                   fit: BoxFit.cover,
                 ),
@@ -244,6 +245,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
               child: Form(
                 key: formKey,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextFormField(
                       labelText: StringConst.name,
@@ -265,7 +267,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                         if (value == null || value.isEmpty) {
                           return 'Email cannot be empty';
                         }
-                        if (!RegExp(r'^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+')
+                        if (!RegExp(r'^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$')
                             .hasMatch(value)) {
                           return 'Enter a valid email address';
                         }
@@ -373,27 +375,25 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                             .style,
                         children: [
                           TextSpan(
-                            text: "Privacy Notice",
-                            style: TextStyle(
-                              fontFamily: Constants.font,
-                              fontWeight: FontConst().lightFont,
-                              overflow: TextOverflow.visible,
-                              color: AppColors.black,
-                              fontSize: getValueForScreenType(
-                                context: context,
-                                mobile: 12,
-                                tablet: 12,
-                                desktop: 12,
+                              text: "Privacy Notice",
+                              style: TextStyle(
+                                fontFamily: Constants.font,
+                                fontWeight: FontConst().lightFont,
+                                overflow: TextOverflow.visible,
+                                color: AppColors.black,
+                                fontSize: getValueForScreenType(
+                                  context: context,
+                                  mobile: 12,
+                                  tablet: 12,
+                                  desktop: 12,
+                                ),
+                                decoration: TextDecoration.underline,
+                                decorationColor: AppColors.black,
                               ),
-                              decoration: TextDecoration.underline,
-                              decorationColor: AppColors.black,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () => launchUrl(
-                                    Uri.parse(
-                                        'https://www.crowdstrike.com/en-us/legal/privacy-notice/'),
-                                  ),
-                          ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  context.goNamed(RouteConstants.privacyPath);
+                                }),
                         ],
                       ),
                     ),

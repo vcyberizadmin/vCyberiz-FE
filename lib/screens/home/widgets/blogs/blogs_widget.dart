@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
@@ -11,6 +10,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/blogs_bloc/blogs_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_button_widget.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/hover/hover.dart';
 import 'package:vcyberiz/data/model/blogs_model/blogs_list.dart';
 
@@ -261,7 +261,7 @@ class BlogCard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             image: DecorationImage(
-              image: CachedNetworkImageProvider(
+              image: decorationImageProviderWidget(
                 imageUrl,
               ),
               fit: BoxFit.cover,

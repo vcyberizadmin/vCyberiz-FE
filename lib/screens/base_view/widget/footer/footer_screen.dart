@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/footer_bloc/footer_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 import '../../../../core/utils/constants/constants.dart';
@@ -65,15 +66,15 @@ class FooterScreen extends StatelessWidget {
       onTap: () {
         context.goNamed(RouteConstants.homeScreenPath);
       },
-      child: Image.network(
-        fit: BoxFit.contain,
-        (state.data?.siteMap?.brand?.secLogo?.first.url ?? ""),
+      child: ImageWidget(
+        imageUrl: (state.data?.siteMap?.brand?.secLogo?.first.url ?? ""),
         width: getValueForScreenType<double>(
           context: context,
           mobile: 150,
           tablet: 150,
           desktop: 200,
         ),
+        fit: BoxFit.contain,
       ),
     );
   }

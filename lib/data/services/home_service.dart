@@ -7,21 +7,7 @@ import '../dio_base_service.dart';
 
 class HomeServices extends DioBaseService {
   final Dio _dio = DioBaseService.dio;
-  final Dio _meiliDio = Dio(
-    BaseOptions(
-      baseUrl: "https://getmeilimeilisearchv190-staging.up.railway.app",
-      // 'http://46.137.247.186:7700', // Replace with your Strapi backend URL
-
-      // baseUrl: 'http://localhost:7700', // Replace with your Strapi backend URL
-
-      // 'http://46.137.247.186:7700', // Replace with your Strapi backend URL
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 10),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    ),
-  );
+  final Dio _meiliDio = DioBaseSearchService.dio;
   Future<Response<dynamic>?> getSections() async {
     try {
       return await _dio.get(
@@ -44,8 +30,6 @@ class HomeServices extends DioBaseService {
 
   Future<Response<dynamic>?> getSearchApi(String query) async {
     const String meiliSearchUrl = '/multi-search';
-    const String apiKey = "5bhcgdv2sisket1qn7acc8kmhdplywys";
-    // 'StratAgile123!';
 
     final List<String> highPriorityIndexes = [
       'blog-post',
@@ -105,12 +89,6 @@ class HomeServices extends DioBaseService {
     try {
       final response = await _meiliDio.post(
         meiliSearchUrl,
-        options: Options(
-          headers: {
-            'Authorization': 'Bearer $apiKey',
-            'Content-Type': 'application/json',
-          },
-        ),
         data: {
           "queries": searchQueries,
         },

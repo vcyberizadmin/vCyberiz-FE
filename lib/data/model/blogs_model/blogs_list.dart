@@ -45,10 +45,11 @@ class BlogsListData {
   final DateTime? updatedAt;
   final DateTime? publishedAt;
   final String? globalUrl;
+  final List<ArticleSection>? articleSection;
   final List<Blog>? blogTags;
   final Blog? blogAuthor;
   final List<Blog>? blogCategories;
-  final SecCta? secCta;
+  final dynamic secCta;
   final Img? secImg;
   final Img? thumbnailImg;
 
@@ -63,6 +64,7 @@ class BlogsListData {
     this.updatedAt,
     this.publishedAt,
     this.globalUrl,
+    this.articleSection,
     this.blogTags,
     this.blogAuthor,
     this.blogCategories,
@@ -90,6 +92,10 @@ class BlogsListData {
             ? null
             : DateTime.parse(json["publishedAt"]),
         globalUrl: json["global_url"],
+        articleSection: json["article_section"] == null
+            ? []
+            : List<ArticleSection>.from(json["article_section"]!
+                .map((x) => ArticleSection.fromJson(x))),
         blogTags: json["blog_tags"] == null
             ? []
             : List<Blog>.from(json["blog_tags"]!.map((x) => Blog.fromJson(x))),
@@ -100,8 +106,7 @@ class BlogsListData {
             ? []
             : List<Blog>.from(
                 json["blog_categories"]!.map((x) => Blog.fromJson(x))),
-        secCta:
-            json["sec_cta"] == null ? null : SecCta.fromJson(json["sec_cta"]),
+        secCta: json["sec_cta"],
         secImg: json["sec_img"] == null ? null : Img.fromJson(json["sec_img"]),
         thumbnailImg: json["thumbnail_img"] == null
             ? null
@@ -119,6 +124,9 @@ class BlogsListData {
         "updatedAt": updatedAt?.toIso8601String(),
         "publishedAt": publishedAt?.toIso8601String(),
         "global_url": globalUrl,
+        "article_section": articleSection == null
+            ? []
+            : List<dynamic>.from(articleSection!.map((x) => x.toJson())),
         "blog_tags": blogTags == null
             ? []
             : List<dynamic>.from(blogTags!.map((x) => x.toJson())),
@@ -126,9 +134,104 @@ class BlogsListData {
         "blog_categories": blogCategories == null
             ? []
             : List<dynamic>.from(blogCategories!.map((x) => x.toJson())),
-        "sec_cta": secCta?.toJson(),
+        "sec_cta": secCta,
         "sec_img": secImg?.toJson(),
         "thumbnail_img": thumbnailImg?.toJson(),
+      };
+}
+
+class ArticleSection {
+  final String? type;
+  final int? level;
+  final List<ArticleSectionChild>? children;
+  final String? format;
+
+  ArticleSection({
+    this.type,
+    this.level,
+    this.children,
+    this.format,
+  });
+
+  factory ArticleSection.fromJson(Map<String, dynamic> json) => ArticleSection(
+        type: json["type"],
+        level: json["level"],
+        children: json["children"] == null
+            ? []
+            : List<ArticleSectionChild>.from(
+                json["children"]!.map((x) => ArticleSectionChild.fromJson(x))),
+        format: json["format"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "type": type,
+        "level": level,
+        "children": children == null
+            ? []
+            : List<dynamic>.from(children!.map((x) => x.toJson())),
+        "format": format,
+      };
+}
+
+class ArticleSectionChild {
+  final bool? bold;
+  final String? text;
+  final String? type;
+  final List<ChildChild>? children;
+  final String? url;
+
+  ArticleSectionChild({
+    this.bold,
+    this.text,
+    this.type,
+    this.children,
+    this.url,
+  });
+
+  factory ArticleSectionChild.fromJson(Map<String, dynamic> json) =>
+      ArticleSectionChild(
+        bold: json["bold"],
+        text: json["text"],
+        type: json["type"],
+        children: json["children"] == null
+            ? []
+            : List<ChildChild>.from(
+                json["children"]!.map((x) => ChildChild.fromJson(x))),
+        url: json["url"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "bold": bold,
+        "text": text,
+        "type": type,
+        "children": children == null
+            ? []
+            : List<dynamic>.from(children!.map((x) => x.toJson())),
+        "url": url,
+      };
+}
+
+class ChildChild {
+  final bool? bold;
+  final String? text;
+  final String? type;
+
+  ChildChild({
+    this.bold,
+    this.text,
+    this.type,
+  });
+
+  factory ChildChild.fromJson(Map<String, dynamic> json) => ChildChild(
+        bold: json["bold"],
+        text: json["text"],
+        type: json["type"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "bold": bold,
+        "text": text,
+        "type": type,
       };
 }
 
@@ -186,43 +289,11 @@ class Blog {
       };
 }
 
-class SecCta {
-  final int? id;
-  final String? label;
-  final String? href;
-  final bool? isExternal;
-  final String? type;
-
-  SecCta({
-    this.id,
-    this.label,
-    this.href,
-    this.isExternal,
-    this.type,
-  });
-
-  factory SecCta.fromJson(Map<String, dynamic> json) => SecCta(
-        id: json["id"],
-        label: json["label"],
-        href: json["href"],
-        isExternal: json["isExternal"],
-        type: json["type"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "label": label,
-        "href": href,
-        "isExternal": isExternal,
-        "type": type,
-      };
-}
-
 class Img {
   final int? id;
   final String? url;
   final String? name;
-  final Mime? mime;
+  final String? mime;
   final String? label;
 
   Img({
@@ -237,7 +308,7 @@ class Img {
         id: json["id"],
         url: json["url"],
         name: json["name"],
-        mime: mimeValues.map[json["mime"]]!,
+        mime: json["mime"],
         label: json["label"],
       );
 
@@ -245,15 +316,10 @@ class Img {
         "id": id,
         "url": url,
         "name": name,
-        "mime": mimeValues.reverse[mime],
+        "mime": mime,
         "label": label,
       };
 }
-
-enum Mime { IMAGE_WEBP, IMG_PNG }
-
-final mimeValues =
-    EnumValues({"image/webp": Mime.IMAGE_WEBP, "img/png": Mime.IMG_PNG});
 
 class Meta {
   final Pagination? pagination;

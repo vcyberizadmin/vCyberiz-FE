@@ -91,7 +91,7 @@ class _ValuesSectionState extends State<ValuesSection> {
                           context: context,
                           mobile: 2 / 1.6,
                           tablet: 2 / 1.5,
-                          desktop: 2 / 1.2,
+                          desktop: 2 / 1.25,
                         ),
                       ),
                       shrinkWrap: true,

@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -8,6 +7,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/our_service_bloc/our_service_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/hover/hover.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
@@ -37,7 +37,7 @@ class KeyFocusAreas extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                   image: DecorationImage(
-                image: CachedNetworkImageProvider(
+                image: decorationImageProviderWidget(
                   state.serviceDetailsData?.innerPage?[2].secBgImg?.first.url ??
                       '',
                 ),
@@ -242,13 +242,9 @@ class _FocusAreaCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Icon
-              Image.network(
-                icon,
+              ImageWidget(
+                imageUrl: icon,
                 height: 60,
-                errorBuilder: (context, error, stackTrace) => const Icon(
-                  Icons.error, // Fallback icon in case of image loading error
-                  size: 50,
-                ),
               ),
               if (title.isNotEmpty)
                 kStyle.semiBold(
@@ -257,7 +253,7 @@ class _FocusAreaCard extends StatelessWidget {
                       context: context,
                       mobile: 20,
                       tablet: 25,
-                      desktop: 30,
+                      desktop: Constants.desktopBreakPoint * .02,
                     ),
                     color: AppColors.black,
                     overflow: TextOverflow.visible),

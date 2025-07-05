@@ -2,13 +2,14 @@
 
 import 'dart:math' as math;
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dashed_circular_progress_bar/dashed_circular_progress_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 import '../../../data/model/service_details_model/service_details_model.dart';
@@ -82,7 +83,7 @@ class _ProgressWidgetState extends State<ProgressWidget> {
       decoration: BoxDecoration(
         color: AppColors.white,
         image: DecorationImage(
-          image: CachedNetworkImageProvider(widget.bgImage),
+          image: decorationImageProviderWidget(widget.bgImage),
           fit: getValueForScreenType(
             context: context,
             mobile: BoxFit.contain,
@@ -160,7 +161,8 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                               color: Colors.orange.shade500,
                               shape: BoxShape.circle,
                             ),
-                            child: Image.network(item.secLogo?.url ?? ''),
+                            child:
+                                ImageWidget(imageUrl: item.secLogo?.url ?? ''),
                           ),
                           const SizedBox(width: 12),
                           Expanded(
@@ -180,7 +182,7 @@ class _ProgressWidgetState extends State<ProgressWidget> {
               } else {
                 return Align(
                   alignment: Alignment.bottomCenter,
-                  child: Container(
+                  child: SizedBox(
                     width: 700,
                     height: stackTotalHeight,
                     child: Stack(
@@ -198,8 +200,8 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                                 width: 700,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: CachedNetworkImageProvider(
-                                      'https://djiq2s79pbv5u.cloudfront.net/project-strapi/Revamp_UI/Managed%20365%20Security%20Service/curve1.png',
+                                    image: decorationImageProviderWidget(
+                                      '/data/uploads/Managed%20365%20Security%20Service/curve1.png',
                                     ),
                                     fit: getValueForScreenType(
                                       context: context,
@@ -243,7 +245,7 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                                   children: [
                                     Positioned(
                                       bottom: 20,
-                                      child: CachedNetworkImage(
+                                      child: ImageWidget(
                                         imageUrl: widget.logoimage,
                                         height: 50, // control size here
                                         fit: BoxFit.contain,
@@ -310,10 +312,18 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                                   width: itemWidth,
                                   child: Column(
                                     children: [
+                                      kStyle.bold(
+                                        text: item.label ?? '',
+                                        textAlign: TextAlign.center,
+                                        size: 13,
+                                        color: AppColors.black,
+                                        overflow: TextOverflow.visible,
+                                        height: 1,
+                                      ),
                                       kStyle.reg(
                                         text: item.secDescription ?? '',
                                         textAlign: TextAlign.center,
-                                        size: 14,
+                                        size: 13,
                                         color: AppColors.black,
                                         overflow: TextOverflow.visible,
                                         height: 1,
@@ -334,8 +344,8 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                                             ),
                                           ],
                                         ),
-                                        child: Image.network(
-                                            item.secLogo?.url ?? ''),
+                                        child: ImageWidget(
+                                            imageUrl: item.secLogo?.url ?? ''),
                                       ),
                                     ],
                                   ),

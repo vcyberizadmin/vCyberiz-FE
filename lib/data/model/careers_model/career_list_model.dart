@@ -11,8 +11,8 @@ String careerListModelToJson(CareerListModel data) =>
     json.encode(data.toJson());
 
 class CareerListModel {
-  List<CareerListData>? data;
-  Meta? meta;
+  final List<CareerListData>? data;
+  final Meta? meta;
 
   CareerListModel({
     this.data,
@@ -37,24 +37,24 @@ class CareerListModel {
 }
 
 class CareerListData {
-  int? id;
-  String? documentId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  DateTime? publishedAt;
-  String? secHeader;
-  String? secDescription;
-  String? jobcardHeader;
-  String? jobcardDescription;
-  String? headerColorIdentifier;
-  String? jpId;
-  bool? bookmarkIdentifier;
-  SecCta? secCta;
-  List<Functions>? employmentTypes;
-  List<Functions>? skills;
-  Functions? function;
-  List<Country>? countries;
-  ZipCode? zipCode;
+  final int? id;
+  final String? documentId;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final DateTime? publishedAt;
+  final String? secHeader;
+  final String? secDescription;
+  final String? jpId;
+  final bool? bookmarkIdentifier;
+  final String? globalUrl;
+  final List<JobDescription>? jobDescription;
+  final String? team;
+  final String? experience;
+  final String? jobLocation;
+  final String? shift;
+  final List<EmploymentType>? skills;
+  final List<EmploymentType>? employmentTypes;
+  final ZipCode? zipCode;
 
   CareerListData({
     this.id,
@@ -64,16 +64,16 @@ class CareerListData {
     this.publishedAt,
     this.secHeader,
     this.secDescription,
-    this.jobcardHeader,
-    this.jobcardDescription,
-    this.headerColorIdentifier,
     this.jpId,
     this.bookmarkIdentifier,
-    this.secCta,
-    this.employmentTypes,
+    this.globalUrl,
+    this.jobDescription,
+    this.team,
+    this.experience,
+    this.jobLocation,
+    this.shift,
     this.skills,
-    this.function,
-    this.countries,
+    this.employmentTypes,
     this.zipCode,
   });
 
@@ -91,28 +91,25 @@ class CareerListData {
             : DateTime.parse(json["publishedAt"]),
         secHeader: json["sec_header"],
         secDescription: json["sec_description"],
-        jobcardHeader: json["jobcard_header"],
-        jobcardDescription: json["jobcard_description"],
-        headerColorIdentifier: json["header_colorIdentifier"],
         jpId: json["jp_id"],
         bookmarkIdentifier: json["bookmark_identifier"],
-        secCta:
-            json["sec_cta"] == null ? null : SecCta.fromJson(json["sec_cta"]),
-        employmentTypes: json["employment_types"] == null
+        globalUrl: json["global_url"],
+        jobDescription: json["job_description"] == null
             ? []
-            : List<Functions>.from(
-                json["employment_types"]!.map((x) => Functions.fromJson(x))),
+            : List<JobDescription>.from(json["job_description"]!
+                .map((x) => JobDescription.fromJson(x))),
+        team: json["team"],
+        experience: json["experience"],
+        jobLocation: json["job_location"],
+        shift: json["shift"],
         skills: json["skills"] == null
             ? []
-            : List<Functions>.from(
-                json["skills"]!.map((x) => Functions.fromJson(x))),
-        function: json["function"] == null
-            ? null
-            : Functions.fromJson(json["function"]),
-        countries: json["countries"] == null
+            : List<EmploymentType>.from(
+                json["skills"]!.map((x) => EmploymentType.fromJson(x))),
+        employmentTypes: json["employment_types"] == null
             ? []
-            : List<Country>.from(
-                json["countries"]!.map((x) => Country.fromJson(x))),
+            : List<EmploymentType>.from(json["employment_types"]!
+                .map((x) => EmploymentType.fromJson(x))),
         zipCode: json["zip_code"] == null
             ? null
             : ZipCode.fromJson(json["zip_code"]),
@@ -126,34 +123,242 @@ class CareerListData {
         "publishedAt": publishedAt?.toIso8601String(),
         "sec_header": secHeader,
         "sec_description": secDescription,
-        "jobcard_header": jobcardHeader,
-        "jobcard_description": jobcardDescription,
-        "header_colorIdentifier": headerColorIdentifier,
         "jp_id": jpId,
         "bookmark_identifier": bookmarkIdentifier,
-        "sec_cta": secCta?.toJson(),
-        "employment_types": employmentTypes == null
+        "global_url": globalUrl,
+        "job_description": jobDescription == null
             ? []
-            : List<dynamic>.from(employmentTypes!.map((x) => x.toJson())),
+            : List<dynamic>.from(jobDescription!.map((x) => x.toJson())),
+        "team": team,
+        "experience": experience,
+        "job_location": jobLocation,
+        "shift": shift,
         "skills": skills == null
             ? []
             : List<dynamic>.from(skills!.map((x) => x.toJson())),
-        "function": function?.toJson(),
-        "countries": countries == null
+        "employment_types": employmentTypes == null
             ? []
-            : List<dynamic>.from(countries!.map((x) => x.toJson())),
+            : List<dynamic>.from(employmentTypes!.map((x) => x.toJson())),
         "zip_code": zipCode?.toJson(),
       };
 }
 
+class EmploymentType {
+  final int? id;
+  final String? documentId;
+  final String? secText;
+  final String? etId;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final DateTime? publishedAt;
+  final String? colorIdentifier;
+  final String? sid;
+
+  EmploymentType({
+    this.id,
+    this.documentId,
+    this.secText,
+    this.etId,
+    this.createdAt,
+    this.updatedAt,
+    this.publishedAt,
+    this.colorIdentifier,
+    this.sid,
+  });
+
+  factory EmploymentType.fromJson(Map<String, dynamic> json) => EmploymentType(
+        id: json["id"],
+        documentId: json["documentId"],
+        secText: json["sec_text"],
+        etId: json["et_id"],
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
+        publishedAt: json["publishedAt"] == null
+            ? null
+            : DateTime.parse(json["publishedAt"]),
+        colorIdentifier: json["color_identifier"],
+        sid: json["sid"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "documentId": documentId,
+        "sec_text": secText,
+        "et_id": etId,
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
+        "publishedAt": publishedAt?.toIso8601String(),
+        "color_identifier": colorIdentifier,
+        "sid": sid,
+      };
+}
+
+class JobDescription {
+  final JobDescriptionType? type;
+  final List<JobDescriptionChild>? children;
+  final String? format;
+
+  JobDescription({
+    this.type,
+    this.children,
+    this.format,
+  });
+
+  factory JobDescription.fromJson(Map<String, dynamic> json) => JobDescription(
+        type: jobDescriptionTypeValues.map[json["type"]]!,
+        children: json["children"] == null
+            ? []
+            : List<JobDescriptionChild>.from(
+                json["children"]!.map((x) => JobDescriptionChild.fromJson(x))),
+        format: json["format"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "type": jobDescriptionTypeValues.reverse[type],
+        "children": children == null
+            ? []
+            : List<dynamic>.from(children!.map((x) => x.toJson())),
+        "format": format,
+      };
+}
+
+class JobDescriptionChild {
+  final bool? bold;
+  final String? text;
+  final ChildType? type;
+  final List<ChildChild>? children;
+
+  JobDescriptionChild({
+    this.bold,
+    this.text,
+    this.type,
+    this.children,
+  });
+
+  factory JobDescriptionChild.fromJson(Map<String, dynamic> json) =>
+      JobDescriptionChild(
+        bold: json["bold"],
+        text: json["text"],
+        type: childTypeValues.map[json["type"]]!,
+        children: json["children"] == null
+            ? []
+            : List<ChildChild>.from(
+                json["children"]!.map((x) => ChildChild.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "bold": bold,
+        "text": text,
+        "type": childTypeValues.reverse[type],
+        "children": children == null
+            ? []
+            : List<dynamic>.from(children!.map((x) => x.toJson())),
+      };
+}
+
+class ChildChild {
+  final String? text;
+  final ChildType? type;
+
+  ChildChild({
+    this.text,
+    this.type,
+  });
+
+  factory ChildChild.fromJson(Map<String, dynamic> json) => ChildChild(
+        text: json["text"],
+        type: childTypeValues.map[json["type"]]!,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "text": text,
+        "type": childTypeValues.reverse[type],
+      };
+}
+
+enum ChildType { LIST_ITEM, TEXT }
+
+final childTypeValues =
+    EnumValues({"list-item": ChildType.LIST_ITEM, "text": ChildType.TEXT});
+
+enum JobDescriptionType { LIST, PARAGRAPH }
+
+final jobDescriptionTypeValues = EnumValues({
+  "list": JobDescriptionType.LIST,
+  "paragraph": JobDescriptionType.PARAGRAPH
+});
+
+class ZipCode {
+  final int? id;
+  final String? documentId;
+  final String? name;
+  final String? zipId;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final DateTime? publishedAt;
+  final ZipCode? state;
+  final String? steId;
+  final Country? country;
+
+  ZipCode({
+    this.id,
+    this.documentId,
+    this.name,
+    this.zipId,
+    this.createdAt,
+    this.updatedAt,
+    this.publishedAt,
+    this.state,
+    this.steId,
+    this.country,
+  });
+
+  factory ZipCode.fromJson(Map<String, dynamic> json) => ZipCode(
+        id: json["id"],
+        documentId: json["documentId"],
+        name: json["name"],
+        zipId: json["zip_id"],
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
+        publishedAt: json["publishedAt"] == null
+            ? null
+            : DateTime.parse(json["publishedAt"]),
+        state: json["state"] == null ? null : ZipCode.fromJson(json["state"]),
+        steId: json["ste_id"],
+        country:
+            json["country"] == null ? null : Country.fromJson(json["country"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "documentId": documentId,
+        "name": name,
+        "zip_id": zipId,
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
+        "publishedAt": publishedAt?.toIso8601String(),
+        "state": state?.toJson(),
+        "ste_id": steId,
+        "country": country?.toJson(),
+      };
+}
+
 class Country {
-  int? id;
-  String? documentId;
-  String? text;
-  String? locId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  DateTime? publishedAt;
+  final int? id;
+  final String? documentId;
+  final String? text;
+  final String? locId;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final DateTime? publishedAt;
 
   Country({
     this.id,
@@ -192,144 +397,8 @@ class Country {
       };
 }
 
-class Functions {
-  int? id;
-  String? documentId;
-  String? secText;
-  String? etId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  DateTime? publishedAt;
-  String? colorIdentifier;
-  String? fid;
-  String? sid;
-
-  Functions({
-    this.id,
-    this.documentId,
-    this.secText,
-    this.etId,
-    this.createdAt,
-    this.updatedAt,
-    this.publishedAt,
-    this.colorIdentifier,
-    this.fid,
-    this.sid,
-  });
-
-  factory Functions.fromJson(Map<String, dynamic> json) => Functions(
-        id: json["id"],
-        documentId: json["documentId"],
-        secText: json["sec_text"],
-        etId: json["et_id"],
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
-        publishedAt: json["publishedAt"] == null
-            ? null
-            : DateTime.parse(json["publishedAt"]),
-        colorIdentifier: json["color_identifier"],
-        fid: json["fid"],
-        sid: json["sid"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "documentId": documentId,
-        "sec_text": secText,
-        "et_id": etId,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-        "publishedAt": publishedAt?.toIso8601String(),
-        "color_identifier": colorIdentifier,
-        "fid": fid,
-        "sid": sid,
-      };
-}
-
-class SecCta {
-  int? id;
-  String? label;
-  String? href;
-  bool? isExternal;
-  String? type;
-
-  SecCta({
-    this.id,
-    this.label,
-    this.href,
-    this.isExternal,
-    this.type,
-  });
-
-  factory SecCta.fromJson(Map<String, dynamic> json) => SecCta(
-        id: json["id"],
-        label: json["label"],
-        href: json["href"],
-        isExternal: json["isExternal"],
-        type: json["type"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "label": label,
-        "href": href,
-        "isExternal": isExternal,
-        "type": type,
-      };
-}
-
-class ZipCode {
-  int? id;
-  String? documentId;
-  String? name;
-  String? zipId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  DateTime? publishedAt;
-
-  ZipCode({
-    this.id,
-    this.documentId,
-    this.name,
-    this.zipId,
-    this.createdAt,
-    this.updatedAt,
-    this.publishedAt,
-  });
-
-  factory ZipCode.fromJson(Map<String, dynamic> json) => ZipCode(
-        id: json["id"],
-        documentId: json["documentId"],
-        name: json["name"],
-        zipId: json["zip_id"],
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
-        publishedAt: json["publishedAt"] == null
-            ? null
-            : DateTime.parse(json["publishedAt"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "documentId": documentId,
-        "name": name,
-        "zip_id": zipId,
-        "createdAt": createdAt?.toIso8601String(),
-        "updatedAt": updatedAt?.toIso8601String(),
-        "publishedAt": publishedAt?.toIso8601String(),
-      };
-}
-
 class Meta {
-  Pagination? pagination;
+  final Pagination? pagination;
 
   Meta({
     this.pagination,
@@ -347,10 +416,10 @@ class Meta {
 }
 
 class Pagination {
-  int? page;
-  int? pageSize;
-  int? pageCount;
-  int? total;
+  final int? page;
+  final int? pageSize;
+  final int? pageCount;
+  final int? total;
 
   Pagination({
     this.page,

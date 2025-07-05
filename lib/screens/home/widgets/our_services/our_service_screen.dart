@@ -8,6 +8,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/our_service_bloc/our_service_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/screens/home/widgets/our_services/widgets/counter_container_widget.dart';
 
@@ -218,15 +219,15 @@ class OurServicesWidget extends StatelessWidget {
                           return Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.network(
+                              ImageWidget(
                                 width: getValueForScreenType<double>(
                                   context: context,
                                   mobile: 25,
                                   tablet: 25,
                                   desktop: 35,
                                 ),
-                                state.data?.mainSection?.first.services?[index]
-                                        .secLogo?.url ??
+                                imageUrl: state.data?.mainSection?.first
+                                        .services?[index].secLogo?.url ??
                                     '',
                                 color: hexToColor(state.data?.mainSection?.first
                                         .services?[index].colorIdentifier ??
@@ -254,15 +255,15 @@ class OurServicesWidget extends StatelessWidget {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.network(
+                              ImageWidget(
                                 width: getValueForScreenType<double>(
                                   context: context,
                                   mobile: 25,
                                   tablet: 25,
                                   desktop: 35,
                                 ),
-                                state.data?.mainSection?.first.services?[index]
-                                        .secLogo?.url ??
+                                imageUrl: state.data?.mainSection?.first
+                                        .services?[index].secLogo?.url ??
                                     '',
                                 color: hexToColor(state.data?.mainSection?.first
                                         .services?[index].colorIdentifier ??
@@ -429,7 +430,7 @@ class OurServicesWidget extends StatelessWidget {
               height: getValueForScreenType(
                 context: context,
                 mobile: 300,
-                desktop: state.selectedItem == 0 ? 450 : 500,
+                desktop: state.selectedItem == 0 ? 400 : 400,
                 tablet: 400,
               ),
               child: state.selectedItem == 0

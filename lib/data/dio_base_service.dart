@@ -35,3 +35,36 @@ class DioBaseService {
     return _dio;
   }
 }
+
+class DioBaseSearchService {
+  static late Dio _dio;
+
+  static Future<void> init() async {
+    _dio = Dio(
+      BaseOptions(
+        baseUrl: dotenv.env[Constants.searchBaseURL] ?? "",
+        connectTimeout: const Duration(seconds: 60),
+        receiveTimeout: const Duration(seconds: 60),
+      ),
+    );
+
+    _dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (
+        RequestOptions options,
+        RequestInterceptorHandler handler,
+      ) {
+        _dio.options.queryParameters.clear();
+        options.headers[Constants.auth] =
+            dotenv.env[Constants.searchApiKey] ?? '';
+
+        options.headers["Content-Type"] = 'application/json';
+
+        return handler.next(options);
+      },
+    ));
+  }
+
+  static Dio get dio {
+    return _dio;
+  }
+}

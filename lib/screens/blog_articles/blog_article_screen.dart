@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -12,6 +11,7 @@ import 'package:vcyberiz/bloc/home-bloc/home_event.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_button_widget.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/data/model/blogs_model/blog_article_model.dart';
 import 'package:vcyberiz/routes/route_constants.dart';
@@ -133,6 +133,7 @@ class _BlogArticleScreenState extends State<BlogArticleScreen> {
                   children: [
                     const Gap(24),
                     _headerWidget(state),
+                    Gap(20),
                     SizedBox(
                       width: getValueForScreenType<double>(
                         context: context,
@@ -181,10 +182,8 @@ class _BlogArticleScreenState extends State<BlogArticleScreen> {
   ) {
     return Column(
       children: [
-        _dataWidget(
-          context,
-          state,
-        ),
+        buildArticleSectionWidget(
+            context, state.blogArticleData?.articleSection),
       ],
     );
   }
@@ -209,10 +208,8 @@ class _BlogArticleScreenState extends State<BlogArticleScreen> {
           Expanded(
             key: _blogListKey,
             flex: 4,
-            child: _dataWidget(
-              context,
-              state,
-            ),
+            child: buildArticleSectionWidget(
+                context, state.blogArticleData?.articleSection),
           ),
           const Gap(96),
           Expanded(
@@ -253,7 +250,7 @@ class _BlogArticleScreenState extends State<BlogArticleScreen> {
         color: AppColors.black,
         borderRadius: BorderRadius.circular(16),
         image: DecorationImage(
-          image: CachedNetworkImageProvider(
+          image: decorationImageProviderWidget(
             state.blogMarketingList?.secCard?.secImg?.url ?? '',
           ),
           fit: BoxFit.cover,
@@ -369,7 +366,7 @@ class _BlogArticleScreenState extends State<BlogArticleScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                  image: CachedNetworkImageProvider(
+                  image: decorationImageProviderWidget(
                     state.blogArticleData?.secImg?.url ?? '',
                   ),
                   fit: BoxFit.cover,
@@ -382,89 +379,174 @@ class _BlogArticleScreenState extends State<BlogArticleScreen> {
     );
   }
 
-  Widget _dataWidget(BuildContext context, BlogsState state) {
-    return ResponsiveBuilder(
-      builder: (context, sizingInformation) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Gap(sizingInformation.isDesktop ? 60 : 30),
-            kStyle.reg(
-              text: state.blogArticleData?.description?.trim() ?? '',
-              size: getValueForScreenType(
-                  context: context, mobile: 14, tablet: 18, desktop: 18),
-              color: AppColors.black,
-              overflow: TextOverflow.visible,
-            ),
-            const Gap(24),
-            //!-------------(Contact US Card)
-            if (!sizingInformation.isDesktop) ...[
-              if (sizingInformation.isTablet) _positionedWidget(context, state),
-              const Gap(24),
-            ],
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: (state.blogArticleData?.blogSection ?? []).length,
-              padding: EdgeInsets.zero,
-              itemBuilder: (context, index) {
-                BlogSection? data = state.blogArticleData?.blogSection?[index];
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    kStyle.med(
-                      text: data?.header ?? '',
-                      size: getValueForScreenType(
-                          context: context,
-                          mobile: 24,
-                          tablet: 32,
-                          desktop: 32),
-                      color: AppColors.fontBlack,
-                      overflow: TextOverflow.visible,
-                    ),
-                    const Gap(20),
-                    // Paragraph
-                    kStyle.reg(
-                        text: data?.content?.trim() ?? '',
-                        size: getValueForScreenType(
-                            context: context,
-                            mobile: 14,
-                            tablet: 18,
-                            desktop: 18),
-                        color: AppColors.black,
-                        overflow: TextOverflow.visible),
-                    const Gap(20),
-                    // Secondary Image
-                    if ((data?.secImg ?? []).isNotEmpty) ...[
-                      Container(
-                        height: getValueForScreenType(
-                            context: context,
-                            mobile: 120,
-                            tablet: 240,
-                            desktop: 320),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                            image: CachedNetworkImageProvider(
-                              data?.secImg?.first.url ?? "",
+  Widget buildArticleSectionWidget(
+    BuildContext context,
+    List<ArticleSection>? sections,
+  ) {
+    if (sections == null || sections.isEmpty) return const SizedBox();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: sections.asMap().entries.map((entry) {
+        final section = entry.value;
+
+        switch (section.type) {
+          case 'heading':
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Text.rich(
+                buildTextSpan(context, section.children ?? []),
+                style: TextStyle(
+                  fontFamily: Constants.font,
+                  fontSize: getHeadingFontSize(context, section.level ?? 4),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+
+          case 'paragraph':
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Text.rich(
+                buildTextSpan(context, section.children ?? []),
+                style: TextStyle(
+                  fontFamily: Constants.font,
+                  fontSize: getParagraphFontSize(context),
+                ),
+              ),
+            );
+
+          case 'list':
+            final isOrdered = section.format == 'ordered';
+
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: section.children?.asMap().entries.map((itemEntry) {
+                      final itemIndex = itemEntry.key;
+                      final item = itemEntry.value;
+
+                      // Convert ChildChild to ArticleSectionChild
+                      final convertedChildren = item.children?.map((child) {
+                            return ArticleSectionChild(
+                              bold: child.bold,
+                              text: child.text,
+                              type: child.type,
+                              children: [],
+                            );
+                          }).toList() ??
+                          [];
+
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              isOrdered ? '${itemIndex + 1}. ' : '• ',
+                              style: const TextStyle(
+                                fontFamily: Constants.font,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                            fit: BoxFit.cover,
-                          ),
+                            Expanded(
+                              child: Text.rich(
+                                buildTextSpan(context, convertedChildren),
+                                style: TextStyle(
+                                  fontFamily: Constants.font,
+                                  fontSize: getParagraphFontSize(context),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      const Gap(24),
-                    ]
-                  ],
-                );
-              },
-            ),
-            Gap(10), tagsRelatedWidget(state.blogArticleData?.blogTags ?? []),
-            Gap(10),
-          ],
-        );
-      },
+                      );
+                    }).toList() ??
+                    [],
+              ),
+            );
+
+          default:
+            return const SizedBox();
+        }
+      }).toList(),
     );
+  }
+
+  TextSpan buildTextSpan(
+      BuildContext context, List<ArticleSectionChild> children) {
+    return TextSpan(
+      children: children.map((child) {
+        if (child.url != null) {
+          // Render image as a WidgetSpan
+          return WidgetSpan(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: ImageWidget(
+                imageUrl: child.url!,
+                width: MediaQuery.of(context).size.width * 0.9,
+                fit: BoxFit.contain,
+              ),
+            ),
+          );
+        }
+
+        // Handle nested children recursively (e.g., bold + nested spans)
+        if (child.children != null && child.children!.isNotEmpty) {
+          return TextSpan(
+            text: child.text ?? '',
+            style: TextStyle(
+              fontFamily: Constants.font,
+              fontWeight:
+                  child.bold == true ? FontWeight.bold : FontWeight.normal,
+            ),
+            children: child.children!.map((sub) {
+              return TextSpan(
+                text: sub.text ?? '',
+                style: TextStyle(
+                  fontFamily: Constants.font,
+                  fontWeight:
+                      sub.bold == true ? FontWeight.bold : FontWeight.normal,
+                ),
+              );
+            }).toList(),
+          );
+        }
+
+        return TextSpan(
+          text: child.text ?? '',
+          style: TextStyle(
+            fontFamily: Constants.font,
+            fontWeight:
+                child.bold == true ? FontWeight.bold : FontWeight.normal,
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  double getHeadingFontSize(BuildContext context, int level) {
+    switch (level) {
+      case 1:
+        return 30;
+      case 2:
+        return 26;
+      case 3:
+        return 22;
+      case 4:
+        return 20;
+      case 5:
+        return 18;
+      case 6:
+        return 16;
+      default:
+        return 16;
+    }
+  }
+
+  double getParagraphFontSize(BuildContext context) {
+    return 16;
   }
 
   Widget tagsRelatedWidget(List<Blog> tags) {

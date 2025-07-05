@@ -1,14 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/login/login_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/asset_constants.dart';
+import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/constants/string_const.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
@@ -30,13 +31,7 @@ class ReCaptchaIntegration extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.white,
                 borderRadius: BorderRadius.circular(5),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: AppColors.grey.withOpacity(0.5),
-                    blurRadius: 5,
-                    offset: const Offset(2, 2),
-                  ),
-                ],
+                border: Border.all(color: Colors.grey),
               ),
               child: _contentInsideCheckBox(context),
             ),
@@ -53,10 +48,13 @@ class ReCaptchaIntegration extends StatelessWidget {
         vertical: 7,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           _checkBoxWithTitle(context),
+          const Gap(100),
           _captchaImageWithPrivacy(context),
+          const Gap(8),
         ],
       ),
     );
@@ -66,9 +64,9 @@ class ReCaptchaIntegration extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        CachedNetworkImage(
-          imageUrl: AssetConst.reCaptcha,
-          height: 35,
+        Image.network(
+          "${dotenv.env[Constants.baseURL] ?? ""}/data/uploads/Contact%20Us/reCaptcha.webp",
+          height: 60,
         ),
         _privacyAndTermsLink(context),
       ],
@@ -78,18 +76,23 @@ class ReCaptchaIntegration extends StatelessWidget {
   RichText _privacyAndTermsLink(BuildContext context) {
     return RichText(
       text: TextSpan(
-        style: const TextStyle(fontSize: 12.0, color: AppColors.grey),
+        style: TextStyle(
+          fontSize: 12.0,
+          color: Colors.grey.shade400,
+          fontWeight: FontWeight.bold,
+        ),
         children: <TextSpan>[
           TextSpan(
             text: StringConst.privacy,
             style: kStyle
-                .reg(
+                .semiBold(
+                  color: Colors.grey.shade600,
                   text: '',
                   size: getValueForScreenType(
                     context: context,
-                    mobile: 7,
-                    tablet: 9,
-                    desktop: 10,
+                    mobile: 13,
+                    tablet: 13,
+                    desktop: 13,
                   ),
                 )
                 .style,
@@ -100,13 +103,14 @@ class ReCaptchaIntegration extends StatelessWidget {
           TextSpan(
             text: StringConst.terms,
             style: kStyle
-                .reg(
+                .semiBold(
+                  color: Colors.grey.shade600,
                   text: '',
                   size: getValueForScreenType(
                     context: context,
-                    mobile: 7,
-                    tablet: 9,
-                    desktop: 10,
+                    mobile: 13,
+                    tablet: 13,
+                    desktop: 13,
                   ),
                 )
                 .style,
@@ -124,36 +128,37 @@ class ReCaptchaIntegration extends StatelessWidget {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
         return Row(
-          children: <Widget>[
-            Gap(10),
+          children: [
+            const Gap(10),
             state.loadingToken
                 ? const SizedBox(
                     height: 20,
                     width: 20,
                     child: CircularProgressIndicator(
-                      color: AppColors.orange,
+                      color: AppColors.selectedBlueColor,
                     ),
                   )
                 : Container(
                     height: 20,
                     width: 20,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.black),
-                      shape: BoxShape.rectangle,
-                    ),
+                    // decoration: BoxDecoration(
+                    //   border: Border.all(color: Colors.grey),
+                    //   shape: BoxShape.rectangle,
+                    //   borderRadius: BorderRadius.circular(5),
+                    // ),
                     child: Checkbox(
-                      side: BorderSide.none,
-                      activeColor: AppColors.white,
-                      checkColor: AppColors.orange,
+                      activeColor: Colors.white,
+                      checkColor: Colors.green.shade700,
+                      hoverColor: Colors.grey.shade300,
                       value: isChecked,
                       onChanged: onChanged,
                     ),
                   ),
-            Gap(10),
+            const Gap(10),
             kStyle.semiBold(
               text: StringConst.iAmNotARobot,
-              size: 12,
-              color: AppColors.black,
+              size: 14,
+              color: Colors.black87.withAlpha(200),
             ),
           ],
         );

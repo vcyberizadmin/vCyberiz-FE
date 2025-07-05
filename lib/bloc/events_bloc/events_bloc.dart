@@ -85,7 +85,13 @@ class EventsBloc extends Bloc<EventsEvent, EventsState> {
     );
     try {
       EventsListModel response = await _repository.getEventsListApi();
-      if (response.data != null) {
+      if (response.data != null && response.data!.isNotEmpty) {
+        // Sort the list in descending order by date
+        response.data!.sort((a, b) {
+          final aDate = a.publicationDate ?? DateTime.now();
+          final bDate = b.publicationDate ?? DateTime.now();
+          return bDate.compareTo(aDate); // descending
+        });
         await Future.delayed(
             const Duration(
               seconds: 1,

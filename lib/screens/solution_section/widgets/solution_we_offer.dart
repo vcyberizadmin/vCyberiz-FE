@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import '../../../bloc/solutions_bloc/solutions_bloc.dart';
 import '../../../core/utils/global_widgets/custom_animated_button.dart';
 import '../../../core/utils/styles/app_colors.dart';
@@ -153,8 +154,8 @@ class SolutionWeOfferScreen extends StatelessWidget {
                     tablet: 340,
                     desktop: Constants.width * .35,
                   ),
-                  child: Image.network(
-                    bgImage,
+                  child: ImageWidget(
+                    imageUrl: bgImage,
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -180,8 +181,8 @@ class SolutionWeOfferScreen extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
-                        child: Image.network(
-                          iconImage,
+                        child: ImageWidget(
+                          imageUrl: iconImage,
                           height: 2,
                           width: 2,
                         ),

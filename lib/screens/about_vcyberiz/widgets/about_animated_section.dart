@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 import '../../../bloc/about_us_bloc/about_us_bloc.dart';
@@ -98,10 +98,8 @@ class _AboutAnimatedSectionState extends State<AboutAnimatedSection>
                         flex: 1,
                         child: SizedBox(
                           height: 400,
-                          child: CachedNetworkImage(
+                          child: ImageWidget(
                             imageUrl: state.ourShieldData?.secBg?.url ?? '',
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -121,10 +119,8 @@ class _AboutAnimatedSectionState extends State<AboutAnimatedSection>
                           tablet: 400,
                         ),
                         width: double.infinity,
-                        child: CachedNetworkImage(
+                        child: ImageWidget(
                           imageUrl: state.ourShieldData?.secBg?.url ?? '',
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
                           fit: BoxFit.cover,
                         ),
                       ),

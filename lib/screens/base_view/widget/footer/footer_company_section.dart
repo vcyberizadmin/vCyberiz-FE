@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_button_widget.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/core/utils/styles/text_styles.dart';
 import 'package:vcyberiz/routes/route_constants.dart';
@@ -165,8 +166,8 @@ class FooterCompanySection extends StatelessWidget {
                           child: CircleAvatar(
                             backgroundColor: AppColors.transparent,
                             radius: 15,
-                            child: Image.network(
-                              data.secLogo?.first.url ?? "",
+                            child: ImageWidget(
+                              imageUrl: data.secLogo?.first.url ?? "",
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -268,8 +269,8 @@ class FooterCompanySection extends StatelessWidget {
                             child: CircleAvatar(
                               backgroundColor: AppColors.transparent,
                               radius: 15,
-                              child: Image.network(
-                                data.secLogo?.first.url ?? "",
+                              child: ImageWidget(
+                                imageUrl: data.secLogo?.first.url ?? "",
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -373,8 +374,8 @@ class FooterCompanySection extends StatelessWidget {
                           child: CircleAvatar(
                             backgroundColor: AppColors.transparent,
                             radius: 15,
-                            child: Image.network(
-                              data.secLogo?.first.url ?? "",
+                            child: ImageWidget(
+                              imageUrl: data.secLogo?.first.url ?? "",
                               fit: BoxFit.fill,
                               //TODO: commented for future use
                               // width: getValueForScreenType<double>(

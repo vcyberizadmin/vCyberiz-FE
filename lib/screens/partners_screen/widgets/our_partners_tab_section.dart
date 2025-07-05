@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -9,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:vcyberiz/bloc/partners_bloc/partners_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 class OurPartnersTabSection extends StatelessWidget {
@@ -36,7 +36,7 @@ class OurPartnersTabSection extends StatelessWidget {
                         height: snapshot.data?.height,
                         width: Constants.videoBreakPoint,
                         child: SizedBox(
-                          child: CachedNetworkImage(
+                          child: ImageWidget(
                             imageUrl:
                                 state.secureFuture?.secBackground?.url ?? "",
                             fit: BoxFit.cover,
@@ -417,19 +417,9 @@ class OurPartnersTabSection extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CachedNetworkImage(
+            ImageWidget(
               imageUrl: image,
               height: height,
-              placeholder: (context, url) => SizedBox(
-                height: height,
-                width: height,
-                child: CircularProgressIndicator(strokeWidth: 2),
-              ),
-              errorWidget: (context, url, error) => SizedBox(
-                height: height,
-                width: height,
-                child: Icon(Icons.error, color: Colors.transparent),
-              ),
             ),
           ],
         ),

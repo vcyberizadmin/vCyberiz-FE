@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_button_widget.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/routes/route_constants.dart';
 
@@ -121,8 +122,8 @@ class OurSolutionWidget extends StatelessWidget {
                                 scale: isSelected ? 1.1 : 1.0,
                                 duration: Duration(milliseconds: 300),
                                 curve: Curves.easeInOut,
-                                child: Image.network(
-                                  item?.sectionLogo?.url ?? '',
+                                child: ImageWidget(
+                                  imageUrl: item?.sectionLogo?.url ?? '',
                                   width: getValueForScreenType<double>(
                                     context: context,
                                     mobile: 25,
@@ -154,8 +155,8 @@ class OurSolutionWidget extends StatelessWidget {
                                 scale: isSelected ? 1.1 : 1.0,
                                 duration: Duration(milliseconds: 300),
                                 curve: Curves.easeInOut,
-                                child: Image.network(
-                                  item?.sectionLogo?.url ?? '',
+                                child: ImageWidget(
+                                  imageUrl: item?.sectionLogo?.url ?? '',
                                   width: getValueForScreenType<double>(
                                     context: context,
                                     mobile: 25,
@@ -305,9 +306,13 @@ class OurSolutionWidget extends StatelessWidget {
                 flex: 4,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Image.network(
-                    state.data?.solutionAccordian?[state.selectedIndex].imgUrl
-                            ?.first.url ??
+                  child: ImageWidget(
+                    imageUrl: state
+                            .data
+                            ?.solutionAccordian?[state.selectedIndex]
+                            .imgUrl
+                            ?.first
+                            .url ??
                         '',
                     height: getValueForScreenType(
                       context: context,
@@ -329,9 +334,9 @@ class OurSolutionWidget extends StatelessWidget {
             //!-----------(Globe image)
             ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                state.data?.solutionAccordian?[state.selectedIndex].imgUrl
-                        ?.first.url ??
+              child: ImageWidget(
+                imageUrl: state.data?.solutionAccordian?[state.selectedIndex]
+                        .imgUrl?.first.url ??
                     '',
                 width: getValueForScreenType(
                   context: context,

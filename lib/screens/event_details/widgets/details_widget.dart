@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -9,6 +8,7 @@ import 'package:vcyberiz/bloc/events_bloc/events_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_button_widget.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 import '../../../data/model/events_model/event_details_model.dart';
@@ -65,10 +65,8 @@ class DetailsWidget extends StatelessWidget {
                             desktop: 400,
                           ),
                           width: double.infinity,
-                          child: CachedNetworkImage(
+                          child: ImageWidget(
                             imageUrl: state.eventDetailsData?.secImg?.url ?? '',
-                            errorWidget: (context, url, error) =>
-                                const SizedBox.shrink(),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -271,8 +269,8 @@ class DetailsWidget extends StatelessWidget {
                     child: CircleAvatar(
                       backgroundColor: AppColors.transparent,
                       radius: 15,
-                      child: Image.network(
-                        data.secLogo?.first.url ?? "",
+                      child: ImageWidget(
+                        imageUrl: data.secLogo?.first.url ?? "",
                         fit: BoxFit.fill,
                       ),
                     ),

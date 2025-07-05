@@ -30,7 +30,6 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-#.env
 pubspec.lock
 
 # Symbolication related
@@ -70,42 +69,4 @@ pubspec.lock
 /build/flutter_assets
 
 .metadata
-
-# Flutter build files
-build/
-.dart_tool/
-.packages
-.pub-cache/
-.flutter-plugins
-.flutter-plugins-dependencies
-.melos_tool/
-
-# IntelliJ / VS Code
-.idea/
-.vscode/
-*.iml
-
-# macOS system files
-.DS_Store
-
-# Android/iOS native (not used in web)
-android/
-ios/
-windows/
-linux/
-macos/
-
-# Log files
-*.log
-
-# Coverage
-coverage/
-
-# Web-specific
-web/.dart_tool/
-web/.packages
-
-# Optional: Environment files (for secrets)
-#.env
-#.env.*
-
+/windows

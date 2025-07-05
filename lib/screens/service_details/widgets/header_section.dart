@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -10,11 +9,13 @@ import 'package:vcyberiz/bloc/our_service_bloc/our_service_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_button_widget.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/routes/route_constants.dart';
 
 class HeaderSection extends StatefulWidget {
-  const HeaderSection({super.key});
+  final String documentId;
+  const HeaderSection({super.key, required this.documentId});
 
   @override
   State<HeaderSection> createState() => _HeaderSectionState();
@@ -37,7 +38,9 @@ class _HeaderSectionState extends State<HeaderSection> {
       final RenderBox box =
           _detailsKey.currentContext!.findRenderObject() as RenderBox;
       setState(() {
-        detailsHeight = box.size.height;
+        if ((detailsHeight ?? 0) >= 500) {
+          detailsHeight = box.size.height;
+        }
       });
     }
   }
@@ -122,9 +125,8 @@ class _HeaderSectionState extends State<HeaderSection> {
   }
 
   Widget imageWidget(String imageUrl) {
-    return CachedNetworkImage(
+    return ImageWidget(
       imageUrl: imageUrl,
-      errorWidget: (context, url, error) => const Icon(Icons.error),
       fit: BoxFit.cover,
       width: double.infinity,
     );

@@ -13,6 +13,7 @@ import 'package:vcyberiz/core/utils/constants/asset_constants.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/constants/string_const.dart';
 import 'package:vcyberiz/core/utils/global_widgets/custom_button_widget.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/data/model/headers_model/headers_model.dart';
 import 'package:vcyberiz/routes/route_constants.dart';
@@ -275,8 +276,8 @@ class HeaderScreen extends StatelessWidget {
         child: SizedBox(
           height: height,
           width: width,
-          child: Image.network(
-            (state.data?.brandLogo?.url).toString(),
+          child: ImageWidget(
+            imageUrl: state.data?.brandLogo?.url ?? '',
           ),
         ),
       ),
@@ -372,7 +373,11 @@ class HeaderScreen extends StatelessWidget {
                       context: context,
                       mobile: Constants.width,
                       tablet: Constants.width * .5,
-                      desktop: 800),
+                      desktop: title == StringConst.services
+                          ? 800
+                          : title == StringConst.solutions
+                              ? 700
+                              : 600),
                   child: ServicesDropdown(
                     data: (title == StringConst.services
                         ? (state.data?.navs?.navWithInnerPage?.first)

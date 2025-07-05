@@ -41,6 +41,7 @@ class AppColors {
   static const Color borderColorBgBlack = Color(0xffFBA919);
   static const Color orangeBorderColor = Color(0xffa97211);
   static const Color selectedBlueColor = Color(0xff039ed5);
+  static const Color green = Colors.green;
   static const Color darkOrangeColor = Color(0xfff5841f);
   static const Color darkOrangeBorderColor = Color(0xff462606);
   static const Color primaryOrangeColor = Color(0xfffaa719);

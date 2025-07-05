@@ -1,9 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/partners_bloc/partners_bloc.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/core/utils/styles/text_styles.dart';
 
@@ -19,7 +19,7 @@ class HeaderSection extends StatelessWidget {
           width: Constants.width,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: CachedNetworkImageProvider(
+              image: decorationImageProviderWidget(
                 state.headerData?.secBg?.url ?? "",
               ),
               fit: BoxFit.fill,

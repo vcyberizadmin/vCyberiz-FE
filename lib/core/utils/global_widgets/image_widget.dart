@@ -1,0 +1,41 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:vcyberiz/core/utils/constants/constants.dart';
+
+class ImageWidget extends StatelessWidget {
+  final String imageUrl;
+  final double? height;
+  final double? width;
+  final BoxFit? fit;
+  final Color? color;
+  final Alignment? alignment;
+  const ImageWidget(
+      {super.key,
+      required this.imageUrl,
+      this.height,
+      this.width,
+      this.fit,
+      this.color,
+      this.alignment});
+
+  @override
+  Widget build(BuildContext context) {
+    return CachedNetworkImage(
+      key: key,
+      imageUrl: (dotenv.env[Constants.baseURL] ?? "") + imageUrl,
+      height: height,
+      width: width,
+      fit: fit,
+      color: color,
+      alignment: alignment ?? Alignment.center,
+      errorWidget: (context, error, stackTrace) => const SizedBox(),
+    );
+  }
+}
+
+CachedNetworkImageProvider decorationImageProviderWidget(String imageUrl) {
+  return CachedNetworkImageProvider(
+    (dotenv.env[Constants.baseURL] ?? "") + imageUrl,
+  );
+}

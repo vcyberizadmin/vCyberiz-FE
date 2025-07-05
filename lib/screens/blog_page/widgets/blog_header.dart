@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/blogs_bloc/blogs_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 class BlogHeaderSection extends StatelessWidget {
@@ -21,7 +21,7 @@ class BlogHeaderSection extends StatelessWidget {
               width: Constants.videoBreakPoint,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: CachedNetworkImageProvider(
+                  image: decorationImageProviderWidget(
                       state.headerData?.secHeader?.secBg?.first.url ?? ""),
                   fit: BoxFit.fill,
                 ),

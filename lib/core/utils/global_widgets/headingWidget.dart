@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/styles/text_styles.dart';
 
 import '../styles/app_colors.dart';
+import 'image_widget.dart';
 
 class HeadingWidget extends StatelessWidget {
   final String text;
@@ -32,7 +32,7 @@ class HeadingWidget extends StatelessWidget {
           decoration: BoxDecoration(
               image: DecorationImage(
             fit: BoxFit.fill,
-            image: CachedNetworkImageProvider(
+            image: decorationImageProviderWidget(
               image,
             ),
           )),

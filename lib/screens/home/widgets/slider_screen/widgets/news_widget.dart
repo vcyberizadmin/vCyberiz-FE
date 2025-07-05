@@ -115,16 +115,20 @@ class NewsWidget extends StatelessWidget {
                 color: AppColors.orange,
               ),
               Gap(5),
-              kStyle.med(
-                text: discription,
-                size: getValueForScreenType(
-                  context: context,
-                  mobile: 20,
-                  tablet: 22,
-                  desktop: 24,
+              SizedBox(
+                height: 100,
+                child: kStyle.med(
+                  text: discription,
+                  size: getValueForScreenType(
+                    context: context,
+                    mobile: 20,
+                    tablet: 22,
+                    desktop: 24,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
+                  color: AppColors.white,
                 ),
-                overflow: TextOverflow.visible,
-                color: AppColors.white,
               ),
               Gap(10),
               kStyle.reg(

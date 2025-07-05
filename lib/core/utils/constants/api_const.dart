@@ -15,7 +15,7 @@ class ApiConst {
       "/api/blog-posts?where[\$or][0][blog_categories][cid][\$in][0]=cyber-crime&where[\$or][1][blog_tags][tid][\$in][0]=...";
   static const String blogArticle1EndPoint = '/api/blog-posts/';
   static const String blogArticle2EndPoint =
-      '?populate[sec_img]=true&populate[blog_author]=true&populate[blog_tags]=true&populate[blog_categories]=true&populate[sec_cta]=true&populate[blog_section][populate]=*';
+      '?populate[sec_img]=true&populate[blog_author]=true&populate[blog_tags]=true&populate[blog_categories]=true&populate[sec_cta]=true';
   static const String popUpEndPoint =
       '/api/homepage-popups?populate[sec_links]=true';
   static const String aboutUsShieldEndPoint =
@@ -109,11 +109,11 @@ class ApiConst {
   static const String careerFilterEndPoint =
       '/api/job-posting-header?populate[sec_headerLogo]=true&populate[form_field_icons][populate][field_icon]=true&populate[sec_body][populate][sec_items]=true&populate[sec_body][populate][sec_logo]=true&populate[sec_buttons]=true';
   static const String careerListEndPoint =
-      '/api/career-pages?populate[employment_types]=true&populate[skills]=true&populate[function]=true&populate[sec_cta]=true&populate[countries]=true&populate[zip_code]=true';
+      '/api/career-pages?populate[skills]=true&populate[employment_types]=true&populate[zip_code][populate][state][populate][country]=true';
 
   static const String careerDetails1EndPoint = '/api/career-pages/';
   static const String careerDetails2EndPoint =
-      '?populate[job_details][on][career.additional-info][populate][content_block]=true&populate[job_details][on][career.content-block][populate][bodyText]=true&populate[job_details][on][career.content-block-short][populate][items]=true&populate[job_details][on][global.content][populate]=true&populate[skills]=true&populate[employment_types]=true&populate[zip_code][populate][state][populate][country]=true';
+      '?populate[skills]=true&populate[employment_types]=true&populate[zip_code][populate][state][populate][country]=true';
 
   static const String uploadPdfEndPoint = "/api/upload";
   static const String submitResumeEndPoint = "/api/career-form-submissions";
@@ -147,5 +147,5 @@ class ApiConst {
       '/api/news-posts?populate=blog_author&populate=blog_categories&populate=blog_tags&populate=sec_img&populate=sec_cta';
   static const String newsArticle1EndPoint = '/api/news-posts/';
   static const String newsArticle2EndPoint =
-      '?populate[sec_img]=true&populate[blog_author]=true&populate[blog_tags]=true&populate[blog_categories]=true&populate[sec_cta]=true&populate[news_section][populate]=*';
+      '?populate[sec_img]=true&populate[blog_author]=true&populate[blog_tags]=true&populate[blog_categories]=true&populate[sec_cta]=true';
 }

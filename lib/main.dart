@@ -26,6 +26,7 @@ Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   // ... make network requests using Dio
   await DioBaseService.init(); //initialize Dio service
+  await DioBaseSearchService.init(); //initialize Dio service
   ResponsiveSizingConfig.instance.setCustomBreakpoints(
     const ScreenBreakpoints(
       desktop: 1026,

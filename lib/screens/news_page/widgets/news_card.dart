@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/routes/route_constants.dart';
 
@@ -105,8 +105,9 @@ class NewsCardContainer extends StatelessWidget {
                 color: AppColors.textBlueColor,
                 size: getValueForScreenType(
                     context: context, mobile: 20, desktop: 24, tablet: 24),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+                overflow: TextOverflow.visible,
+                height: 1,
+                maxLines: 3,
               ),
               const Gap(10),
 
@@ -177,8 +178,7 @@ class ThumbnailWithHoverEffect extends StatelessWidget {
                 scale: isHovered.value ? 1.05 : 1.0,
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
-                child:
-                    CachedNetworkImage(imageUrl: imageUrl!, fit: BoxFit.cover),
+                child: ImageWidget(imageUrl: imageUrl!, fit: BoxFit.cover),
               );
             }),
       ),

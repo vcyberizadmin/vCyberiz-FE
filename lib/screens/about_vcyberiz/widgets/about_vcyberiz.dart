@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/text_styles.dart';
 
 import '../../../bloc/about_us_bloc/about_us_bloc.dart';
@@ -33,7 +33,7 @@ class AboutVcyberizSection extends StatelessWidget {
               decoration: BoxDecoration(
                   image: DecorationImage(
                 fit: BoxFit.fill,
-                image: CachedNetworkImageProvider(
+                image: decorationImageProviderWidget(
                   state.headerData?.secBg?.url ?? '',
                 ),
               )),

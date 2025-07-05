@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 import '../../../bloc/solutions_bloc/solutions_bloc.dart';
@@ -193,8 +194,8 @@ class SolutionCard extends StatelessWidget {
                 text: description,
                 color: AppColors.grey,
               ),
-              Image.network(
-                icon,
+              ImageWidget(
+                imageUrl: icon,
                 width: 100,
                 color: AppColors.grey,
               ),

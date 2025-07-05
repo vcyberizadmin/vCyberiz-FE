@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -9,6 +8,7 @@ import 'package:vcyberiz/bloc/our_service_bloc/our_service_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/global_widgets/gradiant_text.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/hover/hover.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
@@ -237,7 +237,7 @@ class WhyThisService extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               color: AppColors.white,
               image: DecorationImage(
-                image: CachedNetworkImageProvider(isHover
+                image: decorationImageProviderWidget(isHover
                     ? (state.serviceDetailsData?.innerPage?[3].bgImg?.last
                             .url ??
                         '')
@@ -305,7 +305,7 @@ class WhyThisService extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 color: AppColors.white,
                 image: DecorationImage(
-                  image: CachedNetworkImageProvider(isHover
+                  image: decorationImageProviderWidget(isHover
                       ? (state.serviceDetailsData?.innerPage?[3].bgImg?.last
                               .url ??
                           '')

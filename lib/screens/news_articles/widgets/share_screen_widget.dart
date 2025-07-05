@@ -8,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:vcyberiz/bloc/news_bloc/news_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 class ShareScreenWidget extends StatefulWidget {
@@ -195,8 +196,8 @@ class _ShareScreenWidgetState extends State<ShareScreenWidget> {
 
   Widget _buildShareButton(String assetPath, String url) {
     return IconButton(
-      icon: Image.network(
-        assetPath,
+      icon: ImageWidget(
+        imageUrl: assetPath,
         width: 40,
         height: 40,
       ), // Use your icons

@@ -79,11 +79,11 @@ class NewsRepository {
     }
   }
 
-  Future<NewsArtilceModel> getNewsArticlesApi(
+  Future<NewsArticleModel> getNewsArticlesApi(
     String documentId,
   ) async {
     try {
-      final NewsArtilceModel response =
+      final NewsArticleModel response =
           await _dataSource.getNewsArticlesApi(documentId);
       return response;
     } on APIException catch (e) {

@@ -3,9 +3,11 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_bloc.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_event.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_state.dart';
+import 'package:vcyberiz/core/utils/constants/constants.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final String videoUrl;
@@ -26,14 +28,7 @@ class VideoPlayerWidget extends StatefulWidget {
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   @override
   void initState() {
-    context.read<VideoPlayerBloc>().add(
-          InitializeVisionVideoPlayer(
-            videoUrl: widget.videoUrl,
-            autoPlay: true,
-            looping: true,
-            showControls: false,
-          ),
-        ); // Disable PiP in web browsers (like Safari)
+    // Disable PiP in web browsers (like Safari)
     if (kIsWeb) {
       Future.delayed(const Duration(milliseconds: 500), () {
         final videoElements = html.document.getElementsByTagName('video');
@@ -51,30 +46,42 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<VideoPlayerBloc, VideoPlayerState>(
-      builder: (context, state) {
-        return switch (state) {
-          VideoPlayerInitial() => widget.placeholderWidget ?? Container(),
-          VideoPlayerLoading() => widget.placeholderWidget ?? const Center(),
-          VideoPlayerReady(chewieController: final controller) => ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: SizedBox.expand(
-                child: FittedBox(
-                  fit: widget.fit,
-                  child: SizedBox(
-                    width: controller.videoPlayerController.value.size.width,
-                    height: controller.videoPlayerController.value.size.height,
-                    child: Chewie(controller: controller),
+    return BlocProvider(
+      create: (context) => VideoPlayerBloc()
+        ..add(
+          InitializeVisionVideoPlayer(
+            videoUrl: (dotenv.env[Constants.baseURL] ?? "") + widget.videoUrl,
+            autoPlay: true,
+            looping: true,
+            showControls: false,
+          ),
+        ),
+      child: BlocBuilder<VideoPlayerBloc, VideoPlayerState>(
+        builder: (context, state) {
+          return switch (state) {
+            VideoPlayerInitial() => widget.placeholderWidget ?? Container(),
+            VideoPlayerLoading() => widget.placeholderWidget ?? const Center(),
+            VideoPlayerReady(chewieController: final controller) => ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: SizedBox.expand(
+                  child: FittedBox(
+                    fit: widget.fit,
+                    child: SizedBox(
+                      width: controller.videoPlayerController.value.size.width,
+                      height:
+                          controller.videoPlayerController.value.size.height,
+                      child: Chewie(controller: controller),
+                    ),
                   ),
                 ),
               ),
-            ),
-          VideoPlayerError() => Center(
-              child: Text('Error: ${state.error}'),
-            ),
-          Object() => throw UnimplementedError(),
-        };
-      },
+            VideoPlayerError() => Center(
+                child: Text('Error: ${state.error}'),
+              ),
+            Object() => throw UnimplementedError(),
+          };
+        },
+      ),
     );
   }
 }

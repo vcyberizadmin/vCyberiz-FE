@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -594,8 +595,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: CardVideoPlayerWidget(
-                  videoUrl:
-                      'https://djiq2s79pbv5u.cloudfront.net/project-strapi/Revamp_UI/Homepage/videos/h600.webm',
+                  videoUrl: '/data/uploads/Homepage/videos/h600.webm',
                   placeholderWidget: Container(),
                   fit: BoxFit.cover,
                 ),
@@ -677,7 +677,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
                       Expanded(
                         flex: 1,
                         child: SvgPicture.network(
-                          imageUrl,
+                          (dotenv.env[Constants.baseURL] ?? "") + imageUrl,
                           height: getValueForScreenType<double>(
                             context: context,
                             mobile: 100,

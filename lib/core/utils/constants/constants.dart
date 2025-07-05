@@ -1,11 +1,12 @@
 class Constants {
   //.env file path
-  static const String envPath = ".env";
+  static const String envPath = "assets/.env";
 
   static const String baseURL = "baseURL";
-  static const String searchStagingBaseURL = "searchStagingBaseURL";
-  static const String searchLiveBaseURL = "searchLiveBaseURL";
+  static const String searchBaseURL = "searchBaseURL";
+  static const String searchApiKey = "searchApiKey";
   static const String apiKey = "apiKey";
+  static const String token = "token";
   // ReCaptcha Key
 
   static const String auth = 'Authorization';

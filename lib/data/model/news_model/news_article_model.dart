@@ -1,26 +1,26 @@
 // To parse this JSON data, do
 //
-//     final newsArtilceModel = newsArtilceModelFromJson(jsonString);
+//     final newsArticleModel = newsArticleModelFromJson(jsonString);
 
 import 'dart:convert';
 
-NewsArtilceModel newsArtilceModelFromJson(String str) =>
-    NewsArtilceModel.fromJson(json.decode(str));
+NewsArticleModel newsArticleModelFromJson(String str) =>
+    NewsArticleModel.fromJson(json.decode(str));
 
-String newsArtilceModelToJson(NewsArtilceModel data) =>
+String newsArticleModelToJson(NewsArticleModel data) =>
     json.encode(data.toJson());
 
-class NewsArtilceModel {
+class NewsArticleModel {
   final NewsArticleData? data;
   final Meta? meta;
 
-  NewsArtilceModel({
+  NewsArticleModel({
     this.data,
     this.meta,
   });
 
-  factory NewsArtilceModel.fromJson(Map<String, dynamic> json) =>
-      NewsArtilceModel(
+  factory NewsArticleModel.fromJson(Map<String, dynamic> json) =>
+      NewsArticleModel(
         data: json["data"] == null
             ? null
             : NewsArticleData.fromJson(json["data"]),
@@ -43,13 +43,13 @@ class NewsArticleData {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final DateTime? publishedAt;
-  final dynamic globalUrl;
-  final SecImg? secImg;
+  final String? globalUrl;
+  final List<ArticleSection>? articleSection;
   final Blog? blogAuthor;
-  final List<Blog>? blogTags;
   final List<Blog>? blogCategories;
+  final List<Blog>? blogTags;
+  final SecImg? secImg;
   final SecCta? secCta;
-  final List<NewsSection>? newsSection;
 
   NewsArticleData({
     this.id,
@@ -62,12 +62,12 @@ class NewsArticleData {
     this.updatedAt,
     this.publishedAt,
     this.globalUrl,
-    this.secImg,
+    this.articleSection,
     this.blogAuthor,
-    this.blogTags,
     this.blogCategories,
+    this.blogTags,
+    this.secImg,
     this.secCta,
-    this.newsSection,
   });
 
   factory NewsArticleData.fromJson(Map<String, dynamic> json) =>
@@ -90,24 +90,24 @@ class NewsArticleData {
             ? null
             : DateTime.parse(json["publishedAt"]),
         globalUrl: json["global_url"],
-        secImg:
-            json["sec_img"] == null ? null : SecImg.fromJson(json["sec_img"]),
+        articleSection: json["article_section"] == null
+            ? []
+            : List<ArticleSection>.from(json["article_section"]!
+                .map((x) => ArticleSection.fromJson(x))),
         blogAuthor: json["blog_author"] == null
             ? null
             : Blog.fromJson(json["blog_author"]),
-        blogTags: json["blog_tags"] == null
-            ? []
-            : List<Blog>.from(json["blog_tags"]!.map((x) => Blog.fromJson(x))),
         blogCategories: json["blog_categories"] == null
             ? []
             : List<Blog>.from(
                 json["blog_categories"]!.map((x) => Blog.fromJson(x))),
+        blogTags: json["blog_tags"] == null
+            ? []
+            : List<Blog>.from(json["blog_tags"]!.map((x) => Blog.fromJson(x))),
+        secImg:
+            json["sec_img"] == null ? null : SecImg.fromJson(json["sec_img"]),
         secCta:
             json["sec_cta"] == null ? null : SecCta.fromJson(json["sec_cta"]),
-        newsSection: json["news_section"] == null
-            ? []
-            : List<NewsSection>.from(
-                json["news_section"]!.map((x) => NewsSection.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -121,20 +121,116 @@ class NewsArticleData {
         "updatedAt": updatedAt?.toIso8601String(),
         "publishedAt": publishedAt?.toIso8601String(),
         "global_url": globalUrl,
-        "sec_img": secImg?.toJson(),
-        "blog_author": blogAuthor?.toJson(),
-        "blog_tags": blogTags == null
+        "article_section": articleSection == null
             ? []
-            : List<dynamic>.from(blogTags!.map((x) => x.toJson())),
+            : List<dynamic>.from(articleSection!.map((x) => x.toJson())),
+        "blog_author": blogAuthor?.toJson(),
         "blog_categories": blogCategories == null
             ? []
             : List<dynamic>.from(blogCategories!.map((x) => x.toJson())),
-        "sec_cta": secCta?.toJson(),
-        "news_section": newsSection == null
+        "blog_tags": blogTags == null
             ? []
-            : List<dynamic>.from(newsSection!.map((x) => x.toJson())),
+            : List<dynamic>.from(blogTags!.map((x) => x.toJson())),
+        "sec_img": secImg?.toJson(),
+        "sec_cta": secCta?.toJson(),
       };
 }
+
+class ArticleSection {
+  final String? type;
+  final List<ArticleSectionChild>? children;
+  final String? format;
+
+  ArticleSection({
+    this.type,
+    this.children,
+    this.format,
+  });
+
+  factory ArticleSection.fromJson(Map<String, dynamic> json) => ArticleSection(
+        type: json["type"],
+        children: json["children"] == null
+            ? []
+            : List<ArticleSectionChild>.from(
+                json["children"]!.map((x) => ArticleSectionChild.fromJson(x))),
+        format: json["format"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "type": type,
+        "children": children == null
+            ? []
+            : List<dynamic>.from(children!.map((x) => x.toJson())),
+        "format": format,
+      };
+}
+
+class ArticleSectionChild {
+  final String? text;
+  final Type? type;
+  final List<ChildChild>? children;
+  final bool? bold;
+  final String? url;
+
+  ArticleSectionChild({
+    this.text,
+    this.type,
+    this.children,
+    this.bold,
+    this.url,
+  });
+
+  factory ArticleSectionChild.fromJson(Map<String, dynamic> json) =>
+      ArticleSectionChild(
+        text: json["text"],
+        type: typeValues.map[json["type"]]!,
+        children: json["children"] == null
+            ? []
+            : List<ChildChild>.from(
+                json["children"]!.map((x) => ChildChild.fromJson(x))),
+        bold: json["bold"],
+        url: json["url"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "text": text,
+        "type": typeValues.reverse[type],
+        "children": children == null
+            ? []
+            : List<dynamic>.from(children!.map((x) => x.toJson())),
+        "bold": bold,
+        "url": url,
+      };
+}
+
+class ChildChild {
+  final bool? bold;
+  final String? text;
+  final Type? type;
+
+  ChildChild({
+    this.bold,
+    this.text,
+    this.type,
+  });
+
+  factory ChildChild.fromJson(Map<String, dynamic> json) => ChildChild(
+        bold: json["bold"],
+        text: json["text"],
+        type: typeValues.map[json["type"]]!,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "bold": bold,
+        "text": text,
+        "type": typeValues.reverse[type],
+      };
+}
+
+enum Type { LINK, LIST_ITEM, TEXT }
+
+final typeValues = EnumValues(
+    {"link": Type.LINK, "list-item": Type.LIST_ITEM, "text": Type.TEXT});
 
 class Blog {
   final int? id;
@@ -190,40 +286,35 @@ class Blog {
       };
 }
 
-class NewsSection {
-  final String? component;
+class SecCta {
   final int? id;
-  final String? header;
-  final String? content;
-  final List<SecImg>? secImg;
+  final String? label;
+  final String? href;
+  final bool? isExternal;
+  final String? type;
 
-  NewsSection({
-    this.component,
+  SecCta({
     this.id,
-    this.header,
-    this.content,
-    this.secImg,
+    this.label,
+    this.href,
+    this.isExternal,
+    this.type,
   });
 
-  factory NewsSection.fromJson(Map<String, dynamic> json) => NewsSection(
-        component: json["__component"],
+  factory SecCta.fromJson(Map<String, dynamic> json) => SecCta(
         id: json["id"],
-        header: json["header"],
-        content: json["content"],
-        secImg: json["sec_img"] == null
-            ? []
-            : List<SecImg>.from(
-                json["sec_img"]!.map((x) => SecImg.fromJson(x))),
+        label: json["label"],
+        href: json["href"],
+        isExternal: json["isExternal"],
+        type: json["type"],
       );
 
   Map<String, dynamic> toJson() => {
-        "__component": component,
         "id": id,
-        "header": header,
-        "content": content,
-        "sec_img": secImg == null
-            ? []
-            : List<dynamic>.from(secImg!.map((x) => x.toJson())),
+        "label": label,
+        "href": href,
+        "isExternal": isExternal,
+        "type": type,
       };
 }
 
@@ -259,42 +350,22 @@ class SecImg {
       };
 }
 
-class SecCta {
-  final int? id;
-  final String? label;
-  final String? href;
-  final bool? isExternal;
-  final String? type;
-
-  SecCta({
-    this.id,
-    this.label,
-    this.href,
-    this.isExternal,
-    this.type,
-  });
-
-  factory SecCta.fromJson(Map<String, dynamic> json) => SecCta(
-        id: json["id"],
-        label: json["label"],
-        href: json["href"],
-        isExternal: json["isExternal"],
-        type: json["type"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "label": label,
-        "href": href,
-        "isExternal": isExternal,
-        "type": type,
-      };
-}
-
 class Meta {
   Meta();
 
   factory Meta.fromJson(Map<String, dynamic> json) => Meta();
 
   Map<String, dynamic> toJson() => {};
+}
+
+class EnumValues<T> {
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }

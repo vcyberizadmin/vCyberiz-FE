@@ -3,9 +3,11 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_bloc.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_event.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_state.dart';
+import 'package:vcyberiz/core/utils/constants/constants.dart';
 
 class BottomBannerVideo extends StatefulWidget {
   final String videoUrl;
@@ -48,7 +50,7 @@ class _BottomBannerVideoState extends State<BottomBannerVideo> {
       create: (context) => VideoPlayerBloc()
         ..add(
           InitializeMethodologyVideoPlayer(
-            videoUrl: widget.videoUrl,
+            videoUrl: (dotenv.env[Constants.baseURL] ?? "") + widget.videoUrl,
             autoPlay: true,
             looping: true,
             showControls: false,

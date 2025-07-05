@@ -44,7 +44,8 @@ class NewsListData {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final DateTime? publishedAt;
-  final dynamic globalUrl;
+  final String? globalUrl;
+  final List<ArticleSection>? articleSection;
   final Blog? blogAuthor;
   final List<Blog>? blogCategories;
   final List<Blog>? blogTags;
@@ -62,6 +63,7 @@ class NewsListData {
     this.updatedAt,
     this.publishedAt,
     this.globalUrl,
+    this.articleSection,
     this.blogAuthor,
     this.blogCategories,
     this.blogTags,
@@ -88,6 +90,10 @@ class NewsListData {
             ? null
             : DateTime.parse(json["publishedAt"]),
         globalUrl: json["global_url"],
+        articleSection: json["article_section"] == null
+            ? []
+            : List<ArticleSection>.from(json["article_section"]!
+                .map((x) => ArticleSection.fromJson(x))),
         blogAuthor: json["blog_author"] == null
             ? null
             : Blog.fromJson(json["blog_author"]),
@@ -115,6 +121,9 @@ class NewsListData {
         "updatedAt": updatedAt?.toIso8601String(),
         "publishedAt": publishedAt?.toIso8601String(),
         "global_url": globalUrl,
+        "article_section": articleSection == null
+            ? []
+            : List<dynamic>.from(articleSection!.map((x) => x.toJson())),
         "blog_author": blogAuthor?.toJson(),
         "blog_categories": blogCategories == null
             ? []
@@ -126,6 +135,102 @@ class NewsListData {
         "sec_cta": secCta?.toJson(),
       };
 }
+
+class ArticleSection {
+  final String? type;
+  final List<ArticleSectionChild>? children;
+  final String? format;
+
+  ArticleSection({
+    this.type,
+    this.children,
+    this.format,
+  });
+
+  factory ArticleSection.fromJson(Map<String, dynamic> json) => ArticleSection(
+        type: json["type"],
+        children: json["children"] == null
+            ? []
+            : List<ArticleSectionChild>.from(
+                json["children"]!.map((x) => ArticleSectionChild.fromJson(x))),
+        format: json["format"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "type": type,
+        "children": children == null
+            ? []
+            : List<dynamic>.from(children!.map((x) => x.toJson())),
+        "format": format,
+      };
+}
+
+class ArticleSectionChild {
+  final String? text;
+  final Type? type;
+  final List<ChildChild>? children;
+  final bool? bold;
+  final String? url;
+
+  ArticleSectionChild({
+    this.text,
+    this.type,
+    this.children,
+    this.bold,
+    this.url,
+  });
+
+  factory ArticleSectionChild.fromJson(Map<String, dynamic> json) =>
+      ArticleSectionChild(
+        text: json["text"],
+        type: typeValues.map[json["type"]]!,
+        children: json["children"] == null
+            ? []
+            : List<ChildChild>.from(
+                json["children"]!.map((x) => ChildChild.fromJson(x))),
+        bold: json["bold"],
+        url: json["url"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "text": text,
+        "type": typeValues.reverse[type],
+        "children": children == null
+            ? []
+            : List<dynamic>.from(children!.map((x) => x.toJson())),
+        "bold": bold,
+        "url": url,
+      };
+}
+
+class ChildChild {
+  final bool? bold;
+  final String? text;
+  final Type? type;
+
+  ChildChild({
+    this.bold,
+    this.text,
+    this.type,
+  });
+
+  factory ChildChild.fromJson(Map<String, dynamic> json) => ChildChild(
+        bold: json["bold"],
+        text: json["text"],
+        type: typeValues.map[json["type"]]!,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "bold": bold,
+        "text": text,
+        "type": typeValues.reverse[type],
+      };
+}
+
+enum Type { LINK, LIST_ITEM, TEXT }
+
+final typeValues = EnumValues(
+    {"link": Type.LINK, "list-item": Type.LIST_ITEM, "text": Type.TEXT});
 
 class Blog {
   final int? id;

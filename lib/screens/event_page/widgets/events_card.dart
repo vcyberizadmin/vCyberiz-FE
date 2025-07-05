@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/hover/hover.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/core/utils/styles/text_styles.dart';
@@ -140,7 +140,7 @@ class ThumbnailWithHoverEffect extends StatelessWidget {
           scale: isHover ? 1.05 : 1.0,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
-          child: CachedNetworkImage(imageUrl: imageUrl!, fit: BoxFit.cover),
+          child: ImageWidget(imageUrl: imageUrl!, fit: BoxFit.cover),
         ),
       );
     });
