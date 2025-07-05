@@ -50,7 +50,8 @@ class _CardVideoPlayerWidgetState extends State<CardVideoPlayerWidget> {
       create: (context) => VideoPlayerBloc()
         ..add(
           InitializeApproachCardBgVideoPlayer(
-            videoUrl: (dotenv.env[Constants.baseURL] ?? "") + widget.videoUrl,
+            videoUrl:
+                (dotenv.env[Constants.assetBaseURL] ?? "") + widget.videoUrl,
             autoPlay: true,
             looping: true,
             showControls: false,

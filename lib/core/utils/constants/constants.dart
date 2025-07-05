@@ -3,6 +3,7 @@ class Constants {
   static const String envPath = "assets/.env";
 
   static const String baseURL = "baseURL";
+  static const String assetBaseURL = "assetBaseURL";
   static const String searchBaseURL = "searchBaseURL";
   static const String searchApiKey = "searchApiKey";
   static const String apiKey = "apiKey";

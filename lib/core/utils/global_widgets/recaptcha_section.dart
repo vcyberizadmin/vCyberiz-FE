@@ -65,7 +65,7 @@ class ReCaptchaIntegration extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Image.network(
-          "${dotenv.env[Constants.baseURL] ?? ""}/data/uploads/Contact%20Us/reCaptcha.webp",
+          "${dotenv.env[Constants.assetBaseURL] ?? ""}/data/uploads/Contact%20Us/reCaptcha.webp",
           height: 60,
         ),
         _privacyAndTermsLink(context),

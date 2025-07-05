@@ -677,7 +677,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
                       Expanded(
                         flex: 1,
                         child: SvgPicture.network(
-                          (dotenv.env[Constants.baseURL] ?? "") + imageUrl,
+                          (dotenv.env[Constants.assetBaseURL] ?? "") + imageUrl,
                           height: getValueForScreenType<double>(
                             context: context,
                             mobile: 100,

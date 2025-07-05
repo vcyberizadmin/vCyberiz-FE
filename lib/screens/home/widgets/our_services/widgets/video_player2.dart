@@ -54,7 +54,8 @@ class _VideoPlayerWidget2State extends State<VideoPlayerWidget2> {
       create: (context) => VideoPlayerBloc()
         ..add(
           InitializeServiceVideoPlayer(
-            videoUrl: (dotenv.env[Constants.baseURL] ?? "") + widget.videoUrl,
+            videoUrl:
+                (dotenv.env[Constants.assetBaseURL] ?? "") + widget.videoUrl,
             autoPlay: true,
             looping: true,
             showControls: false,

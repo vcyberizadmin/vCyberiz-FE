@@ -50,7 +50,8 @@ class _BottomBannerVideoState extends State<BottomBannerVideo> {
       create: (context) => VideoPlayerBloc()
         ..add(
           InitializeMethodologyVideoPlayer(
-            videoUrl: (dotenv.env[Constants.baseURL] ?? "") + widget.videoUrl,
+            videoUrl:
+                (dotenv.env[Constants.assetBaseURL] ?? "") + widget.videoUrl,
             autoPlay: true,
             looping: true,
             showControls: false,

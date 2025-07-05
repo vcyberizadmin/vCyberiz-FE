@@ -51,7 +51,8 @@ class _KnowMoreVideoState extends State<KnowMoreVideo> {
       create: (context) => VideoPlayerBloc()
         ..add(
           InitializeKnowMoreVideoPlayer(
-            videoUrl: (dotenv.env[Constants.baseURL] ?? "") + widget.videoUrl,
+            videoUrl:
+                (dotenv.env[Constants.assetBaseURL] ?? "") + widget.videoUrl,
             autoPlay: true,
             looping: true,
             showControls: false,

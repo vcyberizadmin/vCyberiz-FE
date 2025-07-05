@@ -23,7 +23,7 @@ class ImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       key: key,
-      imageUrl: (dotenv.env[Constants.baseURL] ?? "") + imageUrl,
+      imageUrl: (dotenv.env[Constants.assetBaseURL] ?? "") + imageUrl,
       height: height,
       width: width,
       fit: fit,
@@ -36,6 +36,6 @@ class ImageWidget extends StatelessWidget {
 
 CachedNetworkImageProvider decorationImageProviderWidget(String imageUrl) {
   return CachedNetworkImageProvider(
-    (dotenv.env[Constants.baseURL] ?? "") + imageUrl,
+    (dotenv.env[Constants.assetBaseURL] ?? "") + imageUrl,
   );
 }
