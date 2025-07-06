@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -16,9 +18,9 @@ class WhatWeDoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<WhatWeDoBloc>().add(const GetWhatWeDoDataEvent());
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   context.read<WhatWeDoBloc>().add(const GetWhatWeDoDataEvent());
+    // });
     return SizedBox(
       height: getValueForScreenType(
         context: context,
@@ -47,6 +49,8 @@ class WhatWeDoWidget extends StatelessWidget {
                   sizingInformation,
                 ) {
                   if (sizingInformation.isDesktop) {
+                    log(state.data?.secGif?.first.url ?? '');
+
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -66,7 +70,7 @@ class WhatWeDoWidget extends StatelessWidget {
                         Expanded(
                           flex: 1,
                           child: Center(
-                            child: ImageWidget(
+                            child: GifWidget(
                               height: getValueForScreenType(
                                 context: context,
                                 mobile: 400,
@@ -81,13 +85,14 @@ class WhatWeDoWidget extends StatelessWidget {
                       ],
                     );
                   } else {
+                    log(state.data?.secGif?.first.url ?? '');
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         //!-------------------------(Image Section)
                         Center(
-                          child: ImageWidget(
+                          child: GifWidget(
                             imageUrl: state.data?.secGif?.first.url ?? '',
                             fit: BoxFit.cover,
                           ),

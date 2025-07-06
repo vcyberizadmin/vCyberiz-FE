@@ -24,7 +24,6 @@ import 'package:vcyberiz/screens/home/widgets/slider_screen/slider_widget.dart';
 import 'package:vcyberiz/screens/home/widgets/why_work_with_us/why_work_with_us_widget.dart';
 
 import '../../bloc/home-bloc/home_state.dart';
-import '../../data/model/sections-model.dart';
 import '../base_view/widget/footer/footer_screen.dart';
 import 'widgets/blogs/blogs_widget.dart';
 import 'widgets/methodology_screen/methodology_widget.dart';
@@ -120,18 +119,21 @@ class _HomeScreenState extends State<HomeScreen> {
               // }
             },
             builder: (context, state) {
-              return SingleChildScrollView(
+              return CustomScrollView(
                 controller: _scrollController,
-                child: Column(
-                  children: [
-                    ...(state.data?.sections ?? []).map(
-                      (Section section) {
-                        return _buildWidgetForSlug(section.slug ?? '');
-                      },
-                    ),
-                    FooterScreen(),
-                  ],
-                ),
+                slivers: [
+                  SliverList.builder(
+                    itemCount: state.data?.sections?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return _buildWidgetForSlug(
+                        state.data?.sections?[index].slug ?? '',
+                      );
+                    },
+                  ),
+                  SliverToBoxAdapter(
+                    child: FooterScreen(),
+                  ),
+                ],
               );
             },
           ),

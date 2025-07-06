@@ -29,18 +29,7 @@ class FooterCompanySection extends StatelessWidget {
           crossAxisAlignment: WrapCrossAlignment.start,
           children: [
             //!---------------------(service)
-            columnWidget(
-                context,
-                state.data?.siteMap?.platform?.referencesMap?.label ?? '',
-                state.data?.siteMap?.platform?.referencesMap?.references,
-                getValueForScreenType<double>(
-                  context: context,
-                  mobile: Constants.width,
-                  tablet: 200,
-                  desktop: Constants.desktopBreakPoint * .14,
-                )),
 
-            //!----------------(solution)
             column2Widget(
                 context,
                 state.data?.siteMap?.withUs?.label ?? '',
@@ -51,11 +40,22 @@ class FooterCompanySection extends StatelessWidget {
                   tablet: 250,
                   desktop: Constants.desktopBreakPoint * .23,
                 )),
-            //!----------------(company)
+            //!----------------(solution)
             column2Widget(
                 context,
                 state.data?.siteMap?.company?.referencesMap?.label ?? '',
                 state.data?.siteMap?.company?.referencesMap?.references,
+                getValueForScreenType<double>(
+                  context: context,
+                  mobile: Constants.width,
+                  tablet: 200,
+                  desktop: Constants.desktopBreakPoint * .14,
+                )),
+            //!----------------(company)
+            columnWidget(
+                context,
+                state.data?.siteMap?.platform?.referencesMap?.label ?? '',
+                state.data?.siteMap?.platform?.referencesMap?.references,
                 getValueForScreenType<double>(
                   context: context,
                   mobile: Constants.width,

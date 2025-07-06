@@ -19,15 +19,12 @@ class VideoWidget extends StatefulWidget {
 class _VideoWidgetState extends State<VideoWidget> {
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<HomeVideoBloc>().add(const GetVideoDataEvent());
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   context.read<HomeVideoBloc>().add(const GetVideoDataEvent());
+    // });
 
     return BlocBuilder<HomeVideoBloc, HomeVideoState>(
       builder: (context, state) {
-        if (state.loading) {
-          return const SizedBox();
-        }
         return Container(
           width: Constants.width,
           height: getValueForScreenType(
@@ -44,18 +41,20 @@ class _VideoWidgetState extends State<VideoWidget> {
             ),
           ),
           child: Center(
-            child: Container(
-              width: getValueForScreenType(
-                context: context,
-                mobile: Constants.width,
-                tablet: Constants.width,
-                desktop: Constants.desktopBreakPoint + 100,
-              ),
-              child: VideoPlayerWidget(
-                videoUrl: state.data?.videoUrl ?? "",
-                fit: BoxFit.fill,
-              ),
-            ),
+            child: state.loading
+                ? const SizedBox()
+                : SizedBox(
+                    width: getValueForScreenType(
+                      context: context,
+                      mobile: Constants.width,
+                      tablet: Constants.width,
+                      desktop: Constants.desktopBreakPoint + 100,
+                    ),
+                    child: VideoPlayerWidget(
+                      videoUrl: state.data?.videoUrl ?? "",
+                      fit: BoxFit.fill,
+                    ),
+                  ),
           ),
         );
       },

@@ -250,26 +250,38 @@ class WhyThisService extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GradientText(
-                text: label,
-                gradient: const LinearGradient(
-                    colors: AppColors.orangeGradient,
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter),
-              ),
-              Padding(
-                padding:
-                    EdgeInsets.only(right: Constants.desktopBreakPoint * .025),
-                child: kStyle.reg(
-                  text: discription,
-                  color: AppColors.black,
-                  size: getValueForScreenType(
-                    context: context,
-                    mobile: 16,
-                    tablet: 18,
-                    desktop: Constants.desktopBreakPoint * .012,
+              Expanded(
+                flex: 2,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: GradientText(
+                    text: label,
+                    gradient: const LinearGradient(
+                        colors: AppColors.orangeGradient,
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter),
                   ),
-                  overflow: TextOverflow.visible,
+                ),
+              ),
+              Expanded(
+                flex: 3,
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        right: Constants.desktopBreakPoint * .025),
+                    child: kStyle.reg(
+                      text: discription,
+                      color: AppColors.black,
+                      size: getValueForScreenType(
+                        context: context,
+                        mobile: 16,
+                        tablet: 18,
+                        desktop: Constants.desktopBreakPoint * .012,
+                      ),
+                      overflow: TextOverflow.visible,
+                    ),
+                  ),
                 ),
               )
             ],
