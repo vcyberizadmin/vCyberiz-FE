@@ -238,7 +238,7 @@ class ScopeOfServiceSection extends StatelessWidget {
             overflow: TextOverflow.visible,
           ),
           Gap(10),
-          kStyle.bold(
+          kStyle.med(
             text: state.serviceDetailsData?.innerPage?[1].secDescription ?? '',
             size: getValueForScreenType(
                 context: context, mobile: 16, tablet: 18, desktop: 18),
