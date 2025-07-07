@@ -72,6 +72,25 @@ class CardWidget extends StatelessWidget {
                         showIcon: true,
                         text: item?.secCta?.label ?? '',
                         onTap: () {
+                          final href = item?.secCta?.href ?? '';
+                          switch (item?.secCta?.label ?? '') {
+                            case 'vShield':
+                              context.goNamed(RouteConstants.vshieldPath,
+                                  queryParameters: {'id': href});
+                              break;
+                            case 'vArmor':
+                              context.goNamed(RouteConstants.varmorPath,
+                                  queryParameters: {'id': href});
+                              break;
+                            case 'vProtect':
+                              context.goNamed(RouteConstants.vprotectPath,
+                                  queryParameters: {'id': href});
+                              break;
+                            case 'vRespond':
+                              context.goNamed(RouteConstants.vrespondPath,
+                                  queryParameters: {'id': href});
+                              break;
+                          }
                           context.goNamed(
                             RouteConstants.serviceDetailsPath,
                             queryParameters: {
@@ -147,6 +166,25 @@ class CardWidget extends StatelessWidget {
                           vertical: 8,
                         ),
                         onTap: () {
+                          final href = item?.secCta?.href ?? '';
+                          switch (item?.secCta?.label ?? '') {
+                            case 'vShield':
+                              context.goNamed(RouteConstants.vshieldPath,
+                                  queryParameters: {'id': href});
+                              break;
+                            case 'vArmor':
+                              context.goNamed(RouteConstants.varmorPath,
+                                  queryParameters: {'id': href});
+                              break;
+                            case 'vProtect':
+                              context.goNamed(RouteConstants.vprotectPath,
+                                  queryParameters: {'id': href});
+                              break;
+                            case 'vRespond':
+                              context.goNamed(RouteConstants.vrespondPath,
+                                  queryParameters: {'id': href});
+                              break;
+                          }
                           context.goNamed(
                             RouteConstants.serviceDetailsPath,
                             queryParameters: {

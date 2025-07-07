@@ -308,12 +308,33 @@ class ServiceTabWidget extends StatelessWidget {
                       Gap(5),
                       InkWell(
                         onTap: () {
-                          context.goNamed(
-                            RouteConstants.serviceDetailsPath,
-                            queryParameters: {
-                              'id': section.secCta?.href ?? '',
-                            },
-                          );
+                          final href = section.secCta?.href ?? '';
+                          switch (section.secCta?.label ?? '') {
+                            case 'Cyber Maturity Assessment (CMA)':
+                              context.goNamed(RouteConstants.cyberMeturityPath,
+                                  queryParameters: {'id': href});
+                              break;
+                            case 'Intelligence-Led PT':
+                              context.goNamed(
+                                  RouteConstants.penitraionTestingPath,
+                                  queryParameters: {'id': href});
+                              break;
+                            case 'M365 Security Posture Advisory':
+                              context.goNamed(
+                                  RouteConstants.postureAdvisoryPath,
+                                  queryParameters: {'id': href});
+                              break;
+                            case 'Managed 365 Security':
+                              context.goNamed(
+                                  RouteConstants.managedSecurityPath,
+                                  queryParameters: {'id': href});
+                              break;
+                            case 'M365 Security Implementation':
+                              context.goNamed(
+                                  RouteConstants.securityImplementationPath,
+                                  queryParameters: {'id': href});
+                              break;
+                          }
                         },
                         child: Container(
                           width: 300,
