@@ -12,7 +12,6 @@ import 'package:vcyberiz/screens/privacy_policy/widgets/header_widget.dart';
 import 'package:vcyberiz/screens/privacy_policy/widgets/policy_desktop_body.dart';
 import 'package:vcyberiz/screens/privacy_policy/widgets/policy_page.dart';
 import 'package:vcyberiz/screens/privacy_policy/widgets/table_of_content.dart';
-
 import '../base_view/widget/footer/footer_screen.dart';
 
 class PrivacyPolicyScreen extends StatefulWidget {
@@ -25,26 +24,24 @@ class PrivacyPolicyScreen extends StatefulWidget {
 class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
   final ScrollController _scrollController = ScrollController();
   final ScrollController _tocScrollController = ScrollController();
-
   final Map<String, GlobalKey> sectionKeys = {};
   final GlobalKey _policyBodyKey = GlobalKey();
   final GlobalKey _footerKey = GlobalKey();
-
   final ValueNotifier<double> stickyPosition = ValueNotifier(0.0);
 
   double? _contentHeight;
   double? _footerHeight;
   bool _lastIsTopVisible = true;
-
-  final Map<String, String> idToTitle = {}; // map id → title
-
-  bool _isManualSelection = false; // prevent conflict between click & scroll
+  final Map<String, String> idToTitle = {};
+  bool _isManualSelection = false;
 
   @override
   void initState() {
     super.initState();
     context.read<PrivacyBloc>().add(const GetPrivacyDataEvent());
-    WidgetsBinding.instance.addPostFrameCallback((_) => _measureHeights());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(milliseconds: 100), _measureHeights);
+    });
     _scrollController.addListener(_onScroll);
   }
 
@@ -72,33 +69,28 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
   }
 
   void _updateStickyPosition() {
+    if (_contentHeight == null || _footerHeight == null) return;
     const stickyThreshold = 160;
     final offset = _scrollController.offset;
     double newSticky =
         offset >= stickyThreshold ? offset - stickyThreshold : 0.0;
-
-    final maxSticky = ((_contentHeight ?? 0) + (_footerHeight ?? 0)) -
-        MediaQuery.of(context).size.height;
+    final maxSticky =
+        (_contentHeight! + _footerHeight!) - MediaQuery.of(context).size.height;
     if (maxSticky > 0 && newSticky > maxSticky) newSticky = maxSticky;
-
     if (newSticky != stickyPosition.value) stickyPosition.value = newSticky;
   }
 
   void _updateActiveSection() {
-    if (_isManualSelection) return; // skip if manual scroll from click
-
+    if (_isManualSelection) return;
     String? currentSectionId;
     sectionKeys.forEach((id, key) {
       final ctx = key.currentContext;
       if (ctx != null) {
         final box = ctx.findRenderObject() as RenderBox;
         final pos = box.localToGlobal(Offset.zero).dy;
-        if (pos - 120 <= 0) {
-          currentSectionId = id;
-        }
+        if (pos - 120 <= 0) currentSectionId = id;
       }
     });
-
     if (currentSectionId != null) {
       final title = idToTitle[currentSectionId!];
       final state = context.read<PrivacyBloc>().state;
@@ -114,17 +106,14 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
       final box = ctx.findRenderObject() as RenderBox;
       final offset =
           box.localToGlobal(Offset.zero).dy + _scrollController.offset;
-
-      _isManualSelection = true; // disable scroll detection temporarily
+      _isManualSelection = true;
       _scrollController
           .animateTo(
-        offset - 100,
-        duration: const Duration(milliseconds: 400),
-        curve: Curves.easeInOut,
-      )
-          .whenComplete(() {
-        _isManualSelection = false; // re-enable after scroll finishes
-      });
+            offset - 100,
+            duration: const Duration(milliseconds: 400),
+            curve: Curves.easeInOut,
+          )
+          .whenComplete(() => _isManualSelection = false);
     }
   }
 
@@ -212,18 +201,13 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
   }
 
   Widget _mobileTabletLayout(PrivacyState state, List<PrivacyPolicyList> list) {
-    final padding = getValueForScreenType<double>(
-      context: context,
-      mobile: 16,
-      tablet: 32,
-      desktop: MediaQuery.of(context).size.width > 1126 ? 120 : 60,
-    );
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: padding),
+    return Container(
+      width: Constants.width * .92,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           HeaderWidget(text: state.data?.secHeader ?? ''),
+          const SizedBox(height: 24),
           TableOfContentsWidget(
             policiesList: list,
             sectionKeys: sectionKeys,
@@ -231,7 +215,9 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
             tocScrollController: _tocScrollController,
             footerHeight: _footerHeight,
           ),
+          const SizedBox(height: 24),
           PolicyPoints(sectionKeys: sectionKeys),
+          const SizedBox(height: 24),
         ],
       ),
     );
