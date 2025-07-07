@@ -38,6 +38,7 @@ class OurServiceData {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final DateTime? publishedAt;
+  final dynamic globalUrl;
   final TitleSection? titleSection;
   final Achieves? achieves;
   final List<MainSection>? mainSection;
@@ -48,6 +49,7 @@ class OurServiceData {
     this.createdAt,
     this.updatedAt,
     this.publishedAt,
+    this.globalUrl,
     this.titleSection,
     this.achieves,
     this.mainSection,
@@ -65,6 +67,7 @@ class OurServiceData {
         publishedAt: json["publishedAt"] == null
             ? null
             : DateTime.parse(json["publishedAt"]),
+        globalUrl: json["global_url"],
         titleSection: json["titleSection"] == null
             ? null
             : TitleSection.fromJson(json["titleSection"]),
@@ -83,6 +86,7 @@ class OurServiceData {
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "publishedAt": publishedAt?.toIso8601String(),
+        "global_url": globalUrl,
         "titleSection": titleSection?.toJson(),
         "achieves": achieves?.toJson(),
         "mainSection": mainSection == null
@@ -134,7 +138,7 @@ class Stat {
 
   factory Stat.fromJson(Map<String, dynamic> json) => Stat(
         id: json["id"],
-        value: json["value"]?.toDouble(),
+        value: json["value"]!.toDouble(),
         sign: json["sign"],
         description: json["description"],
       );
@@ -179,6 +183,7 @@ class Service {
   final String? secColorIdentifier;
   final String? secHeader;
   final String? secDescription;
+  final String? secondaryVideoUrl;
   final SecLogo? secLogo;
   final Cta? cta;
   final List<SecLogo>? serviceBg;
@@ -190,6 +195,7 @@ class Service {
     this.secColorIdentifier,
     this.secHeader,
     this.secDescription,
+    this.secondaryVideoUrl,
     this.secLogo,
     this.cta,
     this.serviceBg,
@@ -202,6 +208,7 @@ class Service {
         secColorIdentifier: json["sec_colorIdentifier"],
         secHeader: json["sec_header"],
         secDescription: json["sec_description"],
+        secondaryVideoUrl: json["secondary_video_url"],
         secLogo: json["sec_logo"] == null
             ? null
             : SecLogo.fromJson(json["sec_logo"]),
@@ -219,6 +226,7 @@ class Service {
         "sec_colorIdentifier": secColorIdentifier,
         "sec_header": secHeader,
         "sec_description": secDescription,
+        "secondary_video_url": secondaryVideoUrl,
         "sec_logo": secLogo?.toJson(),
         "cta": cta?.toJson(),
         "service_bg": serviceBg == null

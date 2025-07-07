@@ -121,6 +121,7 @@ class MethodologyWidget extends StatelessWidget {
           width: Constants.desktopBreakPoint,
           child: VideoPlayerWidget(
             videoUrl: state.data?.bgImg ?? '',
+            secondaryVideoUrl: state.data?.secondaryVideoUrl ?? '',
             placeholderWidget: Container(),
             fit: BoxFit.fitHeight,
           ),
@@ -257,6 +258,7 @@ class MethodologyWidget extends StatelessWidget {
               width: Constants.desktopBreakPoint,
               child: VideoPlayerWidget(
                 videoUrl: state.data?.bgImg ?? '',
+                secondaryVideoUrl: state.data?.secondaryVideoUrl ?? '',
                 placeholderWidget: Container(),
                 fit: BoxFit.fitHeight,
               ),
@@ -369,6 +371,7 @@ class MethodologyWidget extends StatelessWidget {
               width: Constants.desktopBreakPoint,
               child: VideoPlayerWidget(
                 videoUrl: state.data?.bgImg ?? '',
+                secondaryVideoUrl: state.data?.secondaryVideoUrl ?? '',
                 placeholderWidget: Container(),
                 fit: BoxFit.fitHeight,
               ),

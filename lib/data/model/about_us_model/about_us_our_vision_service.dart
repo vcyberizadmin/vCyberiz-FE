@@ -40,6 +40,8 @@ class AboutUsOurVisionData {
   final DateTime? updatedAt;
   final DateTime? publishedAt;
   final String? globalUrl;
+  final String? secondaryVideoUrl1;
+  final String? secondaryVideoUrl2;
   final SecBg? secBg;
   final List<SecWriting>? secWritings;
   final KnowMoreAboutOurService? knowMoreAboutOurService;
@@ -51,6 +53,8 @@ class AboutUsOurVisionData {
     this.updatedAt,
     this.publishedAt,
     this.globalUrl,
+    this.secondaryVideoUrl1,
+    this.secondaryVideoUrl2,
     this.secBg,
     this.secWritings,
     this.knowMoreAboutOurService,
@@ -70,6 +74,8 @@ class AboutUsOurVisionData {
             ? null
             : DateTime.parse(json["publishedAt"]),
         globalUrl: json["global_url"],
+        secondaryVideoUrl1: json["secondary_video_url_1"],
+        secondaryVideoUrl2: json["secondary_video_url_2"],
         secBg: json["sec_bg"] == null ? null : SecBg.fromJson(json["sec_bg"]),
         secWritings: json["sec_writings"] == null
             ? []
@@ -88,6 +94,8 @@ class AboutUsOurVisionData {
         "updatedAt": updatedAt?.toIso8601String(),
         "publishedAt": publishedAt?.toIso8601String(),
         "global_url": globalUrl,
+        "secondary_video_url_1": secondaryVideoUrl1,
+        "secondary_video_url_2": secondaryVideoUrl2,
         "sec_bg": secBg?.toJson(),
         "sec_writings": secWritings == null
             ? []

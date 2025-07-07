@@ -30,7 +30,7 @@ class FooterCompanySection extends StatelessWidget {
           children: [
             //!---------------------(service)
 
-            column2Widget(
+            serviceWidget(
                 context,
                 state.data?.siteMap?.withUs?.label ?? '',
                 state.data?.siteMap?.withUs?.references,
@@ -38,10 +38,10 @@ class FooterCompanySection extends StatelessWidget {
                   context: context,
                   mobile: Constants.width,
                   tablet: 250,
-                  desktop: Constants.desktopBreakPoint * .23,
+                  desktop: Constants.desktopBreakPoint * .25,
                 )),
             //!----------------(solution)
-            column2Widget(
+            solutionsWidget(
                 context,
                 state.data?.siteMap?.company?.referencesMap?.label ?? '',
                 state.data?.siteMap?.company?.referencesMap?.references,
@@ -49,10 +49,10 @@ class FooterCompanySection extends StatelessWidget {
                   context: context,
                   mobile: Constants.width,
                   tablet: 200,
-                  desktop: Constants.desktopBreakPoint * .14,
+                  desktop: Constants.desktopBreakPoint * .16,
                 )),
             //!----------------(company)
-            columnWidget(
+            companyWidget(
                 context,
                 state.data?.siteMap?.platform?.referencesMap?.label ?? '',
                 state.data?.siteMap?.platform?.referencesMap?.references,
@@ -60,7 +60,7 @@ class FooterCompanySection extends StatelessWidget {
                   context: context,
                   mobile: Constants.width,
                   tablet: 200,
-                  desktop: Constants.desktopBreakPoint * .14,
+                  desktop: Constants.desktopBreakPoint * .15,
                 )),
             //!----------------(subscribe)
 
@@ -252,7 +252,7 @@ class FooterCompanySection extends StatelessWidget {
               context: context,
               mobile: 180,
               tablet: 320,
-              desktop: Constants.desktopBreakPoint * .22,
+              desktop: Constants.desktopBreakPoint * .17,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -398,7 +398,7 @@ class FooterCompanySection extends StatelessWidget {
     );
   }
 
-  Widget columnWidget(
+  Widget companyWidget(
     BuildContext context,
     String heading,
     List<Cta>? columnList,
@@ -452,7 +452,7 @@ class FooterCompanySection extends StatelessWidget {
     );
   }
 
-  Widget column2Widget(
+  Widget solutionsWidget(
     BuildContext context,
     String heading,
     List<Cta>? columnList,
@@ -470,98 +470,146 @@ class FooterCompanySection extends StatelessWidget {
             overflow: TextOverflow.visible,
           ),
           const SizedBox(height: 10),
-          ...(columnList ?? []).map((Cta data) {
-            String label = (data.label ?? '').trim();
 
-            return InkWell(
-              onTap: () {
-                if (label == 'Cyber Maturity Assessment') {
-                  context.goNamed(
-                    RouteConstants.cyberMeturityPath,
-                    queryParameters: {
-                      'id': data.href ?? '',
-                    },
-                  );
-                }
-                if (label == 'Intelligence Led Penetration Testing') {
-                  context.goNamed(
-                    RouteConstants.penitraionTestingPath,
-                    queryParameters: {
-                      'id': data.href ?? '',
-                    },
-                  );
-                }
-                if (label == 'M365 Security Posture Advisory') {
-                  context.goNamed(
-                    RouteConstants.postureAdvisoryPath,
-                    queryParameters: {
-                      'id': data.href ?? '',
-                    },
-                  );
-                }
-                if (label == 'Managed 365 Security') {
-                  context.goNamed(
-                    RouteConstants.managedSecurityPath,
-                    queryParameters: {
-                      'id': data.href ?? '',
-                    },
-                  );
-                }
-                if (label == 'M365 Security Implementation') {
-                  context.goNamed(
-                    RouteConstants.securityImplementationPath,
-                    queryParameters: {
-                      'id': data.href ?? '',
-                    },
-                  );
-                }
-                if (label == 'vShield') {
-                  context.goNamed(
-                    RouteConstants.vshieldPath,
-                    queryParameters: {
-                      'id': data.href ?? '',
-                    },
-                  );
-                }
-                if (label == 'vArmor') {
-                  context.goNamed(
-                    RouteConstants.varmorPath,
-                    queryParameters: {
-                      'id': data.href ?? '',
-                    },
-                  );
-                }
-                if (label == 'vProtect') {
-                  context.goNamed(
-                    RouteConstants.vprotectPath,
-                    queryParameters: {
-                      'id': data.href ?? '',
-                    },
-                  );
-                }
-                if (label == 'vRespond') {
-                  context.goNamed(
-                    RouteConstants.vrespondPath,
-                    queryParameters: {
-                      'id': data.href ?? '',
-                    },
-                  );
-                }
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: kStyle.med(
-                  overflow: TextOverflow.visible,
-                  text: data.label ?? '',
-                  size: 14,
-                  color: AppColors.darkBlueText,
-                ),
-              ),
-            );
-          }),
-          Gap(20),
+          // Microsoft Security Solutions
+          kStyle.med(
+            text: 'Microsoft Security Solutions',
+            size: 14,
+            color: AppColors.footerGreyText,
+          ),
+          const SizedBox(height: 8),
+          ..._buildLinkGroupByIndex(context, columnList, 0, 3),
+
+          const SizedBox(height: 10),
+
+          // Emerging Response Solutions
+          kStyle.med(
+            text: 'Emerging Response Solutions',
+            size: 14,
+            color: AppColors.footerGreyText,
+          ),
+          const SizedBox(height: 8),
+          ..._buildLinkGroupByIndex(context, columnList, 3, 4),
+
+          const Gap(20),
         ],
       ),
     );
+  }
+
+  Widget serviceWidget(
+    BuildContext context,
+    String heading,
+    List<Cta>? columnList,
+    double width,
+  ) {
+    return Container(
+      width: width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Kstyles().bold(
+            text: heading,
+            size: 18,
+            color: AppColors.black,
+            overflow: TextOverflow.visible,
+          ),
+          const SizedBox(height: 10),
+
+          // Global Technology Services
+          kStyle.med(
+            text: 'Global Technology Services',
+            size: 14,
+            color: AppColors.footerGreyText,
+          ),
+          const SizedBox(height: 8),
+          ..._buildLinkGroupByIndex(context, columnList, 0, 3),
+
+          const SizedBox(height: 10),
+
+          // Microsoft Consulting Services
+          kStyle.med(
+            text: 'Microsoft Consulting Services',
+            size: 14,
+            color: AppColors.footerGreyText,
+          ),
+          const SizedBox(height: 8),
+          ..._buildLinkGroupByIndex(context, columnList, 3, 5),
+
+          const Gap(20),
+        ],
+      ),
+    );
+  }
+
+  List<Widget> _buildLinkGroupByIndex(
+    BuildContext context,
+    List<Cta>? columnList,
+    int startIndex,
+    int endIndex,
+  ) {
+    if (columnList == null || startIndex >= columnList.length) return [];
+
+    final items = columnList.sublist(
+      startIndex,
+      endIndex > columnList.length ? columnList.length : endIndex,
+    );
+
+    return items.map((data) {
+      final label = (data.label ?? '').trim();
+
+      return InkWell(
+        onTap: () {
+          final href = data.href ?? '';
+          switch (label) {
+            case 'Cyber Maturity Assessment':
+              context.goNamed(RouteConstants.cyberMeturityPath,
+                  queryParameters: {'id': href});
+              break;
+            case 'Intelligence Led Penetration Testing':
+              context.goNamed(RouteConstants.penitraionTestingPath,
+                  queryParameters: {'id': href});
+              break;
+            case 'M365 Security Posture Advisory':
+              context.goNamed(RouteConstants.postureAdvisoryPath,
+                  queryParameters: {'id': href});
+              break;
+            case 'Managed 365 Security':
+              context.goNamed(RouteConstants.managedSecurityPath,
+                  queryParameters: {'id': href});
+              break;
+            case 'M365 Security Implementation':
+              context.goNamed(RouteConstants.securityImplementationPath,
+                  queryParameters: {'id': href});
+              break;
+            case 'vShield':
+              context.goNamed(RouteConstants.vshieldPath,
+                  queryParameters: {'id': href});
+              break;
+            case 'vArmor':
+              context.goNamed(RouteConstants.varmorPath,
+                  queryParameters: {'id': href});
+              break;
+            case 'vProtect':
+              context.goNamed(RouteConstants.vprotectPath,
+                  queryParameters: {'id': href});
+              break;
+            case 'vRespond':
+              context.goNamed(RouteConstants.vrespondPath,
+                  queryParameters: {'id': href});
+              break;
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: kStyle.med(
+            overflow: TextOverflow.visible,
+            text: label,
+            size: 14,
+            color: AppColors.darkBlueText,
+          ),
+        ),
+      );
+    }).toList();
   }
 }

@@ -52,6 +52,7 @@ class _VideoWidgetState extends State<VideoWidget> {
                     ),
                     child: VideoPlayerWidget(
                       videoUrl: state.data?.videoUrl ?? "",
+                      newVideoUrl: state.data?.secondaryVideoUrl ?? "",
                       fit: BoxFit.fill,
                     ),
                   ),

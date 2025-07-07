@@ -143,7 +143,9 @@ class _SliderWidgetState extends State<SliderWidget> {
                 child: Stack(
                   children: [
                     VideoPlayerWidget(
-                      videoUrl: data.data?.carousel?[index].videoUrl ?? '',
+                      videoUrl: data.data?.carousel?[index].videoUrl ?? "",
+                      newVideoUrl:
+                          data.data?.carousel?[index].secondaryVideoUrl ?? "",
                       fit: getValueForScreenType(
                         context: context,
                         mobile: BoxFit.fitHeight,
@@ -221,7 +223,7 @@ class _SliderWidgetState extends State<SliderWidget> {
                     desktop: Constants.desktopBreakPoint * .5,
                   ),
                   child: kStyle.bold(
-                    text: data.data?.carousel?[index].heading ?? "",
+                    text: data.data?.carousel?[index].heading ?? '',
                     color: AppColors.white,
                     size: getValueForScreenType<double>(
                       context: context,
@@ -246,7 +248,7 @@ class _SliderWidgetState extends State<SliderWidget> {
                     desktop: Constants.desktopBreakPoint * .5,
                   ),
                   child: kStyle.reg(
-                    text: data.data?.carousel?[index].description ?? "",
+                    text: data.data?.carousel?[index].description ?? '',
                     color: AppColors.white,
                     overflow: TextOverflow.visible,
                     size: getValueForScreenType(
@@ -268,7 +270,7 @@ class _SliderWidgetState extends State<SliderWidget> {
                     CustomButtonWidget(
                       textSize: 14,
                       buttonHeight: 35,
-                      text: data.data?.carousel?[index].buttonLabel ?? "",
+                      text: data.data?.carousel?[index].buttonLabel ?? '',
                       onTap: () {
                         context.goNamed(RouteConstants.servicesPath);
                       },

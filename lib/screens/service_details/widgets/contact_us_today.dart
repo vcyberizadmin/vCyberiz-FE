@@ -21,6 +21,8 @@ class ContactUsTodayWidget extends StatelessWidget {
           }
           return KnowMoreWidget(
             videoUrl: state.serviceDetailsData?.innerPage?[5].secImg?.url ?? '',
+            secondaryVideoUrl:
+                state.serviceDetailsData?.innerPage?[5].secondaryVideoUrl ?? '',
             header: state.serviceDetailsData?.innerPage?[5].secHeader ?? '',
             buttonText:
                 state.serviceDetailsData?.innerPage?[5].secCta?.label ?? '',

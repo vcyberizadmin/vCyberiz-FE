@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 // To parse this JSON data, do
 //
 //     final videoModel = videoModelFromJson(jsonString);
@@ -11,8 +10,8 @@ VideoModel videoModelFromJson(String str) =>
 String videoModelToJson(VideoModel data) => json.encode(data.toJson());
 
 class VideoModel {
-  VideoData? data;
-  Meta? meta;
+  final VideoData? data;
+  final Meta? meta;
 
   VideoModel({
     this.data,
@@ -31,14 +30,15 @@ class VideoModel {
 }
 
 class VideoData {
-  int? id;
-  String? documentId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  DateTime? publishedAt;
-  String? alt;
-  String? videoUrl;
-  String? title;
+  final int? id;
+  final String? documentId;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final DateTime? publishedAt;
+  final String? alt;
+  final String? videoUrl;
+  final String? title;
+  final String? secondaryVideoUrl;
 
   VideoData({
     this.id,
@@ -49,6 +49,7 @@ class VideoData {
     this.alt,
     this.videoUrl,
     this.title,
+    this.secondaryVideoUrl,
   });
 
   factory VideoData.fromJson(Map<String, dynamic> json) => VideoData(
@@ -66,6 +67,7 @@ class VideoData {
         alt: json["alt"],
         videoUrl: json["video_url"],
         title: json["title"],
+        secondaryVideoUrl: json["secondary_video_url"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -77,12 +79,8 @@ class VideoData {
         "alt": alt,
         "video_url": videoUrl,
         "title": title,
+        "secondary_video_url": secondaryVideoUrl,
       };
-
-  @override
-  String toString() {
-    return 'VideoData(id: $id, documentId: $documentId, createdAt: $createdAt, updatedAt: $updatedAt, publishedAt: $publishedAt, alt: $alt, videoUrl: $videoUrl, title: $title)';
-  }
 }
 
 class Meta {

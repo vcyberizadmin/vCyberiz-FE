@@ -37,6 +37,7 @@ class Data {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final DateTime? publishedAt;
+  final String? globalUrl;
   final List<Carousel>? carousel;
   final List<InfoSection>? infoSection;
 
@@ -46,6 +47,7 @@ class Data {
     this.createdAt,
     this.updatedAt,
     this.publishedAt,
+    this.globalUrl,
     this.carousel,
     this.infoSection,
   });
@@ -62,6 +64,7 @@ class Data {
         publishedAt: json["publishedAt"] == null
             ? null
             : DateTime.parse(json["publishedAt"]),
+        globalUrl: json["global_url"],
         carousel: json["carousel"] == null
             ? []
             : List<Carousel>.from(
@@ -78,6 +81,7 @@ class Data {
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "publishedAt": publishedAt?.toIso8601String(),
+        "global_url": globalUrl,
         "carousel": carousel == null
             ? []
             : List<dynamic>.from(carousel!.map((x) => x.toJson())),
@@ -94,6 +98,7 @@ class Carousel {
   final String? videoUrl;
   final String? buttonLink;
   final String? buttonLabel;
+  final String? secondaryVideoUrl;
 
   Carousel({
     this.id,
@@ -102,6 +107,7 @@ class Carousel {
     this.videoUrl,
     this.buttonLink,
     this.buttonLabel,
+    this.secondaryVideoUrl,
   });
 
   factory Carousel.fromJson(Map<String, dynamic> json) => Carousel(
@@ -111,6 +117,7 @@ class Carousel {
         videoUrl: json["videoUrl"],
         buttonLink: json["buttonLink"],
         buttonLabel: json["buttonLabel"],
+        secondaryVideoUrl: json["secondary_video_url"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -120,6 +127,7 @@ class Carousel {
         "videoUrl": videoUrl,
         "buttonLink": buttonLink,
         "buttonLabel": buttonLabel,
+        "secondary_video_url": secondaryVideoUrl,
       };
 }
 

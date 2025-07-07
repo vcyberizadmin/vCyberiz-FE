@@ -23,6 +23,7 @@ class AboutUsSecurityMaturitySection extends StatelessWidget {
         return KnowMoreWidget(
           videoUrl:
               state.ourVisionData?.knowMoreAboutOurService?.ctaBgImg?.url ?? '',
+          secondaryVideoUrl: state.ourVisionData?.secondaryVideoUrl2 ?? '',
           header: state.ourVisionData?.knowMoreAboutOurService?.ctaTitle ?? '',
           buttonText:
               state.ourVisionData?.knowMoreAboutOurService?.ctaLink?.label ??

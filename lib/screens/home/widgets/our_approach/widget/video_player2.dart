@@ -1,5 +1,6 @@
 import 'dart:html' as html;
 import 'package:chewie/chewie.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,11 +12,13 @@ import 'package:vcyberiz/core/utils/constants/constants.dart';
 
 class CardVideoPlayerWidget extends StatefulWidget {
   final String videoUrl;
+  final String secondaryVideoUrl;
   final BoxFit fit;
   final Widget? placeholderWidget;
 
   const CardVideoPlayerWidget({
     required this.videoUrl,
+    required this.secondaryVideoUrl,
     this.fit = BoxFit.cover,
     this.placeholderWidget,
     super.key,
@@ -26,10 +29,16 @@ class CardVideoPlayerWidget extends StatefulWidget {
 }
 
 class _CardVideoPlayerWidgetState extends State<CardVideoPlayerWidget> {
+  late final VideoPlayerBloc _bloc;
+  String? _finalVideoUrl;
+  bool _isReady = false;
+
+  @override
   void initState() {
     super.initState();
+    _bloc = VideoPlayerBloc();
+    _initVideo();
 
-    // Disable PiP in web browsers (like Safari)
     if (kIsWeb) {
       Future.delayed(const Duration(milliseconds: 500), () {
         final videoElements = html.document.getElementsByTagName('video');
@@ -44,19 +53,51 @@ class _CardVideoPlayerWidgetState extends State<CardVideoPlayerWidget> {
     }
   }
 
+  Future<void> _initVideo() async {
+    final base = dotenv.env[Constants.assetBaseURL] ?? '';
+    bool isSafari = false;
+
+    try {
+      final deviceInfo = DeviceInfoPlugin();
+      final webInfo = await deviceInfo.webBrowserInfo;
+      isSafari = webInfo.browserName.name.toLowerCase() == 'safari';
+    } catch (_) {
+      isSafari = false;
+    }
+
+    _finalVideoUrl =
+        base + (isSafari ? widget.secondaryVideoUrl : widget.videoUrl);
+
+    _bloc.add(
+      InitializeApproachCardBgVideoPlayer(
+        videoUrl: _finalVideoUrl!,
+        autoPlay: true,
+        looping: true,
+        showControls: false,
+      ),
+    );
+
+    if (mounted) {
+      setState(() {
+        _isReady = true;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _bloc.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => VideoPlayerBloc()
-        ..add(
-          InitializeApproachCardBgVideoPlayer(
-            videoUrl:
-                (dotenv.env[Constants.assetBaseURL] ?? "") + widget.videoUrl,
-            autoPlay: true,
-            looping: true,
-            showControls: false,
-          ),
-        ),
+    if (!_isReady) {
+      return widget.placeholderWidget ?? const Center();
+    }
+
+    return BlocProvider.value(
+      value: _bloc,
       child: BlocBuilder<VideoPlayerBloc, VideoPlayerState>(
         builder: (context, state) {
           return switch (state) {
@@ -74,9 +115,9 @@ class _CardVideoPlayerWidgetState extends State<CardVideoPlayerWidget> {
                 ),
               ),
             VideoPlayerError() => Center(
-                child: Text('Error: ${state.error}'),
+                child: SizedBox(),
               ),
-            Object() => throw UnimplementedError(),
+            Object() => const SizedBox.shrink(),
           };
         },
       ),

@@ -8,6 +8,7 @@ class AppColors {
   static const Color powderBlue = Color(0xFF9FB3DD);
   static const Color davysGray = Color(0xFF58595B);
   static const Color progressBgColor = Color(0xFFF3F5F6);
+  static const Color footerGreyText = Color(0xFF7D7974);
   static const Color antiFlashWhite = Color(0xFFEDF1F3);
   static const Color penBlue = Color(0xFF06013A);
   static Color white20 = Colors.white.withAlpha(20);
