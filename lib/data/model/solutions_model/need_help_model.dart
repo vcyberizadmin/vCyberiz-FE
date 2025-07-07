@@ -35,6 +35,8 @@ class NeedHelpData {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final DateTime? publishedAt;
+  final String? globalUrl;
+  final String? secondaryVideoUrl;
   final Section? section;
 
   NeedHelpData({
@@ -43,6 +45,8 @@ class NeedHelpData {
     this.createdAt,
     this.updatedAt,
     this.publishedAt,
+    this.globalUrl,
+    this.secondaryVideoUrl,
     this.section,
   });
 
@@ -58,6 +62,8 @@ class NeedHelpData {
         publishedAt: json["publishedAt"] == null
             ? null
             : DateTime.parse(json["publishedAt"]),
+        globalUrl: json["global_url"],
+        secondaryVideoUrl: json["secondary_video_url"],
         section:
             json["section"] == null ? null : Section.fromJson(json["section"]),
       );
@@ -68,6 +74,8 @@ class NeedHelpData {
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "publishedAt": publishedAt?.toIso8601String(),
+        "global_url": globalUrl,
+        "secondary_video_url": secondaryVideoUrl,
         "section": section?.toJson(),
       };
 }
@@ -77,6 +85,7 @@ class Section {
   final dynamic secLabel;
   final String? secHeader;
   final dynamic secDescription;
+  final String? secondaryVideoUrl;
   final SecImg? secImg;
   final SecCta? secCta;
 
@@ -85,6 +94,7 @@ class Section {
     this.secLabel,
     this.secHeader,
     this.secDescription,
+    this.secondaryVideoUrl,
     this.secImg,
     this.secCta,
   });
@@ -94,6 +104,7 @@ class Section {
         secLabel: json["sec_label"],
         secHeader: json["sec_header"],
         secDescription: json["sec_description"],
+        secondaryVideoUrl: json["secondary_video_url"],
         secImg:
             json["sec_img"] == null ? null : SecImg.fromJson(json["sec_img"]),
         secCta:
@@ -105,6 +116,7 @@ class Section {
         "sec_label": secLabel,
         "sec_header": secHeader,
         "sec_description": secDescription,
+        "secondary_video_url": secondaryVideoUrl,
         "sec_img": secImg?.toJson(),
         "sec_cta": secCta?.toJson(),
       };

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 // To parse this JSON data, do
 //
 //     final methodologyModel = methodologyModelFromJson(jsonString);
@@ -12,8 +11,8 @@ String methodologyModelToJson(MethodologyModel data) =>
     json.encode(data.toJson());
 
 class MethodologyModel {
-  MethodologyData? data;
-  Meta? meta;
+  final MethodologyData? data;
+  final Meta? meta;
 
   MethodologyModel({
     this.data,
@@ -35,16 +34,18 @@ class MethodologyModel {
 }
 
 class MethodologyData {
-  int? id;
-  String? documentId;
-  String? bgImg;
-  String? imgOverlayText1;
-  String? imgOverlayText2;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  DateTime? publishedAt;
-  SectionHeader? sectionHeader;
-  List<SectionHeader>? methodologies;
+  final int? id;
+  final String? documentId;
+  final String? bgImg;
+  final String? imgOverlayText1;
+  final String? imgOverlayText2;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final DateTime? publishedAt;
+  final String? globalUrl;
+  final String? secondaryVideoUrl;
+  final SectionHeader? sectionHeader;
+  final List<SectionHeader>? methodologies;
 
   MethodologyData({
     this.id,
@@ -55,6 +56,8 @@ class MethodologyData {
     this.createdAt,
     this.updatedAt,
     this.publishedAt,
+    this.globalUrl,
+    this.secondaryVideoUrl,
     this.sectionHeader,
     this.methodologies,
   });
@@ -75,6 +78,8 @@ class MethodologyData {
         publishedAt: json["publishedAt"] == null
             ? null
             : DateTime.parse(json["publishedAt"]),
+        globalUrl: json["global_url"],
+        secondaryVideoUrl: json["secondary_video_url"],
         sectionHeader: json["section_header"] == null
             ? null
             : SectionHeader.fromJson(json["section_header"]),
@@ -93,51 +98,49 @@ class MethodologyData {
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "publishedAt": publishedAt?.toIso8601String(),
+        "global_url": globalUrl,
+        "secondary_video_url": secondaryVideoUrl,
         "section_header": sectionHeader?.toJson(),
         "methodologies": methodologies == null
             ? []
             : List<dynamic>.from(methodologies!.map((x) => x.toJson())),
       };
-
-  @override
-  String toString() {
-    return 'MethodologyData(id: $id, documentId: $documentId, bgImg: $bgImg, imgOverlayText1: $imgOverlayText1, imgOverlayText2: $imgOverlayText2, createdAt: $createdAt, updatedAt: $updatedAt, publishedAt: $publishedAt, sectionHeader: $sectionHeader, methodologies: $methodologies)';
-  }
 }
 
 class SectionHeader {
-  int? id;
-  String? header;
-  String? content;
-  dynamic label;
+  final int? id;
+  final String? header;
+  final String? content;
+  final dynamic label;
+  final dynamic key;
+  final dynamic subtitle;
 
   SectionHeader({
     this.id,
     this.header,
     this.content,
     this.label,
+    this.key,
+    this.subtitle,
   });
 
-  factory SectionHeader.fromJson(Map<String, dynamic> json) {
-    return SectionHeader(
-      id: json["id"],
-      header: json["header"],
-      content: json["content"],
-      label: json["label"],
-    );
-  }
+  factory SectionHeader.fromJson(Map<String, dynamic> json) => SectionHeader(
+        id: json["id"],
+        header: json["header"],
+        content: json["content"],
+        label: json["label"],
+        key: json["key"],
+        subtitle: json["subtitle"],
+      );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "header": header,
         "content": content,
         "label": label,
+        "key": key,
+        "subtitle": subtitle,
       };
-
-  @override
-  String toString() {
-    return 'SectionHeader(id: $id, header: $header, content: $content, label: $label)';
-  }
 }
 
 class Meta {

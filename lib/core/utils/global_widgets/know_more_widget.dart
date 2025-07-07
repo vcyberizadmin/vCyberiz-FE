@@ -12,6 +12,7 @@ import 'know_more_video.dart';
 
 class KnowMoreWidget extends StatelessWidget {
   final String videoUrl;
+  final String secondaryVideoUrl;
   final String header;
   final String buttonText;
   final Function()? onTap;
@@ -21,6 +22,7 @@ class KnowMoreWidget extends StatelessWidget {
     required this.header,
     required this.buttonText,
     this.onTap,
+    required this.secondaryVideoUrl,
   });
 
   @override
@@ -52,6 +54,7 @@ class KnowMoreWidget extends StatelessWidget {
                         ? SizedBox()
                         : KnowMoreVideo(
                             videoUrl: videoUrl,
+                            secondaryVideoUrl: secondaryVideoUrl,
                             placeholderWidget: Container(),
                             fit: BoxFit.fill,
                           ),

@@ -8,14 +8,17 @@ import 'package:vcyberiz/bloc/video_player_bloc/video_player_bloc.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_event.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_state.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/check_browser.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final String videoUrl;
+  final String newVideoUrl;
   final BoxFit fit;
   final Widget? placeholderWidget;
 
   const VideoPlayerWidget({
     required this.videoUrl,
+    required this.newVideoUrl,
     this.fit = BoxFit.cover,
     this.placeholderWidget,
     super.key,
@@ -26,11 +29,16 @@ class VideoPlayerWidget extends StatefulWidget {
 }
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
+  String? _finalVideoUrl;
+  late final VideoPlayerBloc _videoBloc;
+  bool _isReadyToBuild = false;
+
   @override
   void initState() {
     super.initState();
+    _videoBloc = VideoPlayerBloc();
+    detectBrowserAndInitBloc();
 
-    // Disable PiP in web browsers (like Safari)
     if (kIsWeb) {
       Future.delayed(const Duration(milliseconds: 500), () {
         final videoElements = html.document.getElementsByTagName('video');
@@ -45,19 +53,40 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     }
   }
 
+  Future<void> detectBrowserAndInitBloc() async {
+    final base = dotenv.env[Constants.assetBaseURL] ?? "";
+    final isSafari = await checkBrowser();
+
+    _finalVideoUrl = base + (isSafari ? widget.newVideoUrl : widget.videoUrl);
+
+    _videoBloc.add(
+      InitializeSliderVideoPlayer(
+        videoUrl: _finalVideoUrl!,
+        autoPlay: true,
+        looping: true,
+        showControls: false,
+      ),
+    );
+
+    setState(() {
+      _isReadyToBuild = true;
+    });
+  }
+
+  @override
+  void dispose() {
+    _videoBloc.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => VideoPlayerBloc()
-        ..add(
-          InitializeSliderVideoPlayer(
-            videoUrl:
-                (dotenv.env[Constants.assetBaseURL] ?? "") + widget.videoUrl,
-            autoPlay: true,
-            looping: true,
-            showControls: false,
-          ),
-        ),
+    if (!_isReadyToBuild) {
+      return widget.placeholderWidget ?? const Center();
+    }
+
+    return BlocProvider.value(
+      value: _videoBloc,
       child: BlocBuilder<VideoPlayerBloc, VideoPlayerState>(
         builder: (context, state) {
           return switch (state) {
@@ -75,9 +104,9 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                 ),
               ),
             VideoPlayerError() => Center(
-                child: Text('Error: ${state.error}'),
+                child: SizedBox(),
               ),
-            Object() => throw UnimplementedError(),
+            Object() => const SizedBox.shrink(),
           };
         },
       ),

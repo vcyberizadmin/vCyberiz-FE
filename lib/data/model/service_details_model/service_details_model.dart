@@ -37,24 +37,28 @@ class ServiceDetailsData {
   final int? id;
   final String? documentId;
   final String? title;
-  final dynamic url;
   final String? pageId;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final DateTime? publishedAt;
-  final dynamic serviceOfferingIsRequired;
+  final bool? serviceOfferingIsRequired;
+  final String? globalUrl;
+  final bool? innerPageIsRequired;
+  final String? searchDescription;
   final List<InnerPage>? innerPage;
 
   ServiceDetailsData({
     this.id,
     this.documentId,
     this.title,
-    this.url,
     this.pageId,
     this.createdAt,
     this.updatedAt,
     this.publishedAt,
     this.serviceOfferingIsRequired,
+    this.globalUrl,
+    this.innerPageIsRequired,
+    this.searchDescription,
     this.innerPage,
   });
 
@@ -63,7 +67,6 @@ class ServiceDetailsData {
         id: json["id"],
         documentId: json["documentId"],
         title: json["title"],
-        url: json["Url"],
         pageId: json["page_id"],
         createdAt: json["createdAt"] == null
             ? null
@@ -75,6 +78,9 @@ class ServiceDetailsData {
             ? null
             : DateTime.parse(json["publishedAt"]),
         serviceOfferingIsRequired: json["Service_Offering_isRequired"],
+        globalUrl: json["global_url"],
+        innerPageIsRequired: json["inner_page_isRequired"],
+        searchDescription: json["search_description"],
         innerPage: json["inner_page"] == null
             ? []
             : List<InnerPage>.from(
@@ -85,12 +91,14 @@ class ServiceDetailsData {
         "id": id,
         "documentId": documentId,
         "title": title,
-        "Url": url,
         "page_id": pageId,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "publishedAt": publishedAt?.toIso8601String(),
         "Service_Offering_isRequired": serviceOfferingIsRequired,
+        "global_url": globalUrl,
+        "inner_page_isRequired": innerPageIsRequired,
+        "search_description": searchDescription,
         "inner_page": innerPage == null
             ? []
             : List<dynamic>.from(innerPage!.map((x) => x.toJson())),
@@ -102,13 +110,14 @@ class InnerPage {
   final int? id;
   final SecBanner? secBanner;
   final String? secHeader;
-  final dynamic secDescription;
+  final String? secDescription;
   final SecImg? secImg;
   final List<SecAccordion>? secAccordion;
   final List<SecImg>? secBgImg;
   final List<SecCard>? secCard;
   final List<SecImg>? bgImg;
   final dynamic secLabel;
+  final String? secondaryVideoUrl;
   final SecCta? secCta;
 
   InnerPage({
@@ -123,6 +132,7 @@ class InnerPage {
     this.secCard,
     this.bgImg,
     this.secLabel,
+    this.secondaryVideoUrl,
     this.secCta,
   });
 
@@ -152,6 +162,7 @@ class InnerPage {
             ? []
             : List<SecImg>.from(json["bg_img"]!.map((x) => SecImg.fromJson(x))),
         secLabel: json["sec_label"],
+        secondaryVideoUrl: json["secondary_video_url"],
         secCta:
             json["sec_cta"] == null ? null : SecCta.fromJson(json["sec_cta"]),
       );
@@ -176,6 +187,7 @@ class InnerPage {
             ? []
             : List<dynamic>.from(bgImg!.map((x) => x.toJson())),
         "sec_label": secLabel,
+        "secondary_video_url": secondaryVideoUrl,
         "sec_cta": secCta?.toJson(),
       };
 }
@@ -184,7 +196,7 @@ class SecImg {
   final int? id;
   final String? url;
   final String? name;
-  final String? mime;
+  final Mime? mime;
   final String? label;
 
   SecImg({
@@ -199,7 +211,7 @@ class SecImg {
         id: json["id"],
         url: json["url"],
         name: json["name"],
-        mime: json["mime"],
+        mime: mimeValues.map[json["mime"]]!,
         label: json["label"],
       );
 
@@ -207,14 +219,19 @@ class SecImg {
         "id": id,
         "url": url,
         "name": name,
-        "mime": mime,
+        "mime": mimeValues.reverse[mime],
         "label": label,
       };
 }
 
+enum Mime { IMG_PNG, VIDEO_AV1 }
+
+final mimeValues =
+    EnumValues({"img/png": Mime.IMG_PNG, "video/AV1": Mime.VIDEO_AV1});
+
 class SecAccordion {
   final int? id;
-  final String? secHeader;
+  final dynamic secHeader;
   final String? secDescription;
 
   SecAccordion({
@@ -241,6 +258,7 @@ class SecBanner {
   final String? secLabel;
   final String? secHeader;
   final String? secDescription;
+  final dynamic secondaryVideoUrl;
   final SecImg? secImg;
   final SecCta? secCta;
 
@@ -249,6 +267,7 @@ class SecBanner {
     this.secLabel,
     this.secHeader,
     this.secDescription,
+    this.secondaryVideoUrl,
     this.secImg,
     this.secCta,
   });
@@ -258,6 +277,7 @@ class SecBanner {
         secLabel: json["sec_label"],
         secHeader: json["sec_header"],
         secDescription: json["sec_description"],
+        secondaryVideoUrl: json["secondary_video_url"],
         secImg:
             json["sec_img"] == null ? null : SecImg.fromJson(json["sec_img"]),
         secCta:
@@ -269,6 +289,7 @@ class SecBanner {
         "sec_label": secLabel,
         "sec_header": secHeader,
         "sec_description": secDescription,
+        "secondary_video_url": secondaryVideoUrl,
         "sec_img": secImg?.toJson(),
         "sec_cta": secCta?.toJson(),
       };
@@ -308,7 +329,7 @@ class SecCta {
 
 class SecCard {
   final int? id;
-  final String? secHeader;
+  final dynamic secHeader;
   final String? description;
   final SecImg? logoImg;
   final String? label;

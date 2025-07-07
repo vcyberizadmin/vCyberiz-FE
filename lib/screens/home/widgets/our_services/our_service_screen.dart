@@ -338,6 +338,9 @@ class OurServicesWidget extends StatelessWidget {
                   videoUrl: (state.data?.mainSection?.first.services?[0]
                           .serviceBg?.first.url ??
                       ""),
+                  secondaryVideoUrl: (state.data?.mainSection?.first
+                          .services?[0].secondaryVideoUrl ??
+                      ""),
                   placeholderWidget: Container(),
                   fit: BoxFit.fill,
                 )
@@ -345,6 +348,9 @@ class OurServicesWidget extends StatelessWidget {
                   videoUrl: (state.data?.mainSection?.first.services?[1]
                           .serviceBg?.first.url ??
                       ""),
+                  secondaryVideoUrl: (state.data?.mainSection?.first
+                          .services?[1].secondaryVideoUrl ??
+                      ''),
                   placeholderWidget: Container(),
                   fit: BoxFit.cover,
                 ),
@@ -430,7 +436,7 @@ class OurServicesWidget extends StatelessWidget {
               height: getValueForScreenType(
                 context: context,
                 mobile: 300,
-                desktop: state.selectedItem == 0 ? 400 : 400,
+                desktop: state.selectedItem == 0 ? 450 : 450,
                 tablet: 400,
               ),
               child: state.selectedItem == 0
@@ -438,12 +444,18 @@ class OurServicesWidget extends StatelessWidget {
                       videoUrl: (state.data?.mainSection?.first.services?[0]
                               .serviceBg?.first.url ??
                           ""),
+                      secondaryVideoUrl: (state.data?.mainSection?.first
+                              .services?[0].secondaryVideoUrl ??
+                          ""),
                       placeholderWidget: Container(),
                       fit: BoxFit.fill,
                     )
                   : VideoPlayerWidget2(
                       videoUrl: (state.data?.mainSection?.first.services?[1]
                               .serviceBg?.first.url ??
+                          ""),
+                      secondaryVideoUrl: (state.data?.mainSection?.first
+                              .services?[1].secondaryVideoUrl ??
                           ""),
                       placeholderWidget: Container(),
                       fit: BoxFit.cover,

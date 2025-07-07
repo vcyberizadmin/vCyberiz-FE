@@ -11,8 +11,8 @@ String ourApproachModelToJson(OurApproachModel data) =>
     json.encode(data.toJson());
 
 class OurApproachModel {
-  ApproachData? data;
-  Meta? meta;
+  final ApproachData? data;
+  final Meta? meta;
 
   OurApproachModel({
     this.data,
@@ -32,15 +32,18 @@ class OurApproachModel {
 }
 
 class ApproachData {
-  int? id;
-  String? documentId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  DateTime? publishedAt;
-  ApproachHeader? approachHeader;
-  List<CardList>? cardList;
-  List<CardNav>? cardNavs;
-  List<SecBg>? secBg;
+  final int? id;
+  final String? documentId;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final DateTime? publishedAt;
+  final String? globalUrl;
+  final String? videoUrl;
+  final String? secondaryVideoUrl;
+  final ApproachHeader? approachHeader;
+  final List<CardList>? cardList;
+  final List<CardNav>? cardNavs;
+  final List<SecBg>? secBg;
 
   ApproachData({
     this.id,
@@ -48,6 +51,9 @@ class ApproachData {
     this.createdAt,
     this.updatedAt,
     this.publishedAt,
+    this.globalUrl,
+    this.videoUrl,
+    this.secondaryVideoUrl,
     this.approachHeader,
     this.cardList,
     this.cardNavs,
@@ -66,6 +72,9 @@ class ApproachData {
         publishedAt: json["publishedAt"] == null
             ? null
             : DateTime.parse(json["publishedAt"]),
+        globalUrl: json["global_url"],
+        videoUrl: json["videoUrl"],
+        secondaryVideoUrl: json["secondary_video_url"],
         approachHeader: json["approachHeader"] == null
             ? null
             : ApproachHeader.fromJson(json["approachHeader"]),
@@ -88,6 +97,9 @@ class ApproachData {
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "publishedAt": publishedAt?.toIso8601String(),
+        "global_url": globalUrl,
+        "videoUrl": videoUrl,
+        "secondary_video_url": secondaryVideoUrl,
         "approachHeader": approachHeader?.toJson(),
         "cardList": cardList == null
             ? []
@@ -102,12 +114,12 @@ class ApproachData {
 }
 
 class ApproachHeader {
-  int? id;
-  String? header;
-  String? content;
-  String? label;
-  dynamic key;
-  dynamic subtitle;
+  final int? id;
+  final String? header;
+  final String? content;
+  final String? label;
+  final dynamic key;
+  final dynamic subtitle;
 
   ApproachHeader({
     this.id,
@@ -138,12 +150,13 @@ class ApproachHeader {
 }
 
 class CardList {
-  int? id;
-  String? title;
-  String? highlightText;
-  String? description;
-  String? cardId;
-  List<SecBg>? approachCard;
+  final int? id;
+  final String? title;
+  final String? highlightText;
+  final String? description;
+  final String? cardId;
+  final String? secondaryVideoUrl;
+  final List<SecBg>? approachCard;
 
   CardList({
     this.id,
@@ -151,6 +164,7 @@ class CardList {
     this.highlightText,
     this.description,
     this.cardId,
+    this.secondaryVideoUrl,
     this.approachCard,
   });
 
@@ -160,6 +174,7 @@ class CardList {
         highlightText: json["highlightText"],
         description: json["description"],
         cardId: json["card_id"],
+        secondaryVideoUrl: json["secondary_video_url"],
         approachCard: json["approach_card"] == null
             ? []
             : List<SecBg>.from(
@@ -172,6 +187,7 @@ class CardList {
         "highlightText": highlightText,
         "description": description,
         "card_id": cardId,
+        "secondary_video_url": secondaryVideoUrl,
         "approach_card": approachCard == null
             ? []
             : List<dynamic>.from(approachCard!.map((x) => x.toJson())),
@@ -179,11 +195,11 @@ class CardList {
 }
 
 class SecBg {
-  int? id;
-  String? url;
-  String? name;
-  Mime? mime;
-  String? label;
+  final int? id;
+  final String? url;
+  final String? name;
+  final Mime? mime;
+  final String? label;
 
   SecBg({
     this.id,
@@ -210,18 +226,15 @@ class SecBg {
       };
 }
 
-enum Mime { IMAGE_SVG_XML, VIDEO_MP4, VIDEO_WEBM }
+enum Mime { IMAGE_SVG_XML, VIDEO_WEBM }
 
-final mimeValues = EnumValues({
-  "image/svg+xml": Mime.IMAGE_SVG_XML,
-  "video/mp4": Mime.VIDEO_MP4,
-  "video/webm": Mime.VIDEO_WEBM
-});
+final mimeValues = EnumValues(
+    {"image/svg+xml": Mime.IMAGE_SVG_XML, "video/webm": Mime.VIDEO_WEBM});
 
 class CardNav {
-  int? id;
-  String? title;
-  String? mapTo;
+  final int? id;
+  final String? title;
+  final String? mapTo;
 
   CardNav({
     this.id,

@@ -22,25 +22,37 @@ class HeaderSection extends StatefulWidget {
 }
 
 class _HeaderSectionState extends State<HeaderSection> {
-  final GlobalKey _detailsKey = GlobalKey();
+  final GlobalKey _leftKey = GlobalKey();
+  final GlobalKey _rightKey = GlobalKey();
+
   double? detailsHeight;
 
   @override
   void initState() {
     super.initState();
-
-    // Delay measurement until first frame is rendered
-    WidgetsBinding.instance.addPostFrameCallback((_) => _measureHeight());
+    WidgetsBinding.instance.addPostFrameCallback((_) => _measureHeights());
   }
 
-  void _measureHeight() {
-    if (_detailsKey.currentContext != null) {
-      final RenderBox box =
-          _detailsKey.currentContext!.findRenderObject() as RenderBox;
+  void _measureHeights() {
+    final leftContext = _leftKey.currentContext;
+    final rightContext = _rightKey.currentContext;
+
+    double? leftHeight;
+    double? rightHeight;
+
+    if (leftContext != null) {
+      final box = leftContext.findRenderObject() as RenderBox;
+      leftHeight = box.size.height;
+    }
+
+    if (rightContext != null) {
+      final box = rightContext.findRenderObject() as RenderBox;
+      rightHeight = box.size.height;
+    }
+
+    if (leftHeight != null && rightHeight != null) {
       setState(() {
-        if ((detailsHeight ?? 0) >= 500) {
-          detailsHeight = box.size.height;
-        }
+        detailsHeight = leftHeight! > rightHeight! ? leftHeight! : rightHeight!;
       });
     }
   }
@@ -60,63 +72,63 @@ class _HeaderSectionState extends State<HeaderSection> {
                 tablet: Constants.width,
                 desktop: Constants.videoBreakPoint,
               ),
-              child: ResponsiveBuilder(builder: (
-                context,
-                sizingInformation,
-              ) {
-                if (sizingInformation.isDesktop) {
-                  return Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: detailsWidget(
-                          _detailsKey,
+              child: ResponsiveBuilder(
+                builder: (context, sizingInformation) {
+                  if (sizingInformation.isDesktop) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: detailsWidget(
+                            _leftKey,
+                            context,
+                            state,
+                          ),
+                        ),
+                        Expanded(
+                          child: SizedBox(
+                            key: _rightKey,
+                            height: (detailsHeight ?? 0) < 500
+                                ? 600
+                                : detailsHeight,
+                            child: imageWidget(
+                              state.serviceDetailsData?.innerPage?[0].secBanner
+                                      ?.secImg?.url ??
+                                  '',
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Column(
+                      children: [
+                        Gap(getValueForScreenType(
+                            context: context,
+                            mobile: 20,
+                            tablet: 30,
+                            desktop: 40)),
+                        detailsWidget(
+                          _leftKey,
                           context,
                           state,
                         ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: SizedBox(
-                          height: detailsHeight,
+                        Gap(getValueForScreenType(
+                            context: context, mobile: 20, tablet: 60)),
+                        SizedBox(
+                          width: double.infinity,
+                          height: sizingInformation.isTablet ? 599 : 355,
                           child: imageWidget(
                             state.serviceDetailsData?.innerPage?[0].secBanner
                                     ?.secImg?.url ??
                                 '',
                           ),
-                        ),
-                      ),
-                    ],
-                  );
-                } else {
-                  return Column(
-                    children: [
-                      Gap(getValueForScreenType(
-                          context: context,
-                          mobile: 20,
-                          tablet: 30,
-                          desktop: 40)),
-                      detailsWidget(
-                        _detailsKey,
-                        context,
-                        state,
-                      ),
-                      Gap(getValueForScreenType(
-                          context: context, mobile: 20, tablet: 60)),
-                      SizedBox(
-                        width: double.infinity,
-                        height: sizingInformation.isTablet ? 599 : 355,
-                        child: imageWidget(
-                          state.serviceDetailsData?.innerPage?[0].secBanner
-                                  ?.secImg?.url ??
-                              '',
-                        ),
-                      )
-                    ],
-                  );
-                }
-              }),
+                        )
+                      ],
+                    );
+                  }
+                },
+              ),
             ),
           ),
         );
@@ -155,11 +167,17 @@ class _HeaderSectionState extends State<HeaderSection> {
           tablet: Constants.width * .92,
           desktop: double.infinity,
         ),
+        height: getValueForScreenType(
+          context: context,
+          mobile: null,
+          tablet: null,
+          desktop: 600,
+        ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Gap(10),
+            Gap(20),
             kStyle.med(
               color: AppColors.white,
               text:

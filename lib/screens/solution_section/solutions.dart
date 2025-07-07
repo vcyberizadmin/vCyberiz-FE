@@ -80,6 +80,8 @@ class _SolutionsSectionState extends State<SolutionsSection> {
                 EmergencyResponse(),
                 KnowMoreWidget(
                   videoUrl: state.needHelpData?.section?.secImg?.url ?? '',
+                  secondaryVideoUrl:
+                      state.needHelpData?.section?.secondaryVideoUrl ?? '',
                   header: state.needHelpData?.section?.secHeader ?? '',
                   buttonText: state.needHelpData?.section?.secCta?.label ?? '',
                   onTap: () {

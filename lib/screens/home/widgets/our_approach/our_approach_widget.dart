@@ -447,6 +447,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
                           ) +
                           ((index - currentIndex + 1) * heightIncrement),
                       showMobilePadding: true,
+                      state: state,
                     ),
                   ),
               ],
@@ -547,6 +548,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
                       ) +
                       ((index - i) * heightIncrement),
                   showMobilePadding: true,
+                  state: state,
                 ),
               ),
             ),
@@ -562,6 +564,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
     required String imageUrl,
     required double height,
     required bool showMobilePadding,
+    required OurApproachState state,
   }) {
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -595,7 +598,8 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: CardVideoPlayerWidget(
-                  videoUrl: '/data/uploads/Homepage/videos/h600.webm',
+                  videoUrl: state.data?.videoUrl ?? "",
+                  secondaryVideoUrl: state.data?.secondaryVideoUrl ?? "",
                   placeholderWidget: Container(),
                   fit: BoxFit.cover,
                 ),

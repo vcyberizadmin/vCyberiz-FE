@@ -122,7 +122,7 @@ class ServiceOfferings extends StatelessWidget {
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      hexToColor(item.colorIdentifier ?? '').withOpacity(.01),
+                      hexToColor(item.colorIdentifier1 ?? ''),
                       AppColors.white,
                     ],
                     begin: Alignment.topLeft,
@@ -201,7 +201,7 @@ class ServiceOfferings extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            hexToColor(item.colorIdentifier ?? '').withOpacity(.01),
+            hexToColor(item.colorIdentifier1 ?? ''),
             AppColors.white,
           ],
           begin: Alignment.topLeft,

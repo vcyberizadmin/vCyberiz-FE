@@ -1,5 +1,6 @@
 import 'dart:html' as html;
 import 'package:chewie/chewie.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,11 +12,13 @@ import 'package:vcyberiz/core/utils/constants/constants.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final String videoUrl;
+  final String secondaryVideoUrl;
   final BoxFit fit;
   final Widget? placeholderWidget;
 
   const VideoPlayerWidget({
     required this.videoUrl,
+    required this.secondaryVideoUrl,
     this.fit = BoxFit.cover,
     this.placeholderWidget,
     super.key,
@@ -26,9 +29,16 @@ class VideoPlayerWidget extends StatefulWidget {
 }
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
+  late final VideoPlayerBloc _videoBloc;
+  String? _finalVideoUrl;
+
   @override
   void initState() {
-    // Disable PiP in web browsers (like Safari)
+    super.initState();
+    _videoBloc = VideoPlayerBloc();
+    _detectBrowserAndPlayCorrectVideo();
+
+    // Disable PiP in Safari/web
     if (kIsWeb) {
       Future.delayed(const Duration(milliseconds: 500), () {
         final videoElements = html.document.getElementsByTagName('video');
@@ -41,22 +51,36 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         }
       });
     }
-    super.initState();
+  }
+
+  Future<void> _detectBrowserAndPlayCorrectVideo() async {
+    String finalVideoPath = widget.videoUrl;
+    if (kIsWeb) {
+      final deviceInfo = DeviceInfoPlugin();
+      final browserInfo = await deviceInfo.webBrowserInfo;
+      final browserName = browserInfo.browserName.name.toLowerCase();
+      if (browserName.contains('safari')) {
+        finalVideoPath = widget.secondaryVideoUrl;
+      }
+    }
+
+    final baseUrl = dotenv.env[Constants.assetBaseURL] ?? '';
+    _finalVideoUrl = baseUrl + finalVideoPath;
+
+    _videoBloc.add(
+      InitializeVisionVideoPlayer(
+        videoUrl: _finalVideoUrl!,
+        autoPlay: true,
+        looping: true,
+        showControls: false,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => VideoPlayerBloc()
-        ..add(
-          InitializeVisionVideoPlayer(
-            videoUrl:
-                (dotenv.env[Constants.assetBaseURL] ?? "") + widget.videoUrl,
-            autoPlay: true,
-            looping: true,
-            showControls: false,
-          ),
-        ),
+    return BlocProvider.value(
+      value: _videoBloc,
       child: BlocBuilder<VideoPlayerBloc, VideoPlayerState>(
         builder: (context, state) {
           return switch (state) {
@@ -76,13 +100,17 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   ),
                 ),
               ),
-            VideoPlayerError() => Center(
-                child: Text('Error: ${state.error}'),
-              ),
-            Object() => throw UnimplementedError(),
+            VideoPlayerError() => Center(child: SizedBox()),
+            Object() => const SizedBox.shrink(),
           };
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _videoBloc.close();
+    super.dispose();
   }
 }

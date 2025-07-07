@@ -219,6 +219,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     return BlocConsumer<ContactUsBloc, ContactUsState>(
       listener: (context, state) {
         if (state.submitStatus == SubmitStatus.success) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Form Submitted!')),
+          );
           name.clear();
           businessEmail.clear();
           companyName.clear();
