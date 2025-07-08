@@ -73,7 +73,7 @@ class CardWidget extends StatelessWidget {
                         text: item?.secCta?.label ?? '',
                         onTap: () {
                           final href = item?.secCta?.href ?? '';
-                          switch (item?.secCta?.label ?? '') {
+                          switch (item?.secTitle ?? '') {
                             case 'vShield':
                               context.goNamed(RouteConstants.vshieldPath,
                                   queryParameters: {'id': href});
@@ -91,12 +91,6 @@ class CardWidget extends StatelessWidget {
                                   queryParameters: {'id': href});
                               break;
                           }
-                          context.goNamed(
-                            RouteConstants.serviceDetailsPath,
-                            queryParameters: {
-                              'id': item?.secCta?.href ?? '',
-                            },
-                          );
                         },
                       ),
                     ],
@@ -167,7 +161,7 @@ class CardWidget extends StatelessWidget {
                         ),
                         onTap: () {
                           final href = item?.secCta?.href ?? '';
-                          switch (item?.secCta?.label ?? '') {
+                          switch (item?.secTitle ?? '') {
                             case 'vShield':
                               context.goNamed(RouteConstants.vshieldPath,
                                   queryParameters: {'id': href});
@@ -185,12 +179,6 @@ class CardWidget extends StatelessWidget {
                                   queryParameters: {'id': href});
                               break;
                           }
-                          context.goNamed(
-                            RouteConstants.serviceDetailsPath,
-                            queryParameters: {
-                              'id': item?.secCta?.href ?? '',
-                            },
-                          );
                         },
                       ),
                     ],
