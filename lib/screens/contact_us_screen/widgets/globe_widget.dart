@@ -6,9 +6,9 @@ import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/contact_us_bloc/contact_us_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
+import 'package:vcyberiz/core/utils/constants/asset_constants.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/constants/string_const.dart';
-import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 import 'address_tile.dart';
@@ -133,7 +133,7 @@ class _GlobeWidgetState extends State<GlobeWidget> {
                               context: context,
                               mobile: Constants.width * .96,
                               tablet: Constants.width * .92,
-                              desktop: Constants.desktopBreakPoint,
+                              desktop: Constants.desktopBreakPoint * .85,
                             ),
                             width: double.infinity,
                             child: InkWell(
@@ -147,10 +147,10 @@ class _GlobeWidgetState extends State<GlobeWidget> {
                                   Positioned.fill(
                                     child: Visibility(
                                       visible: true,
-                                      child: ImageWidget(
-                                        imageUrl: _getImage(''),
+                                      child: Image.asset(
+                                        _getImage(''),
                                         key: ValueKey(_getImage('')),
-                                        fit: BoxFit.fitHeight,
+                                        fit: BoxFit.fitWidth,
                                       ),
                                     ),
                                   ),
@@ -158,11 +158,11 @@ class _GlobeWidgetState extends State<GlobeWidget> {
                                     child: Visibility(
                                       visible: state.selectedCountry ==
                                           StringConst.uae,
-                                      child: ImageWidget(
-                                        imageUrl: _getImage(StringConst.uae),
+                                      child: Image.asset(
+                                        _getImage(StringConst.uae),
                                         key: ValueKey(
                                             _getImage(StringConst.uae)),
-                                        fit: BoxFit.fitHeight,
+                                        fit: BoxFit.fitWidth,
                                       ),
                                     ),
                                   ),
@@ -170,11 +170,11 @@ class _GlobeWidgetState extends State<GlobeWidget> {
                                     child: Visibility(
                                       visible: state.selectedCountry ==
                                           StringConst.india,
-                                      child: ImageWidget(
-                                        imageUrl: _getImage(StringConst.india),
+                                      child: Image.asset(
+                                        _getImage(StringConst.india),
                                         key: ValueKey(
                                             _getImage(StringConst.india)),
-                                        fit: BoxFit.fitHeight,
+                                        fit: BoxFit.fitWidth,
                                       ),
                                     ),
                                   ),
@@ -182,12 +182,11 @@ class _GlobeWidgetState extends State<GlobeWidget> {
                                     child: Visibility(
                                       visible: state.selectedCountry ==
                                           StringConst.malaysia,
-                                      child: ImageWidget(
-                                        imageUrl:
-                                            _getImage(StringConst.malaysia),
+                                      child: Image.asset(
+                                        _getImage(StringConst.malaysia),
                                         key: ValueKey(
                                             _getImage(StringConst.malaysia)),
-                                        fit: BoxFit.fitHeight,
+                                        fit: BoxFit.fitWidth,
                                       ),
                                     ),
                                   ),
@@ -195,12 +194,11 @@ class _GlobeWidgetState extends State<GlobeWidget> {
                                     child: Visibility(
                                       visible: state.selectedCountry ==
                                           StringConst.singapore,
-                                      child: ImageWidget(
-                                        imageUrl:
-                                            _getImage(StringConst.singapore),
+                                      child: Image.asset(
+                                        _getImage(StringConst.singapore),
                                         key: ValueKey(
                                             _getImage(StringConst.singapore)),
-                                        fit: BoxFit.fitHeight,
+                                        fit: BoxFit.fitWidth,
                                       ),
                                     ),
                                   ),
@@ -244,15 +242,15 @@ class _GlobeWidgetState extends State<GlobeWidget> {
       Positioned(
         left: getValueForScreenType(
           context: context,
-          mobile: centerOfTheGlobe * .17,
-          tablet: centerOfTheGlobe * .17,
-          desktop: centerOfTheGlobe * .17,
+          mobile: centerOfTheGlobe * .27,
+          tablet: centerOfTheGlobe * .27,
+          desktop: centerOfTheGlobe * .27,
         ),
         bottom: getValueForScreenType(
           context: context,
-          mobile: centerOfTheGlobe * .38,
-          tablet: centerOfTheGlobe * .38,
-          desktop: centerOfTheGlobe * .38,
+          mobile: centerOfTheGlobe * .32,
+          tablet: centerOfTheGlobe * .32,
+          desktop: centerOfTheGlobe * .32,
         ),
         child: uaeHoverWidget(
           state: state,
@@ -276,9 +274,9 @@ class _GlobeWidgetState extends State<GlobeWidget> {
       Positioned(
         left: getValueForScreenType(
           context: context,
-          mobile: centerOfTheGlobe,
-          tablet: centerOfTheGlobe * .35,
-          desktop: centerOfTheGlobe * .35,
+          mobile: centerOfTheGlobe * 40,
+          tablet: centerOfTheGlobe * .40,
+          desktop: centerOfTheGlobe * .40,
         ),
         bottom: getValueForScreenType(
           context: context,
@@ -293,30 +291,30 @@ class _GlobeWidgetState extends State<GlobeWidget> {
           address: state.locationsData?.secCard?[3].secBody?.content ?? '',
           height: getValueForScreenType(
             context: context,
-            mobile: centerOfTheGlobe * .30,
-            tablet: centerOfTheGlobe * .30,
-            desktop: centerOfTheGlobe * .30,
+            mobile: centerOfTheGlobe * .35,
+            tablet: centerOfTheGlobe * .35,
+            desktop: centerOfTheGlobe * .35,
           ),
           width: getValueForScreenType(
             context: context,
-            mobile: centerOfTheGlobe * .25,
-            tablet: centerOfTheGlobe * .25,
-            desktop: centerOfTheGlobe * .25,
+            mobile: centerOfTheGlobe * .15,
+            tablet: centerOfTheGlobe * .15,
+            desktop: centerOfTheGlobe * .15,
           ),
         ),
       ),
       Positioned(
         right: getValueForScreenType(
           context: context,
-          mobile: centerOfTheGlobe * .28,
-          tablet: centerOfTheGlobe * .28,
-          desktop: centerOfTheGlobe * .28,
+          mobile: centerOfTheGlobe * .35,
+          tablet: centerOfTheGlobe * .35,
+          desktop: centerOfTheGlobe * .35,
         ),
         bottom: getValueForScreenType(
           context: context,
-          mobile: centerOfTheGlobe * .10,
-          tablet: centerOfTheGlobe * .10,
-          desktop: centerOfTheGlobe * .10,
+          mobile: centerOfTheGlobe * .15,
+          tablet: centerOfTheGlobe * .15,
+          desktop: centerOfTheGlobe * .15,
         ),
         child: singaporeHoverWidget(
           state: state,
@@ -341,15 +339,15 @@ class _GlobeWidgetState extends State<GlobeWidget> {
       Positioned(
         right: getValueForScreenType(
           context: context,
-          mobile: centerOfTheGlobe * .31,
-          tablet: centerOfTheGlobe * .31,
-          desktop: centerOfTheGlobe * .31,
+          mobile: centerOfTheGlobe * .37,
+          tablet: centerOfTheGlobe * .37,
+          desktop: centerOfTheGlobe * .37,
         ),
         bottom: getValueForScreenType(
           context: context,
-          mobile: centerOfTheGlobe * .10,
-          tablet: centerOfTheGlobe * .10,
-          desktop: centerOfTheGlobe * .10,
+          mobile: centerOfTheGlobe * .15,
+          tablet: centerOfTheGlobe * .15,
+          desktop: centerOfTheGlobe * .15,
         ),
         child: malaysiaHoverWidget(
           state: state,
@@ -377,15 +375,15 @@ class _GlobeWidgetState extends State<GlobeWidget> {
   String _getImage(String country) {
     switch (country) {
       case "singapore":
-        return '/data/uploads/Contact%20Us/map_latest_23/Singapore-HQ.webp';
+        return AssetConst.singapore;
       case "malaysia":
-        return '/data/uploads/Contact%20Us/map_latest_23/Component%20103.webp';
+        return AssetConst.malaysia;
       case "uae":
-        return '/data/uploads/Contact%20Us/map_latest_23/UAE.webp';
+        return AssetConst.uae;
       case "india":
-        return '/data/uploads/Contact%20Us/map_latest_23/India.webp';
+        return AssetConst.india;
       default:
-        return '/data/uploads/Contact%20Us/map_latest_23/Asia.webp';
+        return AssetConst.asia;
     }
   }
 
@@ -427,10 +425,10 @@ class _GlobeWidgetState extends State<GlobeWidget> {
                 addressText: address,
                 headingText: heading,
                 locationText: '',
-                height: 150,
+                height: 100,
               )
             : Container(
-                height: 150,
+                height: 100,
                 color: AppColors.transparent,
               ),
       ],
@@ -445,51 +443,39 @@ class _GlobeWidgetState extends State<GlobeWidget> {
     required double height,
     required double width,
   }) {
-    return Stack(
-      children: [
-        Positioned(
-          child: state.selectedCountry == location
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AddressTile(
-                      addressText: address,
-                      headingText: heading,
-                      locationText: '',
-                      height: 180,
-                    ),
-                  ],
-                )
-              : Container(
-                  height: 150,
-                  color: AppColors.transparent,
-                ),
-        ),
-        MouseRegion(
-          onEnter: (_) {
-            context
-                .read<ContactUsBloc>()
-                .add(SelectCountryEvent(country: location));
-          },
-          onExit: (_) {
-            context.read<ContactUsBloc>().add(SelectCountryEvent(country: ''));
-          },
-          child: InkWell(
-            onTap: () {
-              context
-                  .read<ContactUsBloc>()
-                  .add(SelectCountryEvent(country: location));
-            },
-            child: Container(
-              alignment: Alignment.topRight,
-              height: height,
-              width: width,
-              color: AppColors.transparent,
-            ),
+    return MouseRegion(
+      onEnter: (_) {
+        context
+            .read<ContactUsBloc>()
+            .add(SelectCountryEvent(country: location));
+      },
+      onExit: (_) {
+        context.read<ContactUsBloc>().add(SelectCountryEvent(country: ''));
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Center(
+            child: state.selectedCountry == location
+                ? AddressTile(
+                    addressText: address,
+                    headingText: heading,
+                    locationText: '',
+                    height: 100,
+                  )
+                : Container(
+                    height: 100,
+                    color: AppColors.transparent,
+                  ),
           ),
-        ),
-      ],
+          Container(
+            alignment: Alignment.topRight,
+            height: height,
+            width: width,
+            color: AppColors.transparent,
+          ),
+        ],
+      ),
     );
   }
 
@@ -545,12 +531,12 @@ class _GlobeWidgetState extends State<GlobeWidget> {
                     addressText: address,
                     headingText: heading,
                     locationText: subtitle,
-                    height: 150,
+                    height: 100,
                   ),
                 ],
               )
             : Container(
-                height: 150,
+                height: 100,
                 width: 10,
                 color: AppColors.transparent,
               ),
@@ -602,12 +588,12 @@ class _GlobeWidgetState extends State<GlobeWidget> {
                     addressText: address,
                     headingText: heading,
                     locationText: subtitle,
-                    height: 170,
+                    height: 120,
                   ),
                 ],
               )
             : Container(
-                height: 170,
+                height: 120,
                 width: 10,
                 color: AppColors.transparent,
               ),

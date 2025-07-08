@@ -6,6 +6,11 @@ class AssetConst {
   static const String aboutUsimage = "assets/images/about_us.png";
   static const String reCaptcha = "assets/images/reCaptcha.png";
   static const String arrowIcon = "assets/images/arrow_icon.png";
+  static const String asia = "assets/images/ASIA-MAP.webp";
+  static const String india = "assets/images/INDIA-MAP.webp";
+  static const String malaysia = "assets/images/MALAYSIA-MAP.webp";
+  static const String singapore = "assets/images/SINGAPORE-MAP.webp";
+  static const String uae = "assets/images/UAE-MAP.webp";
   static const String testing = "assets/images/Testing.png";
   static const String logo = "assets/images/logo.png";
   static const String errorImage = "assets/images/error_image.png";
