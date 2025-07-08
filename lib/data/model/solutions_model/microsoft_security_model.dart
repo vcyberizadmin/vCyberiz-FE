@@ -41,6 +41,7 @@ class MicrosoftSecurityData {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final DateTime? publishedAt;
+  final String? globalUrl;
   final List<SecCard>? secCard;
 
   MicrosoftSecurityData({
@@ -51,6 +52,7 @@ class MicrosoftSecurityData {
     this.createdAt,
     this.updatedAt,
     this.publishedAt,
+    this.globalUrl,
     this.secCard,
   });
 
@@ -69,6 +71,7 @@ class MicrosoftSecurityData {
         publishedAt: json["publishedAt"] == null
             ? null
             : DateTime.parse(json["publishedAt"]),
+        globalUrl: json["global_url"],
         secCard: json["sec_card"] == null
             ? []
             : List<SecCard>.from(
@@ -83,6 +86,7 @@ class MicrosoftSecurityData {
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "publishedAt": publishedAt?.toIso8601String(),
+        "global_url": globalUrl,
         "sec_card": secCard == null
             ? []
             : List<dynamic>.from(secCard!.map((x) => x.toJson())),
@@ -93,6 +97,7 @@ class SecCard {
   final int? id;
   final String? secHeader;
   final String? secDescription;
+  final String? secTitle;
   final SecCta? secCta;
   final SecImg? secImg;
 
@@ -100,6 +105,7 @@ class SecCard {
     this.id,
     this.secHeader,
     this.secDescription,
+    this.secTitle,
     this.secCta,
     this.secImg,
   });
@@ -108,6 +114,7 @@ class SecCard {
         id: json["id"],
         secHeader: json["sec_header"],
         secDescription: json["sec_description"],
+        secTitle: json["sec_title"],
         secCta:
             json["sec_cta"] == null ? null : SecCta.fromJson(json["sec_cta"]),
         secImg:
@@ -118,6 +125,7 @@ class SecCard {
         "id": id,
         "sec_header": secHeader,
         "sec_description": secDescription,
+        "sec_title": secTitle,
         "sec_cta": secCta?.toJson(),
         "sec_img": secImg?.toJson(),
       };
