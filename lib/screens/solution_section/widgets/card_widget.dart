@@ -178,6 +178,10 @@ class CardWidget extends StatelessWidget {
                               context.goNamed(RouteConstants.vrespondPath,
                                   queryParameters: {'id': href});
                               break;
+                            case '':
+                              context.goNamed(RouteConstants.serviceDetailsPath,
+                                  queryParameters: {'id': href});
+                              break;
                           }
                         },
                       ),
