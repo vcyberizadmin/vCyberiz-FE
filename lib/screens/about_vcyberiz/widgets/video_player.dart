@@ -1,6 +1,5 @@
 import 'dart:html' as html;
 import 'package:chewie/chewie.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,16 +8,17 @@ import 'package:vcyberiz/bloc/video_player_bloc/video_player_bloc.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_event.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_state.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
+import 'package:vcyberiz/core/utils/global_widgets/check_browser.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final String videoUrl;
-  final String secondaryVideoUrl;
+  final String newVideoUrl;
   final BoxFit fit;
   final Widget? placeholderWidget;
 
   const VideoPlayerWidget({
     required this.videoUrl,
-    required this.secondaryVideoUrl,
+    required this.newVideoUrl,
     this.fit = BoxFit.cover,
     this.placeholderWidget,
     super.key,
@@ -29,16 +29,16 @@ class VideoPlayerWidget extends StatefulWidget {
 }
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-  late final VideoPlayerBloc _videoBloc;
   String? _finalVideoUrl;
+  late final VideoPlayerBloc _videoBloc;
+  bool _isReadyToBuild = false;
 
   @override
   void initState() {
     super.initState();
     _videoBloc = VideoPlayerBloc();
-    _detectBrowserAndPlayCorrectVideo();
+    detectBrowserAndInitBloc();
 
-    // Disable PiP in Safari/web
     if (kIsWeb) {
       Future.delayed(const Duration(milliseconds: 500), () {
         final videoElements = html.document.getElementsByTagName('video');
@@ -53,32 +53,38 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     }
   }
 
-  Future<void> _detectBrowserAndPlayCorrectVideo() async {
-    String finalVideoPath = widget.videoUrl;
-    if (kIsWeb) {
-      final deviceInfo = DeviceInfoPlugin();
-      final browserInfo = await deviceInfo.webBrowserInfo;
-      final browserName = browserInfo.browserName.name.toLowerCase();
-      if (browserName.contains('safari')) {
-        finalVideoPath = widget.secondaryVideoUrl;
-      }
-    }
+  Future<void> detectBrowserAndInitBloc() async {
+    final base = dotenv.env[Constants.assetBaseURL] ?? "";
+    final isSafari = await checkBrowser();
 
-    final baseUrl = dotenv.env[Constants.assetBaseURL] ?? '';
-    _finalVideoUrl = baseUrl + finalVideoPath;
+    _finalVideoUrl = base + (isSafari ? widget.newVideoUrl : widget.videoUrl);
 
     _videoBloc.add(
-      InitializeVisionVideoPlayer(
+      InitializeSliderVideoPlayer(
         videoUrl: _finalVideoUrl!,
         autoPlay: true,
         looping: true,
         showControls: false,
       ),
     );
+
+    setState(() {
+      _isReadyToBuild = true;
+    });
+  }
+
+  @override
+  void dispose() {
+    _videoBloc.close();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (!_isReadyToBuild) {
+      return widget.placeholderWidget ?? const Center();
+    }
+
     return BlocProvider.value(
       value: _videoBloc,
       child: BlocBuilder<VideoPlayerBloc, VideoPlayerState>(
@@ -86,11 +92,12 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
           return switch (state) {
             VideoPlayerInitial() => widget.placeholderWidget ?? Container(),
             VideoPlayerLoading() => widget.placeholderWidget ?? const Center(),
-            VideoPlayerReady(chewieController: final controller) => ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: SizedBox.expand(
-                  child: FittedBox(
-                    fit: widget.fit,
+            VideoPlayerReady(chewieController: final controller) =>
+              SizedBox.expand(
+                child: FittedBox(
+                  fit: widget.fit,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
                     child: SizedBox(
                       width: controller.videoPlayerController.value.size.width,
                       height:
@@ -100,17 +107,13 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   ),
                 ),
               ),
-            VideoPlayerError() => Center(child: SizedBox()),
+            VideoPlayerError() => Center(
+                child: SizedBox(),
+              ),
             Object() => const SizedBox.shrink(),
           };
         },
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _videoBloc.close();
-    super.dispose();
   }
 }

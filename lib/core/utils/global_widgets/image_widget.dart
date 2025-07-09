@@ -51,15 +51,15 @@ class ImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CachedNetworkImage(
+    return Image.network(
       key: key,
-      imageUrl: (dotenv.env[Constants.assetBaseURL] ?? "") + imageUrl,
+      (dotenv.env[Constants.assetBaseURL] ?? "") + imageUrl,
       height: height,
       width: width,
       fit: fit,
       color: color,
       alignment: alignment ?? Alignment.center,
-      errorWidget: (context, error, stackTrace) => const SizedBox(),
+      errorBuilder: (context, error, stackTrace) => const SizedBox(),
     );
   }
 }

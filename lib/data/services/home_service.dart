@@ -71,7 +71,9 @@ class HomeServices extends DioBaseService {
       'what-we-have-done',
       'why-work-with-us',
       'service-offering-card',
-      'search'
+      'search',
+      'contact-us-around-the-globe',
+      'resource-hub-banner',
     ];
 
     final List<Map<String, dynamic>> searchQueries = allIndexes.map((index) {

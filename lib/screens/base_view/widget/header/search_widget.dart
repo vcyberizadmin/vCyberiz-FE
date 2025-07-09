@@ -82,7 +82,7 @@ class SearchResultsList extends StatelessWidget {
                     return SizedBox();
                   }
                   return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 5),
                     child: InkWell(
                       onTap: () {
                         if (hit.innerPageRequired == true) {
@@ -108,11 +108,11 @@ class SearchResultsList extends StatelessWidget {
                           ),
                           Gap(10),
                           kStyle.med(
-                            text: desc.trim(),
-                            size: 14,
-                            color: AppColors.darkBlue,
-                            overflow: TextOverflow.visible,
-                          ),
+                              text: desc.trim(),
+                              size: 14,
+                              color: AppColors.darkBlue,
+                              overflow: TextOverflow.visible,
+                              maxLines: 3),
                         ],
                       ),
                     ),

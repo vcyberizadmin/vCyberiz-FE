@@ -598,9 +598,9 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: CardVideoPlayerWidget(
-                  videoUrl: "/data/uploads/video/videos/h600_14f43984.av1",
+                  videoUrl: "/data/uploads/video/videos/DIRECT-BG-video.av1",
                   secondaryVideoUrl:
-                      "/data/uploads/Homepage/videos/MP4/card.mp4",
+                      "/data/uploads/Homepage/videos/MP4/DIRECT BG video.mp4",
                   placeholderWidget: Container(),
                   fit: BoxFit.cover,
                 ),
