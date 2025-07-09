@@ -312,35 +312,35 @@ class ScopeOfServiceSection extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: kStyle.med(
-                                  text: item.secHeader ?? '',
-                                  size: getValueForScreenType(
-                                      context: context,
-                                      mobile: 20,
-                                      tablet: 20,
-                                      desktop: 25),
-                                  color: AppColors.blue,
-                                  overflow: TextOverflow.visible,
+                          InkWell(
+                            onTap: () {
+                              context.read<OurServiceBloc>().add(
+                                    ToggleScopeSectionEvent(index),
+                                  );
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: kStyle.med(
+                                    text: item.secHeader ?? '',
+                                    size: getValueForScreenType(
+                                        context: context,
+                                        mobile: 20,
+                                        tablet: 20,
+                                        desktop: 25),
+                                    color: AppColors.blue,
+                                    overflow: TextOverflow.visible,
+                                  ),
                                 ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  context.read<OurServiceBloc>().add(
-                                        ToggleScopeSectionEvent(index),
-                                      );
-                                },
-                                child: Icon(
+                                Icon(
                                   isExpanded
                                       ? Icons.keyboard_arrow_up
                                       : Icons.keyboard_arrow_down,
                                   color: AppColors.blue,
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                           if (isExpanded)
                             Padding(
