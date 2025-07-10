@@ -52,7 +52,7 @@ class _HeaderSectionState extends State<HeaderSection> {
 
     if (leftHeight != null && rightHeight != null) {
       setState(() {
-        detailsHeight = leftHeight! > rightHeight! ? leftHeight! : rightHeight!;
+        detailsHeight = leftHeight! > rightHeight! ? leftHeight : rightHeight;
       });
     }
   }

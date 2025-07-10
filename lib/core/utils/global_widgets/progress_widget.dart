@@ -4,10 +4,10 @@ import 'dart:math' as math;
 
 import 'package:dashed_circular_progress_bar/dashed_circular_progress_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
+import 'package:vcyberiz/core/utils/constants/asset_constants.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
@@ -120,6 +120,7 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                 desktop: 35,
               ),
               color: AppColors.blue,
+              overflow: TextOverflow.visible,
             ),
             if (widget.label.isNotEmpty)
               Container(
@@ -200,8 +201,8 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                                 width: 700,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: decorationImageProviderWidget(
-                                      '/data/uploads/Managed%20365%20Security%20Service/curve1.png',
+                                    image: AssetImage(
+                                      AssetConst.curve,
                                     ),
                                     fit: getValueForScreenType(
                                       context: context,

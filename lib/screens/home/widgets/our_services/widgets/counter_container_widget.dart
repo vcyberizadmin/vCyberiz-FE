@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
@@ -130,7 +129,6 @@ class _CustomCounterWidgetState extends State<CustomCounterWidget> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Gap(5),
                 kStyle.bold(
                   size: getValueForScreenType(
                     context: context,
