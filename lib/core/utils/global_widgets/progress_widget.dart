@@ -286,30 +286,27 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                               itemPlacementRadius * math.cos(angle);
                           final double y = semiCircleCenterInStack.dy -
                               itemPlacementRadius * math.sin(angle);
-
                           return Positioned(
                             left: x - (itemWidth / 2) < 0
                                 ? 0
-                                : x - (itemWidth / 2),
+                                : x - (itemWidth / 2) > 450
+                                    ? 480
+                                    : x - (itemWidth / 2),
                             top: y - (itemHeight / 2),
                             child: MouseRegion(
                               onEnter: (_) => setState(() {
-                                // _hoveredItemId = item.secHeader;
                                 _currentProgressBarValue = progress;
                               }),
                               onExit: (_) => setState(() {
-                                // _hoveredItemId = null;
                                 _currentProgressBarValue = 0.0;
                               }),
                               child: InkWell(
                                 onTap: () {
-                                  // Add your onTap logic here
                                   setState(() {
-                                    // _hoveredItemId = item.secHeader;
                                     _currentProgressBarValue = progress;
                                   });
                                 },
-                                child: SizedBox(
+                                child: Container(
                                   width: itemWidth,
                                   child: Column(
                                     children: [

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -259,6 +261,7 @@ class DetailsWidget extends StatelessWidget {
             ...(state.eventDetailsData?.shareWithFriends?.first.secBody ?? [])
                 .map(
               (SecBody data) {
+                log(data.secLogo?.first.url ?? "");
                 return InkWell(
                   onTap: () {
                     launchSocialShareUrl(

@@ -100,9 +100,9 @@ class _OurSecretsState extends State<OurSecrets>
                       color: AppColors.blue,
                       size: getValueForScreenType<double>(
                         context: context,
-                        mobile: 30,
+                        mobile: 25,
                         tablet: 30,
-                        desktop: 30,
+                        desktop: 35,
                       ),
                       textAlign: getValueForScreenType(
                         context: context,
@@ -131,7 +131,7 @@ class _OurSecretsState extends State<OurSecrets>
                           context: context,
                           mobile: 16,
                           tablet: 16,
-                          desktop: 20,
+                          desktop: 18,
                         ),
                         textAlign: getValueForScreenType(
                           context: context,

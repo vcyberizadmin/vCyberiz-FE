@@ -476,6 +476,7 @@ class FooterCompanySection extends StatelessWidget {
             text: 'Microsoft Security Solutions',
             size: 14,
             color: AppColors.footerGreyText,
+            overflow: TextOverflow.visible,
           ),
           const SizedBox(height: 8),
           ..._buildLinkGroupByIndex(context, columnList, 0, 3),
@@ -485,6 +486,7 @@ class FooterCompanySection extends StatelessWidget {
           // Emerging Response Solutions
           kStyle.med(
             text: 'Emerging Response Solutions',
+            overflow: TextOverflow.visible,
             size: 14,
             color: AppColors.footerGreyText,
           ),
@@ -521,6 +523,7 @@ class FooterCompanySection extends StatelessWidget {
             text: 'Global Technology Services',
             size: 14,
             color: AppColors.footerGreyText,
+            overflow: TextOverflow.visible,
           ),
           const SizedBox(height: 8),
           ..._buildLinkGroupByIndex(context, columnList, 0, 3),
@@ -532,6 +535,7 @@ class FooterCompanySection extends StatelessWidget {
             text: 'Microsoft Consulting Services',
             size: 14,
             color: AppColors.footerGreyText,
+            overflow: TextOverflow.visible,
           ),
           const SizedBox(height: 8),
           ..._buildLinkGroupByIndex(context, columnList, 3, 5),
