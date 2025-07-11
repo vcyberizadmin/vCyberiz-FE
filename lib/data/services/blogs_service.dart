@@ -131,9 +131,6 @@ class BlogsServices extends DioBaseService {
     String documentId,
   ) async {
     try {
-      log(ApiConst.blogArticle1EndPoint +
-          documentId +
-          ApiConst.blogArticle2EndPoint);
       return await _dio.get(
         ApiConst.blogArticle1EndPoint +
             documentId +

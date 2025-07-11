@@ -15,7 +15,7 @@ class ApiConst {
       "/api/blog-posts?where[\$or][0][blog_categories][cid][\$in][0]=cyber-crime&where[\$or][1][blog_tags][tid][\$in][0]=...";
   static const String blogArticle1EndPoint = '/api/blog-posts/';
   static const String blogArticle2EndPoint =
-      '?populate[sec_img]=true&populate[blog_author]=true&populate[blog_tags]=true&populate[blog_categories]=true&populate[sec_cta]=true';
+      '?populate=blog_tags&populate=blog_author&populate=blog_categories&populate=sec_img&populate=thumbnail_img';
   static const String popUpEndPoint =
       '/api/homepage-popups?populate[sec_links]=true';
   static const String aboutUsShieldEndPoint =
@@ -60,7 +60,7 @@ class ApiConst {
   static const String blogsHeaderEndPoint =
       "/api/blog-banner?populate[sec_header][populate][sec_bg]=true";
   static const String blogsListEndPoint =
-      '/api/blog-posts?populate=blog_tags&populate=blog_author&populate=blog_categories&populate=sec_cta&populate=sec_img&populate=thumbnail_img';
+      '/api/blog-posts?populate=blog_tags&populate=blog_author&populate=blog_categories&populate=sec_img&populate=thumbnail_img';
   static const String categoryEndPoint =
       '/api/category-blog?populate=blog_categories&populate=list_indicator';
   static const String tagsEndPoint = '/api/tag-blog?populate=blog_tags';
@@ -144,8 +144,8 @@ class ApiConst {
   static const String newsHeaderEndPoint =
       '/api/news-banner?populate=sec_bg_img';
   static const String newsListEndPoint =
-      '/api/news-posts?populate=blog_author&populate=blog_categories&populate=blog_tags&populate=sec_img&populate=sec_cta';
+      '/api/news-posts?populate=blog_author&populate=blog_categories&populate=blog_tags&populate=sec_img';
   static const String newsArticle1EndPoint = '/api/news-posts/';
   static const String newsArticle2EndPoint =
-      '?populate[sec_img]=true&populate[blog_author]=true&populate[blog_tags]=true&populate[blog_categories]=true&populate[sec_cta]=true';
+      '?populate[sec_img]=true&populate[blog_author]=true&populate[blog_tags]=true&populate[blog_categories]=true';
 }
