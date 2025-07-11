@@ -93,6 +93,7 @@ class _TableOfContentsWidgetState extends State<TableOfContentsWidget> {
           if (sizingInformation.isDesktop) {
             return ListView(
               controller: widget.tocScrollController,
+              // physics: NeverScrollableScrollPhysics(),
               padding:
                   EdgeInsets.only(bottom: (widget.footerHeight ?? 0) + 100),
               children: [

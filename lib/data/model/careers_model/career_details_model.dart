@@ -45,10 +45,11 @@ class CareerData {
   final List<JobDescription>? jobDescription;
   final String? team;
   final String? experience;
-  final dynamic jobLocation;
+  final String? jobLocation;
   final String? shift;
-  final List<dynamic>? skills;
+  final List<EmploymentType>? skills;
   final List<EmploymentType>? employmentTypes;
+  final List<Country>? countries;
   final dynamic zipCode;
 
   CareerData({
@@ -69,6 +70,7 @@ class CareerData {
     this.shift,
     this.skills,
     this.employmentTypes,
+    this.countries,
     this.zipCode,
   });
 
@@ -99,11 +101,16 @@ class CareerData {
         shift: json["shift"],
         skills: json["skills"] == null
             ? []
-            : List<dynamic>.from(json["skills"]!.map((x) => x)),
+            : List<EmploymentType>.from(
+                json["skills"]!.map((x) => EmploymentType.fromJson(x))),
         employmentTypes: json["employment_types"] == null
             ? []
             : List<EmploymentType>.from(json["employment_types"]!
                 .map((x) => EmploymentType.fromJson(x))),
+        countries: json["countries"] == null
+            ? []
+            : List<Country>.from(
+                json["countries"]!.map((x) => Country.fromJson(x))),
         zipCode: json["zip_code"],
       );
 
@@ -125,12 +132,62 @@ class CareerData {
         "experience": experience,
         "job_location": jobLocation,
         "shift": shift,
-        "skills":
-            skills == null ? [] : List<dynamic>.from(skills!.map((x) => x)),
+        "skills": skills == null
+            ? []
+            : List<dynamic>.from(skills!.map((x) => x.toJson())),
         "employment_types": employmentTypes == null
             ? []
             : List<dynamic>.from(employmentTypes!.map((x) => x.toJson())),
+        "countries": countries == null
+            ? []
+            : List<dynamic>.from(countries!.map((x) => x.toJson())),
         "zip_code": zipCode,
+      };
+}
+
+class Country {
+  final int? id;
+  final String? documentId;
+  final String? text;
+  final String? locId;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final DateTime? publishedAt;
+
+  Country({
+    this.id,
+    this.documentId,
+    this.text,
+    this.locId,
+    this.createdAt,
+    this.updatedAt,
+    this.publishedAt,
+  });
+
+  factory Country.fromJson(Map<String, dynamic> json) => Country(
+        id: json["id"],
+        documentId: json["documentId"],
+        text: json["text"],
+        locId: json["Loc_id"],
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
+        publishedAt: json["publishedAt"] == null
+            ? null
+            : DateTime.parse(json["publishedAt"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "documentId": documentId,
+        "text": text,
+        "Loc_id": locId,
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
+        "publishedAt": publishedAt?.toIso8601String(),
       };
 }
 
@@ -143,6 +200,7 @@ class EmploymentType {
   final DateTime? updatedAt;
   final DateTime? publishedAt;
   final String? colorIdentifier;
+  final String? sid;
 
   EmploymentType({
     this.id,
@@ -153,6 +211,7 @@ class EmploymentType {
     this.updatedAt,
     this.publishedAt,
     this.colorIdentifier,
+    this.sid,
   });
 
   factory EmploymentType.fromJson(Map<String, dynamic> json) => EmploymentType(
@@ -170,6 +229,7 @@ class EmploymentType {
             ? null
             : DateTime.parse(json["publishedAt"]),
         colorIdentifier: json["color_identifier"],
+        sid: json["sid"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -181,6 +241,7 @@ class EmploymentType {
         "updatedAt": updatedAt?.toIso8601String(),
         "publishedAt": publishedAt?.toIso8601String(),
         "color_identifier": colorIdentifier,
+        "sid": sid,
       };
 }
 

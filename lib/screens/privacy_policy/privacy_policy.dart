@@ -155,7 +155,11 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
               children: [
                 ResponsiveBuilder(
                   builder: (_, sizing) => sizing.isDesktop
-                      ? _desktopLayout(state, list)
+                      ? _desktopLayout(
+                          state,
+                          list,
+                          stickyPosition,
+                        )
                       : _mobileTabletLayout(state, list),
                 ),
                 FooterScreen(key: _footerKey),
@@ -167,7 +171,11 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
     );
   }
 
-  Widget _desktopLayout(PrivacyState state, List<PrivacyPolicyList> list) {
+  Widget _desktopLayout(
+    PrivacyState state,
+    List<PrivacyPolicyList> list,
+    stickyPosition,
+  ) {
     return SizedBox(
       width: Constants.width,
       child: Center(

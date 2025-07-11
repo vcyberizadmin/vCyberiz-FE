@@ -97,7 +97,7 @@ class ApiConst {
   static const String upcomingEventsListEndPoint =
       '/api/upcoming-event?populate[sec_body][populate][sec_bg]=true&populate[sec_body][populate][sec_cta]=true&populate[sec_body][populate][date_box]=true';
   static const String eventDetailsEndPoint =
-      "?populate=sec_cta&populate=sec_img&populate=blog_author&populate=blog_categories&populate=blog_tags&populate=share_with_friends&populate=share_with_friends.sec_body.link&populate=share_with_friends.sec_body.sec_logo&populate=event_content.sec_img&populate=event_content.sec_cta";
+      "?populate=sec_cta&populate=sec_img&populate=blog_author&populate=blog_categories&populate=blog_tags&populate=share_with_friends&populate=share_with_friends.sec_body.link&populate=share_with_friends.sec_body.sec_logo";
 
   //--------------privacy policy----------------------------
   static const String privacyEndPoint =
@@ -113,7 +113,7 @@ class ApiConst {
 
   static const String careerDetails1EndPoint = '/api/career-pages/';
   static const String careerDetails2EndPoint =
-      '?populate[skills]=true&populate[employment_types]=true&populate[zip_code][populate][state][populate][country]=true';
+      '?populate[countries]=true&populate[skills]=true&populate[employment_types]=true&populate[zip_code]=true';
 
   static const String uploadPdfEndPoint = "/api/upload";
   static const String submitResumeEndPoint = "/api/career-form-submissions";

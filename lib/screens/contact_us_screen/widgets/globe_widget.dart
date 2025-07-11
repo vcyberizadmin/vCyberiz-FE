@@ -62,6 +62,7 @@ class _GlobeWidgetState extends State<GlobeWidget> {
                 ),
                 ListView.builder(
                   shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   itemCount: (state.locationsData?.secCard ?? []).length,
                   itemBuilder: (context, index) {
@@ -75,7 +76,7 @@ class _GlobeWidgetState extends State<GlobeWidget> {
                           headingText: location.secBody?.header ?? '',
                           addressText: location.secBody?.content ?? '',
                           locationText: location.secBody?.subtitle ?? '',
-                          height: 170),
+                          height: 120),
                     );
                   },
                 )

@@ -150,6 +150,7 @@ class HeaderScreen extends StatelessWidget {
 
   void _showAlertBox(BuildContext context) {
     TextEditingController searchTextController = TextEditingController();
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -219,6 +220,7 @@ class HeaderScreen extends StatelessWidget {
                                           ),
                                           child: TextFormField(
                                             controller: searchTextController,
+                                            autofocus: true,
                                             style: const TextStyle(
                                                 color: Colors.white),
                                             cursorColor: Colors.white,

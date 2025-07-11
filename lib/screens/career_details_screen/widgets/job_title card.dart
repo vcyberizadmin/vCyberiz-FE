@@ -155,7 +155,7 @@ class JobTitleCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Gap(8),
+              Gap(5),
 
               /// Location row
               Row(
@@ -167,7 +167,7 @@ class JobTitleCard extends StatelessWidget {
                   ),
                   Gap(5),
                   kStyle.reg(
-                    text: data?.jobLocation?.toString() ?? "",
+                    text: data?.countries?.first.text.toString() ?? "",
                     color: AppColors.davysGray,
                     size: 14,
                   )

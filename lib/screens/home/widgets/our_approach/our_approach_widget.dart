@@ -555,7 +555,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
       child: Container(
         height: height,
         decoration: BoxDecoration(
-          color: AppColors.backGroundBlack,
+          color: AppColors.transparent,
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
             color: AppColors.darkOrangeBorderColor,

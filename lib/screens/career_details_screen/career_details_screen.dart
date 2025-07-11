@@ -16,6 +16,7 @@ import 'package:vcyberiz/screens/career_details_screen/widgets/job_title%20card.
 import 'package:vcyberiz/screens/career_details_screen/widgets/submit_section.dart';
 
 import 'widgets/essential_skills.dart';
+import 'widgets/skills_widget.dart';
 
 class CareerDetailsScreen extends StatefulWidget {
   final String documentId;
@@ -161,9 +162,10 @@ class _CareerDetailsScreenState extends State<CareerDetailsScreen> {
           JobTitleCard(
             state: state,
           ),
-          CombinedSkillsSection(
+          EsseintialSkillsSection(
             state: state,
           ),
+          SkillsCard(skills: state.careerData?.skills ?? []),
           ApplicationForm(),
         ],
       ),
@@ -208,9 +210,10 @@ class _CareerDetailsScreenState extends State<CareerDetailsScreen> {
                           state: state,
                         ),
                         Gap(20),
-                        CombinedSkillsSection(
+                        EsseintialSkillsSection(
                           state: state,
                         ),
+                        SkillsCard(skills: state.careerData?.skills ?? []),
                       ],
                     ),
                   ),
@@ -275,9 +278,10 @@ class _CareerDetailsScreenState extends State<CareerDetailsScreen> {
                           state: state,
                         ),
                         Gap(20),
-                        CombinedSkillsSection(
+                        EsseintialSkillsSection(
                           state: state,
                         ),
+                        SkillsCard(skills: state.careerData?.skills ?? []),
                       ],
                     ),
                   ),
