@@ -97,7 +97,6 @@ class _CardWidgetState extends State<CardWidget> {
               //!-----(Svg icon with Jump Effect)
               if (widget.imageUrl.isNotEmpty)
                 Expanded(
-                  flex: 2,
                   child: Align(
                     alignment: getValueForScreenType(
                       context: context,
@@ -119,6 +118,7 @@ class _CardWidgetState extends State<CardWidget> {
                     ),
                   ),
                 ),
+              Gap(10),
               Expanded(
                 child: kStyle.med(
                   text: widget.title,
@@ -126,7 +126,7 @@ class _CardWidgetState extends State<CardWidget> {
                     context: context,
                     mobile: 20,
                     tablet: 18,
-                    desktop: 17,
+                    desktop: 25,
                   ),
                   color: AppColors.darkOrangeColor,
                   overflow: TextOverflow.visible,
@@ -139,7 +139,7 @@ class _CardWidgetState extends State<CardWidget> {
                   maxLines: 2,
                 ),
               ),
-              Gap(5),
+              Gap(15),
               //!-----(Description)
               Expanded(
                 flex: 2,

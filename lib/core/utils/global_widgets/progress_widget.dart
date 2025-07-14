@@ -329,7 +329,7 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                                         size: 13,
                                         color: AppColors.black,
                                         overflow: TextOverflow.visible,
-                                        height: 1,
+                                        height: 1.5,
                                       ),
                                       const Gap(10),
                                       Container(

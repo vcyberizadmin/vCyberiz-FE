@@ -96,6 +96,7 @@ class _CustomCounterWidgetState extends State<CustomCounterWidget> {
               tablet: Constants.width > 1000 ? 120 : 250,
               desktop: Constants.width < 1300 ? 200 : 230,
             ),
+        color: AppColors.transparent,
         child: Column(
           mainAxisAlignment: widget.isleft
               ? MainAxisAlignment.start

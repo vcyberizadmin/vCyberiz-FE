@@ -69,7 +69,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const DetailsWidget(), const Gap(20),
+                const DetailsWidget(),
+                const Gap(20),
 
                 const UpcomingEvents(),
                 Gap(getValueForScreenType(

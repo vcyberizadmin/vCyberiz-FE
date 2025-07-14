@@ -18,6 +18,7 @@ import 'package:vcyberiz/core/utils/global_widgets/custom_button_widget.dart';
 import 'package:vcyberiz/core/utils/global_widgets/headingWidget.dart';
 import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/global_widgets/recaptcha_section.dart';
+import 'package:vcyberiz/core/utils/global_widgets/success_alert.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/core/utils/styles/font_constants.dart';
 import 'package:vcyberiz/routes/route_constants.dart';
@@ -219,9 +220,8 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
     return BlocConsumer<ContactUsBloc, ContactUsState>(
       listener: (context, state) {
         if (state.submitStatus == SubmitStatus.success) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Form Submitted!')),
-          );
+          showSuccessDialog(context, "Form Submitted Successfully", '');
+
           name.clear();
           businessEmail.clear();
           companyName.clear();
