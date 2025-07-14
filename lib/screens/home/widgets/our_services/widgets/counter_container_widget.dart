@@ -81,7 +81,6 @@ class _CustomCounterWidgetState extends State<CustomCounterWidget> {
             context: context,
             mobile: 0,
             tablet: 20,
-            desktop: 20,
           ),
           vertical: getValueForScreenType(
             context: context,
@@ -95,7 +94,7 @@ class _CustomCounterWidgetState extends State<CustomCounterWidget> {
               context: context,
               mobile: 150,
               tablet: Constants.width > 1000 ? 120 : 250,
-              desktop: 200,
+              desktop: Constants.width < 1300 ? 200 : 230,
             ),
         child: Column(
           mainAxisAlignment: widget.isleft
@@ -114,8 +113,8 @@ class _CustomCounterWidgetState extends State<CustomCounterWidget> {
                 AnimatedFlipCounter(
                   value: animatedValue,
                   fractionDigits: _getFractionDigits(fixedValue),
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.linear,
+                  duration: const Duration(milliseconds: 800),
+                  curve: Curves.easeOutCubic,
                   textStyle: TextStyle(
                     fontSize: getValueForScreenType(
                       context: context,

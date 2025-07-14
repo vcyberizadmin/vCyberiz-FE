@@ -79,7 +79,12 @@ class _ProgressWidgetState extends State<ProgressWidget> {
 
     return Container(
       width: Constants.width,
-      height: 500,
+      height: getValueForScreenType(
+        context: context,
+        mobile: null,
+        tablet: 500,
+        desktop: 500,
+      ),
       decoration: BoxDecoration(
         color: AppColors.white,
         image: DecorationImage(

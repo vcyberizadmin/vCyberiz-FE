@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -114,6 +116,7 @@ class _CareerDetailsScreenState extends State<CareerDetailsScreen> {
     return BaseView(
       child: BlocBuilder<CareersBloc, CareersState>(
         builder: (context, state) {
+          log((state.careerData?.zipCode).toString(), name: 'text');
           return SingleChildScrollView(
             controller: _scrollController,
             child: Column(

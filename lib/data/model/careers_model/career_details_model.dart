@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // To parse this JSON data, do
 //
 //     final careerDetailsModel = careerDetailsModelFromJson(jsonString);
@@ -50,7 +51,7 @@ class CareerData {
   final List<EmploymentType>? skills;
   final List<EmploymentType>? employmentTypes;
   final List<Country>? countries;
-  final dynamic zipCode;
+  final ZipCode? zipCode;
 
   CareerData({
     this.id,
@@ -111,7 +112,9 @@ class CareerData {
             ? []
             : List<Country>.from(
                 json["countries"]!.map((x) => Country.fromJson(x))),
-        zipCode: json["zip_code"],
+        zipCode: json["zip_code"] == null
+            ? null
+            : ZipCode.fromJson(json["zip_code"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -141,8 +144,13 @@ class CareerData {
         "countries": countries == null
             ? []
             : List<dynamic>.from(countries!.map((x) => x.toJson())),
-        "zip_code": zipCode,
+        "zip_code": zipCode?.toJson(),
       };
+
+  @override
+  String toString() {
+    return 'CareerData(id: $id, documentId: $documentId, createdAt: $createdAt, updatedAt: $updatedAt, publishedAt: $publishedAt, secHeader: $secHeader, secDescription: $secDescription, jpId: $jpId, bookmarkIdentifier: $bookmarkIdentifier, globalUrl: $globalUrl, jobDescription: $jobDescription, team: $team, experience: $experience, jobLocation: $jobLocation, shift: $shift, skills: $skills, employmentTypes: $employmentTypes, countries: $countries, zipCode: $zipCode)';
+  }
 }
 
 class Country {
@@ -189,6 +197,11 @@ class Country {
         "updatedAt": updatedAt?.toIso8601String(),
         "publishedAt": publishedAt?.toIso8601String(),
       };
+
+  @override
+  String toString() {
+    return 'Country(id: $id, documentId: $documentId, text: $text, locId: $locId, createdAt: $createdAt, updatedAt: $updatedAt, publishedAt: $publishedAt)';
+  }
 }
 
 class EmploymentType {
@@ -331,6 +344,70 @@ class ChildChild {
 enum Type { LIST_ITEM, TEXT }
 
 final typeValues = EnumValues({"list-item": Type.LIST_ITEM, "text": Type.TEXT});
+
+class ZipCode {
+  final int? id;
+  final String? documentId;
+  final String? name;
+  final String? zipId;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final DateTime? publishedAt;
+  final ZipCode? state;
+  final String? steId;
+  final Country? country;
+
+  ZipCode({
+    this.id,
+    this.documentId,
+    this.name,
+    this.zipId,
+    this.createdAt,
+    this.updatedAt,
+    this.publishedAt,
+    this.state,
+    this.steId,
+    this.country,
+  });
+
+  factory ZipCode.fromJson(Map<String, dynamic> json) => ZipCode(
+        id: json["id"],
+        documentId: json["documentId"],
+        name: json["name"],
+        zipId: json["zip_id"],
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
+        publishedAt: json["publishedAt"] == null
+            ? null
+            : DateTime.parse(json["publishedAt"]),
+        state: json["state"] == null ? null : ZipCode.fromJson(json["state"]),
+        steId: json["ste_id"],
+        country:
+            json["country"] == null ? null : Country.fromJson(json["country"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "documentId": documentId,
+        "name": name,
+        "zip_id": zipId,
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
+        "publishedAt": publishedAt?.toIso8601String(),
+        "state": state?.toJson(),
+        "ste_id": steId,
+        "country": country?.toJson(),
+      };
+
+  @override
+  String toString() {
+    return 'ZipCode(id: $id, documentId: $documentId, name: $name, zipId: $zipId, createdAt: $createdAt, updatedAt: $updatedAt, publishedAt: $publishedAt, state: $state, steId: $steId, country: $country)';
+  }
+}
 
 class Meta {
   Meta();

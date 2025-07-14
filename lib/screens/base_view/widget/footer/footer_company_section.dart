@@ -38,7 +38,7 @@ class FooterCompanySection extends StatelessWidget {
                   context: context,
                   mobile: Constants.width,
                   tablet: 250,
-                  desktop: Constants.desktopBreakPoint * .25,
+                  desktop: Constants.desktopBreakPoint * .24,
                 )),
             //!----------------(solution)
             solutionsWidget(
@@ -49,7 +49,7 @@ class FooterCompanySection extends StatelessWidget {
                   context: context,
                   mobile: Constants.width,
                   tablet: 200,
-                  desktop: Constants.desktopBreakPoint * .16,
+                  desktop: Constants.desktopBreakPoint * .19,
                 )),
             //!----------------(company)
             companyWidget(
@@ -60,7 +60,7 @@ class FooterCompanySection extends StatelessWidget {
                   context: context,
                   mobile: Constants.width,
                   tablet: 200,
-                  desktop: Constants.desktopBreakPoint * .15,
+                  desktop: Constants.desktopBreakPoint * .13,
                 )),
             //!----------------(subscribe)
 
@@ -485,7 +485,7 @@ class FooterCompanySection extends StatelessWidget {
 
           // Emerging Response Solutions
           kStyle.med(
-            text: 'Emerging Response Solutions',
+            text: 'Emergency Response Solution',
             overflow: TextOverflow.visible,
             size: 14,
             color: AppColors.footerGreyText,

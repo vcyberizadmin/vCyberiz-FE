@@ -4,21 +4,21 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_bloc.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_event.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_state.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
-import 'package:vcyberiz/core/utils/global_widgets/check_browser.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final String videoUrl;
-  final String newVideoUrl;
+  final String secondaryVideoUrl;
   final BoxFit fit;
   final Widget? placeholderWidget;
 
   const VideoPlayerWidget({
     required this.videoUrl,
-    required this.newVideoUrl,
+    required this.secondaryVideoUrl,
     this.fit = BoxFit.cover,
     this.placeholderWidget,
     super.key,
@@ -29,15 +29,15 @@ class VideoPlayerWidget extends StatefulWidget {
 }
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
+  late final VideoPlayerBloc _bloc;
   String? _finalVideoUrl;
-  late final VideoPlayerBloc _videoBloc;
-  bool _isReadyToBuild = false;
+  bool _isReady = false;
 
   @override
   void initState() {
     super.initState();
-    _videoBloc = VideoPlayerBloc();
-    detectBrowserAndInitBloc();
+    _bloc = VideoPlayerBloc();
+    _detectBrowserAndInit();
 
     if (kIsWeb) {
       Future.delayed(const Duration(milliseconds: 500), () {
@@ -53,14 +53,21 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     }
   }
 
-  Future<void> detectBrowserAndInitBloc() async {
-    final base = dotenv.env[Constants.assetBaseURL] ?? "";
-    final isSafari = await checkBrowser();
+  Future<void> _detectBrowserAndInit() async {
+    final String base = dotenv.env[Constants.assetBaseURL] ?? '';
+    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    bool isSafari = false;
 
-    _finalVideoUrl = base + (isSafari ? widget.newVideoUrl : widget.videoUrl);
+    try {
+      final webInfo = await deviceInfo.webBrowserInfo;
+      isSafari = webInfo.browserName.name.toLowerCase() == 'safari';
+    } catch (_) {}
 
-    _videoBloc.add(
-      InitializeSliderVideoPlayer(
+    _finalVideoUrl =
+        base + (isSafari ? widget.secondaryVideoUrl : widget.videoUrl);
+
+    _bloc.add(
+      InitializeVisionVideoPlayer(
         videoUrl: _finalVideoUrl!,
         autoPlay: true,
         looping: true,
@@ -68,25 +75,27 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
       ),
     );
 
-    setState(() {
-      _isReadyToBuild = true;
-    });
+    if (mounted) {
+      setState(() {
+        _isReady = true;
+      });
+    }
   }
 
   @override
   void dispose() {
-    _videoBloc.close();
+    _bloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!_isReadyToBuild) {
+    if (!_isReady) {
       return widget.placeholderWidget ?? const Center();
     }
 
     return BlocProvider.value(
-      value: _videoBloc,
+      value: _bloc,
       child: BlocBuilder<VideoPlayerBloc, VideoPlayerState>(
         builder: (context, state) {
           return switch (state) {

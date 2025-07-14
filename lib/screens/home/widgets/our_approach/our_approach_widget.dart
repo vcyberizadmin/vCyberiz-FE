@@ -555,11 +555,11 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
       child: Container(
         height: height,
         decoration: BoxDecoration(
-          color: AppColors.transparent,
+          color: AppColors.blue,
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
             color: AppColors.darkOrangeBorderColor,
-            width: 1,
+            width: .5,
           ),
         ),
         child: Stack(
@@ -579,7 +579,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
                   secondaryVideoUrl:
                       "/data/uploads/Homepage/videos/MP4/DIRECT BG video.mp4",
                   placeholderWidget: Container(),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),

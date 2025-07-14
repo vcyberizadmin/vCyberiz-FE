@@ -377,7 +377,7 @@ class ScopeOfServiceSection extends StatelessWidget {
           context: context,
           mobile: 220,
           tablet: 300,
-          desktop: 450,
+          desktop: 500,
         ),
         imageUrl: state.serviceDetailsData?.innerPage?[1].secImg?.url ??
             '', // Replace with your image

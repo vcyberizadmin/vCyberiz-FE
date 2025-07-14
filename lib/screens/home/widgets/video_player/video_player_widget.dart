@@ -27,12 +27,6 @@ class _VideoWidgetState extends State<VideoWidget> {
       builder: (context, state) {
         return Container(
           width: Constants.width,
-          height: getValueForScreenType(
-            context: context,
-            mobile: 200,
-            tablet: 500,
-            desktop: 800,
-          ),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: AppColors.blueGradiant,
@@ -49,6 +43,12 @@ class _VideoWidgetState extends State<VideoWidget> {
                       mobile: Constants.width,
                       tablet: Constants.width,
                       desktop: Constants.desktopBreakPoint + 100,
+                    ),
+                    height: getValueForScreenType(
+                      context: context,
+                      mobile: 300,
+                      tablet: 500,
+                      desktop: 800,
                     ),
                     child: VideoPlayerWidget(
                       videoUrl: state.data?.videoUrl ?? "",

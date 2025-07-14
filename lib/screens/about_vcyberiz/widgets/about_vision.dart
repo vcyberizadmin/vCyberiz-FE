@@ -114,7 +114,7 @@ class AboutVisionSection extends StatelessWidget {
       ),
       child: VideoPlayerWidget(
         videoUrl: state.ourVisionData?.secBg?.url ?? '',
-        newVideoUrl: state.ourVisionData?.secondaryVideoUrl1 ?? '',
+        secondaryVideoUrl: state.ourVisionData?.secondaryVideoUrl1 ?? '',
         fit: BoxFit.fill,
         placeholderWidget: Container(),
       ),

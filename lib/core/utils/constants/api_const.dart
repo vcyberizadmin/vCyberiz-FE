@@ -113,7 +113,7 @@ class ApiConst {
 
   static const String careerDetails1EndPoint = '/api/career-pages/';
   static const String careerDetails2EndPoint =
-      '?populate[countries]=true&populate[skills]=true&populate[employment_types]=true&populate[zip_code]=true';
+      '?populate[countries]=true&populate[skills]=true&populate[employment_types]=true&populate[zip_code][populate][state][populate][country]=true';
 
   static const String uploadPdfEndPoint = "/api/upload";
   static const String submitResumeEndPoint = "/api/career-form-submissions";
