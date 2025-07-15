@@ -108,32 +108,24 @@ class OurServicesWidget extends StatelessWidget {
           children: [
             const Gap(30),
             //!-------------(counter Widgets)
-            Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: getValueForScreenType(
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              runAlignment: WrapAlignment.spaceBetween,
+              spacing: getValueForScreenType(
                 context: context,
-                mobile: 0,
-                desktop: 50,
-              )),
-              child: Wrap(
-                alignment: WrapAlignment.spaceBetween,
-                runAlignment: WrapAlignment.spaceBetween,
-                spacing: getValueForScreenType(
-                  context: context,
-                  mobile: 5,
-                  tablet: 5,
-                  desktop: 30,
-                ),
-                children: [
-                  ...(state.data?.achieves?.stats ?? []).map(
-                    (Stat data) => CustomCounterWidget(
-                      text: data.description ?? '',
-                      value: data.value ?? 0,
-                      sign: data.sign ?? '',
-                    ),
-                  ),
-                ],
+                mobile: 5,
+                tablet: 5,
+                desktop: 0,
               ),
+              children: [
+                ...(state.data?.achieves?.stat ?? []).map(
+                  (Stat data) => CustomCounterWidget(
+                    text: data.description ?? '',
+                    value: data.value ?? 0,
+                    sign: data.sign ?? '',
+                  ),
+                ),
+              ],
             ),
             const Gap(20),
             //!----------(daily data text)

@@ -258,6 +258,10 @@ class BlogCard extends StatelessWidget {
             tablet: 350,
             desktop: 400,
           ),
+          foregroundDecoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: AppColors.black.withOpacity(0.4), // Dark tint
+          ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             image: DecorationImage(

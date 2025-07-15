@@ -81,6 +81,7 @@ class _CustomCounterWidgetState extends State<CustomCounterWidget> {
             context: context,
             mobile: 0,
             tablet: 20,
+            desktop: 0,
           ),
           vertical: getValueForScreenType(
             context: context,
@@ -93,10 +94,10 @@ class _CustomCounterWidgetState extends State<CustomCounterWidget> {
             getValueForScreenType(
               context: context,
               mobile: 150,
-              tablet: Constants.width > 1000 ? 120 : 250,
-              desktop: Constants.width < 1300 ? 185 : 190,
+              tablet: 300,
+              desktop: 300,
             ),
-        color: AppColors.transparent,
+        color: AppColors.red,
         child: Column(
           mainAxisAlignment: widget.isleft
               ? MainAxisAlignment.start

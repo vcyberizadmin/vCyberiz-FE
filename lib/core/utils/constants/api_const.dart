@@ -40,9 +40,9 @@ class ApiConst {
   static const String whyWorkWithUsEndPoint =
       "/api/why-work-with-us?populate=cards.card_img";
   static const String footerEndPoint =
-      '/api/footer-area?populate[tryUs][populate]=true&populate[siteMap][populate][brand][populate][link]=true&populate[siteMap][populate][brand][populate][sec_logo]=true&populate[siteMap][populate][connect][populate][link]=true&populate[siteMap][populate][connect][populate][sec_logo]=true&populate[siteMap][populate][platform][populate][referencesMap][populate][references]=true&populate[siteMap][populate][platform][populate][cta]=true&populate[siteMap][populate][company][populate][referencesMap][populate][references]=true&populate[siteMap][populate][company][populate]=true&populate[siteMap][populate][withUs][populate][references]=true&populate[termsAndPolicies][populate][references]=true&populate[subscribe]=true';
+      '/api/footer-area?populate[tryUs][populate]=true&populate[siteMap][populate][brand][populate][link]=true&populate[siteMap][populate][brand][populate][sec_logo]=true&populate[siteMap][populate][connect][populate][link]=true&populate[siteMap][populate][connect][populate][sec_logo]=true&populate[siteMap][populate][platform][populate][referencesMap][populate][references]=true&populate[siteMap][populate][platform][populate]=true&populate[siteMap][populate][company][populate][referencesMap][populate][references]=true&populate[siteMap][populate][company][populate]=true&populate[siteMap][populate][withUs][populate][references]=true&populate[termsAndPolicies][populate][references]=true&populate[subscribe]=true';
   static const String ourServicesEndPoint =
-      '/api/service?populate=titleSection&populate=achieves&populate=achieves.stats&populate=mainSection.services&populate=mainSection.services.sec_logo&populate=mainSection.services.cta&populate=mainSection.services.service_bg';
+      '/api/service?populate=titleSection&populate=achieves&populate=achieves.stat&populate=mainSection.services&populate=mainSection.services.sec_logo&populate=mainSection.services.cta&populate=mainSection.services.service_bg';
   static const String subscribeEndPoint = '/api/subscriptions';
   static const String contactUsHeaderEndPoint =
       '/api/contact-us?populate[text_area]=true&populate[sec_bg]=true&populate[sec_cta]=true';
