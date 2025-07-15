@@ -62,7 +62,7 @@ class ApiConst {
   static const String blogsListEndPoint =
       '/api/blog-posts?populate=blog_tags&populate=blog_author&populate=blog_categories&populate=sec_img&populate=thumbnail_img';
   static const String categoryEndPoint =
-      '/api/category-blog?populate=blog_categories&populate=list_indicator';
+      '/api/category-blog?populate=blog_categories';
   static const String tagsEndPoint = '/api/tag-blog?populate=blog_tags';
   static const String blogMarketingEndPoint =
       '/api/marketing-element?populate=sec_card&populate=sec_card.sec_img&populate=sec_card.sec_cta&populate=sec_popup_card&populate=sec_popup_card.sec_cta&populate=sec_popup_card.sec_logo';
