@@ -6,7 +6,7 @@ class RouteConstants {
   static String solutionsRoute = '/solutions';
   static String solutionsPath = 'solutions';
   static String contactUsScreenRoute = '/contact-us';
-  static String contactUsScreenPath = 'contact-cs';
+  static String contactUsScreenPath = 'contact-us';
   static String partnersScreenRoute = '/partners';
   static String partnersScreenPath = 'partners';
   static String blogsScreenRoute = '/blogs';
