@@ -118,7 +118,7 @@ class _ShareScreenWidgetState extends State<ShareScreenWidget> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 8),
                         decoration: BoxDecoration(
-                          color: AppColors.fontLightGrey,
+                          color: AppColors.greyBackGround,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: kStyle.reg(

@@ -94,7 +94,7 @@ class _CustomCounterWidgetState extends State<CustomCounterWidget> {
               context: context,
               mobile: 150,
               tablet: Constants.width > 1000 ? 120 : 250,
-              desktop: Constants.width < 1300 ? 200 : 230,
+              desktop: Constants.width < 1300 ? 185 : 190,
             ),
         color: AppColors.transparent,
         child: Column(

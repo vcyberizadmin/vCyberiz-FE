@@ -55,6 +55,7 @@ class AppColors {
   static const Color bgBlack = Color(0xff000000);
   static const Color transparent = Colors.transparent;
   static const Color grey = Colors.grey;
+  static const Color greyBackGround = Color.fromARGB(255, 205, 204, 204);
   static const Color darkBlueText = Color(0xff00297a);
   static const Color greyText = Color(0xff9199A3);
   static const Color red = Colors.red;

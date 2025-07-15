@@ -14,7 +14,7 @@ class FooterRepository {
   }) : _dataSource = dataSource;
   Future<FooterModel> getFooterApi() async {
     try {
-      final FooterModel response = (await _dataSource.getFooterDataApi());
+      final FooterModel response = await _dataSource.getFooterDataApi();
       return response;
     } on APIException catch (e) {
       logger.log(Level.debug, e);
