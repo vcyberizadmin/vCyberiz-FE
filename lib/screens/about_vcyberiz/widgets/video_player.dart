@@ -116,19 +116,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                   ),
                 ),
               ),
-            VideoPlayerError(error: final message) => Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    message,
-                    style: const TextStyle(
-                      color: Colors.redAccent,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+            VideoPlayerError() => Center(
+                child: SizedBox(),
               ),
             Object() => const SizedBox.shrink(),
           };
