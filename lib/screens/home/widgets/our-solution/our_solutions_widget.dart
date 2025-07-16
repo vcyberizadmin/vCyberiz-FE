@@ -102,7 +102,7 @@ class OurSolutionWidget extends StatelessWidget {
                 curve: Curves.easeInOut,
                 width: getValueForScreenType(
                   context: context,
-                  mobile: Constants.width * .45,
+                  mobile: Constants.width * .4,
                   tablet: Constants.width *
                       .8 /
                       (state.data?.solutionAccordian?.length ?? 1),
@@ -115,37 +115,40 @@ class OurSolutionWidget extends StatelessWidget {
                     ResponsiveBuilder(
                       builder: (context, sizingInformation) {
                         if (sizingInformation.isMobile) {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              AnimatedScale(
-                                scale: isSelected ? 1.1 : 1.0,
-                                duration: Duration(milliseconds: 300),
-                                curve: Curves.easeInOut,
-                                child: ImageWidget(
-                                  imageUrl: item?.sectionLogo?.url ?? '',
-                                  width: getValueForScreenType<double>(
-                                    context: context,
-                                    mobile: 25,
-                                    tablet: 25,
-                                    desktop: 35,
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 3),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                AnimatedScale(
+                                  scale: isSelected ? 1.1 : 1.0,
+                                  duration: Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                  child: ImageWidget(
+                                    imageUrl: item?.sectionLogo?.url ?? '',
+                                    width: getValueForScreenType<double>(
+                                      context: context,
+                                      mobile: 25,
+                                      tablet: 25,
+                                      desktop: 35,
+                                    ),
+                                    color: color,
                                   ),
+                                ),
+                                kStyle.med(
+                                  size: getValueForScreenType(
+                                    context: context,
+                                    mobile: 12,
+                                    desktop: 20,
+                                    tablet: 16,
+                                  ),
+                                  overflow: TextOverflow.visible,
+                                  textAlign: TextAlign.center,
                                   color: color,
+                                  text: item?.heading ?? '',
                                 ),
-                              ),
-                              kStyle.med(
-                                size: getValueForScreenType(
-                                  context: context,
-                                  mobile: 12,
-                                  desktop: 20,
-                                  tablet: 16,
-                                ),
-                                overflow: TextOverflow.visible,
-                                textAlign: TextAlign.center,
-                                color: color,
-                                text: item?.heading ?? '',
-                              ),
-                            ],
+                              ],
+                            ),
                           );
                         } else {
                           return Row(
