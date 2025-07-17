@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -74,9 +76,7 @@ class DetailsWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: kStyle.med(
-                          text: state.eventDetailsData?.eventContent?.first
-                                  .secHeader ??
-                              '',
+                          text: state.eventDetailsData?.eventTitle ?? '',
                           size: getValueForScreenType(
                             context: context,
                             mobile: 20,
@@ -110,10 +110,10 @@ class DetailsWidget extends StatelessWidget {
                       children: [
                         dateWidget(state.eventDetailsData?.publicationDate ??
                             DateTime.now()),
-                        locationWidget(state.eventDetailsData?.eventContent
-                                ?.first.secLocation ??
-                            ''),
-                        descriptionWidget(state, context),
+                        locationWidget(
+                            state.eventDetailsData?.eventPlatform ?? ''),
+                        buildArticleSectionWidget(
+                            context, state.eventDetailsData?.articleSection),
                         const Gap(16),
                         buttonWidget(context, state),
                         const Gap(16),
@@ -135,15 +135,16 @@ class DetailsWidget extends StatelessWidget {
                                     state.eventDetailsData?.publicationDate ??
                                         DateTime.now()),
                                 const Gap(20),
-                                locationWidget(state.eventDetailsData
-                                        ?.eventContent?.first.secLocation ??
-                                    ''),
+                                locationWidget(
+                                    state.eventDetailsData?.eventPlatform ??
+                                        ''),
                               ],
                             ),
                             buttonWidget(context, state),
                           ],
                         ),
-                        descriptionWidget(state, context),
+                        buildArticleSectionWidget(
+                            context, state.eventDetailsData?.articleSection),
                         const Gap(20),
                         shareWidget(state)
                       ],
@@ -165,12 +166,13 @@ class DetailsWidget extends StatelessWidget {
                                       state.eventDetailsData?.publicationDate ??
                                           DateTime.now()),
                                   const Gap(20),
-                                  locationWidget(state.eventDetailsData
-                                          ?.eventContent?.first.secLocation ??
-                                      ''),
+                                  locationWidget(
+                                      state.eventDetailsData?.eventPlatform ??
+                                          ''),
                                 ],
                               ),
-                              descriptionWidget(state, context),
+                              buildArticleSectionWidget(context,
+                                  state.eventDetailsData?.articleSection),
                             ],
                           ),
                         ),
@@ -202,44 +204,102 @@ class DetailsWidget extends StatelessWidget {
       onTap: () {
         registrationDialog(context);
       },
-      text: state.eventDetailsData?.eventContent?.first.secCta?.label ?? '',
+      text: state.eventDetailsData?.secCta?.label ?? '',
     );
   }
 
-  Widget descriptionWidget(
-    EventsState state,
+  Widget buildArticleSectionWidget(
     BuildContext context,
+    List<ArticleSection>? sections,
   ) {
+    if (sections == null || sections.isEmpty) return const SizedBox();
+
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Gap(20),
+      children: sections.asMap().entries.map((entry) {
+        final section = entry.value;
 
-        // Overview Title
-        kStyle.reg(
-          text: state.eventDetailsData?.eventContent?.first.secSubHeader ?? '',
-          size: getValueForScreenType(
-            context: context,
-            mobile: 16,
-            tablet: 18,
-            desktop: 18,
-          ),
-          color: AppColors.black,
-          overflow: TextOverflow.visible,
-        ),
-        const Gap(10),
+        switch (section.type) {
+          case 'heading':
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Text.rich(
+                buildTextSpan(context, section.children ?? []),
+                style: TextStyle(
+                  fontFamily: Constants.font,
+                  fontSize: getHeadingFontSize(context, section.level ?? 4),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
 
-        // Overview Description
-        kStyle.med(
-          text:
-              state.eventDetailsData?.eventContent?.first.secDescription ?? '',
-          size: 14,
-          color: Colors.black,
-          overflow: TextOverflow.visible,
-        ),
-      ],
+          case 'paragraph':
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Text.rich(
+                buildTextSpan(context, section.children ?? []),
+                style: TextStyle(
+                  fontFamily: Constants.font,
+                  fontSize: getParagraphFontSize(context),
+                ),
+              ),
+            );
+
+          default:
+            return const SizedBox();
+        }
+      }).toList(),
     );
+  }
+
+  TextSpan buildTextSpan(BuildContext context, List<Child> children) {
+    return TextSpan(
+      children: children.map((child) {
+        // Handle nested children recursively (e.g., bold + nested spans)
+        if (child.text != null) {
+          return TextSpan(
+            text: child.text ?? '',
+            style: TextStyle(
+              fontFamily: Constants.font,
+              fontWeight:
+                  child.bold == true ? FontWeight.bold : FontWeight.normal,
+            ),
+          );
+        }
+
+        return TextSpan(
+          text: child.text ?? '',
+          style: TextStyle(
+            fontFamily: Constants.font,
+            fontWeight:
+                child.bold == true ? FontWeight.bold : FontWeight.normal,
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  double getHeadingFontSize(BuildContext context, int level) {
+    switch (level) {
+      case 1:
+        return 30;
+      case 2:
+        return 26;
+      case 3:
+        return 22;
+      case 4:
+        return 20;
+      case 5:
+        return 18;
+      case 6:
+        return 16;
+      default:
+        return 16;
+    }
+  }
+
+  double getParagraphFontSize(BuildContext context) {
+    return 16;
   }
 
   Widget shareWidget(EventsState state) {
@@ -259,6 +319,7 @@ class DetailsWidget extends StatelessWidget {
             ...(state.eventDetailsData?.shareWithFriends?.first.secBody ?? [])
                 .map(
               (SecBody data) {
+                log(data.secLogo?.first.url ?? "");
                 return InkWell(
                   onTap: () {
                     launchSocialShareUrl(

@@ -30,7 +30,6 @@ class _HeaderSectionState extends State<HeaderSection> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _measureHeights());
   }
 
   void _measureHeights() {
@@ -52,13 +51,15 @@ class _HeaderSectionState extends State<HeaderSection> {
 
     if (leftHeight != null && rightHeight != null) {
       setState(() {
-        detailsHeight = leftHeight! > rightHeight! ? leftHeight! : rightHeight!;
+        detailsHeight = leftHeight! > rightHeight! ? leftHeight : rightHeight;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _measureHeights());
+
     return BlocBuilder<OurServiceBloc, OurServiceState>(
       builder: (context, state) {
         return Container(
@@ -76,6 +77,7 @@ class _HeaderSectionState extends State<HeaderSection> {
                 builder: (context, sizingInformation) {
                   if (sizingInformation.isDesktop) {
                     return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(

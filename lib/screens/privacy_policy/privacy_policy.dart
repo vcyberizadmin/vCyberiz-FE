@@ -1,9 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/home-bloc/home_bloc.dart';
 import 'package:vcyberiz/bloc/home-bloc/home_event.dart';
+import 'package:vcyberiz/bloc/home-bloc/home_state.dart';
 import 'package:vcyberiz/bloc/privacy_bloc/privacy_bloc.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/data/model/privacy_model/privacy_model.dart';
@@ -39,22 +41,40 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
   void initState() {
     super.initState();
     context.read<PrivacyBloc>().add(const GetPrivacyDataEvent());
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(milliseconds: 100), _measureHeights);
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) => _measureHeights());
     _scrollController.addListener(_onScroll);
   }
 
   void _measureHeights() {
-    _measureHeight(_policyBodyKey, (h) => _contentHeight = h);
-    _measureHeight(_footerKey, (h) => _footerHeight = h);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final policyContext = _policyBodyKey.currentContext;
+      final footerContext = _footerKey.currentContext;
+
+      final canMeasurePolicy = policyContext?.findRenderObject() is RenderBox &&
+          (policyContext!.findRenderObject() as RenderBox).hasSize;
+
+      final canMeasureFooter = footerContext?.findRenderObject() is RenderBox &&
+          (footerContext!.findRenderObject() as RenderBox).hasSize;
+
+      if (canMeasurePolicy && canMeasureFooter) {
+        _measureHeight(_policyBodyKey, (h) => _contentHeight = h);
+        _measureHeight(_footerKey, (h) => _footerHeight = h);
+      } else {
+        _measureHeights();
+      }
+    });
   }
 
   void _measureHeight(GlobalKey key, void Function(double) setHeight) {
     final ctx = key.currentContext;
     if (ctx != null) {
-      final box = ctx.findRenderObject() as RenderBox;
-      setState(() => setHeight(box.size.height));
+      final renderObject = ctx.findRenderObject();
+      if (renderObject != null &&
+          renderObject is RenderBox &&
+          renderObject.hasSize) {
+        final height = renderObject.size.height;
+        setState(() => setHeight(height));
+      }
     }
   }
 
@@ -149,76 +169,161 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
         builder: (context, state) {
           final list = state.data?.privacyPolicy ?? [];
           if (sectionKeys.isEmpty && list.isNotEmpty) _buildSectionKeys(list);
-          return SingleChildScrollView(
-            controller: _scrollController,
-            child: Column(
-              children: [
-                ResponsiveBuilder(
-                  builder: (_, sizing) => sizing.isDesktop
-                      ? _desktopLayout(state, list)
-                      : _mobileTabletLayout(state, list),
-                ),
-                FooterScreen(key: _footerKey),
-              ],
-            ),
+          return Column(
+            children: [
+              ResponsiveBuilder(
+                builder: (_, sizing) => sizing.isDesktop
+                    ? _desktopLayout(state, list, stickyPosition)
+                    : _mobileTabletLayout(state, list),
+              ),
+            ],
           );
         },
       ),
     );
   }
 
-  Widget _desktopLayout(PrivacyState state, List<PrivacyPolicyList> list) {
-    return SizedBox(
-      width: Constants.width,
-      child: Center(
-        child: SizedBox(
-          width: getValueForScreenType<double>(
-            context: context,
-            mobile: Constants.width * 0.96,
-            tablet: Constants.width * 0.92,
-            desktop: Constants.desktopBreakPoint,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _desktopLayout(
+    PrivacyState state,
+    List<PrivacyPolicyList> list,
+    ValueNotifier<double> stickyPosition,
+  ) {
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, homeState) {
+        return SizedBox(
+          width: Constants.width,
+          height: getResponsiveHeight(homeState.isTopContainerVisible),
+          child: Stack(
             children: [
-              const Gap(60),
-              HeaderWidget(text: state.data?.secHeader ?? ''),
-              const Gap(40),
-              PolicyDesktopBody(
-                key: _policyBodyKey,
-                stickyPosition: stickyPosition,
-                sectionKeys: sectionKeys,
-                policiesList: list,
-                scrollToSection: scrollToSection,
-                tocScrollController: _tocScrollController,
-                footerHeight: _footerHeight,
+              /// Scrollable content
+              Positioned.fill(
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: getValueForScreenType<double>(
+                          context: context,
+                          mobile: Constants.width * 0.96,
+                          tablet: Constants.width * 0.92,
+                          desktop: Constants.desktopBreakPoint,
+                        ),
+                        child: PolicyDesktopBody(
+                          key: _policyBodyKey,
+                          sectionKeys: sectionKeys,
+                          policiesList: list,
+                          scrollToSection: scrollToSection,
+                        ),
+                      ),
+                      FooterScreen(key: _footerKey),
+                    ],
+                  ),
+                ),
+              ),
+
+              /// Floating TOC
+              ValueListenableBuilder<double>(
+                valueListenable: stickyPosition,
+                builder: (_, pos, __) {
+                  // final footerHeight = _footerHeight ?? 0;
+
+                  // log(footerHeight.toString(), name: 'footer');
+                  // log(_scrollController.offset.toString(), name: 'offset');
+                  // log(Constants.width.toString(), name: 'width');
+                  // log(_contentHeight.toString(), name: 'content');
+
+                  return Positioned(
+                    top: homeState.isTopContainerVisible ? 160 : 20,
+                    right: 0,
+                    left: 0,
+                    child: Center(
+                      child: SizedBox(
+                        width: Constants.desktopBreakPoint,
+                        child: Row(
+                          children: [
+                            Expanded(child: SizedBox()),
+                            SizedBox(
+                              width: 250,
+                              height: getPositionedHeight(),
+                              child: TableOfContentsWidget(
+                                policiesList: list,
+                                sectionKeys: sectionKeys,
+                                onTapSection: scrollToSection,
+                                tocScrollController: _tocScrollController,
+                                footerHeight: _footerHeight,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ],
           ),
-        ),
-      ),
+        );
+      },
     );
+  }
+
+  double getResponsiveHeight(bool isTopVisible) {
+    if (Constants.width < 1400) {
+      return Constants.height * (isTopVisible ? 0.79 : 0.88);
+    } else if (Constants.width < 1600) {
+      return Constants.height * (isTopVisible ? 0.82 : 0.9);
+    } else if (Constants.width < 2400) {
+      return Constants.height * (isTopVisible ? 0.85 : 0.91);
+    } else if (Constants.width > 2400) {
+      return Constants.height * (isTopVisible ? 0.91 : 0.95);
+    } else {
+      return Constants.height * (isTopVisible ? 0.85 : 0.95);
+    }
+  }
+
+  double getPositionedHeight() {
+    if (Constants.width < 1300) {
+      return (_scrollController.offset < 7600) ? Constants.height : 80;
+    } else if (Constants.width < 1400) {
+      return (_scrollController.offset < 7000) ? Constants.height : 150;
+    } else if (Constants.width < 1600) {
+      return (_scrollController.offset < 6000) ? Constants.height : 200;
+    } else if (Constants.width < 1800) {
+      return (_scrollController.offset < 6200) ? Constants.height : 250;
+    } else if (Constants.width < 2400) {
+      return (_scrollController.offset < 5600) ? Constants.height : 200;
+    } else if (Constants.width > 2400) {
+      return (_scrollController.offset > 6500)
+          ? Constants.height
+          : Constants.height - 500;
+    } else {
+      return (_scrollController.offset < 6500) ? Constants.height : 200;
+    }
   }
 
   Widget _mobileTabletLayout(PrivacyState state, List<PrivacyPolicyList> list) {
     return Container(
       width: Constants.width * .92,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          HeaderWidget(text: state.data?.secHeader ?? ''),
-          const SizedBox(height: 24),
-          TableOfContentsWidget(
-            policiesList: list,
-            sectionKeys: sectionKeys,
-            onTapSection: scrollToSection,
-            tocScrollController: _tocScrollController,
-            footerHeight: _footerHeight,
-          ),
-          const SizedBox(height: 24),
-          PolicyPoints(sectionKeys: sectionKeys),
-          const SizedBox(height: 24),
-        ],
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            HeaderWidget(text: state.data?.secHeader ?? ''),
+            const SizedBox(height: 24),
+            TableOfContentsWidget(
+              policiesList: list,
+              sectionKeys: sectionKeys,
+              onTapSection: scrollToSection,
+              tocScrollController: _tocScrollController,
+              footerHeight: _footerHeight,
+            ),
+            const SizedBox(height: 24),
+            PolicyPoints(sectionKeys: sectionKeys),
+            const SizedBox(height: 24),
+            FooterScreen(key: _footerKey),
+          ],
+        ),
       ),
     );
   }

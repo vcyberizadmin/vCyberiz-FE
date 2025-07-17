@@ -4,10 +4,10 @@ import 'dart:math' as math;
 
 import 'package:dashed_circular_progress_bar/dashed_circular_progress_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
+import 'package:vcyberiz/core/utils/constants/asset_constants.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
@@ -79,7 +79,12 @@ class _ProgressWidgetState extends State<ProgressWidget> {
 
     return Container(
       width: Constants.width,
-      height: 500,
+      height: getValueForScreenType(
+        context: context,
+        mobile: null,
+        tablet: 500,
+        desktop: 500,
+      ),
       decoration: BoxDecoration(
         color: AppColors.white,
         image: DecorationImage(
@@ -120,6 +125,7 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                 desktop: 35,
               ),
               color: AppColors.blue,
+              overflow: TextOverflow.visible,
             ),
             if (widget.label.isNotEmpty)
               Container(
@@ -200,8 +206,8 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                                 width: 700,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: decorationImageProviderWidget(
-                                      '/data/uploads/Managed%20365%20Security%20Service/curve1.png',
+                                    image: AssetImage(
+                                      AssetConst.curve,
                                     ),
                                     fit: getValueForScreenType(
                                       context: context,
@@ -285,30 +291,27 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                               itemPlacementRadius * math.cos(angle);
                           final double y = semiCircleCenterInStack.dy -
                               itemPlacementRadius * math.sin(angle);
-
                           return Positioned(
                             left: x - (itemWidth / 2) < 0
                                 ? 0
-                                : x - (itemWidth / 2),
+                                : x - (itemWidth / 2) > 450
+                                    ? 480
+                                    : x - (itemWidth / 2),
                             top: y - (itemHeight / 2),
                             child: MouseRegion(
                               onEnter: (_) => setState(() {
-                                // _hoveredItemId = item.secHeader;
                                 _currentProgressBarValue = progress;
                               }),
                               onExit: (_) => setState(() {
-                                // _hoveredItemId = null;
                                 _currentProgressBarValue = 0.0;
                               }),
                               child: InkWell(
                                 onTap: () {
-                                  // Add your onTap logic here
                                   setState(() {
-                                    // _hoveredItemId = item.secHeader;
                                     _currentProgressBarValue = progress;
                                   });
                                 },
-                                child: SizedBox(
+                                child: Container(
                                   width: itemWidth,
                                   child: Column(
                                     children: [
@@ -326,7 +329,7 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                                         size: 13,
                                         color: AppColors.black,
                                         overflow: TextOverflow.visible,
-                                        height: 1,
+                                        height: 1.5,
                                       ),
                                       const Gap(10),
                                       Container(

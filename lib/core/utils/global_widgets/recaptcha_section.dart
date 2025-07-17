@@ -8,7 +8,6 @@ import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/login/login_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
-import 'package:vcyberiz/core/utils/constants/asset_constants.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/constants/string_const.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
@@ -51,8 +50,7 @@ class ReCaptchaIntegration extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          _checkBoxWithTitle(context),
-          const Gap(100),
+          Expanded(child: _checkBoxWithTitle(context)),
           _captchaImageWithPrivacy(context),
           const Gap(8),
         ],
@@ -141,11 +139,6 @@ class ReCaptchaIntegration extends StatelessWidget {
                 : Container(
                     height: 20,
                     width: 20,
-                    // decoration: BoxDecoration(
-                    //   border: Border.all(color: Colors.grey),
-                    //   shape: BoxShape.rectangle,
-                    //   borderRadius: BorderRadius.circular(5),
-                    // ),
                     child: Checkbox(
                       activeColor: Colors.white,
                       checkColor: Colors.green.shade700,
@@ -155,10 +148,12 @@ class ReCaptchaIntegration extends StatelessWidget {
                     ),
                   ),
             const Gap(10),
-            kStyle.semiBold(
-              text: StringConst.iAmNotARobot,
-              size: 14,
-              color: Colors.black87.withAlpha(200),
+            Expanded(
+              child: kStyle.semiBold(
+                  text: StringConst.iAmNotARobot,
+                  size: 14,
+                  color: Colors.black87.withAlpha(200),
+                  overflow: TextOverflow.visible),
             ),
           ],
         );

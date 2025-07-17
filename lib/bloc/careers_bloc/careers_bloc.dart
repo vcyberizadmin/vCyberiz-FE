@@ -367,7 +367,7 @@ class CareersBloc extends Bloc<CareersEvent, CareersState> {
     Emitter<CareersState> emit,
   ) async {
     int itemsPerPage = event.itemCount;
-    if (event.dataList == null || event.dataList!.isEmpty) {
+    if ((event.dataList ?? []).isEmpty) {
       emit(state.copyWith(
         currentPageIndex: 0,
         pagesCount: 0,
@@ -421,10 +421,13 @@ class CareersBloc extends Bloc<CareersEvent, CareersState> {
     } // Apply search filter
     if (event.locationSearch.isNotEmpty) {
       filteredList = filteredList.where((career) {
-        return (career.zipCode?.country?.text ?? '')
+        return (career.zipCode?.state?.country?.text ?? '')
                 .toLowerCase()
                 .contains(event.locationSearch.toLowerCase()) ||
             career.zipCode!.name!
+                .toLowerCase()
+                .contains(event.locationSearch.toLowerCase()) ||
+            career.zipCode!.state!.name!
                 .toLowerCase()
                 .contains(event.locationSearch.toLowerCase());
       }).toList();

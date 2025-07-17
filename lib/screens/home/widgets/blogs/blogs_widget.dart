@@ -245,85 +245,111 @@ class BlogCard extends StatelessWidget {
         scale: isHover ? 1.02 : 1.0,
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
-        child: Container(
-          width: getValueForScreenType(
-            context: context,
-            mobile: 270,
-            tablet: 300,
-            desktop: 270,
-          ),
-          height: getValueForScreenType(
-            context: context,
-            mobile: 300,
-            tablet: 350,
-            desktop: 400,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            image: DecorationImage(
-              image: decorationImageProviderWidget(
-                imageUrl,
+        child: Stack(
+          children: [
+            Container(
+              width: getValueForScreenType(
+                context: context,
+                mobile: 270,
+                tablet: 300,
+                desktop: 330,
               ),
-              fit: BoxFit.cover,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.transparent,
-                blurRadius: 10,
-                spreadRadius: 2,
+              height: getValueForScreenType(
+                context: context,
+                mobile: 300,
+                tablet: 350,
+                desktop: 400,
               ),
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                kStyle.reg(
-                    text: date,
-                    color: Colors.white,
-                    size: getValueForScreenType(
-                      context: context,
-                      mobile: 14,
-                      tablet: 14,
-                      desktop: 14,
-                    )),
-                Gap(5),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: kStyle.med(
-                        text: title,
-                        color: isHover ? AppColors.orange : Colors.white,
-                        size: getValueForScreenType(
-                          context: context,
-                          mobile: 14,
-                          tablet: 16,
-                          desktop: 18,
-                        ),
-                        maxLines: getValueForScreenType(
-                          context: context,
-                          mobile: 4,
-                          tablet: 6,
-                          desktop: 4,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Gap(5),
-                    SizedBox(
-                        width: 15,
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          color: isHover ? AppColors.orange : AppColors.white,
-                        )),
-                  ],
+              foregroundDecoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: AppColors.black.withOpacity(0.4), // Dark tint
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                image: DecorationImage(
+                  image: decorationImageProviderWidget(
+                    imageUrl,
+                  ),
+                  fit: BoxFit.cover,
                 ),
-              ],
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.transparent,
+                    blurRadius: 10,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
             ),
-          ),
+            Positioned(
+              child: SizedBox(
+                width: getValueForScreenType(
+                  context: context,
+                  mobile: 270,
+                  tablet: 300,
+                  desktop: 330,
+                ),
+                height: getValueForScreenType(
+                  context: context,
+                  mobile: 300,
+                  tablet: 350,
+                  desktop: 400,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      kStyle.reg(
+                          text: date,
+                          color: Colors.white,
+                          size: getValueForScreenType(
+                            context: context,
+                            mobile: 14,
+                            tablet: 14,
+                            desktop: 14,
+                          )),
+                      Gap(5),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: kStyle.med(
+                              text: title,
+                              color: isHover ? AppColors.orange : Colors.white,
+                              size: getValueForScreenType(
+                                context: context,
+                                mobile: 14,
+                                tablet: 16,
+                                desktop: 18,
+                              ),
+                              maxLines: getValueForScreenType(
+                                context: context,
+                                mobile: 4,
+                                tablet: 6,
+                                desktop: 4,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Gap(5),
+                          SizedBox(
+                              width: 15,
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color: isHover
+                                    ? AppColors.orange
+                                    : AppColors.white,
+                              )),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       );
     });

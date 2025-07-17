@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
@@ -82,7 +81,7 @@ class _CustomCounterWidgetState extends State<CustomCounterWidget> {
             context: context,
             mobile: 0,
             tablet: 20,
-            desktop: 20,
+            desktop: 0,
           ),
           vertical: getValueForScreenType(
             context: context,
@@ -95,9 +94,10 @@ class _CustomCounterWidgetState extends State<CustomCounterWidget> {
             getValueForScreenType(
               context: context,
               mobile: 150,
-              tablet: Constants.width > 1000 ? 120 : 250,
-              desktop: 200,
+              tablet: 300,
+              desktop: 300,
             ),
+        color: AppColors.transparent,
         child: Column(
           mainAxisAlignment: widget.isleft
               ? MainAxisAlignment.start
@@ -115,8 +115,8 @@ class _CustomCounterWidgetState extends State<CustomCounterWidget> {
                 AnimatedFlipCounter(
                   value: animatedValue,
                   fractionDigits: _getFractionDigits(fixedValue),
-                  duration: const Duration(seconds: 1),
-                  curve: Curves.linear,
+                  duration: const Duration(milliseconds: 800),
+                  curve: Curves.easeOutCubic,
                   textStyle: TextStyle(
                     fontSize: getValueForScreenType(
                       context: context,
@@ -130,7 +130,6 @@ class _CustomCounterWidgetState extends State<CustomCounterWidget> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Gap(5),
                 kStyle.bold(
                   size: getValueForScreenType(
                     context: context,

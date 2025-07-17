@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -18,9 +16,6 @@ class WhatWeDoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   context.read<WhatWeDoBloc>().add(const GetWhatWeDoDataEvent());
-    // });
     return SizedBox(
       height: getValueForScreenType(
         context: context,
@@ -49,8 +44,6 @@ class WhatWeDoWidget extends StatelessWidget {
                   sizingInformation,
                 ) {
                   if (sizingInformation.isDesktop) {
-                    log(state.data?.secGif?.first.url ?? '');
-
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,34 +51,23 @@ class WhatWeDoWidget extends StatelessWidget {
                         //!-------------------------(details Section)
 
                         Expanded(flex: 1, child: headingWidget(context, state)),
-                        Gap(
-                          getValueForScreenType<double>(
-                            context: context,
-                            mobile: 20,
-                            tablet: 40,
-                            desktop: 80,
-                          ),
-                        ),
+                        Gap(40),
                         //!-------------------------(Image Section)
-                        Expanded(
-                          flex: 1,
-                          child: Center(
-                            child: GifWidget(
-                              height: getValueForScreenType(
-                                context: context,
-                                mobile: 400,
-                                tablet: 500,
-                                desktop: 500,
-                              ),
-                              imageUrl: state.data?.secGif?.first.url ?? '',
-                              fit: BoxFit.fitHeight,
+                        Center(
+                          child: GifWidget(
+                            height: getValueForScreenType(
+                              context: context,
+                              mobile: 400,
+                              tablet: 500,
+                              desktop: 500,
                             ),
+                            imageUrl: state.data?.secGif?.first.url ?? '',
+                            fit: BoxFit.fitHeight,
                           ),
                         ),
                       ],
                     );
                   } else {
-                    log(state.data?.secGif?.first.url ?? '');
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,

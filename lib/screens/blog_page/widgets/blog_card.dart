@@ -44,7 +44,6 @@ class BlogCardContainer extends StatelessWidget {
         );
       },
       child: Container(
-        // width: 900,
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(24),

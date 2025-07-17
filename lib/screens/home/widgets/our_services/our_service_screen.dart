@@ -115,14 +115,10 @@ class OurServicesWidget extends StatelessWidget {
                 context: context,
                 mobile: 5,
                 tablet: 5,
-                desktop: Constants.width < 1300
-                    ? 30
-                    : Constants.width < 1400
-                        ? 80
-                        : 100,
+                desktop: 0,
               ),
               children: [
-                ...(state.data?.achieves?.stats ?? []).map(
+                ...(state.data?.achieves?.stat ?? []).map(
                   (Stat data) => CustomCounterWidget(
                     text: data.description ?? '',
                     value: data.value ?? 0,
@@ -201,7 +197,7 @@ class OurServicesWidget extends StatelessWidget {
               duration: Duration(milliseconds: 300),
               width: getValueForScreenType(
                 context: context,
-                mobile: Constants.width * .45,
+                mobile: Constants.width * .4,
                 tablet: Constants.width *
                     .8 /
                     (state.data?.mainSection?.first.services?.length ?? 1),
@@ -216,40 +212,51 @@ class OurServicesWidget extends StatelessWidget {
                     child: ResponsiveBuilder(
                       builder: (context, sizingInformation) {
                         if (sizingInformation.isMobile) {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ImageWidget(
-                                width: getValueForScreenType<double>(
-                                  context: context,
-                                  mobile: 25,
-                                  tablet: 25,
-                                  desktop: 35,
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 3),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ImageWidget(
+                                  width: getValueForScreenType<double>(
+                                    context: context,
+                                    mobile: 25,
+                                    tablet: 25,
+                                    desktop: 35,
+                                  ),
+                                  imageUrl: state.data?.mainSection?.first
+                                          .services?[index].secLogo?.url ??
+                                      '',
+                                  color: hexToColor(state
+                                          .data
+                                          ?.mainSection
+                                          ?.first
+                                          .services?[index]
+                                          .colorIdentifier ??
+                                      ''),
                                 ),
-                                imageUrl: state.data?.mainSection?.first
-                                        .services?[index].secLogo?.url ??
-                                    '',
-                                color: hexToColor(state.data?.mainSection?.first
-                                        .services?[index].colorIdentifier ??
-                                    ''),
-                              ),
-                              kStyle.reg(
-                                size: getValueForScreenType(
-                                  context: context,
-                                  mobile: 12,
-                                  desktop: 20,
-                                  tablet: 16,
+                                kStyle.reg(
+                                  size: getValueForScreenType(
+                                    context: context,
+                                    mobile: 12,
+                                    desktop: 20,
+                                    tablet: 16,
+                                  ),
+                                  overflow: TextOverflow.visible,
+                                  textAlign: TextAlign.center,
+                                  color: hexToColor(state
+                                          .data
+                                          ?.mainSection
+                                          ?.first
+                                          .services?[index]
+                                          .colorIdentifier ??
+                                      ''),
+                                  text: state.data?.mainSection?.first
+                                          .services?[index].header ??
+                                      '',
                                 ),
-                                overflow: TextOverflow.visible,
-                                textAlign: TextAlign.center,
-                                color: hexToColor(state.data?.mainSection?.first
-                                        .services?[index].colorIdentifier ??
-                                    ''),
-                                text: state.data?.mainSection?.first
-                                        .services?[index].header ??
-                                    '',
-                              ),
-                            ],
+                              ],
+                            ),
                           );
                         } else {
                           return Row(

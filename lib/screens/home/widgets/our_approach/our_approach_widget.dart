@@ -149,7 +149,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
                           border: Border.all(
                               color: currentIndex == index
                                   ? AppColors.orangeTextColor
-                                  : AppColors.white20,
+                                  : AppColors.transparent,
                               width: 1),
                           borderRadius: BorderRadius.circular(4),
                         ),
@@ -188,9 +188,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
     );
     if (isMobile) {
       final items = state.data?.cardNavs ?? [];
-      final lastItem = items.isNotEmpty ? items.last : null;
-      final mainItems =
-          items.length > 1 ? items.sublist(0, items.length - 1) : [];
+      final mainItems = items.length > 1 ? items.sublist(0, items.length) : [];
 
       return Column(
         mainAxisSize: MainAxisSize.min,
@@ -210,7 +208,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
                           fontFamily: Constants.font,
                           color: AppColors.orangeTextColor,
                           fontWeight: FontConst().semiBoldFont,
-                          fontSize: 18,
+                          fontSize: 16,
                         ),
                       ),
                       TextSpan(
@@ -219,7 +217,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
                           fontFamily: Constants.font,
                           color: AppColors.white,
                           fontWeight: FontConst().semiBoldFont,
-                          fontSize: 15,
+                          fontSize: 13,
                         ),
                       ),
                     ],
@@ -233,32 +231,6 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
               ],
             ],
           ),
-          const SizedBox(height: 8),
-          if (lastItem != null)
-            Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: lastItem.title![0],
-                    style: TextStyle(
-                      fontFamily: Constants.font,
-                      color: AppColors.orangeTextColor,
-                      fontWeight: FontConst().semiBoldFont,
-                      fontSize: 18,
-                    ),
-                  ),
-                  TextSpan(
-                    text: lastItem.title!.substring(1),
-                    style: TextStyle(
-                      fontFamily: Constants.font,
-                      color: AppColors.white,
-                      fontWeight: FontConst().semiBoldFont,
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
-              ),
-            ),
         ],
       );
     }
@@ -481,7 +453,12 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
                 itemCount: state.data?.cardList?.length ?? 0,
                 itemBuilder: (context, index) {
                   return Container(
-                    height: 300, // Fixed height for each container
+                    height: getValueForScreenType(
+                      context: context,
+                      mobile: 200,
+                      tablet: 250,
+                      desktop: 300,
+                    ), // Fixed height for each container
                     margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     decoration: BoxDecoration(
                       color: AppColors.transparent,
@@ -570,7 +547,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
       padding: EdgeInsets.symmetric(
         horizontal: getValueForScreenType(
           context: context,
-          mobile: 10,
+          mobile: 0,
           tablet: 30,
           desktop: 20,
         ),
@@ -578,11 +555,11 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
       child: Container(
         height: height,
         decoration: BoxDecoration(
-          color: AppColors.backGroundBlack,
+          color: AppColors.blue,
           borderRadius: BorderRadius.circular(15),
           border: Border.all(
             color: AppColors.darkOrangeBorderColor,
-            width: 1,
+            width: .5,
           ),
         ),
         child: Stack(
@@ -591,18 +568,18 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
               height: height,
               width: getValueForScreenType(
                 context: context,
-                mobile: Constants.width * .93,
+                mobile: Constants.width,
                 tablet: Constants.width * .95,
                 desktop: Constants.desktopBreakPoint * .55,
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: CardVideoPlayerWidget(
-                  videoUrl: "/data/uploads/video/videos/h600_14f43984.av1",
+                  videoUrl: "/data/uploads/video/videos/DIRECT-BG-video.av1",
                   secondaryVideoUrl:
-                      "/data/uploads/Homepage/videos/MP4/card.mp4",
+                      "/data/uploads/Homepage/videos/MP4/DIRECT BG video.mp4",
                   placeholderWidget: Container(),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
@@ -613,7 +590,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
                   padding: EdgeInsets.symmetric(
                     horizontal: getValueForScreenType(
                       context: context,
-                      mobile: 40,
+                      mobile: 20,
                       tablet: 40,
                       desktop: 40,
                     ),

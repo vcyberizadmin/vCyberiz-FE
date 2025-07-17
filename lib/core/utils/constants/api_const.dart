@@ -15,7 +15,7 @@ class ApiConst {
       "/api/blog-posts?where[\$or][0][blog_categories][cid][\$in][0]=cyber-crime&where[\$or][1][blog_tags][tid][\$in][0]=...";
   static const String blogArticle1EndPoint = '/api/blog-posts/';
   static const String blogArticle2EndPoint =
-      '?populate[sec_img]=true&populate[blog_author]=true&populate[blog_tags]=true&populate[blog_categories]=true&populate[sec_cta]=true';
+      '?populate=blog_tags&populate=blog_author&populate=blog_categories&populate=sec_img&populate=thumbnail_img';
   static const String popUpEndPoint =
       '/api/homepage-popups?populate[sec_links]=true';
   static const String aboutUsShieldEndPoint =
@@ -40,9 +40,9 @@ class ApiConst {
   static const String whyWorkWithUsEndPoint =
       "/api/why-work-with-us?populate=cards.card_img";
   static const String footerEndPoint =
-      '/api/footer-area?populate[tryUs][populate][cta]=true&populate[tryUs][populate][sec_logo]=true&populate[siteMap][populate][brand][populate][link]=true&populate[siteMap][populate][brand][populate][sec_logo]=true&populate[siteMap][populate][connect][populate][link]=true&populate[siteMap][populate][connect][populate][sec_logo]=true&populate[siteMap][populate][platform][populate][referencesMap][populate][references]=true&populate[siteMap][populate][platform][populate][cta]=true&populate[siteMap][populate][company][populate][referencesMap][populate][references]=true&populate[siteMap][populate][company][populate][cta]=true&populate[siteMap][populate][withUs][populate][references]=true&populate[termsAndPolicies][populate][references]=true&populate[subscribe]=true';
+      '/api/footer-area?populate[tryUs][populate]=true&populate[siteMap][populate][brand][populate][link]=true&populate[siteMap][populate][brand][populate][sec_logo]=true&populate[siteMap][populate][connect][populate][link]=true&populate[siteMap][populate][connect][populate][sec_logo]=true&populate[siteMap][populate][platform][populate][referencesMap][populate][references]=true&populate[siteMap][populate][platform][populate]=true&populate[siteMap][populate][company][populate][referencesMap][populate][references]=true&populate[siteMap][populate][company][populate]=true&populate[siteMap][populate][withUs][populate][references]=true&populate[termsAndPolicies][populate][references]=true&populate[subscribe]=true';
   static const String ourServicesEndPoint =
-      '/api/service?populate=titleSection&populate=achieves&populate=achieves.stats&populate=mainSection.services&populate=mainSection.services.sec_logo&populate=mainSection.services.cta&populate=mainSection.services.service_bg';
+      '/api/service?populate=titleSection&populate=achieves&populate=achieves.stat&populate=mainSection.services&populate=mainSection.services.sec_logo&populate=mainSection.services.cta&populate=mainSection.services.service_bg';
   static const String subscribeEndPoint = '/api/subscriptions';
   static const String contactUsHeaderEndPoint =
       '/api/contact-us?populate[text_area]=true&populate[sec_bg]=true&populate[sec_cta]=true';
@@ -60,9 +60,9 @@ class ApiConst {
   static const String blogsHeaderEndPoint =
       "/api/blog-banner?populate[sec_header][populate][sec_bg]=true";
   static const String blogsListEndPoint =
-      '/api/blog-posts?populate=blog_tags&populate=blog_author&populate=blog_categories&populate=sec_cta&populate=sec_img&populate=thumbnail_img';
+      '/api/blog-posts?populate=blog_tags&populate=blog_author&populate=blog_categories&populate=sec_img&populate=thumbnail_img';
   static const String categoryEndPoint =
-      '/api/category-blog?populate=blog_categories&populate=list_indicator';
+      '/api/category-blog?populate=blog_categories';
   static const String tagsEndPoint = '/api/tag-blog?populate=blog_tags';
   static const String blogMarketingEndPoint =
       '/api/marketing-element?populate=sec_card&populate=sec_card.sec_img&populate=sec_card.sec_cta&populate=sec_popup_card&populate=sec_popup_card.sec_cta&populate=sec_popup_card.sec_logo';
@@ -97,7 +97,7 @@ class ApiConst {
   static const String upcomingEventsListEndPoint =
       '/api/upcoming-event?populate[sec_body][populate][sec_bg]=true&populate[sec_body][populate][sec_cta]=true&populate[sec_body][populate][date_box]=true';
   static const String eventDetailsEndPoint =
-      "?populate=sec_cta&populate=sec_img&populate=blog_author&populate=blog_categories&populate=blog_tags&populate=share_with_friends&populate=share_with_friends.sec_body.link&populate=share_with_friends.sec_body.sec_logo&populate=event_content.sec_img&populate=event_content.sec_cta";
+      "?populate=sec_cta&populate=sec_img&populate=blog_author&populate=blog_categories&populate=blog_tags&populate=share_with_friends&populate=share_with_friends.sec_body.link&populate=share_with_friends.sec_body.sec_logo";
 
   //--------------privacy policy----------------------------
   static const String privacyEndPoint =
@@ -113,7 +113,7 @@ class ApiConst {
 
   static const String careerDetails1EndPoint = '/api/career-pages/';
   static const String careerDetails2EndPoint =
-      '?populate[skills]=true&populate[employment_types]=true&populate[zip_code][populate][state][populate][country]=true';
+      '?populate[countries]=true&populate[skills]=true&populate[employment_types]=true&populate[zip_code][populate][state][populate][country]=true';
 
   static const String uploadPdfEndPoint = "/api/upload";
   static const String submitResumeEndPoint = "/api/career-form-submissions";
@@ -144,8 +144,8 @@ class ApiConst {
   static const String newsHeaderEndPoint =
       '/api/news-banner?populate=sec_bg_img';
   static const String newsListEndPoint =
-      '/api/news-posts?populate=blog_author&populate=blog_categories&populate=blog_tags&populate=sec_img&populate=sec_cta';
+      '/api/news-posts?populate=blog_author&populate=blog_categories&populate=blog_tags&populate=sec_img';
   static const String newsArticle1EndPoint = '/api/news-posts/';
   static const String newsArticle2EndPoint =
-      '?populate[sec_img]=true&populate[blog_author]=true&populate[blog_tags]=true&populate[blog_categories]=true&populate[sec_cta]=true';
+      '?populate[sec_img]=true&populate[blog_author]=true&populate[blog_tags]=true&populate[blog_categories]=true';
 }

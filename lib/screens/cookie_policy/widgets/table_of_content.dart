@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -44,7 +46,9 @@ class _TableOfContentsWidgetState extends State<TableOfContentsWidget> {
             const SizedBox(height: 16),
             ListView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: sizingInformation.isDesktop
+                    ? BouncingScrollPhysics()
+                    : NeverScrollableScrollPhysics(),
                 itemCount: widget.items?.length ?? 0,
                 itemBuilder: (context, index) {
                   if (index == 0) return const SizedBox(); // Skip first

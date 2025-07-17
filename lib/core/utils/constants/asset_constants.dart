@@ -6,6 +6,7 @@ class AssetConst {
   static const String aboutUsimage = "assets/images/about_us.png";
   static const String reCaptcha = "assets/images/reCaptcha.png";
   static const String arrowIcon = "assets/images/arrow_icon.png";
+  static const String curve = "assets/images/curve1.png";
   static const String asia = "assets/images/ASIA-MAP.webp";
   static const String india = "assets/images/INDIA-MAP.webp";
   static const String malaysia = "assets/images/MALAYSIA-MAP.webp";

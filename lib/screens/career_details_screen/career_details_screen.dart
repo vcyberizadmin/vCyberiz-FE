@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -16,6 +18,7 @@ import 'package:vcyberiz/screens/career_details_screen/widgets/job_title%20card.
 import 'package:vcyberiz/screens/career_details_screen/widgets/submit_section.dart';
 
 import 'widgets/essential_skills.dart';
+import 'widgets/skills_widget.dart';
 
 class CareerDetailsScreen extends StatefulWidget {
   final String documentId;
@@ -113,6 +116,7 @@ class _CareerDetailsScreenState extends State<CareerDetailsScreen> {
     return BaseView(
       child: BlocBuilder<CareersBloc, CareersState>(
         builder: (context, state) {
+          log((state.careerData?.zipCode).toString(), name: 'text');
           return SingleChildScrollView(
             controller: _scrollController,
             child: Column(
@@ -161,9 +165,10 @@ class _CareerDetailsScreenState extends State<CareerDetailsScreen> {
           JobTitleCard(
             state: state,
           ),
-          CombinedSkillsSection(
+          EsseintialSkillsSection(
             state: state,
           ),
+          SkillsCard(skills: state.careerData?.skills ?? []),
           ApplicationForm(),
         ],
       ),
@@ -208,9 +213,10 @@ class _CareerDetailsScreenState extends State<CareerDetailsScreen> {
                           state: state,
                         ),
                         Gap(20),
-                        CombinedSkillsSection(
+                        EsseintialSkillsSection(
                           state: state,
                         ),
+                        SkillsCard(skills: state.careerData?.skills ?? []),
                       ],
                     ),
                   ),
@@ -275,12 +281,14 @@ class _CareerDetailsScreenState extends State<CareerDetailsScreen> {
                           state: state,
                         ),
                         Gap(20),
-                        CombinedSkillsSection(
+                        EsseintialSkillsSection(
                           state: state,
                         ),
+                        SkillsCard(skills: state.careerData?.skills ?? []),
                       ],
                     ),
                   ),
+                  Gap(20),
                   Expanded(
                     flex: 2,
                     child: Column(

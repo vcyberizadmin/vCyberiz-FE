@@ -44,13 +44,15 @@ class EventDetailsData {
   final DateTime? updatedAt;
   final DateTime? publishedAt;
   final DateTime? publicationDate;
+  final String? globalUrl;
+  final String? location;
+  final List<ArticleSection>? articleSection;
   final SecCta? secCta;
   final Sec? secImg;
   final Blog? blogAuthor;
   final List<Blog>? blogCategories;
   final List<Blog>? blogTags;
   final List<ShareWithFriend>? shareWithFriends;
-  final List<EventContent>? eventContent;
 
   EventDetailsData({
     this.id,
@@ -63,13 +65,15 @@ class EventDetailsData {
     this.updatedAt,
     this.publishedAt,
     this.publicationDate,
+    this.globalUrl,
+    this.location,
+    this.articleSection,
     this.secCta,
     this.secImg,
     this.blogAuthor,
     this.blogCategories,
     this.blogTags,
     this.shareWithFriends,
-    this.eventContent,
   });
 
   factory EventDetailsData.fromJson(Map<String, dynamic> json) =>
@@ -92,6 +96,12 @@ class EventDetailsData {
         publicationDate: json["publication_date"] == null
             ? null
             : DateTime.parse(json["publication_date"]),
+        globalUrl: json["global_url"],
+        location: json["location"],
+        articleSection: json["article_section"] == null
+            ? []
+            : List<ArticleSection>.from(json["article_section"]!
+                .map((x) => ArticleSection.fromJson(x))),
         secCta:
             json["sec_cta"] == null ? null : SecCta.fromJson(json["sec_cta"]),
         secImg: json["sec_img"] == null ? null : Sec.fromJson(json["sec_img"]),
@@ -109,10 +119,6 @@ class EventDetailsData {
             ? []
             : List<ShareWithFriend>.from(json["share_with_friends"]!
                 .map((x) => ShareWithFriend.fromJson(x))),
-        eventContent: json["event_content"] == null
-            ? []
-            : List<EventContent>.from(
-                json["event_content"]!.map((x) => EventContent.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -127,6 +133,11 @@ class EventDetailsData {
         "publishedAt": publishedAt?.toIso8601String(),
         "publication_date":
             "${publicationDate!.year.toString().padLeft(4, '0')}-${publicationDate!.month.toString().padLeft(2, '0')}-${publicationDate!.day.toString().padLeft(2, '0')}",
+        "global_url": globalUrl,
+        "location": location,
+        "article_section": articleSection == null
+            ? []
+            : List<dynamic>.from(articleSection!.map((x) => x.toJson())),
         "sec_cta": secCta?.toJson(),
         "sec_img": secImg?.toJson(),
         "blog_author": blogAuthor?.toJson(),
@@ -139,9 +150,58 @@ class EventDetailsData {
         "share_with_friends": shareWithFriends == null
             ? []
             : List<dynamic>.from(shareWithFriends!.map((x) => x.toJson())),
-        "event_content": eventContent == null
+      };
+}
+
+class ArticleSection {
+  final String? type;
+  final int? level;
+  final List<Child>? children;
+
+  ArticleSection({
+    this.type,
+    this.level,
+    this.children,
+  });
+
+  factory ArticleSection.fromJson(Map<String, dynamic> json) => ArticleSection(
+        type: json["type"],
+        level: json["level"],
+        children: json["children"] == null
             ? []
-            : List<dynamic>.from(eventContent!.map((x) => x.toJson())),
+            : List<Child>.from(json["children"]!.map((x) => Child.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "type": type,
+        "level": level,
+        "children": children == null
+            ? []
+            : List<dynamic>.from(children!.map((x) => x.toJson())),
+      };
+}
+
+class Child {
+  final bool? bold;
+  final String? text;
+  final String? type;
+
+  Child({
+    this.bold,
+    this.text,
+    this.type,
+  });
+
+  factory Child.fromJson(Map<String, dynamic> json) => Child(
+        bold: json["bold"],
+        text: json["text"],
+        type: json["type"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "bold": bold,
+        "text": text,
+        "type": type,
       };
 }
 
@@ -196,51 +256,6 @@ class Blog {
         "publishedAt": publishedAt?.toIso8601String(),
         "cid": cid,
         "tid": tid,
-      };
-}
-
-class EventContent {
-  final String? component;
-  final int? id;
-  final String? secHeader;
-  final String? secDescription;
-  final String? secSubHeader;
-  final String? secLocation;
-  final SecCta? secCta;
-  final Sec? secImg;
-
-  EventContent({
-    this.component,
-    this.id,
-    this.secHeader,
-    this.secDescription,
-    this.secSubHeader,
-    this.secLocation,
-    this.secCta,
-    this.secImg,
-  });
-
-  factory EventContent.fromJson(Map<String, dynamic> json) => EventContent(
-        component: json["__component"],
-        id: json["id"],
-        secHeader: json["sec_header"],
-        secDescription: json["sec_description"],
-        secSubHeader: json["sec_sub_header"],
-        secLocation: json["sec_location"],
-        secCta:
-            json["sec_cta"] == null ? null : SecCta.fromJson(json["sec_cta"]),
-        secImg: json["sec_img"] == null ? null : Sec.fromJson(json["sec_img"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "__component": component,
-        "id": id,
-        "sec_header": secHeader,
-        "sec_description": secDescription,
-        "sec_sub_header": secSubHeader,
-        "sec_location": secLocation,
-        "sec_cta": secCta?.toJson(),
-        "sec_img": secImg?.toJson(),
       };
 }
 

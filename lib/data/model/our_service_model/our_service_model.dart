@@ -98,28 +98,28 @@ class OurServiceData {
 class Achieves {
   final int? id;
   final String? secDescription;
-  final List<Stat>? stats;
+  final List<Stat>? stat;
 
   Achieves({
     this.id,
     this.secDescription,
-    this.stats,
+    this.stat,
   });
 
   factory Achieves.fromJson(Map<String, dynamic> json) => Achieves(
         id: json["id"],
         secDescription: json["sec_description"],
-        stats: json["stats"] == null
+        stat: json["stat"] == null
             ? []
-            : List<Stat>.from(json["stats"]!.map((x) => Stat.fromJson(x))),
+            : List<Stat>.from(json["stat"]!.map((x) => Stat.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "sec_description": secDescription,
-        "stats": stats == null
+        "stat": stat == null
             ? []
-            : List<dynamic>.from(stats!.map((x) => x.toJson())),
+            : List<dynamic>.from(stat!.map((x) => x.toJson())),
       };
 }
 
@@ -138,7 +138,7 @@ class Stat {
 
   factory Stat.fromJson(Map<String, dynamic> json) => Stat(
         id: json["id"],
-        value: json["value"]!.toDouble(),
+        value: json["value"].toDouble(),
         sign: json["sign"],
         description: json["description"],
       );

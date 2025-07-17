@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
@@ -116,7 +118,7 @@ class _ShareScreenWidgetState extends State<ShareScreenWidget> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 8),
                         decoration: BoxDecoration(
-                          color: AppColors.grey,
+                          color: AppColors.greyBackGround,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: kStyle.reg(
@@ -164,26 +166,14 @@ class _ShareScreenWidgetState extends State<ShareScreenWidget> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    _buildShareButton(
-                        state.blogMarketingList?.secPopupCard?.secLogo?[0]
-                                .url ??
-                            '',
-                        "https://www.facebook.com/sharer/sharer.php?u=$currentUrl"),
-                    _buildShareButton(
-                        state.blogMarketingList?.secPopupCard?.secLogo?[1]
-                                .url ??
-                            '',
-                        "https://www.linkedin.com/sharing/share-offsite/?url=$currentUrl"),
-                    _buildShareButton(
-                        state.blogMarketingList?.secPopupCard?.secLogo?[2]
-                                .url ??
-                            '',
-                        "https://wa.me/?text=$currentUrl"),
-                    _buildShareButton(
-                        state.blogMarketingList?.secPopupCard?.secLogo?[3]
-                                .url ??
-                            '',
-                        "mailto:?subject=Check this out!&body=$currentUrl"),
+                    ...(state.blogMarketingList?.secPopupCard?.secLogo ?? [])
+                        .map(
+                      (cta) => _buildShareButton(
+                        cta.url ?? '',
+                        cta.label ?? '',
+                        currentUrl,
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -194,14 +184,34 @@ class _ShareScreenWidgetState extends State<ShareScreenWidget> {
     );
   }
 
-  Widget _buildShareButton(String assetPath, String url) {
+  String getShareUrlByLabel(String label, String currentUrl) {
+    final encodedUrl = Uri.encodeComponent(currentUrl);
+    log(label, name: 'test');
+    switch (label.toLowerCase()) {
+      case 'facebook_logo':
+        return 'https://www.facebook.com/sharer/sharer.php?u=$encodedUrl';
+      case 'linkedin_logo':
+        return 'https://www.linkedin.com/sharing/share-offsite/?url=$encodedUrl';
+      case 'whatsapp_logo':
+        return 'https://wa.me/?text=$encodedUrl';
+      case 'X-logo':
+        return 'https://x.com/intent/tweet?url=$encodedUrl&text=Check this out!';
+      default:
+        return encodedUrl; // fallback to just the URL
+    }
+  }
+
+  Widget _buildShareButton(String assetPath, String label, String currentUrl) {
     return IconButton(
       icon: ImageWidget(
         imageUrl: assetPath,
         width: 40,
         height: 40,
-      ), // Use your icons
-      onPressed: () => _shareUrl(url),
+      ),
+      onPressed: () {
+        final shareUrl = getShareUrlByLabel(label, currentUrl);
+        _shareUrl(shareUrl);
+      },
     );
   }
 }

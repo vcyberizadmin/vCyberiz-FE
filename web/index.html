@@ -91,6 +91,24 @@
     }
   </style>
 </head>
+<!-- 👇 Lottie loader -->
+<script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module">
+</script>
+
+<div id="loader" style="position: fixed; top: 0; left: 0; 
+       width: 100vw; height: 100vh; display: flex; 
+       align-items: center; justify-content: center; 
+       background-color: white; z-index: 9999;">
+  <dotlottie-wc src="https://lottie.host/52f18488-be50-4d4a-ac58-1c2631ffc8d8/JBV60q9yH1.lottie"
+    style="width: 300px; height: 300px" speed="1" autoplay loop>
+  </dotlottie-wc>
+</div>
+<script>
+  window.addEventListener('load', function () {
+    const loader = document.getElementById('loader');
+    if (loader) loader.style.display = 'none';
+  });
+</script>
 
 <body>
   <!-- Google Tag Manager (noscript) -->

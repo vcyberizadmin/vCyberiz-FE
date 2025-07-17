@@ -42,14 +42,15 @@ class SearchSectionNews extends StatelessWidget {
                   searchController: searchController,
                   scrollController: scrollController,
                 ),
-              const Gap(24),
+              Gap(20),
               CategoriesWidget(
                 scrollController: scrollController,
               ),
-              const Gap(24),
+              Gap(20),
               TagsWidget(
                 scrollController: scrollController,
               ),
+              Gap(10),
             ],
           ),
         );

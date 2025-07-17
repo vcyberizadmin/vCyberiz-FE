@@ -133,7 +133,7 @@ class _CookiePolicyState extends State<CookiePolicy> {
                                                 sectionKeys: sectionKeys,
                                                 cookiesList: cookiesList,
                                               ),
-                                              const Gap(350),
+                                              const Gap(450),
                                             ],
                                           ),
                                         );

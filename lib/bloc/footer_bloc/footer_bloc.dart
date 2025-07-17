@@ -27,7 +27,7 @@ class FooterBloc extends Bloc<FooterEvent, FooterState> {
       ),
     );
     try {
-      FooterModel response = (await _FooterRepository.getFooterApi());
+      FooterModel response = await _FooterRepository.getFooterApi();
       if (response.data != null) {
         await Future.delayed(
             const Duration(

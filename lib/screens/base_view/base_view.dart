@@ -130,7 +130,7 @@ class _BaseViewState extends State<BaseView> {
                           tablet: 50,
                           desktop: 100,
                         ),
-                        bottom: 50,
+                        bottom: 80,
                         child: ChatBotWidget(),
                       ),
                     ],

@@ -39,14 +39,15 @@ class _CareerPageState extends State<CareerPage> {
 
   @override
   Widget build(BuildContext context) {
-    context.read<CareersBloc>().add(GetCareerListEvent(
-            itemCount: getValueForScreenType(
-          context: context,
-          mobile: 5,
-          desktop: 9,
-          tablet: 6,
-        )));
-
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<CareersBloc>().add(GetCareerListEvent(
+              itemCount: getValueForScreenType(
+            context: context,
+            mobile: 5,
+            desktop: 9,
+            tablet: 6,
+          )));
+    });
     return BaseView(
       child: SingleChildScrollView(
         controller: _scrollController,

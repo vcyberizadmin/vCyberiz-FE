@@ -9,7 +9,7 @@ import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
-import 'success_alert.dart';
+import '../../../core/utils/global_widgets/success_alert.dart';
 
 void registrationDialog(BuildContext context) {
   final formKey = GlobalKey<FormState>();
@@ -27,7 +27,8 @@ void registrationDialog(BuildContext context) {
           listener: (context, state) {
             if (state.registerStatus == RegisterStatus.success) {
               context.pop();
-              showSuccessDialog(context);
+              showSuccessDialog(context, "Registration Completed Successfully",
+                  "Please check your email for the event updates, thanks.");
             }
           },
           builder: (context, state) {

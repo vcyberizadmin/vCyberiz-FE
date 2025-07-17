@@ -1,10 +1,10 @@
 import 'dart:html' as html;
 import 'package:chewie/chewie.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_bloc.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_event.dart';
 import 'package:vcyberiz/bloc/video_player_bloc/video_player_state.dart';
@@ -29,16 +29,16 @@ class KnowMoreVideo extends StatefulWidget {
 }
 
 class _KnowMoreVideoState extends State<KnowMoreVideo> {
+  late final VideoPlayerBloc _bloc;
   String? _finalVideoUrl;
-  late final VideoPlayerBloc _videoBloc;
+  bool _isReady = false;
 
   @override
   void initState() {
     super.initState();
-    _videoBloc = VideoPlayerBloc();
-    _detectBrowserAndSetUrl();
+    _bloc = VideoPlayerBloc();
+    _detectBrowserAndInit();
 
-    // Disable PiP for Safari
     if (kIsWeb) {
       Future.delayed(const Duration(milliseconds: 500), () {
         final videoElements = html.document.getElementsByTagName('video');
@@ -53,21 +53,20 @@ class _KnowMoreVideoState extends State<KnowMoreVideo> {
     }
   }
 
-  Future<void> _detectBrowserAndSetUrl() async {
-    final base = dotenv.env[Constants.assetBaseURL] ?? '';
-    String finalUrl = widget.videoUrl;
+  Future<void> _detectBrowserAndInit() async {
+    final String base = dotenv.env[Constants.assetBaseURL] ?? '';
+    final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    bool isSafari = false;
 
-    if (kIsWeb) {
-      final deviceInfo = DeviceInfoPlugin();
+    try {
       final webInfo = await deviceInfo.webBrowserInfo;
-      if (webInfo.browserName.name.toLowerCase().contains('safari')) {
-        finalUrl = widget.secondaryVideoUrl;
-      }
-    }
+      isSafari = webInfo.browserName.name.toLowerCase() == 'safari';
+    } catch (_) {}
 
-    _finalVideoUrl = base + finalUrl;
+    _finalVideoUrl =
+        base + (isSafari ? widget.secondaryVideoUrl : widget.videoUrl);
 
-    _videoBloc.add(
+    _bloc.add(
       InitializeKnowMoreVideoPlayer(
         videoUrl: _finalVideoUrl!,
         autoPlay: true,
@@ -75,12 +74,28 @@ class _KnowMoreVideoState extends State<KnowMoreVideo> {
         showControls: false,
       ),
     );
+
+    if (mounted) {
+      setState(() {
+        _isReady = true;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _bloc.close();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (!_isReady) {
+      return widget.placeholderWidget ?? const Center();
+    }
+
     return BlocProvider.value(
-      value: _videoBloc,
+      value: _bloc,
       child: BlocBuilder<VideoPlayerBloc, VideoPlayerState>(
         builder: (context, state) {
           return switch (state) {
@@ -97,17 +112,13 @@ class _KnowMoreVideoState extends State<KnowMoreVideo> {
                   ),
                 ),
               ),
-            VideoPlayerError() => Center(child: SizedBox()),
+            VideoPlayerError() => Center(
+                child: SizedBox(),
+              ),
             Object() => const SizedBox.shrink(),
           };
         },
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _videoBloc.close();
-    super.dispose();
   }
 }

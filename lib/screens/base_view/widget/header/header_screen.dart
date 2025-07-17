@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -148,6 +150,7 @@ class HeaderScreen extends StatelessWidget {
 
   void _showAlertBox(BuildContext context) {
     TextEditingController searchTextController = TextEditingController();
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -177,69 +180,91 @@ class HeaderScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           // Search field
-                          Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Stack(
-                              children: [
-                                // Gradient border
-                                ShaderMask(
-                                  shaderCallback: (Rect bounds) {
-                                    return const LinearGradient(
-                                      colors: AppColors.gradientColor,
-                                    ).createShader(bounds);
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Colors.white,
-                                          width:
-                                              2), // gets overridden by shader
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
                                   ),
-                                ),
-
-                                Padding(
-                                  padding: const EdgeInsets.all(2),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.transparent,
-                                      borderRadius: BorderRadius.circular(28),
-                                    ),
-                                    child: TextFormField(
-                                      controller: searchTextController,
-                                      style:
-                                          const TextStyle(color: Colors.white),
-                                      cursorColor: Colors.white,
-                                      decoration: InputDecoration(
-                                        prefixIcon: const Icon(Icons.search,
-                                            color: Colors.white),
-                                        hintText: 'Search',
-                                        hintStyle: const TextStyle(
-                                            color: Colors.white70),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          borderSide: BorderSide.none,
+                                  child: Stack(
+                                    children: [
+                                      // Gradient border
+                                      ShaderMask(
+                                        shaderCallback: (Rect bounds) {
+                                          return const LinearGradient(
+                                            colors: AppColors.gradientColor,
+                                          ).createShader(bounds);
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.white,
+                                                width:
+                                                    2), // gets overridden by shader
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                          ),
                                         ),
-                                        filled: true,
-                                        fillColor: Colors.transparent,
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 14),
                                       ),
-                                      onChanged: (value) {
-                                        context.read<HomeBloc>().add(
-                                            GetSearchEvent(searchText: value));
-                                      },
-                                    ),
+
+                                      Padding(
+                                        padding: const EdgeInsets.all(2),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.transparent,
+                                            borderRadius:
+                                                BorderRadius.circular(28),
+                                          ),
+                                          child: TextFormField(
+                                            controller: searchTextController,
+                                            autofocus: true,
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                            cursorColor: Colors.white,
+                                            decoration: InputDecoration(
+                                              prefixIcon: const Icon(
+                                                  Icons.search,
+                                                  color: Colors.white),
+                                              hintText: 'Search',
+                                              hintStyle: const TextStyle(
+                                                  color: Colors.white70),
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                borderSide: BorderSide.none,
+                                              ),
+                                              filled: true,
+                                              fillColor: Colors.transparent,
+                                              contentPadding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 14),
+                                            ),
+                                            onChanged: (value) {
+                                              context.read<HomeBloc>().add(
+                                                  GetSearchEvent(
+                                                      searchText: value));
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                              Gap(20),
+                              InkWell(
+                                onTap: () {
+                                  context.pop();
+                                },
+                                child: Icon(
+                                  Icons.close,
+                                  color: AppColors.white,
+                                ),
+                              )
+                            ],
                           ),
                           const Gap(10),
 

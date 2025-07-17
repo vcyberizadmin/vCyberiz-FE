@@ -33,20 +33,6 @@ class _AboutAnimatedSectionState extends State<AboutAnimatedSection>
       duration: const Duration(seconds: 5),
     );
 
-    // _imageOffsetAnimation = Tween<Offset>(
-    //   begin: const Offset(-1.0, 0.0),
-    //   end: Offset.zero,
-    // ).animate(
-    //   CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    // );
-
-    // _textOffsetAnimation = Tween<Offset>(
-    //   begin: const Offset(0.0, 1.0),
-    //   end: Offset.zero,
-    // ).animate(
-    //   CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    // );
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _controller.forward();
     });
@@ -96,12 +82,9 @@ class _AboutAnimatedSectionState extends State<AboutAnimatedSection>
                       ),
                       Expanded(
                         flex: 1,
-                        child: SizedBox(
-                          height: 400,
-                          child: ImageWidget(
-                            imageUrl: state.ourShieldData?.secBg?.url ?? '',
-                            fit: BoxFit.cover,
-                          ),
+                        child: ImageWidget(
+                          imageUrl: state.ourShieldData?.secBg?.url ?? '',
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ],
@@ -113,11 +96,6 @@ class _AboutAnimatedSectionState extends State<AboutAnimatedSection>
                       textWidget(state),
                       Gap(30),
                       SizedBox(
-                        height: getValueForScreenType(
-                          context: context,
-                          mobile: 250,
-                          tablet: 400,
-                        ),
                         width: double.infinity,
                         child: ImageWidget(
                           imageUrl: state.ourShieldData?.secBg?.url ?? '',

@@ -41,28 +41,24 @@ class AboutVisionSection extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                            vertical: 50,
-                          ),
+                              vertical: 50, horizontal: 50),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                height: getValueForScreenType(
-                                  context: context,
-                                  mobile: 300,
-                                  tablet: 450,
-                                  desktop: 400,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 75,
-                                    right: 50,
+                              Expanded(
+                                child: Container(
+                                  height: getValueForScreenType(
+                                    context: context,
+                                    mobile: 300,
+                                    tablet: 450,
+                                    desktop: 400,
                                   ),
                                   child: bodyWidget(context, state),
                                 ),
                               ),
-                              videoWidget(context, state),
+                              Gap(100),
+                              Expanded(child: videoWidget(context, state)),
                             ],
                           ),
                         ),

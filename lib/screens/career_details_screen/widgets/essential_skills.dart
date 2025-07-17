@@ -8,10 +8,10 @@ import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/data/model/careers_model/career_details_model.dart';
 
-class CombinedSkillsSection extends StatelessWidget {
+class EsseintialSkillsSection extends StatelessWidget {
   final CareersState state;
 
-  const CombinedSkillsSection({
+  const EsseintialSkillsSection({
     super.key,
     required this.state,
   });
@@ -52,7 +52,7 @@ class CombinedSkillsSection extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(8.0),
+            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
-import 'package:vcyberiz/core/utils/styles/text_styles.dart';
 
 import '../../../bloc/about_us_bloc/about_us_bloc.dart';
 import '../../../core/utils/global_widgets/card_widget.dart';
@@ -46,15 +46,16 @@ class _ValuesSectionState extends State<ValuesSection> {
                     getValueForScreenType(
                         context: context, mobile: 10, tablet: 15, desktop: 20),
                   ),
-                  Kstyles().med(
-                      text: state.ourValuesData?.secHeader ?? '',
-                      color: AppColors.textBlueColor,
-                      size: getValueForScreenType(
-                        context: context,
-                        mobile: 30,
-                        desktop: 30,
-                        tablet: 30,
-                      )),
+                  kStyle.semiBold(
+                    text: state.ourValuesData?.secHeader ?? '',
+                    color: AppColors.textBlueColor,
+                    size: getValueForScreenType<double>(
+                      context: context,
+                      mobile: 25,
+                      tablet: 30,
+                      desktop: 35,
+                    ),
+                  ),
                   Gap(getValueForScreenType(
                     context: context,
                     mobile: 20,
@@ -91,7 +92,7 @@ class _ValuesSectionState extends State<ValuesSection> {
                           context: context,
                           mobile: 2 / 1.6,
                           tablet: 2 / 1.5,
-                          desktop: 2 / 1.25,
+                          desktop: 2 / 1.5,
                         ),
                       ),
                       shrinkWrap: true,

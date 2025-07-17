@@ -95,16 +95,16 @@ class _OurSecretsState extends State<OurSecrets>
                       tablet: 50,
                       desktop: 50,
                     )),
-                    kStyle.med(
+                    kStyle.semiBold(
                       text: state.ourSecretData?.secHeader ?? '',
                       color: AppColors.blue,
                       size: getValueForScreenType<double>(
                         context: context,
-                        mobile: 30,
+                        mobile: 25,
                         tablet: 30,
-                        desktop: 30,
+                        desktop: 35,
                       ),
-                      textAlign: getValueForScreenType(
+                      align: getValueForScreenType(
                         context: context,
                         mobile: TextAlign.left,
                         tablet: TextAlign.left,
