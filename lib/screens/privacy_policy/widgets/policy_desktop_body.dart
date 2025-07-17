@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:vcyberiz/core/utils/constants/constants.dart';
 import 'package:vcyberiz/data/model/privacy_model/privacy_model.dart';
 import 'package:vcyberiz/screens/privacy_policy/widgets/policy_page.dart';
-import 'package:vcyberiz/screens/privacy_policy/widgets/table_of_content.dart';
-
-import '../../../bloc/home-bloc/home_bloc.dart';
-import '../../../bloc/home-bloc/home_state.dart';
 import '../../../bloc/privacy_bloc/privacy_bloc.dart';
 import 'header_widget.dart';
 
