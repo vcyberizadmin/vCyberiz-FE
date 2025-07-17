@@ -149,7 +149,7 @@ class _OurApproachWidgetState extends State<OurApproachWidget> {
                           border: Border.all(
                               color: currentIndex == index
                                   ? AppColors.orangeTextColor
-                                  : AppColors.white20,
+                                  : AppColors.transparent,
                               width: 1),
                           borderRadius: BorderRadius.circular(4),
                         ),

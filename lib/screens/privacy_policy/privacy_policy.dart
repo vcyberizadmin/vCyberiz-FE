@@ -227,12 +227,12 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
               ValueListenableBuilder<double>(
                 valueListenable: stickyPosition,
                 builder: (_, pos, __) {
-                  final footerHeight = _footerHeight ?? 0;
+                  // final footerHeight = _footerHeight ?? 0;
 
-                  log(footerHeight.toString(), name: 'footer');
-                  log(_scrollController.offset.toString(), name: 'offset');
-                  log(Constants.width.toString(), name: 'width');
-                  log(_contentHeight.toString(), name: 'content');
+                  // log(footerHeight.toString(), name: 'footer');
+                  // log(_scrollController.offset.toString(), name: 'offset');
+                  // log(Constants.width.toString(), name: 'width');
+                  // log(_contentHeight.toString(), name: 'content');
 
                   return Positioned(
                     top: homeState.isTopContainerVisible ? 160 : 20,
