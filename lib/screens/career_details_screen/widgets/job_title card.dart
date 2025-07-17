@@ -30,7 +30,7 @@ class JobTitleCard extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.25),

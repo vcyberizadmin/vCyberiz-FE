@@ -288,6 +288,7 @@ class _CareerDetailsScreenState extends State<CareerDetailsScreen> {
                       ],
                     ),
                   ),
+                  Gap(20),
                   Expanded(
                     flex: 2,
                     child: Column(
