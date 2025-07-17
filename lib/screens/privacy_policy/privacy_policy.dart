@@ -289,7 +289,9 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
     } else if (Constants.width < 1400) {
       return (_scrollController.offset < 7000) ? Constants.height : 150;
     } else if (Constants.width < 1600) {
-      return (_scrollController.offset < 600) ? Constants.height : 200;
+      return (_scrollController.offset < 6000) ? Constants.height : 200;
+    } else if (Constants.width < 1800) {
+      return (_scrollController.offset < 6200) ? Constants.height : 250;
     } else if (Constants.width < 2400) {
       return (_scrollController.offset < 5600) ? Constants.height : 200;
     } else if (Constants.width > 2400) {
