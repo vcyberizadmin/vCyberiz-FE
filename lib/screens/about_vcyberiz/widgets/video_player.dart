@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:html' as html;
 import 'package:chewie/chewie.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
