@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/home-bloc/home_bloc.dart';
 import 'package:vcyberiz/bloc/home-bloc/home_event.dart';
@@ -169,14 +170,10 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
         builder: (context, state) {
           final list = state.data?.privacyPolicy ?? [];
           if (sectionKeys.isEmpty && list.isNotEmpty) _buildSectionKeys(list);
-          return Column(
-            children: [
-              ResponsiveBuilder(
-                builder: (_, sizing) => sizing.isDesktop
-                    ? _desktopLayout(state, list, stickyPosition)
-                    : _mobileTabletLayout(state, list),
-              ),
-            ],
+          return ResponsiveBuilder(
+            builder: (_, sizing) => sizing.isDesktop
+                ? _desktopLayout(state, list, stickyPosition)
+                : _mobileTabletLayout(state, list),
           );
         },
       ),
@@ -302,28 +299,37 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
   }
 
   Widget _mobileTabletLayout(PrivacyState state, List<PrivacyPolicyList> list) {
-    return Container(
-      width: Constants.width * .92,
-      child: SingleChildScrollView(
-        controller: _scrollController,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            HeaderWidget(text: state.data?.secHeader ?? ''),
-            const SizedBox(height: 24),
-            TableOfContentsWidget(
-              policiesList: list,
-              sectionKeys: sectionKeys,
-              onTapSection: scrollToSection,
-              tocScrollController: _tocScrollController,
-              footerHeight: _footerHeight,
+    return SingleChildScrollView(
+      controller: _scrollController,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: Constants.width * .92,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: HeaderWidget(text: state.data?.secHeader ?? '')),
+                  Gap(20),
+                  TableOfContentsWidget(
+                    policiesList: list,
+                    sectionKeys: sectionKeys,
+                    onTapSection: scrollToSection,
+                    tocScrollController: _tocScrollController,
+                    footerHeight: _footerHeight,
+                  ),
+                  Gap(20),
+                  PolicyPoints(sectionKeys: sectionKeys),
+                  Gap(20),
+                ],
+              ),
             ),
-            const SizedBox(height: 24),
-            PolicyPoints(sectionKeys: sectionKeys),
-            const SizedBox(height: 24),
-            FooterScreen(key: _footerKey),
-          ],
-        ),
+          ),
+          FooterScreen(key: _footerKey),
+        ],
       ),
     );
   }

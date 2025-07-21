@@ -89,30 +89,31 @@ class OurSolutionWidget extends StatelessWidget {
           final item = state.data?.solutionAccordian?[index];
           final color = _hexToColor(item?.colorIdentifier ?? '');
 
-          return MouseRegion(
-            cursor: SystemMouseCursors.click,
-            child: InkWell(
-              onTap: () {
-                context.read<OurSolutionsBloc>().add(
-                      SelectIndexEvent(index: index),
-                    );
-              },
-              child: AnimatedContainer(
-                duration: Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-                width: getValueForScreenType(
-                  context: context,
-                  mobile: Constants.width * .4,
-                  tablet: Constants.width *
-                      .8 /
-                      (state.data?.solutionAccordian?.length ?? 1),
-                  desktop: Constants.desktopBreakPoint /
-                      (state.data?.solutionAccordian?.length ?? 1),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ResponsiveBuilder(
+          return InkWell(
+            onTap: () {
+              context.read<OurSolutionsBloc>().add(
+                    SelectIndexEvent(index: index),
+                  );
+            },
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              width: getValueForScreenType(
+                context: context,
+                mobile: Constants.width * .4,
+                tablet: Constants.width *
+                    .8 /
+                    (state.data?.solutionAccordian?.length ?? 1),
+                desktop: Constants.desktopBreakPoint /
+                    (state.data?.solutionAccordian?.length ?? 1),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AnimatedScale(
+                    scale: isSelected ? 1.1 : 1.0,
+                    duration: Duration(milliseconds: 300),
+                    child: ResponsiveBuilder(
                       builder: (context, sizingInformation) {
                         if (sizingInformation.isMobile) {
                           return Padding(
@@ -120,20 +121,15 @@ class OurSolutionWidget extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                AnimatedScale(
-                                  scale: isSelected ? 1.1 : 1.0,
-                                  duration: Duration(milliseconds: 300),
-                                  curve: Curves.easeInOut,
-                                  child: ImageWidget(
-                                    imageUrl: item?.sectionLogo?.url ?? '',
-                                    width: getValueForScreenType<double>(
-                                      context: context,
-                                      mobile: 25,
-                                      tablet: 25,
-                                      desktop: 35,
-                                    ),
-                                    color: color,
+                                ImageWidget(
+                                  imageUrl: item?.sectionLogo?.url ?? '',
+                                  width: getValueForScreenType<double>(
+                                    context: context,
+                                    mobile: 25,
+                                    tablet: 25,
+                                    desktop: 35,
                                   ),
+                                  color: color,
                                 ),
                                 kStyle.med(
                                   size: getValueForScreenType(
@@ -193,14 +189,14 @@ class OurSolutionWidget extends StatelessWidget {
                         }
                       },
                     ),
-                    const Gap(10),
-                    AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      height: 2,
-                      color: isSelected ? color : AppColors.transparent,
-                    ),
-                  ],
-                ),
+                  ),
+                  const Gap(10),
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 300),
+                    height: 2,
+                    color: isSelected ? color : AppColors.transparent,
+                  ),
+                ],
               ),
             ),
           );

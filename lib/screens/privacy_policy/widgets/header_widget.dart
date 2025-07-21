@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
-import 'package:vcyberiz/core/utils/styles/text_styles.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({
@@ -13,26 +13,16 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return getValueForScreenType(
-      context: context,
-      mobile: Kstyles().bold(
-        text: text,
-        size: 36,
-        color: AppColors.blue,
-        textAlign: TextAlign.left,
+    return kStyle.bold(
+      text: text,
+      size: getValueForScreenType(
+        context: context,
+        mobile: 36,
+        tablet: 60,
+        desktop: 64,
       ),
-      tablet: Kstyles().med(
-        text: text,
-        size: 60,
-        color: AppColors.black,
-        textAlign: TextAlign.left,
-      ),
-      desktop: Kstyles().med(
-        text: text,
-        size: 64,
-        color: AppColors.black,
-        textAlign: TextAlign.left,
-      ),
+      color: AppColors.blue,
+      textAlign: TextAlign.left,
     );
   }
 }
