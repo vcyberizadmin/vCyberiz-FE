@@ -94,7 +94,7 @@ class RelatedBlogsWidget extends StatelessWidget {
                               context: context,
                               mobile: 300,
                               tablet: 450,
-                              desktop: Constants.desktopBreakPoint / 3,
+                              desktop: (Constants.desktopBreakPoint / 3) - 15,
                             ),
                             child: BlogCardContainer(
                               imageUrl: blog.secImg?.url ?? '',

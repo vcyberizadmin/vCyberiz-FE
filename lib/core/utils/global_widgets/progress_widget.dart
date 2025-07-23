@@ -70,7 +70,7 @@ class _ProgressWidgetState extends State<ProgressWidget> {
     );
 
     const double itemPlacementRadius = semiCircleRadius + 80;
-    const double itemWidth = 220;
+    const double itemWidth = 210;
     const double itemHeight = 150;
 
     final int itemCount = widget.items.length;
@@ -297,7 +297,11 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                                 : x - (itemWidth / 2) > 450
                                     ? 480
                                     : x - (itemWidth / 2),
-                            top: y - (itemHeight / 2),
+                            top: widget.items.length < 5
+                                ? y - (itemHeight / 2)
+                                : y -
+                                    (itemHeight / 2) +
+                                    (index == 1 || index == 3 ? 20 : 0),
                             child: MouseRegion(
                               onEnter: (_) => setState(() {
                                 _currentProgressBarValue = progress;
@@ -315,10 +319,10 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                                   width: itemWidth,
                                   child: Column(
                                     children: [
-                                      kStyle.bold(
+                                      kStyle.semiBold(
                                         text: item.label ?? '',
-                                        textAlign: TextAlign.center,
-                                        size: 13,
+                                        align: TextAlign.center,
+                                        size: 12,
                                         color: AppColors.black,
                                         overflow: TextOverflow.visible,
                                         height: 1,
@@ -326,7 +330,7 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                                       kStyle.reg(
                                         text: item.secDescription ?? '',
                                         textAlign: TextAlign.center,
-                                        size: 13,
+                                        size: 12,
                                         color: AppColors.black,
                                         overflow: TextOverflow.visible,
                                         height: 1.5,

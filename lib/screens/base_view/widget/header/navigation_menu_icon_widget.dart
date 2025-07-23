@@ -190,50 +190,99 @@ class _NavigationMenuIconState extends State<NavigationMenuIcon>
                                                     onTap: () {
                                                       final label =
                                                           cta.label ?? '';
-                                                      final id = cta.href ?? '';
-
-                                                      final routesMap = {
-                                                        'Career': RouteConstants
-                                                            .careerScreenPath,
-                                                        'Partners': RouteConstants
-                                                            .partnersScreenPath,
-                                                        'Cyber Maturity Assessment (CMA)':
+                                                      final href =
+                                                          cta.href ?? '';
+                                                      if (label case 'Career') {
+                                                        context.goNamed(
+                                                          RouteConstants
+                                                              .careerScreenPath,
+                                                        );
+                                                      } else if (label
+                                                          case 'Partners') {
+                                                        context.goNamed(
+                                                          RouteConstants
+                                                              .partnersScreenPath,
+                                                        );
+                                                      } else if (label
+                                                          case 'Cyber Maturity Assessment (CMA)') {
+                                                        context.goNamed(
                                                             RouteConstants
                                                                 .cyberMeturityPath,
-                                                        'Intelligence-Led PT':
+                                                            queryParameters: {
+                                                              'id': href
+                                                            });
+                                                      } else if (label
+                                                          case 'Intelligence-Led PT') {
+                                                        context.goNamed(
                                                             RouteConstants
                                                                 .penitraionTestingPath,
-                                                        'M365 Security Posture Advisory':
+                                                            queryParameters: {
+                                                              'id': href
+                                                            });
+                                                      } else if (label
+                                                          case 'M365 Security Posture Advisory') {
+                                                        context.goNamed(
                                                             RouteConstants
                                                                 .postureAdvisoryPath,
-                                                        'Managed 365 Security':
+                                                            queryParameters: {
+                                                              'id': href
+                                                            });
+                                                      } else if (label
+                                                          case 'Managed 365 Security') {
+                                                        context.goNamed(
                                                             RouteConstants
                                                                 .managedSecurityPath,
-                                                        'M365 Security Implementation':
+                                                            queryParameters: {
+                                                              'id': href
+                                                            });
+                                                      } else if (label
+                                                          case 'M365 Security Implementation') {
+                                                        context.goNamed(
                                                             RouteConstants
                                                                 .securityImplementationPath,
-                                                        'vShieId':
+                                                            queryParameters: {
+                                                              'id': href
+                                                            });
+                                                      } else if (label
+                                                          case 'vShieId') {
+                                                        context.goNamed(
                                                             RouteConstants
                                                                 .vshieldPath,
-                                                        'vArmor': RouteConstants
-                                                            .varmorPath,
-                                                        'vProtect':
+                                                            queryParameters: {
+                                                              'id': href
+                                                            });
+                                                      } else if (label
+                                                          case 'vArmor') {
+                                                        context.goNamed(
+                                                            RouteConstants
+                                                                .varmorPath,
+                                                            queryParameters: {
+                                                              'id': href
+                                                            });
+                                                      } else if (label
+                                                          case 'vProtect') {
+                                                        context.goNamed(
                                                             RouteConstants
                                                                 .vprotectPath,
-                                                        'vRespond':
+                                                            queryParameters: {
+                                                              'id': href
+                                                            });
+                                                      } else if (label
+                                                          case 'vRespond') {
+                                                        context.goNamed(
                                                             RouteConstants
                                                                 .vrespondPath,
-                                                      };
-
-                                                      if (routesMap
-                                                          .containsKey(label)) {
-                                                        context.goNamed(
-                                                            routesMap[label]!,
                                                             queryParameters: {
-                                                              'id': id
+                                                              'id': href
                                                             });
-                                                        removeOverlay();
+                                                      } else {
+                                                        context.goNamed(
+                                                          RouteConstants
+                                                              .errorPath,
+                                                        );
                                                       }
+
+                                                      removeOverlay();
                                                     },
                                                     title: Row(
                                                       children: [

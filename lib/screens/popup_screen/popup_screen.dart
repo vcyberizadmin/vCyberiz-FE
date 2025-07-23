@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:vcyberiz/routes/route_constants.dart';
 
 import '../../core/utils/global_widgets/check_pref.dart';
 import '../../core/utils/global_widgets/custom_animated_button.dart';
@@ -44,7 +45,9 @@ class PopUpWidget extends StatelessWidget {
                   ),
                   recognizer: TapGestureRecognizer()
                     ..onTap = () {
-                      // Handle Cookies Policy tap
+                      context.pop();
+                      context.pop();
+                      context.goNamed(RouteConstants.cookiesPath);
                     },
                 ),
               ],
@@ -66,6 +69,7 @@ class PopUpWidget extends StatelessWidget {
                 onTap: () async {
                   await AppUtils.setAppOpened();
                   context.pop();
+                  context.pop();
                 },
               ),
               const Gap(20),
@@ -77,6 +81,7 @@ class PopUpWidget extends StatelessWidget {
                 bgButtonColor: AppColors.darkOrangeColor,
                 onTap: () async {
                   await AppUtils.setAppOpened();
+                  context.pop();
                   context.pop();
                 },
               ),

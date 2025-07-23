@@ -56,4 +56,6 @@ class RouteConstants {
   static String newsPath = 'news';
   static String newsArticleRoute = '/news-article';
   static String newsArticlePath = 'news-article';
+  static String errorRoute = '/error';
+  static String errorPath = 'error';
 }

@@ -22,6 +22,7 @@ import 'package:vcyberiz/screens/base_view/base_view.dart';
 import 'package:vcyberiz/screens/home/widgets/our-solution/our_solutions_widget.dart';
 import 'package:vcyberiz/screens/home/widgets/slider_screen/slider_widget.dart';
 import 'package:vcyberiz/screens/home/widgets/why_work_with_us/why_work_with_us_widget.dart';
+import 'package:vcyberiz/screens/popup_screen/popup_screen.dart';
 
 import '../../bloc/home-bloc/home_state.dart';
 import '../base_view/widget/footer/footer_screen.dart';
@@ -98,25 +99,25 @@ class _HomeScreenState extends State<HomeScreen> {
               SharedPreferences prefs = await SharedPreferences.getInstance();
               isFirstOpen = prefs.getBool('isFirstOpen') ?? true;
 
-              // if (isFirstOpen) {
-              //   showDialog(
-              //     context: context,
-              //     builder: (BuildContext context) {
-              //       return AlertDialog(
-              //         shape: RoundedRectangleBorder(
-              //           borderRadius: BorderRadius.circular(5.0),
-              //         ),
-              //         contentPadding:
-              //             EdgeInsets.zero, // Removes any default padding
-              //         content: SizedBox(
-              //           height: 220,
-              //           width: 400,
-              //           child: PopUpWidget(),
-              //         ),
-              //       );
-              //     },
-              //   );
-              // }
+              if (isFirstOpen) {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      contentPadding:
+                          EdgeInsets.zero, // Removes any default padding
+                      content: SizedBox(
+                        height: 220,
+                        width: 400,
+                        child: PopUpWidget(),
+                      ),
+                    );
+                  },
+                );
+              }
             },
             builder: (context, state) {
               return CustomScrollView(

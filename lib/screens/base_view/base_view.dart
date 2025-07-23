@@ -124,12 +124,8 @@ class _BaseViewState extends State<BaseView> {
                       ),
                       //!-------------(chat bot section)
                       Positioned(
-                        right: getValueForScreenType<double>(
-                          context: context,
-                          mobile: 30,
-                          tablet: 50,
-                          desktop: 100,
-                        ),
+                        right: 0,
+                        left: 0,
                         bottom: 80,
                         child: ChatBotWidget(),
                       ),

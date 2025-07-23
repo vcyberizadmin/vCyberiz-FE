@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+import 'package:vcyberiz/core/utils/constants/constants.dart';
 
 import '../../../bloc/home-bloc/home_bloc.dart';
 import '../../../bloc/home-bloc/home_event.dart';
@@ -21,19 +23,39 @@ class ChatBotWidget extends StatelessWidget {
       builder: (context, state) {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (state.showChatContainer)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+            Container(
+              width: getValueForScreenType<double>(
+                context: context,
+                mobile: Constants.width * .96,
+                tablet: Constants.width * .92,
+                desktop: Constants.desktopBreakPoint,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  closeButtonWidget(context),
-                  const Gap(10),
-                  messageBoxWidget(context),
-                  const Gap(20),
+                  if (state.showChatContainer)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        closeButtonWidget(context),
+                        const Gap(10),
+                        messageBoxWidget(context),
+                        const Gap(20),
+                      ],
+                    ),
+                  iconButtonWidget(context, state),
+                  Gap(getValueForScreenType<double>(
+                    context: context,
+                    mobile: 10,
+                    tablet: 20,
+                    desktop: 50,
+                  )),
                 ],
               ),
-            iconButtonWidget(context, state),
+            ),
           ],
         );
       },

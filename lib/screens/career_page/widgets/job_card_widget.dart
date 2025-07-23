@@ -20,101 +20,111 @@ class CareerCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-          10,
+    return InkWell(
+      onTap: () {
+        context.goNamed(
+          RouteConstants.careerDetailsScreenPath,
+          queryParameters: {
+            'id': data?.documentId ?? '',
+          },
+        );
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            10,
+          ),
+          color: AppColors.white,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.grey.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 5,
+            ),
+          ],
         ),
-        color: AppColors.white,
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.grey.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 5,
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.all(
-        15,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          kStyle.med(
-            text: data?.secHeader ?? '',
-            size: getValueForScreenType(
-              context: context,
-              mobile: 16,
-              tablet: 18,
-              desktop: 18,
-            ),
-            color: AppColors.textBlueColor,
-          ),
-          const Gap(10),
-          //!----------(Job type )
-          Wrap(
-            children: [
-              ...(data?.employmentTypes ?? []).map(
-                (EmploymentType data) => jobTypeText(
-                  data.secText ?? '',
-                  _hexToColor(data.colorIdentifier ?? ''),
-                ),
+        padding: const EdgeInsets.all(
+          15,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            kStyle.med(
+              text: data?.secHeader ?? '',
+              size: getValueForScreenType(
+                context: context,
+                mobile: 16,
+                tablet: 18,
+                desktop: 18,
               ),
-            ],
-          ),
-          const Gap(8),
-          Expanded(
-            flex: 1,
-            //!----------(Description text)
-            child: kStyle.reg(
-              text: data?.secDescription ?? '',
-              size: 14,
-              color: AppColors.black,
-              maxLines: getValueForScreenType(
-                  context: context, mobile: 4, desktop: 3, tablet: 4),
-              overflow: TextOverflow.ellipsis,
+              color: AppColors.textBlueColor,
             ),
-          ),
-          const Gap(8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              if ((data?.jobLocation ?? '').isNotEmpty)
-                Expanded(
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        AssetConst.location,
-                        width: 20,
-                        color: AppColors.davysGray,
-                      ),
-                      Gap(5),
-                      Expanded(
-                        child: kStyle.reg(
-                          text: data?.jobLocation ?? '',
-                          size: 14,
-                          color: AppColors.davysGray,
-                          overflow: TextOverflow.visible,
-                        ),
-                      )
-                    ],
+            const Gap(10),
+            //!----------(Job type )
+            Wrap(
+              children: [
+                ...(data?.employmentTypes ?? []).map(
+                  (EmploymentType data) => jobTypeText(
+                    data.secText ?? '',
+                    _hexToColor(data.colorIdentifier ?? ''),
                   ),
                 ),
-              CustomButtonWidget(
-                text: StringConst.applyNow,
-                bgButtonColor: AppColors.darkOrangeColor,
-                onTap: () {
-                  context.goNamed(
-                    RouteConstants.careerDetailsScreenPath,
-                    queryParameters: {
-                      'id': data?.documentId ?? '',
-                    },
-                  );
-                },
+              ],
+            ),
+            const Gap(8),
+            Expanded(
+              flex: 1,
+              //!----------(Description text)
+              child: kStyle.reg(
+                text: data?.secDescription ?? '',
+                size: 14,
+                color: AppColors.black,
+                maxLines: getValueForScreenType(
+                    context: context, mobile: 4, desktop: 3, tablet: 4),
+                overflow: TextOverflow.ellipsis,
               ),
-            ],
-          ),
-        ],
+            ),
+            const Gap(8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                if ((data?.jobLocation ?? '').isNotEmpty)
+                  Expanded(
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          AssetConst.location,
+                          width: 20,
+                          color: AppColors.davysGray,
+                        ),
+                        Gap(5),
+                        Expanded(
+                          child: kStyle.reg(
+                            text: data?.jobLocation ?? '',
+                            size: 14,
+                            color: AppColors.davysGray,
+                            overflow: TextOverflow.visible,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                CustomButtonWidget(
+                  text: StringConst.applyNow,
+                  bgButtonColor: AppColors.darkOrangeColor,
+                  onTap: () {
+                    context.goNamed(
+                      RouteConstants.careerDetailsScreenPath,
+                      queryParameters: {
+                        'id': data?.documentId ?? '',
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

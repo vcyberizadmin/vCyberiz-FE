@@ -565,43 +565,36 @@ class FooterCompanySection extends StatelessWidget {
       return InkWell(
         onTap: () {
           final href = data.href ?? '';
-          switch (label) {
-            case 'Cyber Maturity Assessment':
-              context.goNamed(RouteConstants.cyberMeturityPath,
-                  queryParameters: {'id': href});
-              break;
-            case 'Intelligence Led Penetration Testing':
-              context.goNamed(RouteConstants.penitraionTestingPath,
-                  queryParameters: {'id': href});
-              break;
-            case 'M365 Security Posture Advisory':
-              context.goNamed(RouteConstants.postureAdvisoryPath,
-                  queryParameters: {'id': href});
-              break;
-            case 'Managed 365 Security':
-              context.goNamed(RouteConstants.managedSecurityPath,
-                  queryParameters: {'id': href});
-              break;
-            case 'M365 Security Implementation':
-              context.goNamed(RouteConstants.securityImplementationPath,
-                  queryParameters: {'id': href});
-              break;
-            case 'vShield':
-              context.goNamed(RouteConstants.vshieldPath,
-                  queryParameters: {'id': href});
-              break;
-            case 'vArmor':
-              context.goNamed(RouteConstants.varmorPath,
-                  queryParameters: {'id': href});
-              break;
-            case 'vProtect':
-              context.goNamed(RouteConstants.vprotectPath,
-                  queryParameters: {'id': href});
-              break;
-            case 'vRespond':
-              context.goNamed(RouteConstants.vrespondPath,
-                  queryParameters: {'id': href});
-              break;
+          if (label case 'Cyber Maturity Assessment') {
+            context.goNamed(RouteConstants.cyberMeturityPath,
+                queryParameters: {'id': href});
+          } else if (label case 'Intelligence Led Penetration Testing') {
+            context.goNamed(RouteConstants.penitraionTestingPath,
+                queryParameters: {'id': href});
+          } else if (label case 'M365 Security Posture Advisory') {
+            context.goNamed(RouteConstants.postureAdvisoryPath,
+                queryParameters: {'id': href});
+          } else if (label case 'Managed 365 Security') {
+            context.goNamed(RouteConstants.managedSecurityPath,
+                queryParameters: {'id': href});
+          } else if (label case 'M365 Security Implementation') {
+            context.goNamed(RouteConstants.securityImplementationPath,
+                queryParameters: {'id': href});
+          } else if (label case 'vShield') {
+            context.goNamed(RouteConstants.vshieldPath,
+                queryParameters: {'id': href});
+          } else if (label case 'vArmor') {
+            context.goNamed(RouteConstants.varmorPath,
+                queryParameters: {'id': href});
+          } else if (label case 'vProtect') {
+            context.goNamed(RouteConstants.vprotectPath,
+                queryParameters: {'id': href});
+          } else if (label case 'vRespond') {
+            context.goNamed(RouteConstants.vrespondPath,
+                queryParameters: {'id': href});
+          } else {
+            context.goNamed(RouteConstants.serviceDetailsPath,
+                queryParameters: {'id': href});
           }
         },
         child: Padding(

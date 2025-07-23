@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -222,13 +224,6 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
               ValueListenableBuilder<double>(
                 valueListenable: stickyPosition,
                 builder: (_, pos, __) {
-                  // final footerHeight = _footerHeight ?? 0;
-
-                  // log(footerHeight.toString(), name: 'footer');
-                  // log(_scrollController.offset.toString(), name: 'offset');
-                  // log(Constants.width.toString(), name: 'width');
-                  // log(_contentHeight.toString(), name: 'content');
-
                   return Positioned(
                     top: homeState.isTopContainerVisible ? 160 : 20,
                     right: 0,
@@ -284,7 +279,11 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
     } else if (Constants.width < 1400) {
       return (_scrollController.offset < 7000) ? Constants.height : 150;
     } else if (Constants.width < 1600) {
-      return (_scrollController.offset < 6000) ? Constants.height : 200;
+      if (_scrollController.offset < 6000) {
+        return (_scrollController.offset < 6000) ? Constants.height : 200;
+      } else {
+        return (_scrollController.offset < 6500) ? Constants.height : 200;
+      }
     } else if (Constants.width < 1800) {
       return (_scrollController.offset < 6200) ? Constants.height : 250;
     } else if (Constants.width < 2400) {

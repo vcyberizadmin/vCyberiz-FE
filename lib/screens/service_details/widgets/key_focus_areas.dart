@@ -188,7 +188,7 @@ class _FocusAreaCard extends StatelessWidget {
   // Helper function to determine the border based on index and hover state
   Border? _getCardBorder(int index, bool isHover) {
     const BorderSide hoverBorderSide =
-        BorderSide(color: AppColors.orange, width: 2.0);
+        BorderSide(color: AppColors.orange, width: 2);
     const BorderSide defaultBorderSide =
         BorderSide(color: AppColors.greyBorder, width: .1); // Light grey color
 
@@ -226,7 +226,7 @@ class _FocusAreaCard extends StatelessWidget {
             context: context,
             mobile: 10,
             tablet: 15,
-            desktop: 20,
+            desktop: 16,
           )),
           decoration: BoxDecoration(
               color: AppColors.antiFlashWhite,

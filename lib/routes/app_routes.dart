@@ -254,6 +254,17 @@ final GoRouter basicRoutes = GoRouter(
             ),
           );
         }),
+    GoRoute(
+        path: RouteConstants.errorRoute,
+        name: RouteConstants.errorPath,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return NoTransitionPage(
+            child: ErrorScreen(
+              error: '',
+              dataConnected: true,
+            ),
+          );
+        }),
   ],
   errorBuilder: (context, state) {
     return ErrorScreen(
