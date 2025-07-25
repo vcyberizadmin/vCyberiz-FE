@@ -113,6 +113,7 @@ class _BaseViewState extends State<BaseView> {
                             ),
                           HeaderScreen(
                             key: headerKey,
+                            disableInteractions: showCookieConsent,
                           ),
                           if (showCookieConsent) _cookieConsentBanner(),
                         ],

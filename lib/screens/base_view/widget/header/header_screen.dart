@@ -25,7 +25,8 @@ import 'search_widget.dart';
 import 'service_widget.dart';
 
 class HeaderScreen extends StatelessWidget {
-  const HeaderScreen({super.key});
+  final bool disableInteractions;
+  const HeaderScreen({super.key, required this.disableInteractions});
 
   @override
   Widget build(BuildContext context) {
@@ -34,27 +35,30 @@ class HeaderScreen extends StatelessWidget {
         if (state.loading) {
           return const SizedBox();
         }
-        return Container(
-          color: AppColors.white,
-          width: Constants.width,
-          child: Center(
-            child: SizedBox(
-              width: getValueForScreenType<double>(
-                context: context,
-                mobile: Constants.width * .96,
-                tablet: Constants.width * .92,
-                desktop: Constants.desktopBreakPoint,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //!-----(header bottom widget)
+        return AbsorbPointer(
+          absorbing: disableInteractions,
+          child: Container(
+            color: AppColors.white,
+            width: Constants.width,
+            child: Center(
+              child: SizedBox(
+                width: getValueForScreenType<double>(
+                  context: context,
+                  mobile: Constants.width * .96,
+                  tablet: Constants.width * .92,
+                  desktop: Constants.desktopBreakPoint,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //!-----(header bottom widget)
 
-                    _headerBottomRowWidget(context, state),
-                  ],
+                      _headerBottomRowWidget(context, state),
+                    ],
+                  ),
                 ),
               ),
             ),
