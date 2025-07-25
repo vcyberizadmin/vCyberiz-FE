@@ -60,6 +60,7 @@ class EventListSection extends StatelessWidget {
                         child: firstCard(
                       context: context,
                       imageUrl: event[0].secImg?.url ?? '',
+                      imageLabel: event[0].secImg?.name ?? '',
                       heading: event[0].eventTitle ?? "",
                       documentId: event[0].documentId ?? '',
                       date: event[0].publicationDate ?? DateTime.now(),
@@ -123,6 +124,7 @@ class EventListSection extends StatelessWidget {
                       child: firstCard(
                         context: context,
                         imageUrl: event[0].secImg?.url ?? '',
+                        imageLabel: event[0].secImg?.name ?? '',
                         heading: event[0].eventTitle ?? "",
                         documentId: event[0].documentId ?? '',
                         date: event[0].publicationDate ?? DateTime.now(),
@@ -209,6 +211,7 @@ class EventListSection extends StatelessWidget {
     required BuildContext context,
     required String documentId,
     required String imageUrl,
+    required String imageLabel,
     required String heading,
     required DateTime date,
   }) {
@@ -305,6 +308,7 @@ class EventListSection extends StatelessWidget {
               Expanded(
                 child: ThumbnailWithHoverEffect(
                   imageUrl: imageUrl,
+                  imageLabel: imageLabel,
                 ),
               ),
             ],

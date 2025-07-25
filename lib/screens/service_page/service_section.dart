@@ -61,6 +61,7 @@ class _ServiceSecurityScreenState extends State<ServiceSecurityScreen> {
                 HeadingWidget(
                   text: state.serviceHeaderData?.secHeader ?? '',
                   image: state.serviceHeaderData?.secBg?.url ?? '',
+                  label: state.serviceHeaderData?.secBg?.name ?? '',
                 ), //!------------------------(Security consulting section)
                 DirectApproachScreen(),
                 //!----------------------(Pentagon section)

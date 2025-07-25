@@ -19,7 +19,9 @@ class ProgressWidget extends StatefulWidget {
   final String header;
   final String label;
   final String bgImage;
+  final String bgImageLabel;
   final String logoimage;
+  final String logoLabel;
 
   const ProgressWidget({
     super.key,
@@ -28,6 +30,8 @@ class ProgressWidget extends StatefulWidget {
     required this.bgImage,
     required this.label,
     required this.logoimage,
+    required this.logoLabel,
+    required this.bgImageLabel,
   });
 
   @override
@@ -88,7 +92,8 @@ class _ProgressWidgetState extends State<ProgressWidget> {
       decoration: BoxDecoration(
         color: AppColors.white,
         image: DecorationImage(
-          image: decorationImageProviderWidget(widget.bgImage),
+          image: decorationImageProviderWidget(
+              widget.bgImage, widget.bgImageLabel),
           fit: getValueForScreenType(
             context: context,
             mobile: BoxFit.contain,
@@ -167,8 +172,10 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                               color: Colors.orange.shade500,
                               shape: BoxShape.circle,
                             ),
-                            child:
-                                ImageWidget(imageUrl: item.secLogo?.url ?? ''),
+                            child: ImageWidget(
+                              imageUrl: item.secLogo?.url ?? '',
+                              label: item.secLogo?.name ?? '',
+                            ),
                           ),
                           const SizedBox(width: 12),
                           Expanded(
@@ -253,6 +260,7 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                                       bottom: 20,
                                       child: ImageWidget(
                                         imageUrl: widget.logoimage,
+                                        label: widget.logoLabel,
                                         height: 50, // control size here
                                         fit: BoxFit.contain,
                                       ),
@@ -352,7 +360,9 @@ class _ProgressWidgetState extends State<ProgressWidget> {
                                           ],
                                         ),
                                         child: ImageWidget(
-                                            imageUrl: item.secLogo?.url ?? ''),
+                                          imageUrl: item.secLogo?.url ?? '',
+                                          label: item.secLogo?.name ?? '',
+                                        ),
                                       ),
                                     ],
                                   ),

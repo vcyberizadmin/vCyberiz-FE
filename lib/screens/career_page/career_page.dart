@@ -60,6 +60,9 @@ class _CareerPageState extends State<CareerPage> {
                   text: state.headerData?.pageBanner?.first.secHeader ?? '',
                   image: state.headerData?.pageBanner?.first.secBg?.first.url ??
                       '',
+                  label:
+                      state.headerData?.pageBanner?.first.secBg?.first.name ??
+                          '',
                 ), //!----------(Career vacancy section)
                 CareerVacancySection(),
                 if (state.pagesCount > 1)

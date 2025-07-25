@@ -104,6 +104,7 @@ class _ValuesSectionState extends State<ValuesSection> {
                           title: data?.secHeader ?? '',
                           description: data?.description ?? '',
                           imageUrl: data?.logoImg?.url ?? '',
+                          imageLabel: data?.logoImg?.name ?? '',
                           index: index,
                           hoveredIndex: _hoveredIndex,
                           onHover: (isHovered) {

@@ -156,6 +156,7 @@ class _NewsScreenState extends State<NewsScreen> {
             HeadingWidget(
               text: state.headerData?.secHeader ?? '',
               image: state.headerData?.secBgImg?.url ?? '',
+              label: state.headerData?.secBgImg?.name ?? '',
             ),
             const Gap(60),
             NewsViewHome(
@@ -205,6 +206,7 @@ class _NewsScreenState extends State<NewsScreen> {
         HeadingWidget(
           text: state.headerData?.secHeader ?? '',
           image: state.headerData?.secBgImg?.url ?? '',
+          label: state.headerData?.secBgImg?.name ?? '',
         ),
         Gap(sizingInformation.isTablet ? 60 : 32),
         SizedBox(

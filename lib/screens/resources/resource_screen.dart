@@ -71,6 +71,7 @@ class _ResourceScreenState extends State<ResourceScreen> {
                 HeadingWidget(
                   text: state.headerData?.secHeader ?? '',
                   image: state.headerData?.secBgImg?.url ?? '',
+                  label: state.headerData?.secBgImg?.name ?? '',
                 ),
                 FeaturedBlogs(),
                 LatestNews(),

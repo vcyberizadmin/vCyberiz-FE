@@ -31,6 +31,7 @@ class VideoPlayer extends StatelessWidget {
             image: DecorationImage(
               image: decorationImageProviderWidget(
                 state.homeData?.videoUrl?.url ?? '',
+                state.homeData?.videoUrl?.name ?? '',
               ),
             ),
           ),

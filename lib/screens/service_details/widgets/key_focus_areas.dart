@@ -40,6 +40,9 @@ class KeyFocusAreas extends StatelessWidget {
                 image: decorationImageProviderWidget(
                   state.serviceDetailsData?.innerPage?[2].secBgImg?.first.url ??
                       '',
+                  state.serviceDetailsData?.innerPage?[2].secBgImg?.first
+                          .name ??
+                      '',
                 ),
                 fit: BoxFit.contain,
               )),
@@ -164,6 +167,7 @@ class KeyFocusAreas extends StatelessWidget {
           title: item.secHeader ?? '',
           description: item.description ?? '',
           icon: item.logoImg?.url ?? '',
+          iconLabel: item.logoImg?.name ?? '',
           cardIndex: index,
         );
       },
@@ -176,6 +180,7 @@ class _FocusAreaCard extends StatelessWidget {
   final String title;
   final String description;
   final String icon;
+  final String iconLabel;
   final int cardIndex; // To determine which border to apply
 
   const _FocusAreaCard({
@@ -183,6 +188,7 @@ class _FocusAreaCard extends StatelessWidget {
     required this.description,
     required this.icon,
     required this.cardIndex,
+    required this.iconLabel,
   });
 
   // Helper function to determine the border based on index and hover state
@@ -244,6 +250,7 @@ class _FocusAreaCard extends StatelessWidget {
               // Icon
               ImageWidget(
                 imageUrl: icon,
+                label: iconLabel,
                 height: 60,
               ),
               if (title.isNotEmpty)

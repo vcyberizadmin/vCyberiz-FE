@@ -123,6 +123,7 @@ class OurSolutionWidget extends StatelessWidget {
                               children: [
                                 ImageWidget(
                                   imageUrl: item?.sectionLogo?.url ?? '',
+                                  label: item?.sectionLogo?.name ?? '',
                                   width: getValueForScreenType<double>(
                                     context: context,
                                     mobile: 25,
@@ -156,6 +157,7 @@ class OurSolutionWidget extends StatelessWidget {
                                 curve: Curves.easeInOut,
                                 child: ImageWidget(
                                   imageUrl: item?.sectionLogo?.url ?? '',
+                                  label: item?.sectionLogo?.name ?? '',
                                   width: getValueForScreenType<double>(
                                     context: context,
                                     mobile: 25,
@@ -313,6 +315,9 @@ class OurSolutionWidget extends StatelessWidget {
                             ?.first
                             .url ??
                         '',
+                    label: state.data?.solutionAccordian?[state.selectedIndex]
+                            .imgUrl?.first.name ??
+                        '',
                     height: getValueForScreenType(
                       context: context,
                       mobile: 300,
@@ -336,6 +341,9 @@ class OurSolutionWidget extends StatelessWidget {
               child: ImageWidget(
                 imageUrl: state.data?.solutionAccordian?[state.selectedIndex]
                         .imgUrl?.first.url ??
+                    '',
+                label: state.data?.solutionAccordian?[state.selectedIndex]
+                        .imgUrl?.first.name ??
                     '',
                 width: getValueForScreenType(
                   context: context,

@@ -97,6 +97,7 @@ class EbookWidget extends StatelessWidget {
                             borderRadius: BorderRadius.circular(6),
                             child: ImageWidget(
                               imageUrl: ebook.secImg?.url ?? '',
+                              label: ebook.secImg?.name ?? '',
                               width: 50,
                               height: 70,
                               fit: BoxFit.cover,

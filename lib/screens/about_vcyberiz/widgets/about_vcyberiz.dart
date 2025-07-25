@@ -35,6 +35,7 @@ class AboutVcyberizSection extends StatelessWidget {
                 fit: BoxFit.fill,
                 image: decorationImageProviderWidget(
                   state.headerData?.secBg?.url ?? '',
+                  state.headerData?.secBg?.name ?? '',
                 ),
               )),
               child: Center(

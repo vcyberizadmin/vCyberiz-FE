@@ -9,10 +9,12 @@ import 'image_widget.dart';
 class HeadingWidget extends StatelessWidget {
   final String text;
   final String image;
+  final String label;
   const HeadingWidget({
     super.key,
     required this.text,
     required this.image,
+    required this.label,
   });
 
   @override
@@ -34,6 +36,7 @@ class HeadingWidget extends StatelessWidget {
             fit: BoxFit.fill,
             image: decorationImageProviderWidget(
               image,
+              label,
             ),
           )),
           child: Center(

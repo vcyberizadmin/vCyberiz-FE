@@ -11,6 +11,7 @@ class AboutUsCardWidget extends StatefulWidget {
   final String title;
   final String description;
   final String imageUrl;
+  final String imageLabel;
   final int index;
 
   const AboutUsCardWidget({
@@ -19,6 +20,7 @@ class AboutUsCardWidget extends StatefulWidget {
     required this.description,
     required this.imageUrl,
     required this.index,
+    required this.imageLabel,
   });
 
   @override
@@ -84,6 +86,7 @@ class _AboutUsCardWidgetState extends State<AboutUsCardWidget> {
                       width: isHovered ? 100 : 90,
                       child: ImageWidget(
                         imageUrl: widget.imageUrl,
+                        label: widget.imageLabel,
                         fit: BoxFit.contain,
                       ),
                     ),

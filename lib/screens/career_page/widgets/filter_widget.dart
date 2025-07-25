@@ -134,6 +134,7 @@ class _FilterPopupState extends State<FilterPopup> {
                 tilePadding: EdgeInsets.symmetric(horizontal: 16.0),
                 leading: ImageWidget(
                     imageUrl: data.secLogo?.first.url ?? '',
+                    label: data.secLogo?.first.name ?? '',
                     width: 24,
                     height: 24),
                 title: kStyle.reg(

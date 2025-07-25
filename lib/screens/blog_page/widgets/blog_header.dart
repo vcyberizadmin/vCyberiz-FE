@@ -22,7 +22,9 @@ class BlogHeaderSection extends StatelessWidget {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: decorationImageProviderWidget(
-                      state.headerData?.secHeader?.secBg?.first.url ?? ""),
+                    state.headerData?.secHeader?.secBg?.first.url ?? "",
+                    state.headerData?.secHeader?.secBg?.first.name ?? "",
+                  ),
                   fit: BoxFit.fill,
                 ),
               ),

@@ -55,6 +55,9 @@ class HeaderSection extends StatelessWidget {
                           imageUrl: state.solutionsHeaderData?.secBanner?.secImg
                                   ?.url ??
                               '',
+                          label: state.solutionsHeaderData?.secBanner?.secImg
+                                  ?.name ??
+                              '',
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -83,6 +86,9 @@ class HeaderSection extends StatelessWidget {
                         imageUrl:
                             state.solutionsHeaderData?.secBanner?.secImg?.url ??
                                 '',
+                        label: state
+                                .solutionsHeaderData?.secBanner?.secImg?.name ??
+                            '',
                         fit: BoxFit.cover,
                         // width: sizingInformation.isTablet ? 687 : 833,
                       ),

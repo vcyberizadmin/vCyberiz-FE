@@ -86,7 +86,10 @@ class ScopeOfServiceSection extends StatelessWidget {
                               width: Constants.width,
                               imageUrl: state.serviceDetailsData?.innerPage?[1]
                                       .secImg?.url ??
-                                  '', // Replace with your image
+                                  '',
+                              label: state.serviceDetailsData?.innerPage?[1]
+                                      .secImg?.name ??
+                                  '',
                               fit: BoxFit.cover,
                             ),
                           ],
@@ -379,8 +382,8 @@ class ScopeOfServiceSection extends StatelessWidget {
           tablet: 300,
           desktop: 500,
         ),
-        imageUrl: state.serviceDetailsData?.innerPage?[1].secImg?.url ??
-            '', // Replace with your image
+        imageUrl: state.serviceDetailsData?.innerPage?[1].secImg?.url ?? '',
+        label: state.serviceDetailsData?.innerPage?[1].secImg?.name ?? '',
         fit: BoxFit.cover,
       ),
     );

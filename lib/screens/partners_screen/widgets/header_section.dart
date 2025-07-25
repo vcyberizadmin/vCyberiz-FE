@@ -21,6 +21,7 @@ class HeaderSection extends StatelessWidget {
             image: DecorationImage(
               image: decorationImageProviderWidget(
                 state.headerData?.secBg?.url ?? "",
+                state.headerData?.secBg?.label ?? "",
               ),
               fit: BoxFit.fill,
             ),

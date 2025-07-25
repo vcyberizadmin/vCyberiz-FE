@@ -104,6 +104,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           border: InputBorder.none,
           icon: ImageWidget(
             imageUrl: state.filterData?.formFieldIcons?[0].fieldIcon?.url ?? '',
+            label: state.filterData?.formFieldIcons?[0].fieldIcon?.name ?? '',
             height: 25,
             width: 25,
           ),
@@ -157,6 +158,8 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 icon: ImageWidget(
                   imageUrl:
                       state.filterData?.formFieldIcons?[1].fieldIcon?.url ?? '',
+                  label: state.filterData?.formFieldIcons?[1].fieldIcon?.name ??
+                      '',
                   height: 25,
                   width: 25,
                 ),
@@ -228,6 +231,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             ImageWidget(
               imageUrl:
                   state.filterData?.formFieldIcons?[3].fieldIcon?.url ?? '',
+              label: state.filterData?.formFieldIcons?[3].fieldIcon?.name ?? '',
               height: 25,
               width: 25,
             ),

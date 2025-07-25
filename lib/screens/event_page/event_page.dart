@@ -155,6 +155,7 @@ class _EventsScreenState extends State<EventsScreen> {
           HeadingWidget(
             text: state.headerData?.secBody?.secHeader ?? '',
             image: state.headerData?.secBody?.secBg?.first.url ?? '',
+            label: state.headerData?.secBody?.secBg?.first.name ?? '',
           ),
           const Gap(32),
           SizedBox(
@@ -217,6 +218,7 @@ class _EventsScreenState extends State<EventsScreen> {
             HeadingWidget(
               text: state.headerData?.secBody?.secHeader ?? '',
               image: state.headerData?.secBody?.secBg?.first.url ?? '',
+              label: state.headerData?.secBody?.secBg?.first.name ?? '',
             ),
             const Gap(60),
             EventsSection(
@@ -266,6 +268,7 @@ class _EventsScreenState extends State<EventsScreen> {
         HeadingWidget(
           text: state.headerData?.secBody?.secHeader ?? '',
           image: state.headerData?.secBody?.secBg?.first.url ?? '',
+          label: state.headerData?.secBody?.secBg?.first.name ?? '',
         ),
         const Gap(60),
         SizedBox(

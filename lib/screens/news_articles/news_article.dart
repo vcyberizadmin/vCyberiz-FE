@@ -245,6 +245,7 @@ class _NewsArticleScreenState extends State<NewsArticleScreen> {
         image: DecorationImage(
           image: decorationImageProviderWidget(
             state.blogMarketingList?.secCard?.secImg?.url ?? '',
+            state.blogMarketingList?.secCard?.secImg?.name ?? '',
           ),
           fit: BoxFit.cover,
         ),
@@ -361,6 +362,7 @@ class _NewsArticleScreenState extends State<NewsArticleScreen> {
                 image: DecorationImage(
                   image: decorationImageProviderWidget(
                     state.newsArticleData?.secImg?.url ?? '',
+                    state.newsArticleData?.secImg?.name ?? '',
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -477,7 +479,8 @@ class _NewsArticleScreenState extends State<NewsArticleScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: ImageWidget(
-                imageUrl: child.url!,
+                imageUrl: child.url ?? '',
+                label: '',
                 width: MediaQuery.of(context).size.width * 0.9,
                 fit: BoxFit.contain,
               ),

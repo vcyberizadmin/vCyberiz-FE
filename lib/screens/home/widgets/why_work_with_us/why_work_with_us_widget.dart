@@ -104,6 +104,8 @@ class _WhyWorkWithUsWidgetState extends State<WhyWorkWithUsWidget> {
                           return CardWidget(
                             imageUrl:
                                 state.data?.cards?[index].cardImg?.url ?? "",
+                            imageLabel:
+                                state.data?.cards?[index].cardImg?.name ?? "",
                             title: state.data?.cards?[index].title ?? "",
                             description:
                                 state.data?.cards?[index].description ?? "",
@@ -135,6 +137,8 @@ class _WhyWorkWithUsWidgetState extends State<WhyWorkWithUsWidget> {
                                 child: CardWidget(
                                   imageUrl:
                                       state.data?.cards?[i].cardImg?.url ?? "",
+                                  imageLabel:
+                                      state.data?.cards?[i].cardImg?.name ?? "",
                                   title: state.data?.cards?[i].title ?? "",
                                   description:
                                       state.data?.cards?[i].description ?? "",
@@ -160,6 +164,8 @@ class _WhyWorkWithUsWidgetState extends State<WhyWorkWithUsWidget> {
                                 child: CardWidget(
                                   imageUrl:
                                       state.data?.cards?[i].cardImg?.url ?? "",
+                                  imageLabel:
+                                      state.data?.cards?[i].cardImg?.name ?? "",
                                   title: state.data?.cards?[i].title ?? "",
                                   description:
                                       state.data?.cards?[i].description ?? "",
@@ -177,6 +183,9 @@ class _WhyWorkWithUsWidgetState extends State<WhyWorkWithUsWidget> {
                                 child: CardWidget(
                                   imageUrl:
                                       state.data?.cards?[i + 1].cardImg?.url ??
+                                          "",
+                                  imageLabel:
+                                      state.data?.cards?[i + 1].cardImg?.name ??
                                           "",
                                   title: state.data?.cards?[i + 1].title ?? "",
                                   description:
@@ -213,6 +222,8 @@ class _WhyWorkWithUsWidgetState extends State<WhyWorkWithUsWidget> {
                             return CardWidget(
                               imageUrl:
                                   state.data?.cards?[index].cardImg?.url ?? "",
+                              imageLabel:
+                                  state.data?.cards?[index].cardImg?.name ?? "",
                               title: state.data?.cards?[index].title ?? "",
                               description:
                                   state.data?.cards?[index].description ?? "",

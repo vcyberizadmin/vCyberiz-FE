@@ -83,6 +83,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 HeadingWidget(
                   text: state.bannerData?.data.secHeader ?? "",
                   image: state.bannerData?.data.secBg.url ?? "",
+                  label: state.bannerData?.data.secBg.name ?? "",
                 ),
                 ResponsiveBuilder(
                   builder: (context, sizingInformation) {
@@ -204,7 +205,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 ),
                 image: DecorationImage(
                   image: decorationImageProviderWidget(
-                      state.headerData?.secBg?.url ?? ''),
+                    state.headerData?.secBg?.url ?? '',
+                    state.headerData?.secBg?.name ?? '',
+                  ),
                   fit: BoxFit.cover,
                 ),
               ),

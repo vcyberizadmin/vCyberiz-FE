@@ -14,7 +14,7 @@ class EventsSecurityMaturitySection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: Constants.width,
       child: Center(
         child: BlocConsumer<EventsBloc, EventsState>(
@@ -33,6 +33,7 @@ class EventsSecurityMaturitySection extends StatelessWidget {
                 image: DecorationImage(
                   image: decorationImageProviderWidget(
                     state.relatedEvents?.secCard?.secBg?.url ?? '',
+                    state.relatedEvents?.secCard?.secBg?.name ?? '',
                   ),
                   fit: BoxFit.fill,
                 ),

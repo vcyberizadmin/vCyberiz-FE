@@ -286,6 +286,7 @@ class ServiceOfferings extends StatelessWidget {
             children: [
               ImageWidget(
                 imageUrl: items.secLogo?.url ?? '',
+                label: items.secLogo?.name ?? '',
                 width: 25,
               ),
               Gap(10),

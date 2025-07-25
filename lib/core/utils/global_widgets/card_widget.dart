@@ -12,6 +12,7 @@ class CardWidget extends StatefulWidget {
   final String title;
   final String description;
   final String imageUrl;
+  final String imageLabel;
   final int index;
   final int? hoveredIndex; // New parameter
   final Function(bool) onHover;
@@ -28,6 +29,7 @@ class CardWidget extends StatefulWidget {
     required this.onHover,
     this.width,
     this.isHome = true,
+    required this.imageLabel,
   });
   @override
   State<CardWidget> createState() => _CardWidgetState();
@@ -108,6 +110,7 @@ class _CardWidgetState extends State<CardWidget> {
                     ),
                     child: ImageWidget(
                       imageUrl: widget.imageUrl,
+                      label: widget.imageLabel,
                       fit: BoxFit.fill,
                       height: getValueForScreenType(
                         context: context,

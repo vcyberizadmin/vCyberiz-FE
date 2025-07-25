@@ -90,12 +90,13 @@ class _HeaderSectionState extends State<HeaderSection> {
                         Expanded(
                           child: SizedBox(
                             key: _rightKey,
-                            height: (detailsHeight ?? 0) < 500
-                                ? 600
-                                : detailsHeight,
+                            height: 600,
                             child: imageWidget(
                               state.serviceDetailsData?.innerPage?[0].secBanner
                                       ?.secImg?.url ??
+                                  '',
+                              state.serviceDetailsData?.innerPage?[0].secBanner
+                                      ?.secImg?.name ??
                                   '',
                             ),
                           ),
@@ -124,6 +125,9 @@ class _HeaderSectionState extends State<HeaderSection> {
                             state.serviceDetailsData?.innerPage?[0].secBanner
                                     ?.secImg?.url ??
                                 '',
+                            state.serviceDetailsData?.innerPage?[0].secBanner
+                                    ?.secImg?.name ??
+                                '',
                           ),
                         )
                       ],
@@ -138,9 +142,13 @@ class _HeaderSectionState extends State<HeaderSection> {
     );
   }
 
-  Widget imageWidget(String imageUrl) {
+  Widget imageWidget(
+    String imageUrl,
+    String label,
+  ) {
     return ImageWidget(
       imageUrl: imageUrl,
+      label: label,
       fit: BoxFit.cover,
       width: double.infinity,
     );
@@ -160,7 +168,6 @@ class _HeaderSectionState extends State<HeaderSection> {
           tablet: 0,
           desktop: 50,
         ),
-        vertical: 10,
       ),
       child: SizedBox(
         width: getValueForScreenType(

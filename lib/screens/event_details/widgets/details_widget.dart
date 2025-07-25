@@ -69,6 +69,7 @@ class DetailsWidget extends StatelessWidget {
                           width: double.infinity,
                           child: ImageWidget(
                             imageUrl: state.eventDetailsData?.secImg?.url ?? '',
+                            label: state.eventDetailsData?.secImg?.name ?? '',
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -332,6 +333,7 @@ class DetailsWidget extends StatelessWidget {
                       radius: 15,
                       child: ImageWidget(
                         imageUrl: data.secLogo?.first.url ?? "",
+                        label: data.secLogo?.first.name ?? "",
                         fit: BoxFit.fill,
                       ),
                     ),

@@ -44,6 +44,7 @@ final class CareersState extends Equatable {
     final String? filerText,
     final String? functionText,
     final String? locationText,
+    final String? filterText,
     final String? searchText,
     final String? locationSearch,
     final bool? loading,

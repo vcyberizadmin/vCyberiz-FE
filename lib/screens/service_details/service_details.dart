@@ -92,6 +92,12 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
                   bgImage: state.serviceDetailsData?.innerPage?[4].secBgImg
                           ?.first.url ??
                       '',
+                  bgImageLabel: state.serviceDetailsData?.innerPage?[4].secBgImg
+                          ?.first.url ??
+                      '',
+                  logoLabel: state.serviceDetailsData?.innerPage?[4].secBgImg
+                          ?.last.url ??
+                      '',
                   logoimage: state.serviceDetailsData?.innerPage?[4].secBgImg
                           ?.last.url ??
                       '',

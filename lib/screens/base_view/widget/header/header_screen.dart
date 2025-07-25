@@ -307,6 +307,7 @@ class HeaderScreen extends StatelessWidget {
           width: width,
           child: ImageWidget(
             imageUrl: state.data?.brandLogo?.url ?? '',
+            label: state.data?.brandLogo?.label ?? '',
           ),
         ),
       ),

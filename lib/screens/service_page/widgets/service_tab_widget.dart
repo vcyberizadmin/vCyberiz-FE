@@ -391,6 +391,11 @@ class ServiceTabWidget extends StatelessWidget {
                 ?.imgUrl
                 ?.url ??
             '',
+        label: (state.serviceTabsData?.section ?? [])[state.selectedItem]
+                .tabBody
+                ?.imgUrl
+                ?.name ??
+            '',
         width: getValueForScreenType(
           context: context,
           mobile: Constants.width,

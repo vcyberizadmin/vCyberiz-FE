@@ -10,6 +10,7 @@ import 'package:vcyberiz/routes/route_constants.dart';
 
 class NewsCardContainer extends StatelessWidget {
   final String? imageUrl;
+  final String? label;
   final String heading;
   final String documentId;
   final String subheading;
@@ -25,6 +26,7 @@ class NewsCardContainer extends StatelessWidget {
     required this.buttonText,
     required this.blogDate,
     required this.documentId,
+    this.label,
   });
 
   @override
@@ -60,7 +62,10 @@ class NewsCardContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ThumbnailWithHoverEffect(imageUrl: imageUrl),
+              ThumbnailWithHoverEffect(
+                imageUrl: imageUrl ?? '',
+                imageLabel: label ?? '',
+              ),
               const Gap(10),
               ResponsiveBuilder(builder: (context, sizingInformation) {
                 return Row(
@@ -152,9 +157,11 @@ class ThumbnailWithHoverEffect extends StatelessWidget {
   ThumbnailWithHoverEffect({
     super.key,
     required this.imageUrl,
+    required this.imageLabel,
   });
 
-  final String? imageUrl;
+  final String imageUrl;
+  final String imageLabel;
 
   final ValueNotifier<bool> isHovered = ValueNotifier(false);
 
@@ -178,7 +185,8 @@ class ThumbnailWithHoverEffect extends StatelessWidget {
                 scale: isHovered.value ? 1.05 : 1.0,
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
-                child: ImageWidget(imageUrl: imageUrl!, fit: BoxFit.cover),
+                child: ImageWidget(
+                    imageUrl: imageUrl, label: imageLabel, fit: BoxFit.cover),
               );
             }),
       ),

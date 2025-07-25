@@ -163,9 +163,9 @@ class SecSubCard {
 class SecLogo {
   final int? id;
   final String? url;
-  final Label? name;
+  final String? name;
   final Mime? mime;
-  final Label? label;
+  final String? label;
 
   SecLogo({
     this.id,
@@ -178,23 +178,19 @@ class SecLogo {
   factory SecLogo.fromJson(Map<String, dynamic> json) => SecLogo(
         id: json["id"],
         url: json["url"],
-        name: labelValues.map[json["name"]]!,
+        name: json["name"],
         mime: mimeValues.map[json["mime"]]!,
-        label: labelValues.map[json["label"]]!,
+        label: json["label"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "url": url,
-        "name": labelValues.reverse[name],
+        "name": name,
         "mime": mimeValues.reverse[mime],
-        "label": labelValues.reverse[label],
+        "label": label,
       };
 }
-
-enum Label { LOGO }
-
-final labelValues = EnumValues({"logo": Label.LOGO});
 
 enum Mime { IMG_PNG }
 

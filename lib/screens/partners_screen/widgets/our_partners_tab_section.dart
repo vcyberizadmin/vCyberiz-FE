@@ -39,6 +39,8 @@ class OurPartnersTabSection extends StatelessWidget {
                           child: ImageWidget(
                             imageUrl:
                                 state.secureFuture?.secBackground?.url ?? "",
+                            label:
+                                state.secureFuture?.secBackground?.name ?? "",
                             fit: BoxFit.cover,
                             alignment: Alignment.topCenter,
                           ),
@@ -202,18 +204,19 @@ class OurPartnersTabSection extends StatelessWidget {
               image: state.secureFuture?.partnerCard?[state.selectedItem]
                       .tabBody?.first.secLogo?.url ??
                   '',
+              imageLabel: state.secureFuture?.partnerCard?[state.selectedItem]
+                      .tabBody?.first.secLogo?.name ??
+                  '',
               description: state.secureFuture?.partnerCard?[state.selectedItem]
                       .tabBody?.first.secDescription ??
                   '',
-              linkText: state.secureFuture?.partnerCard?[state.selectedItem]
-                      .tabBody?.first.linkText ??
-                  '',
+              linkText:
+                  state.secureFuture?.partnerCard?[state.selectedItem].tabBody?.first.linkText ??
+                      '',
               uri: state.secureFuture?.partnerCard?[state.selectedItem].tabBody
                       ?.first.secCta?.href ??
                   '',
-              label: state.secureFuture?.partnerCard?[state.selectedItem]
-                      .tabBody?.first.secCta?.label ??
-                  '',
+              label: state.secureFuture?.partnerCard?[state.selectedItem].tabBody?.first.secCta?.label ?? '',
               height: 75),
         ),
       );
@@ -250,6 +253,14 @@ class OurPartnersTabSection extends StatelessWidget {
                               ?.first
                               .secLogo
                               ?.url ??
+                          '',
+                      imageLabel: state
+                              .secureFuture
+                              ?.partnerCard?[state.selectedItem]
+                              .tabBody
+                              ?.first
+                              .secLogo
+                              ?.name ??
                           '',
                       description: state
                               .secureFuture
@@ -290,6 +301,14 @@ class OurPartnersTabSection extends StatelessWidget {
                               ?.last
                               .secLogo
                               ?.url ??
+                          '',
+                      imageLabel: state
+                              .secureFuture
+                              ?.partnerCard?[state.selectedItem]
+                              .tabBody
+                              ?.last
+                              .secLogo
+                              ?.name ??
                           '',
                       description: state
                               .secureFuture
@@ -347,6 +366,14 @@ class OurPartnersTabSection extends StatelessWidget {
                   image: state.secureFuture?.partnerCard?[state.selectedItem]
                           .tabBody?.first.secLogo?.url ??
                       '',
+                  imageLabel: state
+                          .secureFuture
+                          ?.partnerCard?[state.selectedItem]
+                          .tabBody
+                          ?.first
+                          .secLogo
+                          ?.name ??
+                      '',
                   description: state
                           .secureFuture
                           ?.partnerCard?[state.selectedItem]
@@ -371,6 +398,14 @@ class OurPartnersTabSection extends StatelessWidget {
                     image: state.secureFuture?.partnerCard?[state.selectedItem]
                             .tabBody?.last.secLogo?.url ??
                         '',
+                    imageLabel: state
+                            .secureFuture
+                            ?.partnerCard?[state.selectedItem]
+                            .tabBody
+                            ?.last
+                            .secLogo
+                            ?.name ??
+                        '',
                     description: state
                             .secureFuture
                             ?.partnerCard?[state.selectedItem]
@@ -388,9 +423,7 @@ class OurPartnersTabSection extends StatelessWidget {
                     uri: state.secureFuture?.partnerCard?[state.selectedItem]
                             .tabBody?.last.secCta?.href ??
                         '',
-                    label: state.secureFuture?.partnerCard?[state.selectedItem]
-                            .tabBody?.last.secCta?.label ??
-                        '',
+                    label: state.secureFuture?.partnerCard?[state.selectedItem].tabBody?.last.secCta?.label ?? '',
                     height: 90),
               ],
             ),
@@ -403,6 +436,7 @@ class OurPartnersTabSection extends StatelessWidget {
   Widget detailsWidget({
     required BuildContext context,
     required String image,
+    required String imageLabel,
     required String description,
     required String linkText,
     required String uri,
@@ -419,6 +453,7 @@ class OurPartnersTabSection extends StatelessWidget {
           children: [
             ImageWidget(
               imageUrl: image,
+              label: imageLabel,
               height: height,
             ),
           ],

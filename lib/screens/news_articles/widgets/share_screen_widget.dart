@@ -165,25 +165,33 @@ class _ShareScreenWidgetState extends State<ShareScreenWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     _buildShareButton(
-                        state.blogMarketingList?.secPopupCard?.secLogo?[0]
-                                .url ??
-                            '',
-                        "https://www.facebook.com/sharer/sharer.php?u=$currentUrl"),
+                      state.blogMarketingList?.secPopupCard?.secLogo?[0].url ??
+                          '',
+                      "https://www.facebook.com/sharer/sharer.php?u=$currentUrl",
+                      state.blogMarketingList?.secPopupCard?.secLogo?[0].name ??
+                          '',
+                    ),
                     _buildShareButton(
-                        state.blogMarketingList?.secPopupCard?.secLogo?[1]
-                                .url ??
-                            '',
-                        "https://www.linkedin.com/sharing/share-offsite/?url=$currentUrl"),
+                      state.blogMarketingList?.secPopupCard?.secLogo?[1].url ??
+                          '',
+                      "https://www.linkedin.com/sharing/share-offsite/?url=$currentUrl",
+                      state.blogMarketingList?.secPopupCard?.secLogo?[1].name ??
+                          '',
+                    ),
                     _buildShareButton(
-                        state.blogMarketingList?.secPopupCard?.secLogo?[2]
-                                .url ??
-                            '',
-                        "https://wa.me/?text=$currentUrl"),
+                      state.blogMarketingList?.secPopupCard?.secLogo?[2].url ??
+                          '',
+                      "https://wa.me/?text=$currentUrl",
+                      state.blogMarketingList?.secPopupCard?.secLogo?[2].name ??
+                          '',
+                    ),
                     _buildShareButton(
-                        state.blogMarketingList?.secPopupCard?.secLogo?[3]
-                                .url ??
-                            '',
-                        "mailto:?subject=Check this out!&body=$currentUrl"),
+                      state.blogMarketingList?.secPopupCard?.secLogo?[3].url ??
+                          '',
+                      "mailto:?subject=Check this out!&body=$currentUrl",
+                      state.blogMarketingList?.secPopupCard?.secLogo?[3].name ??
+                          '',
+                    ),
                   ],
                 ),
               ],
@@ -194,10 +202,15 @@ class _ShareScreenWidgetState extends State<ShareScreenWidget> {
     );
   }
 
-  Widget _buildShareButton(String assetPath, String url) {
+  Widget _buildShareButton(
+    String assetPath,
+    String url,
+    String label,
+  ) {
     return IconButton(
       icon: ImageWidget(
         imageUrl: assetPath,
+        label: label,
         width: 40,
         height: 40,
       ), // Use your icons

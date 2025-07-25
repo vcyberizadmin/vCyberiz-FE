@@ -170,6 +170,7 @@ class _ShareScreenWidgetState extends State<ShareScreenWidget> {
                         .map(
                       (cta) => _buildShareButton(
                         cta.url ?? '',
+                        cta.name ?? '',
                         cta.label ?? '',
                         currentUrl,
                       ),
@@ -201,10 +202,12 @@ class _ShareScreenWidgetState extends State<ShareScreenWidget> {
     }
   }
 
-  Widget _buildShareButton(String assetPath, String label, String currentUrl) {
+  Widget _buildShareButton(
+      String assetPath, String name, String label, String currentUrl) {
     return IconButton(
       icon: ImageWidget(
         imageUrl: assetPath,
+        label: name,
         width: 40,
         height: 40,
       ),

@@ -76,6 +76,7 @@ class PartnersSection extends StatelessWidget {
                           flex: 1,
                           child: ImageWidget(
                             imageUrl: state.technology?.secImg?.url ?? "",
+                            label: state.technology?.secImg?.name ?? "",
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -126,6 +127,7 @@ class PartnersSection extends StatelessWidget {
                           width: double.infinity,
                           child: ImageWidget(
                             imageUrl: state.technology?.secImg?.url ?? "",
+                            label: state.technology?.secImg?.name ?? "",
                             fit: BoxFit.cover,
                           ),
                         ),

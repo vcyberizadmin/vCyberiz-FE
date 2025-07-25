@@ -7,7 +7,6 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:vcyberiz/bloc/careers_bloc/careers_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/constants/constants.dart';
-import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 
 import 'carrier_job_section.dart';
@@ -80,17 +79,6 @@ class CareerVacancySection extends StatelessWidget {
             },
           ),
         ),
-      ),
-    );
-  }
-
-  //!-----------(Logo png)
-  Widget vcyberizLogo(String imageUrl) {
-    return Container(
-      width: 200,
-      height: 80,
-      child: ImageWidget(
-        imageUrl: imageUrl,
       ),
     );
   }

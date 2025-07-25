@@ -237,12 +237,15 @@ class WhyThisService extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               color: AppColors.white,
               image: DecorationImage(
-                image: decorationImageProviderWidget(isHover
-                    ? (state.serviceDetailsData?.innerPage?[3].bgImg?.last
-                            .url ??
-                        '')
-                    : state.serviceDetailsData?.innerPage?[3].bgImg?.first
-                            .url ??
+                image: decorationImageProviderWidget(
+                    isHover
+                        ? (state.serviceDetailsData?.innerPage?[3].bgImg?.last
+                                .url ??
+                            '')
+                        : state.serviceDetailsData?.innerPage?[3].bgImg?.first
+                                .url ??
+                            '',
+                    state.serviceDetailsData?.innerPage?[3].bgImg?.first.name ??
                         ''),
                 fit: BoxFit.fill,
               )),
@@ -317,12 +320,16 @@ class WhyThisService extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 color: AppColors.white,
                 image: DecorationImage(
-                  image: decorationImageProviderWidget(isHover
-                      ? (state.serviceDetailsData?.innerPage?[3].bgImg?.last
-                              .url ??
-                          '')
-                      : state.serviceDetailsData?.innerPage?[3].bgImg?.first
-                              .url ??
+                  image: decorationImageProviderWidget(
+                      isHover
+                          ? (state.serviceDetailsData?.innerPage?[3].bgImg?.last
+                                  .url ??
+                              '')
+                          : state.serviceDetailsData?.innerPage?[3].bgImg?.first
+                                  .url ??
+                              '',
+                      state.serviceDetailsData?.innerPage?[3].bgImg?.first
+                              .name ??
                           ''),
                   fit: BoxFit.fill,
                 )),

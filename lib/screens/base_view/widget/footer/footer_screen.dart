@@ -67,7 +67,8 @@ class FooterScreen extends StatelessWidget {
         context.goNamed(RouteConstants.homeScreenPath);
       },
       child: ImageWidget(
-        imageUrl: (state.data?.siteMap?.brand?.secLogo?.first.url ?? ""),
+        imageUrl: state.data?.siteMap?.brand?.secLogo?.first.url ?? "",
+        label: state.data?.siteMap?.brand?.secLogo?.first.name ?? "",
         width: getValueForScreenType<double>(
           context: context,
           mobile: 150,

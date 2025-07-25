@@ -84,6 +84,7 @@ class _AboutAnimatedSectionState extends State<AboutAnimatedSection>
                         flex: 1,
                         child: ImageWidget(
                           imageUrl: state.ourShieldData?.secBg?.url ?? '',
+                          label: state.ourShieldData?.secBg?.name ?? '',
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -99,6 +100,7 @@ class _AboutAnimatedSectionState extends State<AboutAnimatedSection>
                         width: double.infinity,
                         child: ImageWidget(
                           imageUrl: state.ourShieldData?.secBg?.url ?? '',
+                          label: state.ourShieldData?.secBg?.name ?? '',
                           fit: BoxFit.cover,
                         ),
                       ),

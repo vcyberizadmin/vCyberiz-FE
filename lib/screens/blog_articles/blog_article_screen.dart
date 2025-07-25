@@ -252,6 +252,7 @@ class _BlogArticleScreenState extends State<BlogArticleScreen> {
         image: DecorationImage(
           image: decorationImageProviderWidget(
             state.blogMarketingList?.secCard?.secImg?.url ?? '',
+            state.blogMarketingList?.secCard?.secImg?.name ?? '',
           ),
           fit: BoxFit.cover,
         ),
@@ -368,6 +369,7 @@ class _BlogArticleScreenState extends State<BlogArticleScreen> {
                 image: DecorationImage(
                   image: decorationImageProviderWidget(
                     state.blogArticleData?.secImg?.url ?? '',
+                    state.blogArticleData?.secImg?.name ?? '',
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -485,6 +487,7 @@ class _BlogArticleScreenState extends State<BlogArticleScreen> {
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: ImageWidget(
                 imageUrl: child.url!,
+                label: '',
                 width: MediaQuery.of(context).size.width * 0.9,
                 fit: BoxFit.contain,
               ),

@@ -212,6 +212,7 @@ class _BlogsWidgetState extends State<BlogsWidget> {
                 },
                 child: BlogCard(
                   imageUrl: data.thumbnailImg?.url ?? '',
+                  imageLabel: data.thumbnailImg?.name ?? '',
                   date: DateFormat('MMMM d, yyyy').format(
                     data.publicationDate ?? DateTime.now(),
                   ),
@@ -228,6 +229,7 @@ class _BlogsWidgetState extends State<BlogsWidget> {
 
 class BlogCard extends StatelessWidget {
   final String imageUrl;
+  final String imageLabel;
   final String date;
   final String title;
 
@@ -236,6 +238,7 @@ class BlogCard extends StatelessWidget {
     required this.imageUrl,
     required this.date,
     required this.title,
+    required this.imageLabel,
   });
 
   @override
@@ -267,9 +270,7 @@ class BlogCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 image: DecorationImage(
-                  image: decorationImageProviderWidget(
-                    imageUrl,
-                  ),
+                  image: decorationImageProviderWidget(imageUrl, imageLabel),
                   fit: BoxFit.cover,
                 ),
                 boxShadow: [

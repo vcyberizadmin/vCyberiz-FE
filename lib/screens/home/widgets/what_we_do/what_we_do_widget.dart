@@ -62,6 +62,7 @@ class WhatWeDoWidget extends StatelessWidget {
                               desktop: 500,
                             ),
                             imageUrl: state.data?.secGif?.first.url ?? '',
+                            label: state.data?.secGif?.first.name ?? '',
                             fit: BoxFit.fitHeight,
                           ),
                         ),
@@ -76,6 +77,7 @@ class WhatWeDoWidget extends StatelessWidget {
                         Center(
                           child: GifWidget(
                             imageUrl: state.data?.secGif?.first.url ?? '',
+                            label: state.data?.secGif?.first.name ?? '',
                             fit: BoxFit.cover,
                           ),
                         ),

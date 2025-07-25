@@ -12,6 +12,7 @@ import 'package:vcyberiz/routes/route_constants.dart';
 
 class BlogCardContainer extends StatelessWidget {
   final String? imageUrl;
+  final String? imageLabel;
   final String heading;
   final String documentId;
   final String subheading;
@@ -28,6 +29,7 @@ class BlogCardContainer extends StatelessWidget {
     required this.blogDate,
     required this.documentId,
     required this.buttonText,
+    this.imageLabel,
   });
 
   @override
@@ -64,7 +66,10 @@ class BlogCardContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ThumbnailWithHoverEffect(imageUrl: imageUrl),
+              ThumbnailWithHoverEffect(
+                imageUrl: imageUrl ?? '',
+                imageLabel: imageLabel ?? '',
+              ),
               ResponsiveBuilder(builder: (context, sizingInformation) {
                 return Row(
                   mainAxisAlignment: sizingInformation.isMobile
@@ -149,12 +154,10 @@ class BlogCardContainer extends StatelessWidget {
 }
 
 class ThumbnailWithHoverEffect extends StatelessWidget {
-  ThumbnailWithHoverEffect({
-    super.key,
-    required this.imageUrl,
-  });
-
-  final String? imageUrl;
+  final String imageUrl;
+  final String imageLabel;
+  ThumbnailWithHoverEffect(
+      {super.key, required this.imageUrl, required this.imageLabel});
 
   final ValueNotifier<bool> isHovered = ValueNotifier(false);
 
@@ -178,7 +181,8 @@ class ThumbnailWithHoverEffect extends StatelessWidget {
                 scale: isHovered.value ? 1.05 : 1.0,
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
-                child: ImageWidget(imageUrl: imageUrl!, fit: BoxFit.cover),
+                child: ImageWidget(
+                    imageUrl: imageUrl, label: imageLabel, fit: BoxFit.cover),
               );
             }),
       ),

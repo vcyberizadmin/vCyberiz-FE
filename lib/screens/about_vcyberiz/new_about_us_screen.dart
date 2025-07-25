@@ -60,6 +60,7 @@ class _NewAboutUsScreenState extends State<NewAboutUsScreen> {
                 HeadingWidget(
                   text: state.headerData?.secHeader ?? '',
                   image: state.headerData?.secBg?.url ?? '',
+                  label: state.headerData?.secBg?.name ?? '',
                 ),
                 //!---------(Shield sction)
                 AboutAnimatedSection(),

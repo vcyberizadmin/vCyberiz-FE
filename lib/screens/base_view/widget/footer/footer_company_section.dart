@@ -364,6 +364,7 @@ class FooterCompanySection extends StatelessWidget {
                   radius: 15,
                   child: ImageWidget(
                     imageUrl: data.secLogo?.first.url ?? "",
+                    label: data.secLogo?.first.name ?? "",
                     fit: BoxFit.fill,
                   ),
                 ),

@@ -13,6 +13,7 @@ import 'package:vcyberiz/routes/route_constants.dart';
 
 class EventsCard extends StatelessWidget {
   final String? imageUrl;
+  final String? imageLabel;
   final String heading;
   final String documentId;
   final String subheading;
@@ -26,6 +27,7 @@ class EventsCard extends StatelessWidget {
     required this.vcyberizText,
     required this.blogDate,
     required this.documentId,
+    this.imageLabel,
   });
 
   @override
@@ -68,7 +70,8 @@ class EventsCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ThumbnailWithHoverEffect(
-                imageUrl: imageUrl,
+                imageUrl: imageUrl ?? '',
+                imageLabel: imageLabel ?? '',
               ),
               const Gap(10),
 
@@ -119,9 +122,11 @@ class ThumbnailWithHoverEffect extends StatelessWidget {
   ThumbnailWithHoverEffect({
     super.key,
     required this.imageUrl,
+    required this.imageLabel,
   });
 
-  final String? imageUrl;
+  final String imageUrl;
+  final String imageLabel;
 
   final ValueNotifier<bool> isHovered = ValueNotifier(false);
 
@@ -140,7 +145,8 @@ class ThumbnailWithHoverEffect extends StatelessWidget {
           scale: isHover ? 1.05 : 1.0,
           duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut,
-          child: ImageWidget(imageUrl: imageUrl!, fit: BoxFit.cover),
+          child: ImageWidget(
+              imageUrl: imageUrl, label: imageLabel, fit: BoxFit.cover),
         ),
       );
     });

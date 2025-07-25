@@ -34,6 +34,7 @@ class CardWidget extends StatelessWidget {
               // Logo
               ImageWidget(
                 imageUrl: item?.secImg?.url ?? '',
+                label: item?.secImg?.name ?? '',
                 width: Constants.width,
                 height: 250,
               ),
@@ -117,6 +118,7 @@ class CardWidget extends StatelessWidget {
             // Logo
             ImageWidget(
               imageUrl: item?.secImg?.url ?? '',
+              label: item?.secImg?.name ?? '',
               width: getValueForScreenType(
                   context: context, mobile: 0, tablet: 200, desktop: 300),
               fit: BoxFit.cover,

@@ -24,6 +24,7 @@ class DirectApproachScreen extends StatelessWidget {
             image: DecorationImage(
               image: decorationImageProviderWidget(
                 state.servicedirectApproachdata?.bgImg?.url ?? '',
+                state.servicedirectApproachdata?.bgImg?.name ?? '',
               ),
               fit: BoxFit.fill,
             ),
@@ -150,6 +151,7 @@ class DirectApproachScreen extends StatelessWidget {
                                       padding: const EdgeInsets.all(10),
                                       child: ImageWidget(
                                         imageUrl: item?.logoImg?.url ?? '',
+                                        label: item?.logoImg?.name ?? '',
                                         width: 25,
                                         height: 25,
                                         color: isHovered

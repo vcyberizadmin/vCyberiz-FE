@@ -227,6 +227,9 @@ class OurServicesWidget extends StatelessWidget {
                                   imageUrl: state.data?.mainSection?.first
                                           .services?[index].secLogo?.url ??
                                       '',
+                                  label: state.data?.mainSection?.first
+                                          .services?[index].secLogo?.name ??
+                                      '',
                                   color: hexToColor(state
                                           .data
                                           ?.mainSection
@@ -271,6 +274,9 @@ class OurServicesWidget extends StatelessWidget {
                                 ),
                                 imageUrl: state.data?.mainSection?.first
                                         .services?[index].secLogo?.url ??
+                                    '',
+                                label: state.data?.mainSection?.first
+                                        .services?[index].secLogo?.name ??
                                     '',
                                 color: hexToColor(state.data?.mainSection?.first
                                         .services?[index].colorIdentifier ??

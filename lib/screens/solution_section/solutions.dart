@@ -74,6 +74,7 @@ class _SolutionsSectionState extends State<SolutionsSection> {
                 HeadingWidget(
                   text: state.headerData?.secHeader ?? '',
                   image: state.headerData?.bgImg?.url ?? '',
+                  label: state.headerData?.bgImg?.name ?? '',
                 ),
                 HeaderSection(),
                 MicrosoftSecurity(),

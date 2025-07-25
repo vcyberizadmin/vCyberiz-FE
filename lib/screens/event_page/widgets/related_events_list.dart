@@ -112,6 +112,7 @@ class RelatedEventsList extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                   child: ImageWidget(
                     imageUrl: data?.secBg?.url ?? '',
+                    label: data?.secBg?.name ?? '',
                     fit: BoxFit.fill,
                     height: getValueForScreenType(
                         context: context,

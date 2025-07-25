@@ -156,6 +156,7 @@ class _BlogsScreenState extends State<BlogsScreen> {
             HeadingWidget(
               text: state.headerData?.secHeader?.secBg?.first.name ?? '',
               image: state.headerData?.secHeader?.secBg?.first.url ?? "",
+              label: state.headerData?.secHeader?.secBg?.first.name ?? "",
             ),
             const Gap(60),
             BlogViewHome(
@@ -205,6 +206,7 @@ class _BlogsScreenState extends State<BlogsScreen> {
         HeadingWidget(
           text: state.headerData?.secHeader?.secBg?.first.name ?? '',
           image: state.headerData?.secHeader?.secBg?.first.url ?? "",
+          label: state.headerData?.secHeader?.secBg?.first.name ?? "",
         ),
         Gap(sizingInformation.isTablet ? 60 : 32),
         SizedBox(
