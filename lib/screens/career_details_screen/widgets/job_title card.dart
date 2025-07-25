@@ -52,7 +52,12 @@ class JobTitleCard extends StatelessWidget {
                   children: [
                     kStyle.bold(
                       text: "Job Description",
-                      size: 16,
+                      size: getValueForScreenType(
+                        context: context,
+                        mobile: 16,
+                        tablet: 16,
+                        desktop: 18,
+                      ),
                       color: AppColors.darkBlueText,
                     ),
                     Wrap(
@@ -71,7 +76,12 @@ class JobTitleCard extends StatelessWidget {
                                       ),
                                       child: kStyle.reg(
                                         text: e.secText ?? '',
-                                        size: 12,
+                                        size: getValueForScreenType(
+                                          context: context,
+                                          mobile: 14,
+                                          tablet: 15,
+                                          desktop: 16,
+                                        ),
                                         color: _hexToColor(
                                             e.colorIdentifier ?? "#000000"),
                                       ),
@@ -88,7 +98,12 @@ class JobTitleCard extends StatelessWidget {
                   children: [
                     kStyle.bold(
                       text: "Job Description",
-                      size: 16,
+                      size: getValueForScreenType(
+                        context: context,
+                        mobile: 14,
+                        tablet: 15,
+                        desktop: 16,
+                      ),
                       color: AppColors.darkBlueText,
                     ),
                     Wrap(
@@ -107,7 +122,12 @@ class JobTitleCard extends StatelessWidget {
                                       ),
                                       child: kStyle.reg(
                                         text: e.secText ?? '',
-                                        size: 12,
+                                        size: getValueForScreenType(
+                                          context: context,
+                                          mobile: 14,
+                                          tablet: 15,
+                                          desktop: 16,
+                                        ),
                                         color: _hexToColor(
                                             e.colorIdentifier ?? "#000000"),
                                       ),
@@ -169,29 +189,35 @@ class JobTitleCard extends StatelessWidget {
                   kStyle.reg(
                     text: data?.countries?.first.text.toString() ?? "",
                     color: AppColors.davysGray,
-                    size: 14,
+                    size: getValueForScreenType(
+                      context: context,
+                      mobile: 14,
+                      tablet: 15,
+                      desktop: 16,
+                    ),
                   )
                 ],
               ),
               Gap(12),
 
               /// Team
-              _labelWithValue("Team", data?.team),
+              _labelWithValue(context, "Team", data?.team),
 
               /// Designation
-              _labelWithValue("Designation", data?.secHeader),
+              _labelWithValue(context, "Designation", data?.secHeader),
 
               /// Job Role
-              _labelWithValue("Job Role", data?.secDescription),
+              _labelWithValue(context, "Job Role", data?.secDescription),
 
               /// Experience
-              _labelWithValue("Experience", data?.experience),
+              _labelWithValue(context, "Experience", data?.experience),
 
               /// Job Location
-              _labelWithValue("Job Location", data?.jobLocation?.toString()),
+              _labelWithValue(
+                  context, "Job Location", data?.jobLocation?.toString()),
 
               /// Shifts
-              _labelWithValue("Shifts", data?.shift),
+              _labelWithValue(context, "Shifts", data?.shift),
             ],
           ),
         ),
@@ -200,7 +226,7 @@ class JobTitleCard extends StatelessWidget {
   }
 
   /// Widget for label-value row
-  Widget _labelWithValue(String label, String? value) {
+  Widget _labelWithValue(BuildContext context, String label, String? value) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: RichText(
@@ -208,7 +234,12 @@ class JobTitleCard extends StatelessWidget {
           text: "$label : ",
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 14,
+            fontSize: getValueForScreenType(
+              context: context,
+              mobile: 14,
+              tablet: 15,
+              desktop: 16,
+            ),
             color: AppColors.blue,
             fontFamily: Constants.font,
           ),
@@ -217,7 +248,12 @@ class JobTitleCard extends StatelessWidget {
               text: value ?? "-",
               style: TextStyle(
                 fontWeight: FontWeight.normal,
-                fontSize: 14,
+                fontSize: getValueForScreenType(
+                  context: context,
+                  mobile: 14,
+                  tablet: 15,
+                  desktop: 16,
+                ),
                 color: AppColors.black,
                 fontFamily: Constants.font,
               ),
