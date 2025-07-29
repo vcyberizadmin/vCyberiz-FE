@@ -35,7 +35,10 @@ class NewsCardContainer extends StatelessWidget {
     return InkWell(
       onTap: () {
         context.goNamed(
-          RouteConstants.newsArticlePath,
+          RouteConstants.newsArticleRoute,
+          pathParameters: {
+            'name': heading, // this is the slug, e.g. 'flutter-for-beginners'
+          },
           queryParameters: {
             'id': documentId,
           },

@@ -33,10 +33,15 @@ class _ShareScreenWidgetState extends State<ShareScreenWidget> {
   void initState() {
     super.initState();
     currentUrl = Uri.base.toString();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      currentUrl = Uri.base.toString();
+      setState(() {});
+    });
     return SizedBox(
       width: Constants.width,
       child: Row(

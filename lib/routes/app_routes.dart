@@ -101,15 +101,20 @@ final GoRouter basicRoutes = GoRouter(
           return NoTransitionPage(child: BlogsScreen());
         }),
     GoRoute(
-        path: RouteConstants.blogArticleRoute,
-        name: RouteConstants.blogArticlePath,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return NoTransitionPage(
-            child: BlogArticleScreen(
-              documentId: state.uri.queryParameters['id'] ?? '',
-            ),
-          );
-        }),
+      path: '/blog-article/:name', // `name` is used as the slug
+      name: RouteConstants.blogArticleRoute,
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        final slug = state.pathParameters['name'] ?? '';
+        final documentId = state.uri.queryParameters['id'] ?? '';
+
+        return NoTransitionPage(
+          child: BlogArticleScreen(
+            name: slug,
+            documentId: documentId,
+          ),
+        );
+      },
+    ),
     GoRoute(
         path: RouteConstants.cookiesRoute,
         name: RouteConstants.cookiesPath,
@@ -135,15 +140,20 @@ final GoRouter basicRoutes = GoRouter(
           return NoTransitionPage(child: NewsScreen());
         }),
     GoRoute(
-        path: RouteConstants.newsArticleRoute,
-        name: RouteConstants.newsArticlePath,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return NoTransitionPage(
-            child: NewsArticleScreen(
-              documentId: state.uri.queryParameters['id'] ?? '',
-            ),
-          );
-        }),
+      path: '/news-article/:name',
+      name: RouteConstants.newsArticleRoute,
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        final slug = state.pathParameters['name'] ?? '';
+        final documentId = state.uri.queryParameters['id'] ?? '';
+
+        return NoTransitionPage(
+          child: NewsArticleScreen(
+            name: slug,
+            documentId: documentId,
+          ),
+        );
+      },
+    ),
     GoRoute(
         path: RouteConstants.serviceDetailsRoute,
         name: RouteConstants.serviceDetailsPath,
@@ -245,12 +255,13 @@ final GoRouter basicRoutes = GoRouter(
           );
         }),
     GoRoute(
-        path: RouteConstants.eventDetailsRoute,
-        name: RouteConstants.eventDetailsPath,
+        path: '/event-details/:name',
+        name: RouteConstants.eventDetailsRoute,
         pageBuilder: (BuildContext context, GoRouterState state) {
           return NoTransitionPage(
             child: EventDetailsScreen(
               documentId: state.uri.queryParameters['id'] ?? '',
+              name: state.uri.queryParameters['name'] ?? '',
             ),
           );
         }),

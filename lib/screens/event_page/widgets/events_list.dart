@@ -220,7 +220,10 @@ class EventListSection extends StatelessWidget {
     return InkWell(
       onTap: () {
         context.goNamed(
-          RouteConstants.eventDetailsPath,
+          RouteConstants.newsArticleRoute,
+          pathParameters: {
+            'name': heading,
+          },
           queryParameters: {
             'id': documentId,
           },

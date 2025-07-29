@@ -20,8 +20,10 @@ import 'widgets/related_news.dart';
 import 'widgets/share_screen_widget.dart';
 
 class NewsArticleScreen extends StatefulWidget {
+  final String name;
   final String documentId;
-  const NewsArticleScreen({super.key, required this.documentId});
+  const NewsArticleScreen(
+      {super.key, required this.documentId, required this.name});
 
   @override
   State<NewsArticleScreen> createState() => _NewsArticleScreenState();

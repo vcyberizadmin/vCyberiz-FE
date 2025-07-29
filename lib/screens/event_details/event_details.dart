@@ -15,9 +15,11 @@ import 'widgets/details_widget.dart';
 
 class EventDetailsScreen extends StatefulWidget {
   final String documentId;
+  final String name;
   const EventDetailsScreen({
     super.key,
     required this.documentId,
+    required this.name,
   });
 
   @override

@@ -204,7 +204,11 @@ class _BlogsWidgetState extends State<BlogsWidget> {
               child: InkWell(
                 onTap: () {
                   context.goNamed(
-                    RouteConstants.blogArticlePath,
+                    RouteConstants.blogArticleRoute,
+                    pathParameters: {
+                      'name': data.title ??
+                          '', // this is the slug, e.g. 'flutter-for-beginners'
+                    },
                     queryParameters: {
                       'id': data.documentId ?? '',
                     },

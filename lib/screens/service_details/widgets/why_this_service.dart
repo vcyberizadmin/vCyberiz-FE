@@ -272,7 +272,7 @@ class WhyThisService extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   child: Padding(
                     padding: EdgeInsets.only(
-                        right: Constants.desktopBreakPoint * .025),
+                        right: Constants.desktopBreakPoint * .035),
                     child: kStyle.reg(
                       text: discription,
                       color: AppColors.black,
@@ -280,7 +280,7 @@ class WhyThisService extends StatelessWidget {
                         context: context,
                         mobile: 16,
                         tablet: 18,
-                        desktop: Constants.desktopBreakPoint * .012,
+                        desktop: Constants.desktopBreakPoint * .01,
                       ),
                       overflow: TextOverflow.visible,
                     ),

@@ -22,8 +22,11 @@ import 'widgets/related_blog.dart';
 import 'widgets/share_screen_widget.dart';
 
 class BlogArticleScreen extends StatefulWidget {
+  final String name;
+
   final String documentId;
-  const BlogArticleScreen({super.key, required this.documentId});
+  const BlogArticleScreen(
+      {super.key, required this.documentId, required this.name});
 
   @override
   State<BlogArticleScreen> createState() => _BlogArticleScreenState();

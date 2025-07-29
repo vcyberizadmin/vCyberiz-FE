@@ -115,7 +115,6 @@ class _BaseViewState extends State<BaseView> {
                             key: headerKey,
                             disableInteractions: showCookieConsent,
                           ),
-                          if (showCookieConsent) _cookieConsentBanner(),
                         ],
                       ),
                     );
@@ -136,6 +135,12 @@ class _BaseViewState extends State<BaseView> {
                           bottom: 80,
                           child: ChatBotWidget(),
                         ),
+                        if (showCookieConsent)
+                          Positioned(
+                              right: 0,
+                              left: 0,
+                              bottom: 0,
+                              child: _cookieConsentBanner()),
                       ],
                     );
                   },
@@ -162,6 +167,7 @@ class _BaseViewState extends State<BaseView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Gap(15),
               kStyle.med(
                 text: 'About Cookies on The Site',
                 size: getValueForScreenType(

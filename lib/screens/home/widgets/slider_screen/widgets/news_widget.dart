@@ -94,9 +94,15 @@ class NewsWidget extends StatelessWidget {
     return HoverView(builder: (isHover) {
       return InkWell(
         onTap: () {
-          context.goNamed(RouteConstants.newsArticlePath, queryParameters: {
-            'id': documentId,
-          });
+          context.goNamed(
+            RouteConstants.newsArticleRoute,
+            pathParameters: {
+              'name': heading,
+            },
+            queryParameters: {
+              'id': documentId,
+            },
+          );
         },
         child: SizedBox(
           width: getValueForScreenType(

@@ -1,7 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
@@ -39,6 +37,10 @@ class _ShareScreenWidgetState extends State<ShareScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      currentUrl = Uri.base.toString();
+      setState(() {});
+    });
     return SizedBox(
       width: Constants.width,
       child: Row(
@@ -187,7 +189,6 @@ class _ShareScreenWidgetState extends State<ShareScreenWidget> {
 
   String getShareUrlByLabel(String label, String currentUrl) {
     final encodedUrl = Uri.encodeComponent(currentUrl);
-    log(label, name: 'test');
     switch (label.toLowerCase()) {
       case 'facebook_logo':
         return 'https://www.facebook.com/sharer/sharer.php?u=$encodedUrl';

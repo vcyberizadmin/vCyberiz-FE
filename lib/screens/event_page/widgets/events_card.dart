@@ -37,7 +37,10 @@ class EventsCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         context.goNamed(
-          RouteConstants.eventDetailsPath,
+          RouteConstants.eventDetailsRoute,
+          pathParameters: {
+            'name': heading,
+          },
           queryParameters: {
             'id': documentId,
           },
