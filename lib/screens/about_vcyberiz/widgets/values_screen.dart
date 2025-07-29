@@ -63,56 +63,65 @@ class _ValuesSectionState extends State<ValuesSection> {
                     tablet: 20,
                   )),
                   SizedBox(
-                    // width: Constants.width * .58,
                     width: getValueForScreenType(
-                        context: context,
-                        mobile: Constants.width,
-                        tablet: Constants.width,
-                        desktop: Constants.desktopBreakPoint * .9),
-
-                    child: GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: getValueForScreenType(
+                      context: context,
+                      mobile: Constants.width,
+                      tablet: Constants.width,
+                      desktop: Constants.desktopBreakPoint * .9,
+                    ),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        final crossAxisCount = getValueForScreenType(
                           context: context,
                           mobile: 1,
                           tablet: 2,
                           desktop: 3,
-                        ),
-                        crossAxisSpacing: getValueForScreenType(
-                            context: context,
-                            mobile: 10,
-                            tablet: 10,
-                            desktop: 30),
-                        mainAxisSpacing: getValueForScreenType(
-                            context: context,
-                            mobile: 10,
-                            tablet: 10,
-                            desktop: 30),
-                        childAspectRatio: getValueForScreenType(
-                          context: context,
-                          mobile: 2 / 1.6,
-                          tablet: 2 / 1.5,
-                          desktop: 2 / 1.5,
-                        ),
-                      ),
-                      shrinkWrap: true,
-                      itemCount: (state.ourValuesData?.secCard ?? []).length,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        SecCard? data = state.ourValuesData?.secCard?[index];
-                        return CardWidget(
-                          title: data?.secHeader ?? '',
-                          description: data?.description ?? '',
-                          imageUrl: data?.logoImg?.url ?? '',
-                          imageLabel: data?.logoImg?.name ?? '',
-                          index: index,
-                          hoveredIndex: _hoveredIndex,
-                          onHover: (isHovered) {
-                            setState(() {
-                              _hoveredIndex = isHovered ? index : null;
-                            });
-                          },
-                          isHome: false,
+                        );
+
+                        final itemWidth = (constraints.maxWidth -
+                                (getValueForScreenType(
+                                        context: context,
+                                        mobile: 10,
+                                        tablet: 10,
+                                        desktop: 30) *
+                                    (crossAxisCount - 1))) /
+                            crossAxisCount;
+
+                        return Wrap(
+                          spacing: getValueForScreenType(
+                              context: context,
+                              mobile: 10,
+                              tablet: 10,
+                              desktop: 30),
+                          runSpacing: getValueForScreenType(
+                              context: context,
+                              mobile: 10,
+                              tablet: 10,
+                              desktop: 30),
+                          children: List.generate(
+                            (state.ourValuesData?.secCard ?? []).length,
+                            (index) {
+                              SecCard? data =
+                                  state.ourValuesData?.secCard?[index];
+                              return SizedBox(
+                                width: itemWidth,
+                                child: CardWidget(
+                                  title: data?.secHeader ?? '',
+                                  description: data?.description ?? '',
+                                  imageUrl: data?.logoImg?.url ?? '',
+                                  imageLabel: data?.logoImg?.name ?? '',
+                                  index: index,
+                                  hoveredIndex: _hoveredIndex,
+                                  onHover: (isHovered) {
+                                    setState(() {
+                                      _hoveredIndex = isHovered ? index : null;
+                                    });
+                                  },
+                                  isHome: false,
+                                ),
+                              );
+                            },
+                          ),
                         );
                       },
                     ),
@@ -178,7 +187,7 @@ class _CardWidgetState extends State<CardWidget> {
             context: context,
             mobile: 270,
             tablet: 230,
-            desktop: 330,
+            desktop: 250,
           ),
           width: widget.width ??
               getValueForScreenType(
@@ -214,31 +223,31 @@ class _CardWidgetState extends State<CardWidget> {
               desktop: CrossAxisAlignment.center,
             ),
             children: [
+              Gap(10),
               //!-----(Svg icon with Jump Effect)
               if (widget.imageUrl.isNotEmpty)
-                Expanded(
-                  child: Align(
-                    alignment: getValueForScreenType(
+                Align(
+                  alignment: getValueForScreenType(
+                    context: context,
+                    mobile: Alignment.center,
+                    tablet: Alignment.center,
+                    desktop: Alignment.center,
+                  ),
+                  child: ImageWidget(
+                    imageUrl: widget.imageUrl,
+                    label: widget.imageLabel,
+                    fit: BoxFit.fill,
+                    height: getValueForScreenType(
                       context: context,
-                      mobile: Alignment.center,
-                      tablet: Alignment.center,
-                      desktop: Alignment.center,
-                    ),
-                    child: ImageWidget(
-                      imageUrl: widget.imageUrl,
-                      label: widget.imageLabel,
-                      fit: BoxFit.fill,
-                      height: getValueForScreenType(
-                        context: context,
-                        mobile: 70,
-                        tablet: 70,
-                        desktop: 85,
-                      ),
+                      mobile: 70,
+                      tablet: 70,
+                      desktop: 80,
                     ),
                   ),
                 ),
               Gap(10),
               Expanded(
+                flex: 1,
                 child: kStyle.med(
                   text: widget.title,
                   size: getValueForScreenType(

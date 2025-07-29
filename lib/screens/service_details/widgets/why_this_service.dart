@@ -221,7 +221,7 @@ class WhyThisService extends StatelessWidget {
             context: context,
             mobile: 200,
             tablet: 200,
-            desktop: 220,
+            desktop: 200,
           ),
           width: getValueForScreenType(
             context: context,
