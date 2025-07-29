@@ -234,7 +234,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                             Expanded(child: SizedBox()),
                             SizedBox(
                               width: 250,
-                              height: getPositionedHeight(),
+                              height: getPositionedHeight(list, state),
                               child: TableOfContentsWidget(
                                 policiesList: list,
                                 sectionKeys: sectionKeys,
@@ -271,25 +271,90 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
     }
   }
 
-  double getPositionedHeight() {
+  double getPositionedHeight(
+    List<PrivacyPolicyList> list,
+    PrivacyState state,
+  ) {
     if (Constants.width < 1300) {
-      return (_scrollController.offset < 7600) ? Constants.height : 80;
-    } else if (Constants.width < 1400) {
-      return (_scrollController.offset < 7000) ? Constants.height : 150;
-    } else if (Constants.width < 1600) {
-      if (_scrollController.offset < 6000) {
-        return (_scrollController.offset < 6000) ? Constants.height : 200;
-      } else {
-        return (_scrollController.offset < 6500) ? Constants.height : 200;
+      for (int i = 0; i < list.length; i++) {
+        final parent = list[i];
+        final parentTitle = parent.privPolicyPointsHd ?? '';
+        final isActive = state.selectedItem == parentTitle;
+
+        // If current item is active
+        if (isActive) {
+          final isInLastThree = i >= list.length - 2;
+          return isInLastThree ? 80 : Constants.height;
+        }
       }
+      return Constants.height * .8;
+    } else if (Constants.width < 1400) {
+      for (int i = 0; i < list.length; i++) {
+        final parent = list[i];
+        final parentTitle = parent.privPolicyPointsHd ?? '';
+        final isActive = state.selectedItem == parentTitle;
+
+        // If current item is active
+        if (isActive) {
+          final isInLastThree = i >= list.length - 3;
+          return isInLastThree ? 150 : Constants.height;
+        }
+      }
+      return Constants.height * .8;
+    } else if (Constants.width < 1600) {
+      for (int i = 0; i < list.length; i++) {
+        final parent = list[i];
+        final parentTitle = parent.privPolicyPointsHd ?? '';
+        final isActive = state.selectedItem == parentTitle;
+
+        // If current item is active
+        if (isActive) {
+          final isInLastThree = i >= list.length - 3;
+          return isInLastThree ? 200 : Constants.height;
+        }
+      }
+      return Constants.height;
     } else if (Constants.width < 1800) {
-      return (_scrollController.offset < 6200) ? Constants.height : 250;
+      for (int i = 0; i < list.length; i++) {
+        final parent = list[i];
+        final parentTitle = parent.privPolicyPointsHd ?? '';
+        final isActive = state.selectedItem == parentTitle;
+
+        // If current item is active
+        if (isActive) {
+          final isInLastThree = i >= list.length - 3;
+          return isInLastThree ? 250 : Constants.height;
+        }
+      }
+      return Constants.height * .8;
     } else if (Constants.width < 2400) {
-      return (_scrollController.offset < 5600) ? Constants.height : 200;
-    } else if (Constants.width > 2400) {
-      return (_scrollController.offset > 6500)
-          ? Constants.height
-          : Constants.height - 500;
+      for (int i = 0; i < list.length; i++) {
+        final parent = list[i];
+        final parentTitle = parent.privPolicyPointsHd ?? '';
+        final isActive = state.selectedItem == parentTitle;
+
+        // If current item is active
+        if (isActive) {
+          final isInLastThree = i >= list.length - 4;
+          return isInLastThree ? 400 : Constants.height;
+        }
+      }
+      return Constants.height * .9;
+    } else if (Constants.width < 3100) {
+      for (int i = 0; i < list.length; i++) {
+        final parent = list[i];
+        final parentTitle = parent.privPolicyPointsHd ?? '';
+        final isActive = state.selectedItem == parentTitle;
+
+        // If current item is active
+        if (isActive) {
+          final isInLastThree = i >= list.length - 6;
+          return isInLastThree ? Constants.height * .6 : Constants.height;
+        }
+      }
+      return Constants.height * .9;
+    } else if (Constants.width > 3100) {
+      return Constants.height;
     } else {
       return (_scrollController.offset < 6500) ? Constants.height : 200;
     }

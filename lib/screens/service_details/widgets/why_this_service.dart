@@ -270,20 +270,16 @@ class WhyThisService extends StatelessWidget {
                 flex: 3,
                 child: Align(
                   alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        right: Constants.desktopBreakPoint * .035),
-                    child: kStyle.reg(
-                      text: discription,
-                      color: AppColors.black,
-                      size: getValueForScreenType(
-                        context: context,
-                        mobile: 16,
-                        tablet: 18,
-                        desktop: Constants.desktopBreakPoint * .01,
-                      ),
-                      overflow: TextOverflow.visible,
+                  child: kStyle.reg(
+                    text: discription,
+                    color: AppColors.black,
+                    size: getValueForScreenType(
+                      context: context,
+                      mobile: 16,
+                      tablet: 18,
+                      desktop: Constants.desktopBreakPoint * .01,
                     ),
+                    overflow: TextOverflow.visible,
                   ),
                 ),
               )
