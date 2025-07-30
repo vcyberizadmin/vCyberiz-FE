@@ -44,16 +44,16 @@ class _FeaturedNewsState extends State<LatestNews> {
   Widget build(BuildContext context) {
     return BlocBuilder<NewsBloc, NewsState>(
       builder: (context, state) {
-        final blogs = state.newsList ?? [];
+        final news = state.newsList ?? [];
 
         // Hide if no blogs or less than 1
-        if (blogs.isEmpty) return SizedBox();
+        if (news.isEmpty) return SizedBox();
 
         return ResponsiveBuilder(
           builder: (context, sizingInformation) {
             final isTablet =
                 sizingInformation.deviceScreenType == DeviceScreenType.tablet;
-            final visibleBlogs = blogs.take(3).toList();
+            final visibleNews = news.take(3).toList();
 
             return SizedBox(
               width: getValueForScreenType<double>(
@@ -106,7 +106,7 @@ class _FeaturedNewsState extends State<LatestNews> {
                     ],
                   ),
                   if (isTablet)
-                    _buildHorizontalScrollView(visibleBlogs)
+                    _buildHorizontalScrollView(visibleNews)
                   else if (sizingInformation.isDesktop)
                     SizedBox(
                       height: 550,
@@ -115,10 +115,10 @@ class _FeaturedNewsState extends State<LatestNews> {
                         controller: _scrollController,
                         scrollDirection: Axis.horizontal,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: blogs.length >= 3 ? 3 : blogs.length,
+                        itemCount: news.length >= 3 ? 3 : news.length,
                         separatorBuilder: (_, __) => const SizedBox(width: 20),
                         itemBuilder: (context, index) {
-                          final blog = blogs[index];
+                          final blog = news[index];
                           return SizedBox(
                             width: (Constants.desktopBreakPoint / 3) - 15,
                             child: NewsCardContainer(
@@ -138,10 +138,10 @@ class _FeaturedNewsState extends State<LatestNews> {
                     ListView.separated(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: blogs.length >= 3 ? 3 : blogs.length,
+                      itemCount: news.length >= 3 ? 3 : news.length,
                       separatorBuilder: (_, __) => const SizedBox(height: 20),
                       itemBuilder: (context, index) {
-                        final blog = blogs[index];
+                        final blog = news[index];
                         return NewsCardContainer(
                           imageUrl: blog.secImg?.url ?? '',
                           heading: blog.title ?? "",

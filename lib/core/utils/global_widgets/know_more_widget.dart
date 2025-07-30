@@ -29,6 +29,9 @@ class KnowMoreWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SolutionsBloc, SolutionsState>(
       builder: (context, state) {
+        if (videoUrl.isEmpty) {
+          return const SizedBox();
+        }
         return Container(
           color: AppColors.darkBlueText,
           width: Constants.width,
@@ -51,7 +54,7 @@ class KnowMoreWidget extends StatelessWidget {
                       desktop: 300,
                     ),
                     child: videoUrl.isEmpty
-                        ? SizedBox()
+                        ? const SizedBox()
                         : KnowMoreVideo(
                             videoUrl: videoUrl,
                             secondaryVideoUrl: secondaryVideoUrl,

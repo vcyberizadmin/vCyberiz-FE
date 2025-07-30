@@ -22,7 +22,7 @@ class ServiceTabWidget extends StatelessWidget {
       color: AppColors.white,
       child: BlocBuilder<OurServiceBloc, OurServiceState>(
         builder: (context, state) {
-          if (state.loading) {
+          if (state.serviceTabsData == null) {
             return SizedBox();
           }
           return Center(

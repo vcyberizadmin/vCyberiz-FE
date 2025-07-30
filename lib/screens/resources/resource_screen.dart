@@ -69,8 +69,9 @@ class _ResourceScreenState extends State<ResourceScreen> {
               children: [
                 //!-----------------( solution Heading)
                 HeadingWidget(
-                  text: state.headerData?.secHeader ?? '',
-                  image: state.headerData?.secBgImg?.url ?? '',
+                  text: state.headerData?.secHeader ?? 'Resources Hub',
+                  image: state.headerData?.secBgImg?.url ??
+                      '/data/uploads/Homepage/Images/Frame%202147227449.png',
                   label: state.headerData?.secBgImg?.name ?? '',
                 ),
                 FeaturedBlogs(),

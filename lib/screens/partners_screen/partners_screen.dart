@@ -52,8 +52,9 @@ class _PartnersScreenState extends State<PartnersScreen> {
               children: [
                 //!-----------header section
                 HeadingWidget(
-                  text: state.headerData?.secHeader ?? '',
-                  image: state.headerData?.secBg?.url ?? '',
+                  text: state.headerData?.secHeader ?? 'Our Partners',
+                  image: state.headerData?.secBg?.url ??
+                      '/data/uploads/Homepage/Images/Frame%202147227449.png',
                   label: state.headerData?.secBg?.name ?? '',
                 ),
 

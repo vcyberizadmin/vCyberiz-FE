@@ -18,6 +18,9 @@ class DirectApproachScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<OurServiceBloc, OurServiceState>(
       builder: (context, state) {
+        if (state.servicedirectApproachdata == null) {
+          return SizedBox();
+        }
         return Container(
           width: Constants.width,
           decoration: BoxDecoration(

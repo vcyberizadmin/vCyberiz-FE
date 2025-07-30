@@ -62,9 +62,6 @@ class _SolutionsSectionState extends State<SolutionsSection> {
     return BaseView(
       child: BlocBuilder<SolutionsBloc, SolutionsState>(
         builder: (context, state) {
-          if (state.loading) {
-            return SizedBox.shrink();
-          }
           return SingleChildScrollView(
             controller: _scrollController,
             child: Column(
@@ -72,8 +69,9 @@ class _SolutionsSectionState extends State<SolutionsSection> {
               children: [
                 //!-----------------( solution Heading)
                 HeadingWidget(
-                  text: state.headerData?.secHeader ?? '',
-                  image: state.headerData?.bgImg?.url ?? '',
+                  text: state.headerData?.secHeader ?? 'Solutions',
+                  image: state.headerData?.bgImg?.url ??
+                      '/data/uploads/Homepage/Images/Frame%202147227449.png',
                   label: state.headerData?.bgImg?.name ?? '',
                 ),
                 HeaderSection(),

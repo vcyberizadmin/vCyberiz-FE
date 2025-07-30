@@ -13,9 +13,6 @@ class AboutUsSecurityMaturitySection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AboutUsBloc, AboutUsState>(
       builder: (context, state) {
-        if (state.loading) {
-          return const SizedBox();
-        }
         if ((state.ourVisionData?.knowMoreAboutOurService?.ctaBgImg?.url ?? '')
             .isEmpty) {
           return const SizedBox();

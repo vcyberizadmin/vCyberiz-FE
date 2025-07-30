@@ -30,6 +30,9 @@ class PartnersSection extends StatelessWidget {
           ),
           child: BlocBuilder<PartnersBloc, PartnersState>(
             builder: (context, state) {
+              if (state.technology == null) {
+                return SizedBox();
+              }
               return ResponsiveBuilder(
                 builder: (context, sizingInformation) {
                   if (sizingInformation.isDesktop) {

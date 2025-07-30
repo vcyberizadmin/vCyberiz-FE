@@ -154,8 +154,9 @@ class _BlogsScreenState extends State<BlogsScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             HeadingWidget(
-              text: state.headerData?.secHeader?.secBg?.first.name ?? '',
-              image: state.headerData?.secHeader?.secBg?.first.url ?? "",
+              text: state.headerData?.secHeader?.secBg?.first.name ?? 'Blogs',
+              image: state.headerData?.secHeader?.secBg?.first.url ??
+                  "/data/uploads/Homepage/Images/Frame%202147227449.png",
               label: state.headerData?.secHeader?.secBg?.first.name ?? "",
             ),
             const Gap(60),
@@ -204,8 +205,9 @@ class _BlogsScreenState extends State<BlogsScreen> {
     return Column(
       children: [
         HeadingWidget(
-          text: state.headerData?.secHeader?.secBg?.first.name ?? '',
-          image: state.headerData?.secHeader?.secBg?.first.url ?? "",
+          text: state.headerData?.secHeader?.secBg?.first.name ?? 'Blogs',
+          image: state.headerData?.secHeader?.secBg?.first.url ??
+              "/data/uploads/Homepage/Images/Frame%202147227449.png",
           label: state.headerData?.secHeader?.secBg?.first.name ?? "",
         ),
         Gap(sizingInformation.isTablet ? 60 : 32),

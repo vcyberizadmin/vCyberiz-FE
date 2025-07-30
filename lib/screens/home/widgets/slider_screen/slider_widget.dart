@@ -34,7 +34,7 @@ class _SliderWidgetState extends State<SliderWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SliderBloc, SliderState>(builder: (context, state) {
-      if (state.data == null) {
+      if (state.loading) {
         return SizedBox();
       }
 

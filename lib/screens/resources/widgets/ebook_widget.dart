@@ -25,7 +25,7 @@ class EbookWidget extends StatelessWidget {
         builder: (context, state) {
           final ebooks = state.ebookList ?? [];
 
-          if (ebooks.isEmpty) return const SizedBox.shrink();
+          if (ebooks.isEmpty) return const SizedBox();
 
           final deviceType = getDeviceType(MediaQuery.of(context).size);
 

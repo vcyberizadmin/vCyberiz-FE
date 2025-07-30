@@ -28,6 +28,9 @@ class MethodologyWidget extends StatelessWidget {
       width: Constants.width,
       child: BlocBuilder<MethodologyBloc, MethodologyState>(
         builder: (context, state) {
+          if (state.loading) {
+            return SizedBox();
+          }
           return SizedBox(
             width: getValueForScreenType(
               context: context,

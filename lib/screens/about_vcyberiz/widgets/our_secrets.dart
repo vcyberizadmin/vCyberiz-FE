@@ -56,7 +56,7 @@ class _OurSecretsState extends State<OurSecrets>
       },
       child: BlocBuilder<AboutUsBloc, AboutUsState>(
         builder: (context, state) {
-          if (state.loading) {
+          if (state.ourSecretData == null) {
             return const SizedBox();
           }
 

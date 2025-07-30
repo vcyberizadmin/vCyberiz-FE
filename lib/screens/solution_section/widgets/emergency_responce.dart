@@ -21,6 +21,9 @@ class EmergencyResponse extends StatelessWidget {
       color: AppColors.white,
       child: BlocBuilder<SolutionsBloc, SolutionsState>(
         builder: (context, state) {
+          if (state.emergencyResponceData == null) {
+            return SizedBox();
+          }
           return Center(
             child: SizedBox(
               width: getValueForScreenType<double>(

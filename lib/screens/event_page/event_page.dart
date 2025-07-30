@@ -153,8 +153,9 @@ class _EventsScreenState extends State<EventsScreen> {
       child: Column(
         children: [
           HeadingWidget(
-            text: state.headerData?.secBody?.secHeader ?? '',
-            image: state.headerData?.secBody?.secBg?.first.url ?? '',
+            text: state.headerData?.secBody?.secHeader ?? 'Events',
+            image: state.headerData?.secBody?.secBg?.first.url ??
+                '/data/uploads/Homepage/Images/Frame%202147227449.png',
             label: state.headerData?.secBody?.secBg?.first.name ?? '',
           ),
           const Gap(32),
@@ -216,8 +217,9 @@ class _EventsScreenState extends State<EventsScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             HeadingWidget(
-              text: state.headerData?.secBody?.secHeader ?? '',
-              image: state.headerData?.secBody?.secBg?.first.url ?? '',
+              text: state.headerData?.secBody?.secHeader ?? 'Events',
+              image: state.headerData?.secBody?.secBg?.first.url ??
+                  '/data/uploads/Homepage/Images/Frame%202147227449.png',
               label: state.headerData?.secBody?.secBg?.first.name ?? '',
             ),
             const Gap(60),
@@ -266,8 +268,9 @@ class _EventsScreenState extends State<EventsScreen> {
     return Column(
       children: [
         HeadingWidget(
-          text: state.headerData?.secBody?.secHeader ?? '',
-          image: state.headerData?.secBody?.secBg?.first.url ?? '',
+          text: state.headerData?.secBody?.secHeader ?? 'Events',
+          image: state.headerData?.secBody?.secBg?.first.url ??
+              '/data/uploads/Homepage/Images/Frame%202147227449.png',
           label: state.headerData?.secBody?.secBg?.first.name ?? '',
         ),
         const Gap(60),

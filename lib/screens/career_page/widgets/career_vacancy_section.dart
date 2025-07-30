@@ -18,7 +18,6 @@ class CareerVacancySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
       color: AppColors.bluishGrey,
       width: Constants.width,
       child: Center(
@@ -29,22 +28,21 @@ class CareerVacancySection extends StatelessWidget {
             tablet: Constants.width * .92,
             desktop: Constants.desktopBreakPoint,
           ),
-          child: BlocConsumer<CareersBloc, CareersState>(
-            listener: (context, state) {
-              // TODO: implement listener
-            },
+          child: BlocBuilder<CareersBloc, CareersState>(
             builder: (context, state) {
               if (state.loading) {
                 return const SizedBox();
               }
               return Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: getValueForScreenType(
-                  context: context,
-                  mobile: 0,
-                  tablet: 0,
-                  desktop: 100,
-                )),
+                  horizontal: getValueForScreenType(
+                    context: context,
+                    mobile: 0,
+                    tablet: 0,
+                    desktop: 100,
+                  ),
+                  vertical: 20,
+                ),
                 child: Column(
                   children: [
                     Gap(20),

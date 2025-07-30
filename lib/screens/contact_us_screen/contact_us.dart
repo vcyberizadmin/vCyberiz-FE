@@ -81,8 +81,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             return Column(
               children: [
                 HeadingWidget(
-                  text: state.bannerData?.data.secHeader ?? "",
-                  image: state.bannerData?.data.secBg.url ?? "",
+                  text: state.bannerData?.data.secHeader ?? "Contact Us",
+                  image: state.bannerData?.data.secBg.url ??
+                      "/data/uploads/Homepage/Images/Frame%202147227449.png",
                   label: state.bannerData?.data.secBg.name ?? "",
                 ),
                 ResponsiveBuilder(

@@ -19,7 +19,7 @@ class AboutVisionSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AboutUsBloc, AboutUsState>(
       builder: (context, state) {
-        if (state.loading) {
+        if (state.ourVisionData == null) {
           return const SizedBox();
         }
         return ResponsiveBuilder(

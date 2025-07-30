@@ -26,7 +26,7 @@ class _ValuesSectionState extends State<ValuesSection> {
   Widget build(BuildContext context) {
     return BlocBuilder<AboutUsBloc, AboutUsState>(
       builder: (context, state) {
-        if (state.loading) {
+        if (state.ourValuesData == null) {
           return const SizedBox();
         }
         return Container(

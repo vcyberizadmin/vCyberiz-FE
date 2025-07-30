@@ -71,7 +71,7 @@ class AboutUsBloc extends Bloc<AboutUsEvent, AboutUsState> {
   ) async {
     emit(
       state.copyWith(
-        loading: true,
+        headerLoading: true,
       ),
     );
     try {
@@ -82,7 +82,10 @@ class AboutUsBloc extends Bloc<AboutUsEvent, AboutUsState> {
               seconds: 1,
             ), () {
           return emit(
-            state.copyWith(loading: false, headerData: response.data),
+            state.copyWith(
+              headerLoading: false,
+              headerData: response.data,
+            ),
           );
         });
       } else {

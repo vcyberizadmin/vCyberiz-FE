@@ -18,6 +18,9 @@ class OurPartnersTabSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PartnersBloc, PartnersState>(
       builder: (context, state) {
+        if (state.secureFuture == null) {
+          return SizedBox();
+        }
         //!-----------image container
         return Stack(
           children: [

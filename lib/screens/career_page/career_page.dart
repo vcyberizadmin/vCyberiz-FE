@@ -57,9 +57,10 @@ class _CareerPageState extends State<CareerPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 HeadingWidget(
-                  text: state.headerData?.pageBanner?.first.secHeader ?? '',
+                  text:
+                      state.headerData?.pageBanner?.first.secHeader ?? 'Career',
                   image: state.headerData?.pageBanner?.first.secBg?.first.url ??
-                      '',
+                      '/data/uploads/Homepage/Images/Frame%202147227449.png',
                   label:
                       state.headerData?.pageBanner?.first.secBg?.first.name ??
                           '',

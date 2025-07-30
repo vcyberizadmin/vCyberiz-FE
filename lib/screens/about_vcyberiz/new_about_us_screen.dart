@@ -58,8 +58,9 @@ class _NewAboutUsScreenState extends State<NewAboutUsScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 HeadingWidget(
-                  text: state.headerData?.secHeader ?? '',
-                  image: state.headerData?.secBg?.url ?? '',
+                  text: state.headerData?.secHeader ?? 'About vCyberiz',
+                  image: state.headerData?.secBg?.url ??
+                      '/data/uploads/aboutus/Images/Frame%202147227449.png',
                   label: state.headerData?.secBg?.name ?? '',
                 ),
                 //!---------(Shield sction)

@@ -8,6 +8,7 @@ import 'package:vcyberiz/bloc/our_service_bloc/our_service_bloc.dart';
 import 'package:vcyberiz/core/utils/global_widgets/progress_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
 import 'package:vcyberiz/screens/base_view/base_view.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../bloc/footer_bloc/footer_bloc.dart';
 import '../../bloc/headers_bloc/headers_bloc.dart';
@@ -35,9 +36,6 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
 
   @override
   void initState() {
-    context.read<HeadersBloc>().add(const GetHeaderDataEvent());
-    context.read<FooterBloc>().add(const GetFooterEvent());
-
     super.initState();
     _scrollController.addListener(() {
       final isVisible = _scrollController.offset <= 70;
@@ -52,6 +50,8 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<HeadersBloc>().add(const GetHeaderDataEvent());
+      context.read<FooterBloc>().add(const GetFooterEvent());
       context.read<OurServiceBloc>().add(GetServicedetailsEvent(
             documentId: widget.documentId,
           ));
@@ -60,7 +60,12 @@ class _ServiceDetailsScreenState extends State<ServiceDetailsScreen> {
       child: BlocBuilder<OurServiceBloc, OurServiceState>(
         builder: (context, state) {
           if (state.loading) {
-            return SizedBox();
+            return Center(
+              child: SpinKitThreeBounce(
+                color: AppColors.blue,
+                size: 50,
+              ),
+            );
           }
           return SingleChildScrollView(
             controller: _scrollController,

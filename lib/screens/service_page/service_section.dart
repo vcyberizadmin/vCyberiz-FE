@@ -50,17 +50,15 @@ class _ServiceSecurityScreenState extends State<ServiceSecurityScreen> {
     return BaseView(
       child: BlocBuilder<OurServiceBloc, OurServiceState>(
         builder: (context, state) {
-          if (state.loading) {
-            return SizedBox();
-          }
           return SingleChildScrollView(
             controller: _scrollController,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 HeadingWidget(
-                  text: state.serviceHeaderData?.secHeader ?? '',
-                  image: state.serviceHeaderData?.secBg?.url ?? '',
+                  text: state.serviceHeaderData?.secHeader ?? 'Our Services',
+                  image: state.serviceHeaderData?.secBg?.url ??
+                      '/data/uploads/aboutus/Images/Frame%202147227449.png',
                   label: state.serviceHeaderData?.secBg?.name ?? '',
                 ), //!------------------------(Security consulting section)
                 DirectApproachScreen(),

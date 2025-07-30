@@ -21,6 +21,9 @@ class MicrosoftSecurity extends StatelessWidget {
       color: AppColors.backGroundColor,
       child: BlocBuilder<SolutionsBloc, SolutionsState>(
         builder: (context, state) {
+          if (state.microsoftSecurityData == null) {
+            return SizedBox();
+          }
           return Center(
             child: SizedBox(
               width: getValueForScreenType<double>(

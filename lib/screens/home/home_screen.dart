@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vcyberiz/bloc/about_us_bloc/about_us_bloc.dart';
 import 'package:vcyberiz/bloc/blogs_bloc/blogs_bloc.dart';
 import 'package:vcyberiz/bloc/home-bloc/home_bloc.dart';
 import 'package:vcyberiz/bloc/home-bloc/home_event.dart';
@@ -49,17 +48,17 @@ class _HomeScreenState extends State<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<HomeBloc>().add(GetSectionsEvent());
       context.read<SliderBloc>().add(GetBannerInfoSectionEvent());
-      context.read<MethodologyBloc>().add(const GetMethodologyDataEvent());
-      context.read<HomeVideoBloc>().add(const GetVideoDataEvent());
+      context.read<NewsBloc>().add(const GetNewsListEvent());
       context.read<WhatWeDoBloc>().add(const GetWhatWeDoDataEvent());
-      context.read<AboutUsBloc>().add(const GetAboutUsDataEvent());
+      context.read<OurApproachBloc>().add(const GetOurApproachDataEvent());
+      context.read<OurServiceBloc>().add(const GetOurServiceDataEvent());
       context.read<OurSolutionsBloc>().add(const GetOurSolutionsDataEvent());
+      context.read<HomeVideoBloc>().add(const GetVideoDataEvent());
+      context.read<MethodologyBloc>().add(const GetMethodologyDataEvent());
+      context.read<WhyWorkWithUsBloc>().add(const GetWhyWorkUsDataEvent());
+      context.read<WhyWorkWithUsBloc>().add(const GetWhyWorkUsDataEvent());
       context.read<BlogsBloc>().add(const GetBlogsDataEvent());
       context.read<BlogsBloc>().add(const GetBlogsListEvent());
-      context.read<NewsBloc>().add(const GetNewsListEvent());
-      context.read<OurApproachBloc>().add(const GetOurApproachDataEvent());
-      context.read<WhyWorkWithUsBloc>().add(const GetWhyWorkUsDataEvent());
-      context.read<OurServiceBloc>().add(const GetOurServiceDataEvent());
     });
 
     // Add a listener to the scroll controller
@@ -92,30 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: SizedBox(
         width: Constants.width,
         child: Center(
-          child: BlocConsumer<HomeBloc, HomeState>(
-            listener: (context, state) {
-              // SharedPreferences prefs = await SharedPreferences.getInstance();
-              // isFirstOpen = prefs.getBool('isFirstOpen') ?? true;
-              //   if (isFirstOpen) {
-              //     showDialog(
-              //       context: context,
-              //       builder: (BuildContext context) {
-              //         return AlertDialog(
-              //           shape: RoundedRectangleBorder(
-              //             borderRadius: BorderRadius.circular(5.0),
-              //           ),
-              //           contentPadding:
-              //               EdgeInsets.zero, // Removes any default padding
-              //           content: SizedBox(
-              //             height: 220,
-              //             width: 400,
-              //             child: PopUpWidget(),
-              //           ),
-              //         );
-              //       },
-              //     );
-              //   }
-            },
+          child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
               return CustomScrollView(
                 controller: _scrollController,

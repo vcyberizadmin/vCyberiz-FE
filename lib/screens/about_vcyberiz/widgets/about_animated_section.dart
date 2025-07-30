@@ -48,7 +48,7 @@ class _AboutAnimatedSectionState extends State<AboutAnimatedSection>
   Widget build(BuildContext context) {
     return BlocBuilder<AboutUsBloc, AboutUsState>(
       builder: (context, state) {
-        if (state.loading) {
+        if (state.ourShieldData == null) {
           return SizedBox();
         }
         return Container(

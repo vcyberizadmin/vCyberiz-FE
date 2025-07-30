@@ -18,6 +18,9 @@ class HeaderSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SolutionsBloc, SolutionsState>(
       builder: (context, state) {
+        if (state.solutionsHeaderData == null) {
+          return SizedBox();
+        }
         return Container(
           width: Constants.width,
           color: AppColors.powderBlue,

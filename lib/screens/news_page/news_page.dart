@@ -154,8 +154,9 @@ class _NewsScreenState extends State<NewsScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             HeadingWidget(
-              text: state.headerData?.secHeader ?? '',
-              image: state.headerData?.secBgImg?.url ?? '',
+              text: state.headerData?.secHeader ?? 'News',
+              image: state.headerData?.secBgImg?.url ??
+                  '/data/uploads/Homepage/Images/Frame%202147227449.png',
               label: state.headerData?.secBgImg?.name ?? '',
             ),
             const Gap(60),
@@ -204,8 +205,9 @@ class _NewsScreenState extends State<NewsScreen> {
     return Column(
       children: [
         HeadingWidget(
-          text: state.headerData?.secHeader ?? '',
-          image: state.headerData?.secBgImg?.url ?? '',
+          text: state.headerData?.secHeader ?? 'News',
+          image: state.headerData?.secBgImg?.url ??
+              '/data/uploads/Homepage/Images/Frame%202147227449.png',
           label: state.headerData?.secBgImg?.name ?? '',
         ),
         Gap(sizingInformation.isTablet ? 60 : 32),
