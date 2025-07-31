@@ -124,6 +124,9 @@ class _BlogArticleScreenState extends State<BlogArticleScreen> {
     return BaseView(
       child: BlocBuilder<BlogsBloc, BlogsState>(
         builder: (context, state) {
+          if (state.loading) {
+            return SizedBox();
+          }
           return SizedBox(
             width: Constants.width,
             child: Center(

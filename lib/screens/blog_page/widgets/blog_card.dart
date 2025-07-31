@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:vcyberiz/bloc/blogs_bloc/blogs_bloc.dart';
 import 'package:vcyberiz/core/utils/config/config.dart';
 import 'package:vcyberiz/core/utils/global_widgets/image_widget.dart';
 import 'package:vcyberiz/core/utils/styles/app_colors.dart';
@@ -41,16 +43,19 @@ class BlogCardContainer extends StatelessWidget {
     return InkWell(
       onTap: onTap ??
           () {
-            context.goNamed(
-              RouteConstants.blogArticleRoute,
-              pathParameters: {
-                'name':
-                    heading, // this is the slug, e.g. 'flutter-for-beginners'
-              },
-              queryParameters: {
-                'id': documentId,
-              },
-            );
+            context.read<BlogsBloc>().add(GetBlogArticleEvent(documentId));
+            Future.delayed(Duration(seconds: 1), () {
+              context.goNamed(
+                RouteConstants.blogArticleRoute,
+                pathParameters: {
+                  'name':
+                      heading, // this is the slug, e.g. 'flutter-for-beginners'
+                },
+                queryParameters: {
+                  'id': documentId,
+                },
+              );
+            });
           },
       child: Container(
         decoration: BoxDecoration(

@@ -341,7 +341,10 @@ class BlogsBloc extends Bloc<BlogsEvent, BlogsState> {
     GetBlogArticleEvent event,
     Emitter<BlogsState> emit,
   ) async {
-    emit(state.copyWith(loading: true));
+    emit(state.copyWith(
+      loading: true,
+      blogArticleData: null,
+    ));
 
     try {
       BlogArticleModel response =
