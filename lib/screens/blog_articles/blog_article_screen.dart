@@ -161,6 +161,7 @@ class _BlogArticleScreenState extends State<BlogArticleScreen> {
                     //!--------------------(Related Blog Section)
                     RelatedBlogsWidget(
                       documentId: widget.documentId,
+                      controller: _scrollController,
                     ),
 
                     const Gap(10),

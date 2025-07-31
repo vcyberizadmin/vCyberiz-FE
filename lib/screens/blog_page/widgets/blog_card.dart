@@ -19,6 +19,7 @@ class BlogCardContainer extends StatelessWidget {
   final String vcyberizText;
   final DateTime blogDate;
   final String buttonText;
+  final Function()? onTap;
 
   const BlogCardContainer({
     super.key,
@@ -30,6 +31,7 @@ class BlogCardContainer extends StatelessWidget {
     required this.documentId,
     required this.buttonText,
     this.imageLabel,
+    this.onTap,
   });
 
   @override
@@ -37,17 +39,19 @@ class BlogCardContainer extends StatelessWidget {
     final String formattedDate = DateFormat('dd MMMM yyyy').format(blogDate);
 //!---------------------Blog Card
     return InkWell(
-      onTap: () {
-        context.goNamed(
-          RouteConstants.blogArticleRoute,
-          pathParameters: {
-            'name': heading, // this is the slug, e.g. 'flutter-for-beginners'
+      onTap: onTap ??
+          () {
+            context.goNamed(
+              RouteConstants.blogArticleRoute,
+              pathParameters: {
+                'name':
+                    heading, // this is the slug, e.g. 'flutter-for-beginners'
+              },
+              queryParameters: {
+                'id': documentId,
+              },
+            );
           },
-          queryParameters: {
-            'id': documentId,
-          },
-        );
-      },
       child: Container(
         decoration: BoxDecoration(
           color: AppColors.white,

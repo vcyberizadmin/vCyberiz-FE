@@ -13,7 +13,9 @@ import 'package:vcyberiz/screens/blog_page/widgets/blog_card.dart';
 
 class RelatedBlogsWidget extends StatelessWidget {
   final String documentId;
-  const RelatedBlogsWidget({super.key, required this.documentId});
+  final ScrollController controller;
+  const RelatedBlogsWidget(
+      {super.key, required this.documentId, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +72,20 @@ class RelatedBlogsWidget extends StatelessWidget {
                       documentId: blog.documentId ?? '',
                       blogDate: blog.publicationDate ?? DateTime.now(),
                       buttonText: blog.secCta?.label ?? "",
+                      onTap: () {
+                        controller.jumpTo(0);
+
+                        context.goNamed(
+                          RouteConstants.blogArticleRoute,
+                          pathParameters: {
+                            'name': blog.title ??
+                                "", // this is the slug, e.g. 'flutter-for-beginners'
+                          },
+                          queryParameters: {
+                            'id': documentId,
+                          },
+                        );
+                      },
                     ),
                     const Gap(24)
                   ]
@@ -104,6 +120,19 @@ class RelatedBlogsWidget extends StatelessWidget {
                               documentId: blog.documentId ?? '',
                               blogDate: blog.publicationDate ?? DateTime.now(),
                               buttonText: blog.secCta?.label ?? "",
+                              onTap: () {
+                                controller.jumpTo(0);
+                                context.goNamed(
+                                  RouteConstants.blogArticleRoute,
+                                  pathParameters: {
+                                    'name': blog.title ??
+                                        "", // this is the slug, e.g. 'flutter-for-beginners'
+                                  },
+                                  queryParameters: {
+                                    'id': documentId,
+                                  },
+                                );
+                              },
                             ),
                           ),
                         );
